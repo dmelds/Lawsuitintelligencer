@@ -1,0 +1,300 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #0b0b0b;
+  color: #f5f5f5;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: #9fd0ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(11, 11, 11, 0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+}
+
+.logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.main-nav {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  color: #d8d8d8;
+  font-size: 0.95rem;
+}
+
+.header-cta,
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.header-cta,
+.btn-primary {
+  background: #f5f5f5;
+  color: #111;
+}
+
+.header-cta:hover,
+.btn-primary:hover {
+  opacity: 0.92;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255,255,255,0.16);
+  color: #f5f5f5;
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.05);
+  text-decoration: none;
+}
+
+.hero {
+  padding: 88px 0 64px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #9fd0ff;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero h1,
+.section-heading h2,
+.two-col h2,
+.final-cta-box h2 {
+  margin: 0 0 16px;
+  line-height: 1.12;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+}
+
+.hero-text,
+.hero-note,
+.section-heading p,
+.info-card p,
+.report-card p,
+.audience-card p,
+.site-footer p {
+  color: #c9c9c9;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 28px 0 18px;
+}
+
+.hero-panel .panel-card,
+.trust-card,
+.info-card,
+.report-card,
+.quote-card,
+.audience-card,
+.final-cta-box,
+.stack-box {
+  background: #141414;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+}
+
+.panel-card {
+  padding: 24px;
+}
+
+.panel-label,
+.report-type {
+  margin: 0 0 12px;
+  color: #9fd0ff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.panel-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #e8e8e8;
+}
+
+.trust-strip,
+.section {
+  padding: 64px 0;
+}
+
+.trust-grid,
+.cards-grid,
+.report-list,
+.audience-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.trust-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cards-grid {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 28px;
+}
+
+.report-list {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 28px;
+}
+
+.audience-grid {
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 28px;
+}
+
+.trust-card,
+.info-card,
+.report-card,
+.audience-card {
+  padding: 24px;
+}
+
+.alt-section {
+  background: #101010;
+}
+
+.section-heading {
+  max-width: 760px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.stack-box {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.quote-card {
+  padding: 28px;
+}
+
+.quote-text {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #f1f1f1;
+}
+
+.final-cta-box {
+  padding: 40px;
+  text-align: center;
+}
+
+.site-footer {
+  padding: 56px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.8fr 1fr;
+  gap: 28px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li + li {
+  margin-top: 10px;
+}
+
+.footer-note {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 980px) {
+  .hero-grid,
+  .two-col,
+  .trust-grid,
+  .cards-grid,
+  .report-list,
+  .audience-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    width: 100%;
+  }
+}
