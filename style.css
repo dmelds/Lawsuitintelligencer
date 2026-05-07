@@ -620,6 +620,15 @@ a:hover {
   .masthead-title {
     padding: 16px 0 28px;
   }
+   .masthead-title h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.masthead-title h1 a:hover {
+  color: var(--accent);
+}
+
 
   .lede {
     padding: 40px 0 48px;
