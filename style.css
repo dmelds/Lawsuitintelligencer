@@ -675,7 +675,7 @@ a:hover {
 }
 .masthead-issue {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.4rem;
 }
 
@@ -685,6 +685,8 @@ a:hover {
   max-width: none;
   display: inline-block;
   flex-shrink: 0;
+  align-self: baseline;
+  transform: translateY(2px);
 }
 
 @media (max-width: 480px) {
