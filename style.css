@@ -701,6 +701,11 @@ a:hover {
   .article-dek {
     font-size: 19px;
   }
+
+  .lede-byline .byline-sep {
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    margin: 4px 0;
+  }
 }
-
-
