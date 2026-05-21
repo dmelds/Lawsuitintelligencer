@@ -679,6 +679,13 @@ a:hover {
   gap: 0.4rem;
 }
 
+.masthead-mark-link {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  border: 0;
+}
+
 .masthead-mark {
   height: 1.4em;
   width: auto;
