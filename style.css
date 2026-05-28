@@ -716,3 +716,30 @@ a:hover {
     margin: 4px 0;
   }
 }
+/* === ARTICLE LISTS === */
+.article-body ul,
+.article-body ol {
+  margin: 0 0 24px;
+  padding-left: 1.4em;
+}
+
+.article-body li {
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: 10px;
+  padding-left: 0.3em;
+}
+
+.article-body ul li::marker { color: var(--accent); }
+
+.article-body ol li::marker {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .article-body li { font-size: 18px; }
+}
+
