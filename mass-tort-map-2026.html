@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>The 2026 Mass Tort Map: Concentration, the Bellwether Turn, and Two Cracking Defenses | Lawsuit Intelligencer</title>
+  <meta name="description" content="A data-driven map of the federal mass tort docket in 2026: extreme concentration in a handful of mega-dockets, the year bellwethers turned into verdicts, and the simultaneous erosion of two structural defenses — Section 230 and bankruptcy." />
+
+  <link rel="canonical" href="https://lawsuitintelligencer.com/mass-tort-map-2026" />
+
+  <meta property="og:title" content="The 2026 Mass Tort Map" />
+  <meta property="og:description" content="Docket concentration, the bellwether turn, and two structural defenses cracking at once. A data-driven map of the federal mass tort landscape in 2026." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://lawsuitintelligencer.com/mass-tort-map-2026" />
+  <meta property="og:image" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+  <meta property="og:image:secure_url" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Lawsuit Intelligencer — Mass Torts. Plaintiff-Side Litigation." />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The 2026 Mass Tort Map" />
+  <meta name="twitter:description" content="A data-driven map of the federal mass tort docket in 2026." />
+  <meta name="twitter:image" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#001a57">
+
+  <!--
+    NOTE FOR INTEGRATION: This page is self-contained (all CSS is inline below) so it renders
+    fully on its own. To drop it into the live site, you can delete the <style> block and add
+    <link rel="stylesheet" href="style.css" />. The figure/chart components are scoped under the
+    .li- prefix so they will not collide with your existing article styles — keep that portion.
+  -->
+  <style>
+    :root{
+      --ink:#001a57;            /* masthead navy / theme */
+      --ink-deep:#0b1430;       /* body text */
+      --paper:#fbfaf6;          /* warm newsprint */
+      --paper-panel:#f3efe6;    /* figure panels */
+      --rule:#ddd6c7;           /* hairline */
+      --rule-dark:#c3bba8;
+      --accent:#bf7d1e;         /* warm gold accent */
+      --accent-soft:#e7d3ad;
+      --muted:#736b59;
+      --bar:#001a57;
+      --bar-soft:#9fa9c4;
+      --grid:#e4ddcd;
+      --maxw:760px;
+    }
+    *{box-sizing:border-box;}
+    html{-webkit-text-size-adjust:100%;}
+    body{
+      margin:0;
+      background:var(--paper);
+      color:var(--ink-deep);
+      font-family:"Spectral",Georgia,serif;
+      font-weight:400;
+      font-size:19px;
+      line-height:1.62;
+      -webkit-font-smoothing:antialiased;
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+    a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--accent-soft);}
+    a:hover{border-bottom-color:var(--accent);}
+
+    /* ---------- Masthead ---------- */
+    .masthead{background:var(--ink);color:#f6f3ea;border-bottom:3px double rgba(255,255,255,.35);}
+    .masthead .container{padding-top:14px;padding-bottom:20px;}
+    .masthead a{color:inherit;border:none;}
+    .masthead-top{display:flex;justify-content:space-between;align-items:center;gap:16px;
+      border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:10px;flex-wrap:wrap;}
+    .masthead-issue{display:flex;align-items:center;gap:12px;font-family:"IBM Plex Mono",monospace;
+      font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#d7dcea;}
+    .masthead-mark{height:22px;width:auto;display:block;}
+    .masthead-mark-link{display:inline-flex;}
+    .masthead-nav{display:flex;gap:20px;font-family:"IBM Plex Mono",monospace;font-size:12px;
+      letter-spacing:.08em;text-transform:uppercase;}
+    .masthead-nav a:hover{color:#fff;}
+    .masthead-title{text-align:center;padding-top:18px;}
+    .masthead-title h1{font-weight:700;font-size:clamp(34px,8vw,60px);line-height:.98;margin:0;
+      letter-spacing:-.01em;}
+    .masthead-tagline{font-style:italic;color:#c8cfe2;font-size:15px;max-width:560px;
+      margin:12px auto 0;line-height:1.5;}
+
+    /* ---------- Article ---------- */
+    main{padding:0 0 40px;}
+    .article{padding:40px 0 10px;}
+    .article > header{border-bottom:1px solid var(--rule);padding-bottom:26px;margin-bottom:30px;}
+    .article-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--accent);margin:0 0 14px;}
+    .article > header h1{font-weight:700;font-size:clamp(30px,5.6vw,46px);line-height:1.06;
+      letter-spacing:-.012em;margin:0 0 16px;color:var(--ink);}
+    .article-dek{font-size:21px;font-style:italic;color:#3a3526;line-height:1.45;margin:0 0 18px;
+      font-weight:300;}
+    .article-meta{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.05em;
+      color:var(--muted);text-transform:uppercase;margin:0;}
+
+    /* ---------- Disclosure ---------- */
+    .li-disclosure{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.55;
+      color:var(--muted);background:var(--paper-panel);border-left:3px solid var(--accent);
+      padding:12px 16px;margin:0 0 30px;}
+    .li-disclosure strong{color:var(--ink);}
+
+    /* ---------- Summary box ---------- */
+    .article-summary{border:1px solid var(--rule-dark);background:#fff;padding:22px 26px 24px;
+      margin:0 0 36px;}
+    .summary-label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--accent);margin:0 0 12px;}
+    .article-summary ul{margin:0;padding-left:20px;}
+    .article-summary li{font-size:17px;line-height:1.5;margin-bottom:9px;}
+    .article-summary li::marker{color:var(--accent);}
+
+    /* ---------- Body ---------- */
+    .article-body h2{font-weight:600;font-size:27px;line-height:1.18;letter-spacing:-.01em;
+      color:var(--ink);margin:46px 0 14px;padding-top:8px;}
+    .article-body h3{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px;
+      letter-spacing:.04em;text-transform:uppercase;color:var(--ink-deep);margin:30px 0 8px;}
+    .article-body p{margin:0 0 18px;}
+    .article-body em{font-style:italic;}
+    .article-body strong{font-weight:600;color:var(--ink-deep);}
+    .pullquote{font-size:23px;font-style:italic;font-weight:300;line-height:1.4;color:var(--ink);
+      border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+      padding:22px 0;margin:32px 0;}
+
+    /* ---------- Figures (KCIC style) ---------- */
+    .li-fig{margin:34px 0;border:1px solid var(--rule-dark);background:#fff;}
+    .li-fig-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+      padding:14px 20px 12px;border-bottom:1px solid var(--rule);background:var(--paper-panel);}
+    .li-fig-num{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--accent);white-space:nowrap;}
+    .li-fig-title{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.03em;
+      text-transform:uppercase;color:var(--ink);font-weight:600;text-align:right;line-height:1.35;}
+    .li-fig-body{padding:22px 20px 10px;}
+    .li-fig svg{display:block;width:100%;height:auto;font-family:"IBM Plex Mono",monospace;}
+    .li-fig-cap{font-family:"IBM Plex Mono",monospace;font-size:11.5px;line-height:1.5;
+      color:var(--muted);padding:4px 20px 16px;border-top:1px dotted var(--rule);margin-top:6px;}
+    .li-fig-cap b{color:var(--ink);font-weight:600;}
+
+    /* SVG text classes */
+    .ax{fill:var(--muted);font-size:11px;}
+    .ax-v{fill:var(--muted);font-size:10px;}
+    .val{fill:var(--ink);font-size:11px;font-weight:600;}
+    .val-on{fill:#fff;font-size:11px;font-weight:600;}
+    .lbl{fill:var(--ink-deep);font-size:11.5px;}
+    .grid-l{stroke:var(--grid);stroke-width:1;}
+    .bar-main{fill:var(--bar);}
+    .bar-hi{fill:var(--accent);}
+    .line-main{fill:none;stroke:var(--ink);stroke-width:2.4;}
+    .line-area{fill:var(--ink);opacity:.06;}
+    .dot{fill:var(--accent);}
+
+    /* ---------- Ranked data table ---------- */
+    .li-table-wrap{margin:30px 0;overflow-x:auto;}
+    table.li-table{width:100%;border-collapse:collapse;font-size:15px;
+      font-family:"Spectral",serif;}
+    .li-table caption{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--accent);text-align:left;padding-bottom:10px;}
+    .li-table th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;
+      text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;
+      border-bottom:2px solid var(--ink);padding:8px 10px;}
+    .li-table td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}
+    .li-table td.num{font-family:"IBM Plex Mono",monospace;text-align:right;white-space:nowrap;}
+    .li-table tr:last-child td{border-bottom:none;}
+    .li-table .up{color:#1f6b3a;}
+    .li-table .down{color:#9a2b2b;}
+    .li-table .rk{font-family:"IBM Plex Mono",monospace;color:var(--accent);font-weight:600;width:26px;}
+
+    /* ---------- Big stat strip ---------- */
+    .li-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule-dark);
+      border:1px solid var(--rule-dark);margin:30px 0;}
+    .li-stat{background:#fff;padding:20px 16px;text-align:center;}
+    .li-stat .n{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;color:var(--ink);
+      line-height:1;letter-spacing:-.02em;}
+    .li-stat .n .accent{color:var(--accent);}
+    .li-stat .k{font-size:13.5px;color:var(--muted);line-height:1.4;margin-top:9px;}
+
+    /* ---------- Footer ---------- */
+    footer.article-foot{margin-top:36px;padding-top:22px;border-top:1px solid var(--rule);}
+    .article-byline-end{font-style:italic;color:#3a3526;font-size:16px;line-height:1.55;}
+    .site-footer{background:var(--ink);color:#cdd3e4;margin-top:50px;padding:38px 0 26px;}
+    .site-footer a{color:#cdd3e4;border:none;}
+    .site-footer a:hover{color:#fff;}
+    .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:30px;}
+    .footer-mast{font-family:"Spectral",serif;font-weight:700;font-size:22px;color:#fff;margin:0 0 6px;}
+    .footer-mast-sub{font-size:14px;font-style:italic;color:#aab2cc;margin:0;line-height:1.45;}
+    .site-footer h4{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+      text-transform:uppercase;color:#8c96b6;margin:0 0 10px;}
+    .site-footer ul{list-style:none;margin:0;padding:0;}
+    .site-footer li{margin-bottom:7px;font-size:14.5px;}
+    .footer-disclosure{font-family:"IBM Plex Mono",monospace;font-size:11.5px;line-height:1.6;
+      color:#8c96b6;border-top:1px solid rgba(255,255,255,.14);margin-top:28px;padding-top:18px;}
+    .footer-bottom{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
+      color:#7a85a6;margin-top:14px;}
+
+    @media (max-width:620px){
+      body{font-size:17.5px;}
+      .li-stats{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr;gap:22px;}
+      .li-fig-title{font-size:11px;}
+      .article-dek{font-size:18.5px;}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"The 2026 Mass Tort Map: Concentration, the Bellwether Turn, and Two Cracking Defenses",
+    "description":"A data-driven map of the federal mass tort docket in 2026: extreme concentration in a handful of mega-dockets, the year bellwethers turned into verdicts, and the simultaneous erosion of Section 230 and bankruptcy as structural defenses.",
+    "datePublished":"2026-05-30",
+    "dateModified":"2026-05-30",
+    "author":{"@type":"Person","name":"David Meldofsky","jobTitle":"California-licensed attorney","url":"https://lawsuitintelligencer.com/"},
+    "publisher":{"@type":"Organization","name":"Lawsuit Intelligencer","url":"https://lawsuitintelligencer.com/"},
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://lawsuitintelligencer.com/mass-tort-map-2026"}
+  }
+  </script>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="container">
+      <div class="masthead-top">
+        <div class="masthead-issue">
+          <a href="/" aria-label="Lawsuit Intelligencer home" class="masthead-mark-link">
+            <img src="/logo.svg" alt="Lawsuit Intelligencer" class="masthead-mark" />
+          </a>
+          <strong>Vol. I &middot; No. 1 &middot; May 2026</strong>
+        </div>
+        <nav class="masthead-nav">
+          <a href="index.html#articles">Articles</a>
+          <a href="index.html#coverage">Coverage</a>
+          <a href="about.html">About</a>
+          <a href="contribute.html">Contribute</a>
+        </nav>
+      </div>
+      <div class="masthead-title">
+        <h1><a href="index.html">Lawsuit Intelligencer</a></h1>
+        <p class="masthead-tagline">Editorial analysis of mass torts, product liability, toxic exposure litigation, and the business of plaintiff-side law in the age of AI.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article class="article">
+        <header>
+          <p class="article-eyebrow">Analysis &middot; Mass Torts &amp; MDL Practice</p>
+          <h1>The 2026 Mass Tort Map</h1>
+          <p class="article-dek">The federal docket has never been more concentrated, and 2026 is the year the procedural phase finally turned into verdicts. Two of the defense bar's most dependable shields &mdash; Section&nbsp;230 and bankruptcy &mdash; are cracking at the same time.</p>
+          <p class="article-meta">By David Meldofsky &middot; May 30, 2026 &middot; 11 min read</p>
+        </header>
+
+        <p class="li-disclosure"><strong>Disclosure:</strong> The editor owns and operates Lawsuit Informer and Lawsuit Center, consumer-facing sites that publish educational material on several of the litigations discussed here. This piece is industry analysis, not case solicitation, and references no specific intake program.</p>
+
+        <div class="article-summary">
+          <p class="summary-label">The short version</p>
+          <ul>
+            <li>The system holds roughly <strong>199,700 pending actions across about 159 active MDLs</strong> &mdash; but about <strong>13% of dockets hold ~94% of the cases</strong>, and J&amp;J talc alone is roughly a third of everything.</li>
+            <li><strong>2026 is the bellwether year.</strong> The first social-media design-defect verdict landed against Meta and YouTube; the first Bard PowerPort bellwether split; the AFFF personal-injury bellwether was reset.</li>
+            <li><strong>Two structural defenses cracked at once.</strong> Plaintiffs reframed platform harm as product design and beat Section&nbsp;230 at trial; J&amp;J's third attempt to cap talc liability through Chapter&nbsp;11 was dismissed.</li>
+            <li><strong>JPML gatekeeping is sharp.</strong> Roblox child-exploitation claims were centralized; a video-game "addiction" theory naming the same platform was refused weeks earlier.</li>
+          </ul>
+        </div>
+
+        <div class="article-body">
+
+          <h2>1. The shape of the docket</h2>
+
+          <p>Read in aggregate, the federal mass tort system looks enormous and sprawling. Read by where the cases actually sit, it looks like a short list of mega-dockets with a long tail trailing behind them. As of the JPML's May&nbsp;1, 2026 distribution report, the system held on the order of 199,700 pending actions across roughly 159 active multidistrict litigations &mdash; but the distribution is so lopsided that the headline count is almost the least useful number in it.</p>
+
+          <p>Dockets carrying 1,000 or more pending actions make up only about an eighth of all active MDLs, yet they hold the overwhelming majority of the cases. The concentration is not a quirk of one big year; it is the structural fact that shapes leadership appointments, settlement leverage, and where the plaintiff bar spends its advertising dollars.</p>
+
+          <div class="li-fig" role="img" aria-label="Concentration bar chart: MDLs with 1,000-plus pending actions are about 13.2 percent of dockets but about 93.9 percent of all pending actions.">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Fig. 1</span>
+              <span class="li-fig-title">Docket concentration &middot; mega-MDLs (1,000+ cases)</span>
+            </div>
+            <div class="li-fig-body">
+              <svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
+                <!-- track + bars 0..100% mapped to x 150..610 (460px) -->
+                <text x="0" y="46" class="lbl">Share of active MDLs</text>
+                <rect x="150" y="34" width="460" height="22" fill="#eee7d6"/>
+                <rect x="150" y="34" width="60.7" height="22" class="bar-hi"/>
+                <text x="218" y="50" class="val">13.2%</text>
+
+                <text x="0" y="116" class="lbl">Share of pending actions</text>
+                <rect x="150" y="104" width="460" height="22" fill="#eee7d6"/>
+                <rect x="150" y="104" width="431.9" height="22" class="bar-main"/>
+                <text x="566" y="120" class="val-on" text-anchor="end">93.9%</text>
+
+                <line x1="150" y1="150" x2="610" y2="150" class="grid-l"/>
+                <text x="150" y="170" class="ax-v">0%</text>
+                <text x="380" y="170" class="ax-v" text-anchor="middle">50%</text>
+                <text x="610" y="170" class="ax-v" text-anchor="end">100%</text>
+              </svg>
+            </div>
+            <p class="li-fig-cap"><b>A small number of mega-dockets carry the system.</b> MDLs with 1,000+ pending actions are roughly an eighth of all active dockets but hold about 94% of pending cases. Source: JPML distribution-of-pending-dockets report, May&nbsp;1,&nbsp;2026.</p>
+          </div>
+
+          <p>Within that top tier, one docket dominates everything else. Johnson &amp; Johnson's talc litigation alone accounts for roughly a third of all pending federal MDL actions &mdash; more than the next several dockets combined &mdash; which is why a single bankruptcy ruling in Texas can move the entire system's case count.</p>
+
+          <div class="li-fig" role="img" aria-label="Horizontal bar chart of the ten largest mass tort MDLs by pending actions as of May 1, 2026. J&J talc leads at 67,623, far ahead of Bard hernia mesh at 23,703 and AFFF at 15,232.">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Fig. 2</span>
+              <span class="li-fig-title">Ten largest product-liability MDLs &middot; pending actions</span>
+            </div>
+            <div class="li-fig-body">
+              <svg viewBox="0 0 760 350" xmlns="http://www.w3.org/2000/svg">
+                <!-- bars start x=250, max width to 740, scale by 67623 -->
+                <!-- J&J Talc -->
+                <text x="240" y="35" class="lbl" text-anchor="end">J&amp;J Talc</text>
+                <rect x="250" y="22" width="490" height="18" class="bar-hi"/>
+                <text x="735" y="35" class="val-on" text-anchor="end">67,623</text>
+                <!-- Bard Hernia Mesh -->
+                <text x="240" y="65" class="lbl" text-anchor="end">Bard Hernia Mesh</text>
+                <rect x="250" y="52" width="172" height="18" class="bar-main"/>
+                <text x="428" y="65" class="val" >23,703</text>
+                <!-- AFFF -->
+                <text x="240" y="95" class="lbl" text-anchor="end">AFFF / PFAS</text>
+                <rect x="250" y="82" width="110" height="18" class="bar-main"/>
+                <text x="366" y="95" class="val">15,232</text>
+                <!-- Hair Relaxer -->
+                <text x="240" y="125" class="lbl" text-anchor="end">Hair Relaxer</text>
+                <rect x="250" y="112" width="84" height="18" class="bar-main"/>
+                <text x="340" y="125" class="val">11,526</text>
+                <!-- PPI -->
+                <text x="240" y="155" class="lbl" text-anchor="end">Proton-Pump Inhibitor</text>
+                <rect x="250" y="142" width="82" height="18" class="bar-main"/>
+                <text x="338" y="155" class="val">11,322</text>
+                <!-- Paraquat -->
+                <text x="240" y="185" class="lbl" text-anchor="end">Paraquat</text>
+                <rect x="250" y="172" width="48" height="18" class="bar-main"/>
+                <text x="304" y="185" class="val">6,580</text>
+                <!-- Depo-Provera -->
+                <text x="240" y="215" class="lbl" text-anchor="end">Depo-Provera</text>
+                <rect x="250" y="202" width="27" height="18" class="bar-hi"/>
+                <text x="283" y="215" class="val">3,769</text>
+                <!-- GLP-1 -->
+                <text x="240" y="245" class="lbl" text-anchor="end">GLP-1 (GI injury)</text>
+                <rect x="250" y="232" width="24" height="18" class="bar-main"/>
+                <text x="280" y="245" class="val">3,363</text>
+                <!-- Bard PowerPort -->
+                <text x="240" y="275" class="lbl" text-anchor="end">Bard PowerPort</text>
+                <rect x="250" y="262" width="23" height="18" class="bar-main"/>
+                <text x="279" y="275" class="val">3,187</text>
+                <!-- Social Media -->
+                <text x="240" y="305" class="lbl" text-anchor="end">Social Media Addiction</text>
+                <rect x="250" y="292" width="18" height="18" class="bar-main"/>
+                <text x="274" y="305" class="val">2,527</text>
+                <!-- baseline -->
+                <line x1="250" y1="320" x2="740" y2="320" class="grid-l"/>
+                <text x="250" y="338" class="ax-v">0</text>
+                <text x="495" y="338" class="ax-v" text-anchor="middle">35,000</text>
+                <text x="740" y="338" class="ax-v" text-anchor="end">70,000</text>
+              </svg>
+            </div>
+            <p class="li-fig-cap"><b>Gold bars mark dockets covered in detail below.</b> Approximate pending actions, JPML report of May&nbsp;1,&nbsp;2026. Counts are point-in-time and shift monthly; confirm against the current report before citing.</p>
+          </div>
+
+          <h2>2. The growth is inside the mega-dockets</h2>
+
+          <p>The number of active MDLs is flat to slightly declining &mdash; down from roughly 170 in early 2025 to about 159 a year later. What is growing is the size of the dockets that already dominate. Talc is the clearest illustration: the count climbed steeply through mid-2025 and then plateaued near 67,000&ndash;68,000, which is exactly the shape you would expect from a docket whose proposed exit ramp collapsed and whose claims had nowhere to go but back into active litigation.</p>
+
+          <div class="li-fig" role="img" aria-label="Line chart of J&J talc pending actions from February 2025 to May 2026, rising from about 58,200 to a plateau near 67,600.">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Fig. 3</span>
+              <span class="li-fig-title">J&amp;J Talc (MDL 2738) &middot; pending actions, Feb 2025&ndash;May 2026</span>
+            </div>
+            <div class="li-fig-body">
+              <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- gridlines -->
+                <line x1="70" y1="217.7" x2="760" y2="217.7" class="grid-l"/>
+                <line x1="70" y1="185.4" x2="760" y2="185.4" class="grid-l"/>
+                <line x1="70" y1="153.1" x2="760" y2="153.1" class="grid-l"/>
+                <line x1="70" y1="120.8" x2="760" y2="120.8" class="grid-l"/>
+                <line x1="70" y1="88.5" x2="760" y2="88.5" class="grid-l"/>
+                <line x1="70" y1="56.2" x2="760" y2="56.2" class="grid-l"/>
+                <text x="62" y="221" class="ax-v" text-anchor="end">58k</text>
+                <text x="62" y="124" class="ax-v" text-anchor="end">64k</text>
+                <text x="62" y="60" class="ax-v" text-anchor="end">68k</text>
+                <!-- area + line -->
+                <path d="M 70,250 L 70.0,214.4 L 116.0,214.4 L 162.0,214.3 L 208.0,207.3 L 254.0,192.3 L 300.0,125.7 L 346.0,80.2 L 392.0,73.8 L 438.0,69.0 L 484.0,68.6 L 530.0,61.5 L 576.0,62.9 L 622.0,62.3 L 668.0,70.4 L 714.0,66.2 L 760.0,62.2 L 760,250 Z" class="line-area"/>
+                <polyline points="70.0,214.4 116.0,214.4 162.0,214.3 208.0,207.3 254.0,192.3 300.0,125.7 346.0,80.2 392.0,73.8 438.0,69.0 484.0,68.6 530.0,61.5 576.0,62.9 622.0,62.3 668.0,70.4 714.0,66.2 760.0,62.2" class="line-main"/>
+                <circle cx="70" cy="214.4" r="3" class="dot"/>
+                <circle cx="760" cy="62.2" r="3.5" class="dot"/>
+                <text x="70" y="206" class="val">58,206</text>
+                <text x="760" y="54" class="val" text-anchor="end">67,623</text>
+                <!-- x labels -->
+                <line x1="70" y1="250" x2="760" y2="250" class="grid-l"/>
+                <text x="70" y="268" class="ax-v">F'25</text>
+                <text x="300" y="268" class="ax-v" text-anchor="middle">Jul</text>
+                <text x="530" y="268" class="ax-v" text-anchor="middle">Dec</text>
+                <text x="760" y="268" class="ax-v" text-anchor="end">May'26</text>
+              </svg>
+            </div>
+            <p class="li-fig-cap"><b>The plateau is the story.</b> The steep climb tracks direct filing into the transferee court; the flat top reflects a docket with no settlement to absorb it. Source: JPML monthly statistics, Feb&nbsp;2025&ndash;May&nbsp;2026.</p>
+          </div>
+
+          <p>The opposite shape &mdash; near-vertical growth &mdash; belongs to Depo-Provera. It is the fastest-growing MDL in the federal system by a wide margin, more than doubling in a single quarter, including a single month in which it added roughly a thousand cases. For anyone tracking where intake advertising and referral volume are flowing right now, this is the cleanest signal on the board.</p>
+
+          <div class="li-fig" role="img" aria-label="Column chart of Depo-Provera pending actions from December 2025 to May 2026, rising from 1,470 to 3,769, with the March surge highlighted.">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Fig. 4</span>
+              <span class="li-fig-title">Depo-Provera (MDL 3140) &middot; the fastest-growing MDL</span>
+            </div>
+            <div class="li-fig-body">
+              <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- gridlines -->
+                <line x1="70" y1="190" x2="470" y2="190" class="grid-l"/>
+                <line x1="70" y1="140" x2="470" y2="140" class="grid-l"/>
+                <line x1="70" y1="90" x2="470" y2="90" class="grid-l"/>
+                <line x1="70" y1="40" x2="470" y2="40" class="grid-l"/>
+                <text x="62" y="194" class="ax-v" text-anchor="end">1k</text>
+                <text x="62" y="94" class="ax-v" text-anchor="end">3k</text>
+                <text x="62" y="44" class="ax-v" text-anchor="end">4k</text>
+                <!-- bars -->
+                <rect x="85.0" y="166.5" width="36.7" height="73.5" class="bar-main"/>
+                <text x="103.3" y="160" class="val" text-anchor="middle">1,470</text>
+                <rect x="151.7" y="152.4" width="36.7" height="87.6" class="bar-main"/>
+                <text x="170.0" y="146" class="val" text-anchor="middle">1,752</text>
+                <rect x="218.3" y="135.1" width="36.7" height="104.9" class="bar-main"/>
+                <text x="236.7" y="129" class="val" text-anchor="middle">2,098</text>
+                <rect x="285.0" y="85.1" width="36.7" height="154.9" class="bar-hi"/>
+                <text x="303.3" y="79" class="val" text-anchor="middle">3,099</text>
+                <rect x="351.7" y="65.5" width="36.7" height="174.5" class="bar-main"/>
+                <text x="370.0" y="59" class="val" text-anchor="middle">3,490</text>
+                <rect x="418.3" y="51.6" width="36.7" height="188.4" class="bar-main"/>
+                <text x="436.7" y="45" class="val" text-anchor="middle">3,769</text>
+                <!-- baseline + labels -->
+                <line x1="70" y1="240" x2="470" y2="240" class="grid-l"/>
+                <text x="103.3" y="258" class="ax-v" text-anchor="middle">Dec'25</text>
+                <text x="170.0" y="258" class="ax-v" text-anchor="middle">Jan'26</text>
+                <text x="236.7" y="258" class="ax-v" text-anchor="middle">Feb</text>
+                <text x="303.3" y="258" class="ax-v" text-anchor="middle">Mar</text>
+                <text x="370.0" y="258" class="ax-v" text-anchor="middle">Apr</text>
+                <text x="436.7" y="258" class="ax-v" text-anchor="middle">May</text>
+              </svg>
+            </div>
+            <p class="li-fig-cap"><b>The gold column is the March surge</b> &mdash; roughly +1,000 cases in a single month, the largest one-month jump of any MDL this cycle. Source: JPML monthly statistics, Dec&nbsp;2025&ndash;May&nbsp;2026.</p>
+          </div>
+
+          <h2>3. The bellwether turn</h2>
+
+          <p>For most of the last three years, the mega-dockets generated motion practice, not verdicts. That changed in the first half of 2026. Within roughly six months, the litigation produced the first jury verdict in the social-media docket, the first bellwether result in Bard PowerPort, a reset of the AFFF personal-injury track, and a string of state-court talc rulings &mdash; the moment a docket stops being a filing statistic and starts pricing risk.</p>
+
+          <div class="li-fig" role="img" aria-label="Timeline of key 2026 mass tort events from January to July, including the Ninth Circuit Section 230 argument, the Lyft MDL, the social media verdict, the Bard PowerPort bellwether, new MDLs, and the federal social media bellwether.">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Fig. 5</span>
+              <span class="li-fig-title">The 2026 bellwether turn &middot; selected milestones</span>
+            </div>
+            <div class="li-fig-body">
+              <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+                <!-- axis -->
+                <line x1="60" y1="125" x2="740" y2="125" stroke="#001a57" stroke-width="2"/>
+                <!-- ticks Jan..Jul -->
+                <g>
+                  <circle cx="60" cy="125" r="4" class="dot"/>
+                  <circle cx="173.3" cy="125" r="4" class="dot"/>
+                  <circle cx="286.7" cy="125" r="5" fill="#001a57"/>
+                  <circle cx="400" cy="125" r="4" class="dot"/>
+                  <circle cx="513.3" cy="125" r="5" fill="#001a57"/>
+                  <circle cx="626.7" cy="125" r="4" class="dot"/>
+                  <circle cx="740" cy="125" r="4" class="dot"/>
+                </g>
+                <!-- month labels -->
+                <text x="60" y="145" class="ax-v" text-anchor="middle">JAN</text>
+                <text x="173.3" y="145" class="ax-v" text-anchor="middle">FEB</text>
+                <text x="286.7" y="145" class="ax-v" text-anchor="middle">MAR</text>
+                <text x="400" y="145" class="ax-v" text-anchor="middle">APR</text>
+                <text x="513.3" y="145" class="ax-v" text-anchor="middle">MAY</text>
+                <text x="626.7" y="145" class="ax-v" text-anchor="middle">JUN</text>
+                <text x="740" y="145" class="ax-v" text-anchor="middle">JUL</text>
+                <!-- events above -->
+                <line x1="60" y1="125" x2="60" y2="92" class="grid-l"/>
+                <text x="60" y="80" class="ax" text-anchor="middle"><tspan x="60" dy="0">9th Cir. hears</tspan><tspan x="60" dy="13">§230 appeal</tspan></text>
+                <line x1="286.7" y1="125" x2="286.7" y2="78" class="grid-l"/>
+                <text x="286.7" y="66" class="ax" text-anchor="middle" fill="#bf7d1e"><tspan x="286.7" dy="0">Meta + YouTube</tspan><tspan x="286.7" dy="13" font-weight="600">design-defect verdict</tspan></text>
+                <line x1="513.3" y1="125" x2="513.3" y2="78" class="grid-l"/>
+                <text x="513.3" y="66" class="ax" text-anchor="middle" fill="#bf7d1e"><tspan x="513.3" dy="0">PowerPort verdict:</tspan><tspan x="513.3" dy="13" font-weight="600">hung on design defect</tspan></text>
+                <line x1="740" y1="125" x2="740" y2="92" class="grid-l"/>
+                <text x="740" y="80" class="ax" text-anchor="end"><tspan x="740" dy="0">PowerPort</tspan><tspan x="740" dy="13">settlement talks</tspan></text>
+                <!-- events below -->
+                <line x1="173.3" y1="125" x2="173.3" y2="165" class="grid-l"/>
+                <text x="173.3" y="183" class="ax" text-anchor="middle"><tspan x="173.3" dy="0">Lyft assault MDL</tspan><tspan x="173.3" dy="13">3171 centralized</tspan></text>
+                <line x1="400" y1="125" x2="400" y2="165" class="grid-l"/>
+                <text x="400" y="183" class="ax" text-anchor="middle"><tspan x="400" dy="0">Bard PowerPort</tspan><tspan x="400" dy="13">1st bellwether tried</tspan></text>
+                <line x1="626.7" y1="125" x2="626.7" y2="165" class="grid-l"/>
+                <text x="626.7" y="183" class="ax" text-anchor="middle" fill="#bf7d1e"><tspan x="626.7" dy="0">Federal social-media</tspan><tspan x="626.7" dy="13" font-weight="600">bellwether (Jun 15)</tspan></text>
+              </svg>
+            </div>
+            <p class="li-fig-cap"><b>Gold markers are verdicts and the trials that price them.</b> Compiled from court records and litigation reporting (Reuters, Law.com/ALM). Dates approximate; the federal social-media bellwether date is as scheduled.</p>
+          </div>
+
+          <h3>Social media: from "untested" to a plaintiff verdict</h3>
+          <p>For three years the social-media docket was a Section&nbsp;230 argument with no money changing hands. In early 2026 the lead California state-court bellwether broke that pattern: TikTok and Snap settled confidentially before trial, and on March&nbsp;24 a jury found Meta and Google/YouTube liable for negligently designing platform features that harm adolescent users. The verdict followed a ruling that neither Section&nbsp;230 nor the First Amendment barred the design-defect theory. The first federal MDL bellwether &mdash; a school-district case &mdash; is set for June&nbsp;15, and the Ninth Circuit heard the immunity appeal in January, so an appellate marker could land on top of the trial calendar.</p>
+
+          <h3>Bard PowerPort: a "defense verdict" that wasn't clean</h3>
+          <p>The first federal PowerPort bellwether went to a jury in Arizona and produced a partial defense verdict: the manufacturer prevailed on failure-to-warn, failure-to-instruct, and consumer-fraud claims, but the jury hung on the central design-defect question. Calling it a defense win overstates it. Additional bellwethers run through early 2027, and the court has pushed the parties into settlement discussions in July.</p>
+
+          <h3>AFFF: water resolved, personal injury reset</h3>
+          <p>The PFAS story has split cleanly. The public-water track is largely resolved through large settlements with the principal chemical defendants. The personal-injury track &mdash; organized around a defined set of qualifying conditions, with kidney cancer as the lead &mdash; saw its first bellwether pulled off the October calendar and reset, even as the inventory of unfiled claims runs into the tens of thousands.</p>
+
+          <h2>4. Two structural defenses under pressure</h2>
+
+          <p>The throughline of 2026 is not any single verdict. It is that two defenses the corporate bar has relied on for years showed cracks in the same window.</p>
+
+          <p class="pullquote">Plaintiffs stopped litigating what users posted and started litigating how the product was built. That reframing &mdash; design choices, not content &mdash; is what carried a verdict past Section&nbsp;230.</p>
+
+          <p><strong>Section 230.</strong> The platform-immunity statute was built for liability over third-party content. The plaintiff bar's move was to stop suing over content and start suing over design &mdash; algorithms, notification cadence, infinite scroll, the architecture of engagement. Courts have increasingly let that theory through, and a jury has now accepted it. Immunity is not gone, but the design-defect lane around it is now a proven path rather than a hopeful one.</p>
+
+          <p><strong>Bankruptcy.</strong> The other shield is the use of Chapter&nbsp;11 to corral and cap mass-tort liability. J&amp;J's third attempt &mdash; the "Texas two-step" via a purpose-built subsidiary &mdash; was dismissed, with the court pointing to irregularities in how claimant support was tallied. The proposed multibillion-dollar resolution evaporated, and roughly 90,000 claims returned to active litigation. The lesson for any defendant eyeing the divisional-merger route is that the maneuver is getting harder to land, not easier.</p>
+
+          <h2>5. What the JPML is centralizing &mdash; and refusing</h2>
+
+          <p>The Panel's gatekeeping in this cycle rewards two things: a clearly defined injury and a recognizable, bounded set of defendants. Where either is missing, centralization tends to fail. The sharpest illustration came weeks apart, around the same product.</p>
+
+          <div class="li-table-wrap">
+            <table class="li-table">
+              <caption>JPML gatekeeping &middot; selected 2025&ndash;2026 rulings</caption>
+              <thead>
+                <tr><th>Petition / docket</th><th>Theory</th><th>Result</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Roblox child sexual exploitation (MDL&nbsp;3166)</td><td>Platform-safety failure; facilitated exploitation</td><td class="up">Centralized &middot; Dec&nbsp;2025</td></tr>
+                <tr><td>"Gateway games" video-game addiction</td><td>Addiction across multiple platforms/publishers</td><td class="down">Denied &middot; Dec&nbsp;2025</td></tr>
+                <tr><td>Lyft passenger sexual assault (MDL&nbsp;3171)</td><td>Driver assault; mirrors Uber docket</td><td class="up">Centralized &middot; Feb&nbsp;2026</td></tr>
+                <tr><td>GLP-1 NAION vision loss (MDL&nbsp;3163)</td><td>Distinct injury split from GI-injury docket</td><td class="up">Centralized &middot; separate MDL</td></tr>
+                <tr><td>ByHeart infant formula (MDL&nbsp;3178)</td><td>Contamination / product liability</td><td class="up">Centralized &middot; May&nbsp;2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>The contrast in the first two rows is the whole lesson. A theory built on a defined harm and a single defendant was centralized; a broader "addiction" theory that would have swept in multiple publishers and an open-ended product universe was refused. The same logic explains the GLP-1 split into two MDLs by injury type, and it is the single best predictor of which emerging theory becomes a docket and which stays a press release.</p>
+
+          <h3>Ecosystem defendants are now the norm</h3>
+          <p>The defendants in these dockets are rarely a single manufacturer anymore. PFAS names the chemical, formulation, manufacturing, distribution, and successor chain &mdash; the principal chemical companies and their corporate descendants. GLP-1 names multiple manufacturers in a drug class while courts separate the claims by injury. Talc has pulled consumer-product allegations into a litigation built on industrial asbestos. The practical drafting implication: defendant identity is a corporate-family question, not a product question.</p>
+
+          <h2>6. What it means for plaintiff-side practice</h2>
+
+          <div class="li-stats">
+            <div class="li-stat"><div class="n">~159</div><div class="k">active MDLs &mdash; flat to declining year over year</div></div>
+            <div class="li-stat"><div class="n"><span class="accent">~94%</span></div><div class="k">of pending actions sit in mega-dockets</div></div>
+            <div class="li-stat"><div class="n">Dec&nbsp;1</div><div class="k">Rule 16.1 took effect, formalizing early MDL management</div></div>
+          </div>
+
+          <p>Two operational shifts follow from the data. First, <strong>Rule&nbsp;16.1</strong>, effective December&nbsp;1, 2025, formalizes early case management &mdash; leadership structure, discovery planning, and early identification of the factual and legal issues. Expect courts and defendants to press sooner for proof of product use, exposure, diagnosis, and injury timing. The documentation burden moves forward in the case, which means intake quality, not intake volume, is where the risk now sits.</p>
+
+          <p>Second, the verdict turn changes how a docket should be read. A bellwether outcome is a data point about a single plaintiff, not a verdict on the inventory &mdash; the PowerPort result, prevailing on warnings while hanging on design defect, is the textbook example. Treating one bellwether as dispositive, in either direction, is the most common analytical error of the cycle.</p>
+
+          <p>The strategic picture for the plaintiff bar is a barbell. At one end, the proven mega-dockets &mdash; talc, AFFF, hair relaxer &mdash; with known injury definitions and recognizable defendants. At the other, a fast-growing breakout (Depo-Provera) and a coherent new category of platform-harm-to-minors cases (social media, Roblox, rideshare assault) where the law is being made in real time. The thin middle is the speculative theory the JPML has shown it will refuse to centralize.</p>
+
+          <h2>Sources &amp; method</h2>
+          <p>Case counts are drawn from the JPML's distribution-of-pending-dockets and monthly statistics reports, anchored to the May&nbsp;1, 2026 report; counts are point-in-time and move monthly. Verdicts, settlements, and procedural milestones are compiled from court records and litigation reporting by Reuters, Law.com/ALM, and established docket trackers. Asbestos and talc filing context draws on KCIC's asbestos litigation year-in-review series. Figures should be re-verified against primary sources before republication. Nothing here is legal advice.</p>
+
+        </div>
+
+        <footer class="article-foot">
+          <p class="article-byline-end">David Meldofsky is a California-licensed attorney and the editor of Lawsuit Intelligencer. He is also the founder of <a href="https://lawsuitinformer.com">Lawsuit Informer</a> and <a href="https://lawsuit.center">Lawsuit Center</a>.</p>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-mast">Lawsuit Intelligencer</p>
+          <p class="footer-mast-sub">Litigation analysis, mass torts, and the business of plaintiff-side law.</p>
+        </div>
+        <div>
+          <h4>Sections</h4>
+          <ul>
+            <li><a href="index.html#articles">Articles</a></li>
+            <li><a href="index.html#coverage">Coverage</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="editorial-standards.html">Editorial standards</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>The Ecosystem</h4>
+          <ul>
+            <li><a href="https://lawsuitinformer.com">Lawsuit Informer</a></li>
+            <li><a href="https://lawsuit.center">Lawsuit Center</a></li>
+            <li><a href="https://davidmeldofsky.com">David Meldofsky</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-disclosure">
+        Lawsuit Intelligencer is editorial commentary and does not constitute legal advice. Nothing on this site creates an attorney-client relationship. The publication is independent of any case, claim, or law firm covered. Authors writing about matters in which they have a financial interest disclose that interest in the byline area of each piece.
+      </p>
+      <p class="footer-bottom">&copy; 2026 Lawsuit Intelligencer &middot; Edited by David Meldofsky</p>
+    </div>
+  </footer>
+
+</body>
+</html>
