@@ -52,8 +52,12 @@
       color:var(--accent);white-space:nowrap;}
     .li-fig-title{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;
       color:var(--ink-soft);text-align:right;line-height:1.35;}
-    .li-fig-body{padding:20px 18px 8px;}
+    .li-fig-body{padding:20px 18px 8px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
     .li-fig svg{display:block;width:100%;height:auto;}
+    /* On narrow screens, keep charts legible: give them a floor width and let the
+       figure body scroll horizontally instead of shrinking the labels to nothing. */
+    .li-svg-wide{min-width:580px;}
+    .li-svg-mid{min-width:440px;}
     .li-fig-cap{font-family:var(--mono);font-size:11.5px;line-height:1.55;color:var(--ink-muted);
       padding:12px 18px 16px;border-top:1px dotted var(--rule);}
 
@@ -169,7 +173,7 @@
               <span class="li-fig-title">Docket concentration &middot; mega-MDLs (1,000+ cases)</span>
             </div>
             <div class="li-fig-body">
-              <svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="-8 0 636 190" class="li-svg-wide" xmlns="http://www.w3.org/2000/svg">
                 <text x="0" y="46" class="li-lbl">Share of active MDLs</text>
                 <rect x="150" y="34" width="460" height="22" fill="#e6ddca"/>
                 <rect x="150" y="34" width="60.7" height="22" class="li-bar"/>
@@ -197,7 +201,7 @@
               <span class="li-fig-title">Ten largest product-liability MDLs &middot; pending actions</span>
             </div>
             <div class="li-fig-body">
-              <svg viewBox="0 0 760 350" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="-6 0 772 350" class="li-svg-wide" xmlns="http://www.w3.org/2000/svg">
                 <text x="240" y="35" class="li-lbl" text-anchor="end">J&amp;J Talc</text>
                 <rect x="250" y="22" width="490" height="18" class="li-bar"/>
                 <text x="735" y="35" class="li-valon" text-anchor="end">67,623</text>
@@ -257,7 +261,7 @@
               <span class="li-fig-title">J&amp;J Talc (MDL 2738) &middot; pending actions, Feb 2025&ndash;May 2026</span>
             </div>
             <div class="li-fig-body">
-              <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 800 280" class="li-svg-wide" xmlns="http://www.w3.org/2000/svg">
                 <line x1="70" y1="217.7" x2="760" y2="217.7" class="li-grid"/>
                 <line x1="70" y1="185.4" x2="760" y2="185.4" class="li-grid"/>
                 <line x1="70" y1="153.1" x2="760" y2="153.1" class="li-grid"/>
@@ -293,7 +297,7 @@
               <span class="li-fig-title">Depo-Provera (MDL 3140) &middot; the fastest-growing MDL</span>
             </div>
             <div class="li-fig-body">
-              <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 500 280" class="li-svg-mid" xmlns="http://www.w3.org/2000/svg">
                 <line x1="70" y1="190" x2="470" y2="190" class="li-grid"/>
                 <line x1="70" y1="140" x2="470" y2="140" class="li-grid"/>
                 <line x1="70" y1="90" x2="470" y2="90" class="li-grid"/>
@@ -337,7 +341,7 @@
               <span class="li-fig-title">The 2026 bellwether turn &middot; selected milestones</span>
             </div>
             <div class="li-fig-body">
-              <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 800 250" class="li-svg-wide" xmlns="http://www.w3.org/2000/svg">
                 <line x1="60" y1="125" x2="740" y2="125" stroke="var(--ink)" stroke-width="2"/>
                 <circle cx="60" cy="125" r="4" class="li-dot-n"/>
                 <circle cx="173.3" cy="125" r="4" class="li-dot-n"/>
