@@ -37,49 +37,40 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#001a57">
 
-  <!--
-    Figure/chart components only. The page uses your style.css for everything else
-    (masthead, footer, article, summary box). These rules are scoped under .li- so
-    they cannot collide with site styles, and they reference your CSS variables
-    (--ink, --accent, --rule, etc.) so the charts track the site palette.
-  -->
+  <!-- Scoped styles for the figure/chart/table components only. These use the site's
+       existing CSS variables (from style.css) and are prefixed .li- so they cannot
+       affect the masthead, article body, or footer. -->
   <style>
-    /* ---- Figures (KCIC-style) ---- */
-    .li-fig{margin:40px 0;border:1px solid var(--rule);background:#fdfbf5;}
+    .li-disclosure{font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--ink-muted);
+      background:var(--bg-alt);border-left:3px solid var(--accent);padding:14px 18px;margin:0 0 36px;}
+    .li-disclosure strong{color:var(--ink);font-weight:500;}
+
+    .li-fig{margin:36px 0;border:1px solid var(--rule);background:#fffdf8;}
     .li-fig-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
-      padding:13px 20px 11px;border-bottom:1px solid var(--rule-soft);background:var(--bg-alt);}
-    .li-fig-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+      padding:13px 18px;border-bottom:1px solid var(--rule);background:var(--bg-alt);}
+    .li-fig-num{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
       color:var(--accent);white-space:nowrap;}
-    .li-fig-title{font-family:var(--mono);font-size:12px;letter-spacing:.03em;text-transform:uppercase;
-      color:var(--ink);font-weight:500;text-align:right;line-height:1.35;}
-    .li-fig-body{padding:22px 20px 12px;}
-    .li-fig svg{display:block;width:100%;height:auto;font-family:var(--mono);}
-    .li-fig-cap{font-family:var(--mono);font-size:11px;line-height:1.55;color:var(--ink-muted);
-      padding:10px 20px 16px;border-top:1px dotted var(--rule-soft);}
-    .li-fig-cap b{color:var(--ink-soft);font-weight:600;}
+    .li-fig-title{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--ink-soft);text-align:right;line-height:1.35;}
+    .li-fig-body{padding:20px 18px 8px;}
+    .li-fig svg{display:block;width:100%;height:auto;}
+    .li-fig-cap{font-family:var(--mono);font-size:11.5px;line-height:1.55;color:var(--ink-muted);
+      padding:12px 18px 16px;border-top:1px dotted var(--rule);}
 
-    /* SVG text + shape classes (scoped to figures) */
-    .li-fig .ax{fill:var(--ink-muted);font-size:11px;}
-    .li-fig .ax-v{fill:var(--ink-muted);font-size:10px;}
-    .li-fig .val{fill:var(--ink);font-size:11px;font-weight:600;}
-    .li-fig .val-on{fill:#fdfbf5;font-size:11px;font-weight:600;}
-    .li-fig .lbl{fill:var(--ink-soft);font-size:11.5px;}
-    .li-fig .grid-l{stroke:var(--rule-soft);stroke-width:1;}
-    .li-fig .bar-main{fill:var(--ink);}
-    .li-fig .bar-hi{fill:var(--accent);}
-    .li-fig .track{fill:#e7dcc7;}
-    .li-fig .line-main{fill:none;stroke:var(--ink);stroke-width:2.4;}
-    .li-fig .line-area{fill:var(--ink);opacity:.06;}
-    .li-fig .dot{fill:var(--accent);}
-    .li-fig .axis{stroke:var(--ink);stroke-width:2;}
+    .li-grid{stroke:var(--rule-soft);stroke-width:1;}
+    .li-bar{fill:var(--ink);}
+    .li-bar-hi{fill:var(--accent);}
+    .li-line{fill:none;stroke:var(--ink);stroke-width:2.2;}
+    .li-area{fill:var(--ink);opacity:.06;}
+    .li-dot{fill:var(--accent);}
+    .li-dot-n{fill:var(--ink);}
+    .li-ax{fill:var(--ink-muted);font-family:var(--mono);font-size:11px;}
+    .li-axv{fill:var(--ink-muted);font-family:var(--mono);font-size:10px;}
+    .li-val{fill:var(--ink);font-family:var(--mono);font-size:11px;font-weight:500;}
+    .li-valon{fill:var(--bg);font-family:var(--mono);font-size:11px;font-weight:500;}
+    .li-lbl{fill:var(--ink-soft);font-family:var(--mono);font-size:11px;}
 
-    /* ---- Disclosure note ---- */
-    .li-disclosure{font-family:var(--mono);font-size:12px;line-height:1.55;color:var(--ink-muted);
-      background:var(--bg-alt);border-left:3px solid var(--accent);padding:12px 16px;margin:0 0 40px;}
-    .li-disclosure strong{color:var(--ink-soft);}
-
-    /* ---- Ranked data table ---- */
-    .li-table-wrap{margin:34px 0;overflow-x:auto;}
+    .li-table-wrap{margin:32px 0;overflow-x:auto;}
     table.li-table{width:100%;border-collapse:collapse;font-family:var(--serif);font-size:16px;}
     .li-table caption{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
       color:var(--accent);text-align:left;padding-bottom:12px;}
@@ -87,20 +78,17 @@
       color:var(--ink-muted);text-align:left;font-weight:500;border-bottom:2px solid var(--ink);padding:9px 10px;}
     .li-table td{padding:10px;border-bottom:1px solid var(--rule-soft);vertical-align:top;color:var(--ink-soft);}
     .li-table tr:last-child td{border-bottom:none;}
-    .li-table .res{font-family:var(--mono);font-size:12px;letter-spacing:.02em;white-space:nowrap;}
-    .li-table .grant{color:#3d6b4a;font-weight:600;}
-    .li-table .deny{color:var(--accent);font-weight:600;}
+    .li-table .li-up{color:#4f6b2f;font-family:var(--mono);font-size:13px;white-space:nowrap;}
+    .li-table .li-down{color:var(--accent);font-family:var(--mono);font-size:13px;white-space:nowrap;}
 
-    /* ---- Stat strip ---- */
     .li-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
-      border:1px solid var(--rule);margin:34px 0;}
-    .li-stat{background:var(--bg-alt);padding:22px 16px;text-align:center;}
-    .li-stat .n{font-family:var(--mono);font-weight:600;font-size:30px;color:var(--ink);line-height:1;
-      letter-spacing:-.02em;}
-    .li-stat .n .accent{color:var(--accent);}
-    .li-stat .k{font-size:14px;color:var(--ink-soft);line-height:1.4;margin-top:10px;}
+      border:1px solid var(--rule);margin:32px 0;}
+    .li-stat{background:var(--bg);padding:22px 16px;text-align:center;}
+    .li-stat .li-n{font-family:var(--mono);font-weight:600;font-size:30px;color:var(--ink);line-height:1;}
+    .li-stat .li-n .li-accent{color:var(--accent);}
+    .li-stat .li-k{font-size:14px;color:var(--ink-soft);line-height:1.4;margin-top:10px;}
 
-    @media (max-width:600px){
+    @media (max-width:768px){
       .li-stats{grid-template-columns:1fr;}
       .li-fig-title{font-size:10.5px;}
     }
@@ -182,23 +170,23 @@
             </div>
             <div class="li-fig-body">
               <svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg">
-                <text x="0" y="46" class="lbl">Share of active MDLs</text>
-                <rect x="150" y="34" width="460" height="22" class="track"/>
-                <rect x="150" y="34" width="60.7" height="22" class="bar-hi"/>
-                <text x="218" y="50" class="val">13.2%</text>
+                <text x="0" y="46" class="li-lbl">Share of active MDLs</text>
+                <rect x="150" y="34" width="460" height="22" fill="#e6ddca"/>
+                <rect x="150" y="34" width="60.7" height="22" class="li-bar"/>
+                <text x="218" y="50" class="li-val">13.2%</text>
 
-                <text x="0" y="116" class="lbl">Share of pending actions</text>
-                <rect x="150" y="104" width="460" height="22" class="track"/>
-                <rect x="150" y="104" width="431.9" height="22" class="bar-main"/>
-                <text x="566" y="120" class="val-on" text-anchor="end">93.9%</text>
+                <text x="0" y="116" class="li-lbl">Share of pending actions</text>
+                <rect x="150" y="104" width="460" height="22" fill="#e6ddca"/>
+                <rect x="150" y="104" width="431.9" height="22" class="li-bar"/>
+                <text x="566" y="120" class="li-valon" text-anchor="end">93.9%</text>
 
-                <line x1="150" y1="150" x2="610" y2="150" class="grid-l"/>
-                <text x="150" y="170" class="ax-v">0%</text>
-                <text x="380" y="170" class="ax-v" text-anchor="middle">50%</text>
-                <text x="610" y="170" class="ax-v" text-anchor="end">100%</text>
+                <line x1="150" y1="150" x2="610" y2="150" class="li-grid"/>
+                <text x="150" y="170" class="li-axv">0%</text>
+                <text x="380" y="170" class="li-axv" text-anchor="middle">50%</text>
+                <text x="610" y="170" class="li-axv" text-anchor="end">100%</text>
               </svg>
             </div>
-            <p class="li-fig-cap"><b>A small number of mega-dockets carry the system.</b> MDLs with 1,000+ pending actions are roughly an eighth of all active dockets but hold about 94% of pending cases. Source: JPML distribution-of-pending-dockets report, May&nbsp;1,&nbsp;2026.</p>
+            <p class="li-fig-cap">Mega-dockets (1,000+ pending actions) are roughly an eighth of all active MDLs but hold about 94% of pending cases. Source: JPML distribution-of-pending-dockets report, May&nbsp;1,&nbsp;2026.</p>
           </div>
 
           <p>Within that top tier, one docket dominates everything else. Johnson &amp; Johnson's talc litigation alone accounts for roughly a third of all pending federal MDL actions &mdash; more than the next several dockets combined &mdash; which is why a single bankruptcy ruling in Texas can move the entire system's case count.</p>
@@ -210,58 +198,58 @@
             </div>
             <div class="li-fig-body">
               <svg viewBox="0 0 760 350" xmlns="http://www.w3.org/2000/svg">
-                <text x="240" y="35" class="lbl" text-anchor="end">J&amp;J Talc</text>
-                <rect x="250" y="22" width="490" height="18" class="bar-hi"/>
-                <text x="735" y="35" class="val-on" text-anchor="end">67,623</text>
+                <text x="240" y="35" class="li-lbl" text-anchor="end">J&amp;J Talc</text>
+                <rect x="250" y="22" width="490" height="18" class="li-bar"/>
+                <text x="735" y="35" class="li-valon" text-anchor="end">67,623</text>
 
-                <text x="240" y="65" class="lbl" text-anchor="end">Bard Hernia Mesh</text>
-                <rect x="250" y="52" width="172" height="18" class="bar-main"/>
-                <text x="428" y="65" class="val">23,703</text>
+                <text x="240" y="65" class="li-lbl" text-anchor="end">Bard Hernia Mesh</text>
+                <rect x="250" y="52" width="172" height="18" class="li-bar"/>
+                <text x="428" y="65" class="li-val">23,703</text>
 
-                <text x="240" y="95" class="lbl" text-anchor="end">AFFF / PFAS</text>
-                <rect x="250" y="82" width="110" height="18" class="bar-main"/>
-                <text x="366" y="95" class="val">15,232</text>
+                <text x="240" y="95" class="li-lbl" text-anchor="end">AFFF / PFAS</text>
+                <rect x="250" y="82" width="110" height="18" class="li-bar"/>
+                <text x="366" y="95" class="li-val">15,232</text>
 
-                <text x="240" y="125" class="lbl" text-anchor="end">Hair Relaxer</text>
-                <rect x="250" y="112" width="84" height="18" class="bar-main"/>
-                <text x="340" y="125" class="val">11,526</text>
+                <text x="240" y="125" class="li-lbl" text-anchor="end">Hair Relaxer</text>
+                <rect x="250" y="112" width="84" height="18" class="li-bar"/>
+                <text x="340" y="125" class="li-val">11,526</text>
 
-                <text x="240" y="155" class="lbl" text-anchor="end">Proton-Pump Inhibitor</text>
-                <rect x="250" y="142" width="82" height="18" class="bar-main"/>
-                <text x="338" y="155" class="val">11,322</text>
+                <text x="240" y="155" class="li-lbl" text-anchor="end">Proton-Pump Inhibitor</text>
+                <rect x="250" y="142" width="82" height="18" class="li-bar"/>
+                <text x="338" y="155" class="li-val">11,322</text>
 
-                <text x="240" y="185" class="lbl" text-anchor="end">Paraquat</text>
-                <rect x="250" y="172" width="48" height="18" class="bar-main"/>
-                <text x="304" y="185" class="val">6,580</text>
+                <text x="240" y="185" class="li-lbl" text-anchor="end">Paraquat</text>
+                <rect x="250" y="172" width="48" height="18" class="li-bar"/>
+                <text x="304" y="185" class="li-val">6,580</text>
 
-                <text x="240" y="215" class="lbl" text-anchor="end">Depo-Provera</text>
-                <rect x="250" y="202" width="27" height="18" class="bar-hi"/>
-                <text x="283" y="215" class="val">3,769</text>
+                <text x="240" y="215" class="li-lbl" text-anchor="end">Depo-Provera</text>
+                <rect x="250" y="202" width="27" height="18" class="li-bar"/>
+                <text x="283" y="215" class="li-val">3,769</text>
 
-                <text x="240" y="245" class="lbl" text-anchor="end">GLP-1 (GI injury)</text>
-                <rect x="250" y="232" width="24" height="18" class="bar-main"/>
-                <text x="280" y="245" class="val">3,363</text>
+                <text x="240" y="245" class="li-lbl" text-anchor="end">GLP-1 (GI injury)</text>
+                <rect x="250" y="232" width="24" height="18" class="li-bar"/>
+                <text x="280" y="245" class="li-val">3,363</text>
 
-                <text x="240" y="275" class="lbl" text-anchor="end">Bard PowerPort</text>
-                <rect x="250" y="262" width="23" height="18" class="bar-main"/>
-                <text x="279" y="275" class="val">3,187</text>
+                <text x="240" y="275" class="li-lbl" text-anchor="end">Bard PowerPort</text>
+                <rect x="250" y="262" width="23" height="18" class="li-bar"/>
+                <text x="279" y="275" class="li-val">3,187</text>
 
-                <text x="240" y="305" class="lbl" text-anchor="end">Social Media Addiction</text>
-                <rect x="250" y="292" width="18" height="18" class="bar-main"/>
-                <text x="274" y="305" class="val">2,527</text>
+                <text x="240" y="305" class="li-lbl" text-anchor="end">Social Media Addiction</text>
+                <rect x="250" y="292" width="18" height="18" class="li-bar"/>
+                <text x="274" y="305" class="li-val">2,527</text>
 
-                <line x1="250" y1="320" x2="740" y2="320" class="grid-l"/>
-                <text x="250" y="338" class="ax-v">0</text>
-                <text x="495" y="338" class="ax-v" text-anchor="middle">35,000</text>
-                <text x="740" y="338" class="ax-v" text-anchor="end">70,000</text>
+                <line x1="250" y1="320" x2="740" y2="320" class="li-grid"/>
+                <text x="250" y="338" class="li-axv">0</text>
+                <text x="495" y="338" class="li-axv" text-anchor="middle">35,000</text>
+                <text x="740" y="338" class="li-axv" text-anchor="end">70,000</text>
               </svg>
             </div>
-            <p class="li-fig-cap"><b>Oxblood bars mark dockets covered in detail below.</b> Approximate pending actions, JPML report of May&nbsp;1,&nbsp;2026. Counts are point-in-time and shift monthly; confirm against the current report before citing.</p>
+            <p class="li-fig-cap">Approximate pending actions, JPML report of May&nbsp;1,&nbsp;2026. Counts are point-in-time and shift monthly; confirm against the current report before citing.</p>
           </div>
 
           <h2>2. The growth is inside the mega-dockets</h2>
 
-          <p>The number of active MDLs is flat to slightly declining &mdash; down from roughly 170 in early 2025 to about 159 a year later. What is growing is the size of the dockets that already dominate. Talc is the clearest illustration: the count climbed steeply through mid-2025 and then plateaued near 67,000&ndash;68,000, which is exactly the shape you would expect from a docket whose proposed exit ramp collapsed and whose claims had nowhere to go but back into active litigation.</p>
+          <p>The number of active MDLs is flat to slightly declining &mdash; down from roughly 170 in early 2025 to about 159 a year later. What is growing is the size of the dockets that already dominate. Talc is the clearest illustration: the count climbed steeply through mid-2025 and then plateaued near 67,000&ndash;68,000, the shape you would expect from a docket whose proposed exit ramp collapsed and whose claims had nowhere to go but back into active litigation.</p>
 
           <div class="li-fig" role="img" aria-label="Line chart of J&J talc pending actions from February 2025 to May 2026, rising from about 58,200 to a plateau near 67,600.">
             <div class="li-fig-head">
@@ -270,117 +258,126 @@
             </div>
             <div class="li-fig-body">
               <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
-                <line x1="70" y1="217.7" x2="760" y2="217.7" class="grid-l"/>
-                <line x1="70" y1="185.4" x2="760" y2="185.4" class="grid-l"/>
-                <line x1="70" y1="153.1" x2="760" y2="153.1" class="grid-l"/>
-                <line x1="70" y1="120.8" x2="760" y2="120.8" class="grid-l"/>
-                <line x1="70" y1="88.5" x2="760" y2="88.5" class="grid-l"/>
-                <line x1="70" y1="56.2" x2="760" y2="56.2" class="grid-l"/>
-                <text x="62" y="221" class="ax-v" text-anchor="end">58k</text>
-                <text x="62" y="124" class="ax-v" text-anchor="end">64k</text>
-                <text x="62" y="60" class="ax-v" text-anchor="end">68k</text>
-                <path d="M 70,250 L 70.0,214.4 L 116.0,214.4 L 162.0,214.3 L 208.0,207.3 L 254.0,192.3 L 300.0,125.7 L 346.0,80.2 L 392.0,73.8 L 438.0,69.0 L 484.0,68.6 L 530.0,61.5 L 576.0,62.9 L 622.0,62.3 L 668.0,70.4 L 714.0,66.2 L 760.0,62.2 L 760,250 Z" class="line-area"/>
-                <polyline points="70.0,214.4 116.0,214.4 162.0,214.3 208.0,207.3 254.0,192.3 300.0,125.7 346.0,80.2 392.0,73.8 438.0,69.0 484.0,68.6 530.0,61.5 576.0,62.9 622.0,62.3 668.0,70.4 714.0,66.2 760.0,62.2" class="line-main"/>
-                <circle cx="70" cy="214.4" r="3" class="dot"/>
-                <circle cx="760" cy="62.2" r="3.5" class="dot"/>
-                <text x="70" y="206" class="val">58,206</text>
-                <text x="760" y="54" class="val" text-anchor="end">67,623</text>
-                <line x1="70" y1="250" x2="760" y2="250" class="grid-l"/>
-                <text x="70" y="268" class="ax-v">F'25</text>
-                <text x="300" y="268" class="ax-v" text-anchor="middle">Jul</text>
-                <text x="530" y="268" class="ax-v" text-anchor="middle">Dec</text>
-                <text x="760" y="268" class="ax-v" text-anchor="end">May'26</text>
+                <line x1="70" y1="217.7" x2="760" y2="217.7" class="li-grid"/>
+                <line x1="70" y1="185.4" x2="760" y2="185.4" class="li-grid"/>
+                <line x1="70" y1="153.1" x2="760" y2="153.1" class="li-grid"/>
+                <line x1="70" y1="120.8" x2="760" y2="120.8" class="li-grid"/>
+                <line x1="70" y1="88.5" x2="760" y2="88.5" class="li-grid"/>
+                <line x1="70" y1="56.2" x2="760" y2="56.2" class="li-grid"/>
+                <text x="62" y="221" class="li-axv" text-anchor="end">58k</text>
+                <text x="62" y="124" class="li-axv" text-anchor="end">64k</text>
+                <text x="62" y="60" class="li-axv" text-anchor="end">68k</text>
+
+                <path d="M 70,250 L 70.0,214.4 L 116.0,214.4 L 162.0,214.3 L 208.0,207.3 L 254.0,192.3 L 300.0,125.7 L 346.0,80.2 L 392.0,73.8 L 438.0,69.0 L 484.0,68.6 L 530.0,61.5 L 576.0,62.9 L 622.0,62.3 L 668.0,70.4 L 714.0,66.2 L 760.0,62.2 L 760,250 Z" class="li-area"/>
+                <polyline points="70.0,214.4 116.0,214.4 162.0,214.3 208.0,207.3 254.0,192.3 300.0,125.7 346.0,80.2 392.0,73.8 438.0,69.0 484.0,68.6 530.0,61.5 576.0,62.9 622.0,62.3 668.0,70.4 714.0,66.2 760.0,62.2" class="li-line"/>
+                <circle cx="70" cy="214.4" r="3" class="li-dot-n"/>
+                <circle cx="760" cy="62.2" r="3.5" class="li-dot"/>
+                <text x="70" y="206" class="li-val">58,206</text>
+                <text x="760" y="54" class="li-val" text-anchor="end">67,623</text>
+
+                <line x1="70" y1="250" x2="760" y2="250" class="li-grid"/>
+                <text x="70" y="268" class="li-axv">F'25</text>
+                <text x="300" y="268" class="li-axv" text-anchor="middle">Jul</text>
+                <text x="530" y="268" class="li-axv" text-anchor="middle">Dec</text>
+                <text x="760" y="268" class="li-axv" text-anchor="end">May'26</text>
               </svg>
             </div>
-            <p class="li-fig-cap"><b>The plateau is the story.</b> The steep climb tracks direct filing into the transferee court; the flat top reflects a docket with no settlement to absorb it. Source: JPML monthly statistics, Feb&nbsp;2025&ndash;May&nbsp;2026.</p>
+            <p class="li-fig-cap">Monthly pending actions, Feb&nbsp;2025&ndash;May&nbsp;2026. The steep rise reflects direct filing into the transferee court; the plateau follows the collapse of the proposed bankruptcy settlement. Source: JPML monthly statistics.</p>
           </div>
 
           <p>The opposite shape &mdash; near-vertical growth &mdash; belongs to Depo-Provera. It is the fastest-growing MDL in the federal system by a wide margin, more than doubling in a single quarter, including a single month in which it added roughly a thousand cases. For anyone tracking where intake advertising and referral volume are flowing right now, this is the cleanest signal on the board.</p>
 
-          <div class="li-fig" role="img" aria-label="Column chart of Depo-Provera pending actions from December 2025 to May 2026, rising from 1,470 to 3,769, with the March surge highlighted.">
+          <div class="li-fig" role="img" aria-label="Column chart of Depo-Provera pending actions from December 2025 to May 2026, rising from 1,470 to 3,769, with the March surge marked.">
             <div class="li-fig-head">
               <span class="li-fig-num">Fig. 4</span>
               <span class="li-fig-title">Depo-Provera (MDL 3140) &middot; the fastest-growing MDL</span>
             </div>
             <div class="li-fig-body">
               <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
-                <line x1="70" y1="190" x2="470" y2="190" class="grid-l"/>
-                <line x1="70" y1="140" x2="470" y2="140" class="grid-l"/>
-                <line x1="70" y1="90" x2="470" y2="90" class="grid-l"/>
-                <line x1="70" y1="40" x2="470" y2="40" class="grid-l"/>
-                <text x="62" y="194" class="ax-v" text-anchor="end">1k</text>
-                <text x="62" y="94" class="ax-v" text-anchor="end">3k</text>
-                <text x="62" y="44" class="ax-v" text-anchor="end">4k</text>
-                <rect x="85.0" y="166.5" width="36.7" height="73.5" class="bar-main"/>
-                <text x="103.3" y="160" class="val" text-anchor="middle">1,470</text>
-                <rect x="151.7" y="152.4" width="36.7" height="87.6" class="bar-main"/>
-                <text x="170.0" y="146" class="val" text-anchor="middle">1,752</text>
-                <rect x="218.3" y="135.1" width="36.7" height="104.9" class="bar-main"/>
-                <text x="236.7" y="129" class="val" text-anchor="middle">2,098</text>
-                <rect x="285.0" y="85.1" width="36.7" height="154.9" class="bar-hi"/>
-                <text x="303.3" y="79" class="val" text-anchor="middle">3,099</text>
-                <rect x="351.7" y="65.5" width="36.7" height="174.5" class="bar-main"/>
-                <text x="370.0" y="59" class="val" text-anchor="middle">3,490</text>
-                <rect x="418.3" y="51.6" width="36.7" height="188.4" class="bar-main"/>
-                <text x="436.7" y="45" class="val" text-anchor="middle">3,769</text>
-                <line x1="70" y1="240" x2="470" y2="240" class="grid-l"/>
-                <text x="103.3" y="258" class="ax-v" text-anchor="middle">Dec'25</text>
-                <text x="170.0" y="258" class="ax-v" text-anchor="middle">Jan'26</text>
-                <text x="236.7" y="258" class="ax-v" text-anchor="middle">Feb</text>
-                <text x="303.3" y="258" class="ax-v" text-anchor="middle">Mar</text>
-                <text x="370.0" y="258" class="ax-v" text-anchor="middle">Apr</text>
-                <text x="436.7" y="258" class="ax-v" text-anchor="middle">May</text>
+                <line x1="70" y1="190" x2="470" y2="190" class="li-grid"/>
+                <line x1="70" y1="140" x2="470" y2="140" class="li-grid"/>
+                <line x1="70" y1="90" x2="470" y2="90" class="li-grid"/>
+                <line x1="70" y1="40" x2="470" y2="40" class="li-grid"/>
+                <text x="62" y="194" class="li-axv" text-anchor="end">1k</text>
+                <text x="62" y="94" class="li-axv" text-anchor="end">3k</text>
+                <text x="62" y="44" class="li-axv" text-anchor="end">4k</text>
+
+                <rect x="85.0" y="166.5" width="36.7" height="73.5" class="li-bar"/>
+                <text x="103.3" y="160" class="li-val" text-anchor="middle">1,470</text>
+                <rect x="151.7" y="152.4" width="36.7" height="87.6" class="li-bar"/>
+                <text x="170.0" y="146" class="li-val" text-anchor="middle">1,752</text>
+                <rect x="218.3" y="135.1" width="36.7" height="104.9" class="li-bar"/>
+                <text x="236.7" y="129" class="li-val" text-anchor="middle">2,098</text>
+                <rect x="285.0" y="85.1" width="36.7" height="154.9" class="li-bar-hi"/>
+                <text x="303.3" y="79" class="li-val" text-anchor="middle">3,099</text>
+                <rect x="351.7" y="65.5" width="36.7" height="174.5" class="li-bar"/>
+                <text x="370.0" y="59" class="li-val" text-anchor="middle">3,490</text>
+                <rect x="418.3" y="51.6" width="36.7" height="188.4" class="li-bar"/>
+                <text x="436.7" y="45" class="li-val" text-anchor="middle">3,769</text>
+
+                <line x1="70" y1="240" x2="470" y2="240" class="li-grid"/>
+                <text x="103.3" y="258" class="li-axv" text-anchor="middle">Dec'25</text>
+                <text x="170.0" y="258" class="li-axv" text-anchor="middle">Jan'26</text>
+                <text x="236.7" y="258" class="li-axv" text-anchor="middle">Feb</text>
+                <text x="303.3" y="258" class="li-axv" text-anchor="middle">Mar</text>
+                <text x="370.0" y="258" class="li-axv" text-anchor="middle">Apr</text>
+                <text x="436.7" y="258" class="li-axv" text-anchor="middle">May</text>
               </svg>
             </div>
-            <p class="li-fig-cap"><b>The oxblood column is the March surge</b> &mdash; roughly +1,000 cases in a single month, the largest one-month jump of any MDL this cycle. Source: JPML monthly statistics, Dec&nbsp;2025&ndash;May&nbsp;2026.</p>
+            <p class="li-fig-cap">Monthly pending actions, Dec&nbsp;2025&ndash;May&nbsp;2026. The March gain of roughly 1,000 cases (marked) was the largest single-month increase of any MDL this cycle. Source: JPML monthly statistics.</p>
           </div>
 
           <h2>3. The bellwether turn</h2>
 
           <p>For most of the last three years, the mega-dockets generated motion practice, not verdicts. That changed in the first half of 2026. Within roughly six months, the litigation produced the first jury verdict in the social-media docket, the first bellwether result in Bard PowerPort, a reset of the AFFF personal-injury track, and a string of state-court talc rulings &mdash; the moment a docket stops being a filing statistic and starts pricing risk.</p>
 
-          <div class="li-fig" role="img" aria-label="Timeline of key 2026 mass tort events from January to July, including the Ninth Circuit Section 230 argument, the Lyft MDL, the social media verdict, the Bard PowerPort bellwether, new MDLs, and the federal social media bellwether.">
+          <div class="li-fig" role="img" aria-label="Timeline of key 2026 mass tort events from January to July: the Ninth Circuit Section 230 argument, the Lyft MDL, the social media verdict, the Bard PowerPort bellwether and verdict, and the federal social media bellwether.">
             <div class="li-fig-head">
               <span class="li-fig-num">Fig. 5</span>
               <span class="li-fig-title">The 2026 bellwether turn &middot; selected milestones</span>
             </div>
             <div class="li-fig-body">
               <svg viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
-                <line x1="60" y1="125" x2="740" y2="125" class="axis"/>
-                <circle cx="60" cy="125" r="4" class="dot"/>
-                <circle cx="173.3" cy="125" r="4" class="dot"/>
-                <circle cx="286.7" cy="125" r="6" class="bar-hi"/>
-                <circle cx="400" cy="125" r="4" class="dot"/>
-                <circle cx="513.3" cy="125" r="6" class="bar-hi"/>
-                <circle cx="626.7" cy="125" r="4" class="dot"/>
-                <circle cx="740" cy="125" r="4" class="dot"/>
+                <line x1="60" y1="125" x2="740" y2="125" stroke="var(--ink)" stroke-width="2"/>
+                <circle cx="60" cy="125" r="4" class="li-dot-n"/>
+                <circle cx="173.3" cy="125" r="4" class="li-dot-n"/>
+                <circle cx="286.7" cy="125" r="5.5" class="li-dot"/>
+                <circle cx="400" cy="125" r="4" class="li-dot-n"/>
+                <circle cx="513.3" cy="125" r="5.5" class="li-dot"/>
+                <circle cx="626.7" cy="125" r="4" class="li-dot-n"/>
+                <circle cx="740" cy="125" r="4" class="li-dot-n"/>
 
-                <text x="60" y="145" class="ax-v" text-anchor="middle">JAN</text>
-                <text x="173.3" y="145" class="ax-v" text-anchor="middle">FEB</text>
-                <text x="286.7" y="145" class="ax-v" text-anchor="middle">MAR</text>
-                <text x="400" y="145" class="ax-v" text-anchor="middle">APR</text>
-                <text x="513.3" y="145" class="ax-v" text-anchor="middle">MAY</text>
-                <text x="626.7" y="145" class="ax-v" text-anchor="middle">JUN</text>
-                <text x="740" y="145" class="ax-v" text-anchor="middle">JUL</text>
+                <text x="60" y="145" class="li-axv" text-anchor="middle">JAN</text>
+                <text x="173.3" y="145" class="li-axv" text-anchor="middle">FEB</text>
+                <text x="286.7" y="145" class="li-axv" text-anchor="middle">MAR</text>
+                <text x="400" y="145" class="li-axv" text-anchor="middle">APR</text>
+                <text x="513.3" y="145" class="li-axv" text-anchor="middle">MAY</text>
+                <text x="626.7" y="145" class="li-axv" text-anchor="middle">JUN</text>
+                <text x="740" y="145" class="li-axv" text-anchor="middle">JUL</text>
 
-                <line x1="60" y1="125" x2="60" y2="92" class="grid-l"/>
-                <text x="60" y="80" class="ax" text-anchor="middle"><tspan x="60" dy="0">9th Cir. hears</tspan><tspan x="60" dy="13">&sect;230 appeal</tspan></text>
-                <line x1="286.7" y1="125" x2="286.7" y2="78" class="grid-l"/>
-                <text x="286.7" y="66" class="ax" text-anchor="middle" fill="#8a2419"><tspan x="286.7" dy="0">Meta + YouTube</tspan><tspan x="286.7" dy="13" font-weight="600">design-defect verdict</tspan></text>
-                <line x1="513.3" y1="125" x2="513.3" y2="78" class="grid-l"/>
-                <text x="513.3" y="66" class="ax" text-anchor="middle" fill="#8a2419"><tspan x="513.3" dy="0">PowerPort verdict:</tspan><tspan x="513.3" dy="13" font-weight="600">hung on design defect</tspan></text>
-                <line x1="740" y1="125" x2="740" y2="92" class="grid-l"/>
-                <text x="740" y="80" class="ax" text-anchor="end"><tspan x="740" dy="0">PowerPort</tspan><tspan x="740" dy="13">settlement talks</tspan></text>
+                <line x1="60" y1="125" x2="60" y2="92" class="li-grid"/>
+                <text x="60" y="80" class="li-ax" text-anchor="middle"><tspan x="60" dy="0">9th Cir. hears</tspan><tspan x="60" dy="13">§230 appeal</tspan></text>
 
-                <line x1="173.3" y1="125" x2="173.3" y2="165" class="grid-l"/>
-                <text x="173.3" y="183" class="ax" text-anchor="middle"><tspan x="173.3" dy="0">Lyft assault MDL</tspan><tspan x="173.3" dy="13">3171 centralized</tspan></text>
-                <line x1="400" y1="125" x2="400" y2="165" class="grid-l"/>
-                <text x="400" y="183" class="ax" text-anchor="middle"><tspan x="400" dy="0">Bard PowerPort</tspan><tspan x="400" dy="13">1st bellwether tried</tspan></text>
-                <line x1="626.7" y1="125" x2="626.7" y2="165" class="grid-l"/>
-                <text x="626.7" y="183" class="ax" text-anchor="middle" fill="#8a2419"><tspan x="626.7" dy="0">Federal social-media</tspan><tspan x="626.7" dy="13" font-weight="600">bellwether (Jun 15)</tspan></text>
+                <line x1="286.7" y1="125" x2="286.7" y2="78" class="li-grid"/>
+                <text x="286.7" y="66" class="li-ax" text-anchor="middle" fill="var(--accent)"><tspan x="286.7" dy="0">Meta + YouTube</tspan><tspan x="286.7" dy="13">design-defect verdict</tspan></text>
+
+                <line x1="513.3" y1="125" x2="513.3" y2="78" class="li-grid"/>
+                <text x="513.3" y="66" class="li-ax" text-anchor="middle" fill="var(--accent)"><tspan x="513.3" dy="0">PowerPort verdict:</tspan><tspan x="513.3" dy="13">hung on design defect</tspan></text>
+
+                <line x1="740" y1="125" x2="740" y2="92" class="li-grid"/>
+                <text x="740" y="80" class="li-ax" text-anchor="end"><tspan x="740" dy="0">PowerPort</tspan><tspan x="740" dy="13">settlement talks</tspan></text>
+
+                <line x1="173.3" y1="125" x2="173.3" y2="165" class="li-grid"/>
+                <text x="173.3" y="183" class="li-ax" text-anchor="middle"><tspan x="173.3" dy="0">Lyft assault MDL</tspan><tspan x="173.3" dy="13">3171 centralized</tspan></text>
+
+                <line x1="400" y1="125" x2="400" y2="165" class="li-grid"/>
+                <text x="400" y="183" class="li-ax" text-anchor="middle"><tspan x="400" dy="0">Bard PowerPort</tspan><tspan x="400" dy="13">1st bellwether tried</tspan></text>
+
+                <line x1="626.7" y1="125" x2="626.7" y2="165" class="li-grid"/>
+                <text x="626.7" y="183" class="li-ax" text-anchor="middle"><tspan x="626.7" dy="0">Federal social-media</tspan><tspan x="626.7" dy="13">bellwether (Jun 15)</tspan></text>
               </svg>
             </div>
-            <p class="li-fig-cap"><b>Oxblood markers are verdicts and the trials that price them.</b> Compiled from court records and litigation reporting (Reuters, Law.com/ALM). Dates approximate; the federal social-media bellwether date is as scheduled.</p>
+            <p class="li-fig-cap">Selected 2026 milestones compiled from court records and litigation reporting. Dates approximate; the federal social-media bellwether date is as scheduled.</p>
           </div>
 
           <h3>Social media: from "untested" to a plaintiff verdict</h3>
@@ -413,11 +410,11 @@
                 <tr><th>Petition / docket</th><th>Theory</th><th>Result</th></tr>
               </thead>
               <tbody>
-                <tr><td>Roblox child sexual exploitation (MDL&nbsp;3166)</td><td>Platform-safety failure; facilitated exploitation</td><td class="res grant">Centralized &middot; Dec&nbsp;2025</td></tr>
-                <tr><td>"Gateway games" video-game addiction</td><td>Addiction across multiple platforms/publishers</td><td class="res deny">Denied &middot; Dec&nbsp;2025</td></tr>
-                <tr><td>Lyft passenger sexual assault (MDL&nbsp;3171)</td><td>Driver assault; mirrors Uber docket</td><td class="res grant">Centralized &middot; Feb&nbsp;2026</td></tr>
-                <tr><td>GLP-1 NAION vision loss (MDL&nbsp;3163)</td><td>Distinct injury split from GI-injury docket</td><td class="res grant">Centralized &middot; separate MDL</td></tr>
-                <tr><td>ByHeart infant formula (MDL&nbsp;3178)</td><td>Contamination / product liability</td><td class="res grant">Centralized &middot; May&nbsp;2026</td></tr>
+                <tr><td>Roblox child sexual exploitation (MDL&nbsp;3166)</td><td>Platform-safety failure; facilitated exploitation</td><td class="li-up">Centralized &middot; Dec&nbsp;2025</td></tr>
+                <tr><td>"Gateway games" video-game addiction</td><td>Addiction across multiple platforms/publishers</td><td class="li-down">Denied &middot; Dec&nbsp;2025</td></tr>
+                <tr><td>Lyft passenger sexual assault (MDL&nbsp;3171)</td><td>Driver assault; mirrors Uber docket</td><td class="li-up">Centralized &middot; Feb&nbsp;2026</td></tr>
+                <tr><td>GLP-1 NAION vision loss (MDL&nbsp;3163)</td><td>Distinct injury split from GI-injury docket</td><td class="li-up">Centralized &middot; separate MDL</td></tr>
+                <tr><td>ByHeart infant formula (MDL&nbsp;3178)</td><td>Contamination / product liability</td><td class="li-up">Centralized &middot; May&nbsp;2026</td></tr>
               </tbody>
             </table>
           </div>
@@ -430,9 +427,9 @@
           <h2>6. What it means for plaintiff-side practice</h2>
 
           <div class="li-stats">
-            <div class="li-stat"><div class="n">~159</div><div class="k">active MDLs &mdash; flat to declining year over year</div></div>
-            <div class="li-stat"><div class="n"><span class="accent">~94%</span></div><div class="k">of pending actions sit in mega-dockets</div></div>
-            <div class="li-stat"><div class="n">Dec&nbsp;1</div><div class="k">Rule 16.1 took effect, formalizing early MDL management</div></div>
+            <div class="li-stat"><div class="li-n">~159</div><div class="li-k">active MDLs &mdash; flat to declining year over year</div></div>
+            <div class="li-stat"><div class="li-n"><span class="li-accent">~94%</span></div><div class="li-k">of pending actions sit in mega-dockets</div></div>
+            <div class="li-stat"><div class="li-n">Dec&nbsp;1</div><div class="li-k">Rule 16.1 took effect, formalizing early MDL management</div></div>
           </div>
 
           <p>Two operational shifts follow from the data. First, <strong>Rule&nbsp;16.1</strong>, effective December&nbsp;1, 2025, formalizes early case management &mdash; leadership structure, discovery planning, and early identification of the factual and legal issues. Expect courts and defendants to press sooner for proof of product use, exposure, diagnosis, and injury timing. The documentation burden moves forward in the case, which means intake quality, not intake volume, is where the risk now sits.</p>
@@ -442,13 +439,39 @@
           <p>The strategic picture for the plaintiff bar is a barbell. At one end, the proven mega-dockets &mdash; talc, AFFF, hair relaxer &mdash; with known injury definitions and recognizable defendants. At the other, a fast-growing breakout (Depo-Provera) and a coherent new category of platform-harm-to-minors cases (social media, Roblox, rideshare assault) where the law is being made in real time. The thin middle is the speculative theory the JPML has shown it will refuse to centralize.</p>
 
           <h2>Sources &amp; method</h2>
-          <p>Case counts are drawn from the JPML's distribution-of-pending-dockets and monthly statistics reports, anchored to the May&nbsp;1, 2026 report; counts are point-in-time and move monthly. Verdicts, settlements, and procedural milestones are compiled from court records and litigation reporting by Reuters, Law.com/ALM, and established docket trackers. Asbestos and talc filing context draws on KCIC's asbestos litigation year-in-review series. Figures should be re-verified against primary sources before republication. Nothing here is legal advice.</p>
+          <p>Case counts are drawn from the JPML's distribution-of-pending-dockets and monthly statistics reports, anchored to the May&nbsp;1, 2026 report; counts are point-in-time and move monthly. Verdicts, settlements, and procedural milestones are compiled from court records and litigation reporting by Reuters, Law.com/ALM, and established docket trackers. Figures should be re-verified against primary sources before republication. Nothing here is legal advice.</p>
 
         </div>
 
-        <p class="article-byline-end">David Meldofsky is a California-licensed attorney and the editor of Lawsuit Intelligencer. He is also the founder of <a href="https://lawsuitinformer.com">Lawsuit Informer</a> and <a href="https://lawsuit.center">Lawsuit Center</a>.</p>
+        <footer>
+          <p class="article-byline-end">David Meldofsky is a California-licensed attorney and the editor of Lawsuit Intelligencer. He is also the founder of <a href="https://lawsuitinformer.com">Lawsuit Informer</a> and <a href="https://lawsuit.center">Lawsuit Center</a>.</p>
+        </footer>
       </article>
     </div>
+
+    <section class="section">
+      <div class="container">
+        <p class="section-eyebrow center">More from Lawsuit Intelligencer</p>
+        <div class="recent">
+          <ol>
+            <li>
+              <div>
+                <h3><a href="pfas-rules-contracting.html">Federal PFAS Rules Are Contracting. State PFAS Rules Aren't. The Litigation Will Follow the States.</a></h3>
+                <p class="dek">The 2024 EPA drinking water standards looked like a foundation for the next wave of PFAS litigation. EPA's 2025&ndash;2026 rollback collapsed that assumption.</p>
+                <p class="meta">By David Meldofsky &middot; 8 min read</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="ai-in-court-briefs.html">AI Can Write the Brief. You Still Have to Verify It.</a></h3>
+                <p class="dek">The sanctions docket is now its own body of law, and almost every entry failed at the same step.</p>
+                <p class="meta">By David Meldofsky &middot; 9 min read</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
