@@ -51,6 +51,7 @@
      "name": "David Meldofsky",
      "jobTitle": "Editor, Lawsuit Intelligencer; California-licensed attorney",
      "url": "https://lawsuitintelligencer.com/david-meldofsky",
+     "image": "https://lawsuitintelligencer.com/david-meldofsky.png",
      "identifier": {
        "@type": "PropertyValue",
        "name": "California State Bar Number",
@@ -135,6 +136,33 @@
    ]
  }
  </script>
+
+ <style>
+   .editor-portrait {
+     float: right;
+     width: 150px;
+     margin: 6px 0 20px 28px;
+   }
+   .editor-portrait img {
+     width: 100%;
+     height: auto;
+     display: block;
+     border: 1px solid var(--rule, #cbb89a);
+     filter: grayscale(100%);
+   }
+   .editor-portrait figcaption {
+     font-family: "IBM Plex Mono", monospace;
+     font-size: 11px;
+     line-height: 1.4;
+     color: #6b6155;
+     margin-top: 7px;
+     text-transform: uppercase;
+     letter-spacing: 0.04em;
+   }
+   @media (max-width: 600px) {
+     .editor-portrait { float: none; width: 160px; margin: 0 0 22px 0; }
+   }
+ </style>
 </head>
 <body>
 
@@ -174,6 +202,12 @@
        </header>
 
        <div class="article-body">
+
+         <figure class="editor-portrait">
+           <img src="david-meldofsky.png" alt="David Meldofsky, editor of Lawsuit Intelligencer" width="150" height="150" loading="lazy" decoding="async" />
+           <figcaption>David Meldofsky<br>Editor</figcaption>
+         </figure>
+
          <p>David Meldofsky edits Lawsuit Intelligencer and writes most of its current analysis. He is a California-licensed attorney with roughly two decades of experience in mass tort referral and the plaintiff-side legal industry &mdash; representing injured clients, and working inside the intake, claim-screening, and referral systems where the business of plaintiff-side law actually runs.</p>
 
          <p>That vantage point is the reason this publication exists. The questions it covers &mdash; how referral economics work, what state regulatory action means when the federal floor contracts, what happens to product liability doctrine when the defective product is an AI system &mdash; are the ones he kept encountering inside the industry and rarely saw analyzed honestly outside it. He is also the founder of <a href="https://lawsuitinformer.com">Lawsuit Informer</a>, which provides plain-English public legal education, and <a href="https://lawsuit.center">Lawsuit Center</a>, which organizes case-review information by lawsuit category. Lawsuit Intelligencer is the industry-facing layer of that ecosystem.</p>
