@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://lawsuitintelligencer.com/</loc>
-    <lastmod>2026-06-10</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -81,6 +81,13 @@
   <url>
     <loc>https://lawsuitintelligencer.com/xai-data-center-class-action</loc>
     <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/ai-wrongful-death-docket</loc>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
