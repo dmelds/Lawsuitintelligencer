@@ -3,9 +3,44 @@
 
   <url>
     <loc>https://lawsuitintelligencer.com/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/ai-wrongful-death-docket</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/fable-5-section-230-defense</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/legion-fable-5-lawsuit</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/mass-tort-map-2026</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/mso-indirect-fee-sharing</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <url>
@@ -16,31 +51,17 @@
   </url>
 
   <url>
-    <loc>https://lawsuitintelligencer.com/about</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://lawsuitintelligencer.com/xai-data-center-class-action</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://lawsuitintelligencer.com/editorial-standards</loc>
-    <lastmod>2026-05-07</lastmod>
+    <loc>https://lawsuitintelligencer.com/ai-in-court-briefs</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://lawsuitintelligencer.com/contribute</loc>
-    <lastmod>2026-05-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://lawsuitintelligencer.com/david-meldofsky</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 
   <url>
@@ -58,38 +79,31 @@
   </url>
 
   <url>
-    <loc>https://lawsuitintelligencer.com/ai-in-court-briefs</loc>
-    <lastmod>2026-05-28</lastmod>
+    <loc>https://lawsuitintelligencer.com/about</loc>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://lawsuitintelligencer.com/mso-indirect-fee-sharing</loc>
-    <lastmod>2026-05-29</lastmod>
+    <loc>https://lawsuitintelligencer.com/david-meldofsky</loc>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://lawsuitintelligencer.com/mass-tort-map-2026</loc>
-    <lastmod>2026-05-30</lastmod>
+    <loc>https://lawsuitintelligencer.com/editorial-standards</loc>
+    <lastmod>2026-05-07</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://lawsuitintelligencer.com/xai-data-center-class-action</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://lawsuitintelligencer.com/ai-wrongful-death-docket</loc>
-    <lastmod>2026-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://lawsuitintelligencer.com/contribute</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
 </urlset>
