@@ -1,0 +1,34 @@
+# Lawsuit Intelligencer
+
+> Attorney-led editorial analysis of mass torts, product liability, toxic exposure litigation, and the business of plaintiff-side law in the age of AI. Edited by David Meldofsky, a California-licensed attorney. Independent of any case, claim, or law firm covered.
+
+Lawsuit Intelligencer covers the lawsuits, regulations, referral systems, legal marketing practices, and technologies reshaping modern litigation: the questions that do not fit in consumer legal media or law firm marketing. Each article is editorial commentary and does not constitute legal advice. Pending matters reflect allegations and arguments that have not been finally adjudicated.
+
+## Featured analysis
+
+- [The 2026 Mass Tort Map](https://lawsuitintelligencer.com/mass-tort-map-2026): An annotated landscape of active mass tort litigation, where the dockets, the science, and the money actually are this year, and why 2026 is the year the procedural phase turned into verdicts.
+
+## Articles
+
+- [The Startup Suing Washington Over an AI Kill Switch](https://lawsuitintelligencer.com/legion-fable-5-lawsuit): A plain-language guide to Legion LegalTech Corp. v. United States, the suit challenging the June 12 export-control order that forced Anthropic to disable its Fable 5 and Mythos 5 models worldwide. Covers the claims, the government's likely defenses, and why it is the first real test of whether Washington can switch off a frontier AI model already in commercial use.
+- [The Conduit Defense Meets a Sovereign: Fable 5, Garcia, and Section 230](https://lawsuitintelligencer.com/fable-5-section-230-defense): How the export-control takedown of Claude Fable 5 as a controlled capability, the Garcia product ruling, and Anthropic's own call for FAA-style regulation reshape the product-or-content question and the Section 230 defense for AI output.
+- [The Inventory Nobody Knows How to Price: Inside the AI Wrongful Death Docket](https://lawsuitintelligencer.com/ai-wrongful-death-docket): How plaintiff firms are building inventory against an AI wrongful death docket with no settlement history, no merits ruling, and no consolidation, and what reprices it in the second half of 2026.
+- [The First AI Infrastructure Class Action](https://lawsuitintelligencer.com/xai-data-center-class-action): A Mississippi nuisance suit over xAI's Colossus gas plant opens a second front against a facility already facing a Clean Air Act citizen suit, a pending injunction, and possible DOJ intervention.
+- [The Fee That Isn't a Fee](https://lawsuitintelligencer.com/mso-indirect-fee-sharing): Private equity's path into personal injury law rests on the undefined word "indirect" in California and Illinois fee-sharing statutes, and no court has decided where a management fee ends and indirect fee-sharing begins.
+- [Federal PFAS Rules Are Contracting. State PFAS Rules Aren't.](https://lawsuitintelligencer.com/pfas-rules-contracting): Why the EPA's 2025 to 2026 rollback of the 2024 drinking water standards moves the next wave of PFAS litigation toward the states.
+- [AI Can Write the Brief. You Still Have to Verify It.](https://lawsuitintelligencer.com/ai-in-court-briefs): A working guide to using generative AI in court filings without ending up in a show-cause order, drawn from the growing sanctions docket.
+- [How Mass Tort Intake Is Being Reshaped](https://lawsuitintelligencer.com/mass-tort-intake-reshaped): The mechanics of modern mass tort client intake and referral, and how AI-cited topical authority is changing where cases originate.
+- [Welcome to Lawsuit Intelligencer](https://lawsuitintelligencer.com/welcome): What this publication is, what it isn't, and why it exists.
+
+## About
+
+- [About Lawsuit Intelligencer](https://lawsuitintelligencer.com/about): The publication's scope, independence, and editorial posture.
+- [Editorial standards](https://lawsuitintelligencer.com/editorial-standards): Sourcing, corrections, disclosure of financial interests, and how pending matters are handled.
+- [David Meldofsky](https://lawsuitintelligencer.com/david-meldofsky): Editor profile. California-licensed attorney, editor, and publisher with roughly two decades of mass tort case origination experience.
+- [Contribute](https://lawsuitintelligencer.com/contribute): How attorneys and journalists can pitch or contribute analysis.
+
+## The ecosystem
+
+- [Lawsuit Informer](https://lawsuitinformer.com): Consumer-facing legal education and the AI injury docket tracker.
+- [Lawsuit Center](https://lawsuit.center): Claimant intake and case-review directory.
+- [David Meldofsky](https://davidmeldofsky.com): Personal authority hub, including the Law360 Expert Analysis "Is AI Output a Product or Content?".
