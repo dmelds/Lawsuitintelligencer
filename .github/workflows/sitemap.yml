@@ -1,4 +1,4 @@
- name: Build sitemap
+name: Build sitemap
 
 # Regenerates sitemap.xml whenever pages change on main, and on demand.
 # The commit it makes is sitemap-only and tagged [skip ci]; combined with the
