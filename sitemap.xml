@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://lawsuitintelligencer.com/</loc>
-    <lastmod>2026-06-24</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -58,8 +58,29 @@
   </url>
 
   <url>
+    <loc>https://lawsuitintelligencer.com/ai-due-diligence-queries</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://lawsuitintelligencer.com/ai-in-court-briefs</loc>
     <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/byheart-mdl-3178</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/hair-relaxer-daubert-economics</loc>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
