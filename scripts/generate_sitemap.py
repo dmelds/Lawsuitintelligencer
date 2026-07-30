@@ -5,6 +5,7 @@ Generate sitemap.xml for Lawsuit Intelligencer.
 Scans the repository root for top-level .html files, maps each to its
 extensionless public URL, and writes sitemap.xml. lastmod is taken from the
 file's last git commit date so it stays honest without manual editing.
+Commits marked SKIP_TOKEN are ignored (see below).
 
 No third-party dependencies. Runs on the stock Python 3 available on the
 GitHub Actions ubuntu-latest runner, and locally.
@@ -20,6 +21,11 @@ import sys
 from pathlib import Path
 
 BASE_URL = "https://lawsuitintelligencer.com"
+
+# Commits whose message contains this token are ignored when computing
+# <lastmod>, so site-wide mechanical sweeps don't flatten every date to the
+# same day. Usage: git commit -m "Add GA4 snippet [skip lastmod] [skip ci]"
+SKIP_TOKEN = "[skip lastmod]"
 
 # Files that exist on disk but must never appear in the sitemap.
 EXCLUDE = {"404.html"}
@@ -46,17 +52,24 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def git_lastmod(path: Path) -> str:
-    """Last commit date (YYYY-MM-DD) for a file, or today if unavailable."""
+    """Last commit date (YYYY-MM-DD) for a file, or today if unavailable.
+
+    Commits whose message contains SKIP_TOKEN are ignored, so a mechanical
+    site-wide sweep doesn't reset every <lastmod> to the same day and flatten
+    the signal. Falls back to the unfiltered date for files whose only commits
+    are marked.
+    """
     try:
-        out = subprocess.run(
-            ["git", "log", "-1", "--format=%cs", "--", path.name],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-            check=True,
-        ).stdout.strip()
-        if out:
-            return out
+        for extra in (["-F", f"--grep={SKIP_TOKEN}", "--invert-grep"], []):
+            out = subprocess.run(
+                ["git", "log", "-1", "--format=%cs", *extra, "--", path.name],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                check=True,
+            ).stdout.strip()
+            if out:
+                return out
     except (subprocess.CalledProcessError, FileNotFoundError):
         pass
     # Fallbacks: filesystem mtime, then today.
