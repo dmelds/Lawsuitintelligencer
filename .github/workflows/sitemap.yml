@@ -18,7 +18,10 @@ permissions:
 
 concurrency:
   group: sitemap-${{ github.ref }}
-  cancel-in-progress: true
+  # Queue rather than cancel. Cancelling an in-flight run to start a newer one
+  # is safe only if the newer run finishes; when it loses the push race, the
+  # cancelled run is gone and sitemap.xml silently stays stale.
+  cancel-in-progress: false
 
 jobs:
   sitemap:
@@ -35,14 +38,25 @@ jobs:
 
       - name: Commit if changed
         run: |
-          if [ -n "$(git status --porcelain sitemap.xml)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add sitemap.xml
-            git commit -m "chore: regenerate sitemap.xml [skip ci]"
-            git pull --rebase origin "$(git branch --show-current)"
-            git push
-            echo "sitemap.xml updated."
-          else
+          if [ -z "$(git status --porcelain sitemap.xml)" ]; then
             echo "sitemap.xml already up to date; nothing to commit."
+            exit 0
           fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git commit -m "chore: regenerate sitemap.xml [skip ci]"
+          BRANCH="$(git branch --show-current)"
+          # This workflow and Generate Redirects both fire on the same push and
+          # both push to main. A single rebase-then-push loses whichever lands
+          # second, so retry with backoff instead of failing the run.
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin "$BRANCH" && git push; then
+              echo "Pushed sitemap.xml on attempt $attempt"
+              exit 0
+            fi
+            echo "Push attempt $attempt failed; retrying"
+            sleep $(( attempt * 3 + RANDOM % 4 ))
+          done
+          echo "::error::Could not push sitemap.xml after 5 attempts"
+          exit 1
