@@ -28,9 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
-          # Full history so per-file git commit dates (lastmod) are accurate.
+          # lastmod now comes from each page's JSON-LD dateModified, but pages
+          # with no date in their schema (index, about, contribute,
+          # editorial-standards) still fall back to their git commit date, so
+          # full history is still required.
           fetch-depth: 0
 
       - name: Generate sitemap.xml
