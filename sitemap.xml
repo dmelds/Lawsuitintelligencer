@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://lawsuitintelligencer.com/</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -81,6 +81,13 @@
   <url>
     <loc>https://lawsuitintelligencer.com/byheart-mdl-3178</loc>
     <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/chatgpt-log-preservation</loc>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
