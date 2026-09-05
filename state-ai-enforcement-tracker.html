@@ -115,25 +115,59 @@
     .caption,
     .entry .caption {
       font-family: var(--mono);
-      font-size: 0.76rem;
+      font-size: 0.72rem;
+      line-height: 1.6;
       color: var(--ink-muted);
-      margin-bottom: 14px;
+      max-width: 62ch;
+      margin-bottom: 20px;
     }
 
-    .entry dl { margin: 0 0 14px; }
+    .entry dl {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      column-gap: 30px;
+      row-gap: 20px;
+      margin: 18px 0 14px;
+      align-items: start;
+    }
 
     .entry dt {
       font-family: var(--mono);
       font-size: 0.68rem;
+      line-height: 1.5;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--ink-muted);
-      margin-top: 12px;
+      margin: 0;
+      padding-top: 0.35em;
+      text-align: right;
+      border-top: 1px solid var(--rule-soft);
     }
 
     .entry dd {
-      margin: 2px 0 0;
+      margin: 0;
       font-size: 0.95rem;
+      padding-top: 0.1em;
+      border-top: 1px solid var(--rule-soft);
+    }
+
+    .entry dd > p { margin: 10px 0 0; }
+    .entry dd > p:first-child { margin-top: 0; }
+
+    @media (max-width: 760px) {
+      .entry dl {
+        display: block;
+      }
+      .entry dt {
+        text-align: left;
+        margin-top: 20px;
+        padding-top: 10px;
+      }
+      .entry dd {
+        border-top: none;
+        padding-top: 4px;
+        margin-top: 2px;
+      }
     }
 
     .entry dd ol,
