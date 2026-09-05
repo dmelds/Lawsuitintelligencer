@@ -182,6 +182,30 @@
 
     .entry dd li { margin-bottom: 4px; }
 
+    .finding {
+      border-top: 1px solid var(--rule-soft);
+      padding-top: 12px;
+      margin-top: 30px;
+    }
+
+    .finding-label {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+
+    .article-body .finding p {
+      font-size: 19px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .article-body .finding p:last-child { margin-bottom: 0; }
+
     .gap {
       font-style: italic;
       color: inherit;
@@ -632,17 +656,31 @@
 
           <h2>What the filings show</h2>
 
-          <p>The states have not converged on a theory, and the spread is wider than the coverage suggests. Kentucky pairs a consumer protection act with a data privacy statute that was eight days old, two constitutional privacy provisions, and unjust enrichment. Pennsylvania pleads one count under a medical licensing act and asks for nothing but a cease-and-desist. California works from imagery law and has not filed. Florida pleads ten counts including two in strict liability and asks for treble and punitive damages against a chief executive personally.</p>
+          <p>Four matters have been filed and no two use the same vehicle. Kentucky pairs a consumer protection act with a data privacy statute that was eight days old. Pennsylvania pleads a single count under a medical licensing act. California works from imagery law and has not filed at all. Florida pleads ten counts, two of them in strict liability.</p>
 
-          <p>Florida is the outlier and the one that resets the analysis. The convenient framing for this docket has been that states ask whether existing regulatory law reaches a model's conduct while the private bar asks whether a model is a product. Counts VII and VIII collapse that. A state is now litigating design defect and failure to warn against a large language model, with a state's discovery budget, on a rural circuit docket that may move faster than the coordinated private proceedings. Whatever that court says about defect will be the first word from any court, and it will arrive as persuasive authority in every private case.</p>
+          <div class="finding">
+            <p class="finding-label">Florida changed the question</p>
+            <p>The convenient framing has been that states ask whether existing regulatory law reaches a model's conduct, while the private bar asks whether a model is a product. Counts VII and VIII collapse that.</p>
+            <p>A state is now litigating design defect and failure to warn against a large language model, with a state's discovery budget, on a rural circuit docket. Whatever that court says about defect will be the first word from any court on the question.</p>
+          </div>
 
-          <p>Pennsylvania is the opposite lesson and the more replicable one. Section 422.38 requires no showing that anyone was injured. A licensing board with an investigator, a free account, and an afternoon produced a filed enforcement action against a twenty-million-user platform. Every state has medical, psychology, and counseling licensing boards, and every one of those boards has the same statutory posture.</p>
+          <div class="finding">
+            <p class="finding-label">Pennsylvania is cheap, and untested</p>
+            <p>Section 422.38 requires no showing that anyone was injured. A licensing board with an investigator, a free account, and an afternoon produced a filed action against a twenty-million-user platform. Every state has boards with the same statutory posture.</p>
+            <p>Cheap to file is not the same as tested. Pennsylvania applied for its injunction on day one and has twice continued its own hearing. No answer in four months. No court has said whether the theory works.</p>
+          </div>
 
-          <p>Cheap to file is not the same as tested. Pennsylvania applied for its injunction on day one, drew a hearing date within five weeks, and has since continued that hearing twice by joint motion. No answer has been filed in four months. The theory is available to every state, and so far no court has said whether it works.</p>
+          <div class="finding">
+            <p class="finding-label">The defense moved first</p>
+            <p>xAI's challenge to California's disclosure law is a pre-enforcement suit against the same attorney general now investigating it. It rests on two arguments: that training data is a trade secret the state cannot compel it to publish, and that the Unfair Competition Law is the threat giving it standing to sue.</p>
+            <p>Companies are litigating the enforcement architecture and the enforcement action at the same time, in front of the same official.</p>
+          </div>
 
-          <p>The defense side is not waiting either. xAI's challenge to AB 2013 is a pre-enforcement suit against the same attorney general now investigating it. It rests on two arguments. Training data is a trade secret the state cannot compel it to publish. And the Unfair Competition Law is the enforcement threat that gives it standing to sue. Companies are litigating the enforcement architecture and the enforcement action at the same time, in front of the same official, and whichever result lands first shapes the other.</p>
-
-          <p>On the business side, the retention pattern is now visible. Kentucky brought in Motley Rice, Florida brought in Keller Postman, and both firms built their reputations on the aggregate-litigation model. Texas and Pennsylvania ran theirs in-house and asked for disclosure and cessation rather than money. The presence of contingency counsel is the tell for which matters are being built toward damages, and where the state's discovery will eventually converge with a private inventory.</p>
+          <div class="finding">
+            <p class="finding-label">Who gets hired tells you what a matter is worth</p>
+            <p>Kentucky brought in Motley Rice. Florida brought in Keller Postman. Both firms built their reputations on aggregate litigation. Texas and Pennsylvania ran theirs in-house and asked for disclosure and cessation rather than money.</p>
+            <p>Contingency counsel is the tell for which matters are being built toward damages, and where a state's discovery will eventually converge with a private inventory.</p>
+          </div>
 
           <div class="tracker-note">
             <p><strong>Scope and corrections.</strong> This tracker covers state and state-agency enforcement actions against generative AI companies arising from consumer harm. It excludes algorithmic-pricing and biometric-scraping matters, which are a different fight. Constitutional challenges brought by AI companies against state statutes are noted as cross-references where they bear on a listed matter, and are marked as such. Private injury litigation is covered separately in <a href="ai-wrongful-death-docket">The Inventory Nobody Knows How to Price</a> and <a href="jccp-5431-pro-se-leadership-order">The Handwritten Line</a>. Where a fact is not publicly available, the page says so rather than leaving the gap unmarked. If you have a filing, a docket entry, or a correction, write to <a href="mailto:editor@lawsuitintelligencer.com">editor@lawsuitintelligencer.com</a> and it will appear in the next update, with attribution if you want it.</p>
