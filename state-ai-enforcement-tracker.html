@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>State AI Enforcement Tracker</title>
+  <meta name="description" content="Every state consumer-harm enforcement action against a generative AI company: court, statute, counts, remedy sought, and status. Read from the filings." />
+
+  <link rel="canonical" href="https://lawsuitintelligencer.com/state-ai-enforcement-tracker" />
+
+  <meta property="og:title" content="State AI Enforcement Tracker: Every State Action Against a Generative AI Company" />
+  <meta property="og:description" content="Court, statute, counts, remedy sought, and status for each state consumer-harm action against a generative AI company. Read from the filings, not the press releases." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://lawsuitintelligencer.com/state-ai-enforcement-tracker" />
+  <meta property="og:image" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+  <meta property="og:image:secure_url" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Lawsuit Intelligencer — Mass Torts. Plaintiff-Side Litigation." />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="State AI Enforcement Tracker: Every State Action Against a Generative AI Company" />
+  <meta name="twitter:description" content="Court, statute, counts, remedy sought, and status for each state consumer-harm action against a generative AI company." />
+  <meta name="twitter:image" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#001a57">
+
+  <style>
+    /* Tracker — scoped to this page */
+    .tracker-updated {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-top: 2px solid var(--accent);
+      border-bottom: 1px solid var(--rule);
+      padding: 10px 0;
+      margin: 28px 0 8px;
+    }
+
+    .tracker-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 24px 0 8px;
+      border: 1px solid var(--rule);
+      background: var(--bg-alt);
+    }
+
+    table.tracker {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 800px;
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    table.tracker th,
+    table.tracker td {
+      text-align: left;
+      vertical-align: top;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--rule-soft);
+    }
+
+    table.tracker thead th {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      background: var(--bg);
+      border-bottom: 2px solid var(--rule);
+      white-space: nowrap;
+    }
+
+    table.tracker tbody tr:last-child td { border-bottom: none; }
+
+    table.tracker td.state {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .tracker-hint {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+      margin: 0 0 32px;
+    }
+
+    .entry {
+      border-top: 1px solid var(--rule);
+      padding-top: 22px;
+      margin-top: 34px;
+    }
+
+    .entry h3 {
+      font-size: 1.25rem;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .caption,
+    .entry .caption {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--ink-muted);
+      margin-bottom: 14px;
+    }
+
+    .entry dl { margin: 0 0 14px; }
+
+    .entry dt {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 12px;
+    }
+
+    .entry dd {
+      margin: 2px 0 0;
+      font-size: 0.95rem;
+    }
+
+    .entry dd ol,
+    .entry dd ul {
+      margin: 6px 0 0 20px;
+      padding: 0;
+    }
+
+    .entry dd li { margin-bottom: 4px; }
+
+    .gap {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .crossref {
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--ink-muted);
+      background: var(--bg-alt);
+      padding: 16px 20px;
+      margin: 18px 0 0;
+      font-size: 0.92rem;
+    }
+
+    .crossref p { margin-bottom: 10px; }
+    .crossref p:last-child { margin-bottom: 0; }
+
+    .crossref .label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 8px;
+    }
+
+    .tracker-note {
+      background: var(--bg-alt);
+      border-left: 3px solid var(--accent);
+      padding: 18px 22px;
+      margin: 36px 0;
+      font-size: 0.95rem;
+    }
+
+    .tracker-note p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 640px) {
+      .entry h3 { font-size: 1.1rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "State AI Enforcement Tracker: Every State Action Against a Generative AI Company",
+    "description": "A running record of state consumer-harm enforcement actions against generative artificial intelligence companies, with court, statutory theory, counts, remedy sought, and status for each matter, read from the filings.",
+    "datePublished": "2026-09-05",
+    "dateModified": "2026-09-05",
+    "author": {
+      "@type": "Person",
+      "@id": "https://davidmeldofsky.com/#person",
+      "name": "David Meldofsky",
+      "url": "https://lawsuitintelligencer.com/david-meldofsky",
+      "jobTitle": "California-licensed attorney"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lawsuit Intelligencer",
+      "url": "https://lawsuitintelligencer.com/"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://lawsuitintelligencer.com/state-ai-enforcement-tracker"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="masthead">
+    <div class="container">
+      <div class="masthead-top">
+        <div class="masthead-issue">
+          <a href="/" aria-label="Lawsuit Intelligencer home" class="masthead-mark-link">
+            <img src="/logo.svg" alt="Lawsuit Intelligencer" class="masthead-mark" />
+          </a>
+          <strong>Vol. I &middot; No. 5 &middot; September 2026</strong>
+        </div>
+
+        <nav class="masthead-nav" aria-label="Main navigation">
+          <a href="/#articles">Articles</a>
+          <a href="/#coverage">Coverage</a>
+          <a href="about">About</a>
+          <a href="contribute">Contribute</a>
+        </nav>
+      </div>
+
+      <div class="masthead-title">
+        <p class="masthead-h1"><a href="/">Lawsuit Intelligencer</a></p>
+        <p class="masthead-tagline">Attorney-led analysis of mass torts, product liability, toxic exposure litigation, and the business of plaintiff-side law.</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <article class="article">
+        <header>
+          <p class="article-eyebrow">Tracker &middot; State AI Enforcement</p>
+          <h1>State AI Enforcement Tracker</h1>
+          <p class="article-dek">Every state consumer-harm action against a generative AI company, with the court, the statutory theory, the counts as pleaded, the remedy sought, and where each matter stands. Read from the filings rather than the press releases, because on this docket the two do not always agree.</p>
+          <p class="article-meta">Compiled by <a href="david-meldofsky">David Meldofsky</a> &middot; 16 min read</p>
+        </header>
+
+        <p class="tracker-updated">Last updated September 5, 2026 &middot; 5 live matters &middot; 1 precursor settlement &middot; 3 coalition letters</p>
+
+        <div class="article-summary">
+          <p class="summary-label">The short version</p>
+          <ul>
+            <li>Five matters are live against generative AI companies, and no two use the same vehicle: two attorney general lawsuits, one AG investigation with a cease-and-desist attached, one multistate subpoena, and one petition from a state medical licensing board rather than an attorney general at all.</li>
+            <li>Florida pleads strict liability for design defect and failure to warn. A sovereign is now running the private bar's product theory, which closes the gap most commentary assumed existed between the two tracks.</li>
+            <li>Pennsylvania's licensing statute says in terms that no individual injury need be shown. Its case took one investigator, a free account, and a single afternoon of chat logs. Kentucky needed pre-suit document production from the company and retained Motley Rice; Florida filed 83 pages and retained Keller Postman.</li>
+            <li>Two of the four filed matters use retained plaintiffs' firms: Motley Rice for Kentucky, Keller Postman for Florida. Texas and Pennsylvania ran theirs in-house.</li>
+            <li>On December 29, xAI sued the California Attorney General to block enforcement of the state's AI training-data transparency law, pleading that the Unfair Competition Law is the enforcement threat that gives it standing to sue. Eighteen days later, the same Attorney General cited the Unfair Competition Law against xAI over Grok. Both matters are live.</li>
+            <li>California's cease-and-desist letter sets a four-day deadline and orders a litigation hold. Neither appears in the press release announcing it. Where an announcement and the document behind it disagree, this page reports the document.</li>
+            <li>Pennsylvania sought a preliminary injunction on day one, got a hearing set within five weeks, and has since continued it twice by joint motion. No answer has been filed in four months.</li>
+          </ul>
+        </div>
+
+        <div class="article-body">
+
+          <h2>The precursor: Texas and Pieces Technologies</h2>
+
+          <p class="caption">In the Matter of the State of Texas and Pieces Technologies, Inc. &middot; Cause No. DC-24-13476, 191st Judicial District, Dallas County &middot; petition filed August 21, 2024</p>
+
+          <p>Before any of the consumer-harm actions, Texas built the template. The Attorney General resolved a deceptive-marketing case against a generative AI company without filing a lawsuit and without collecting a dollar. It is the first state enforcement resolution of its kind in the country.</p>
+
+          <p>The vehicle was an Assurance of Voluntary Compliance, a settlement device under Section 17.58 of the Deceptive Trade Practices Act that the company signs and the court then approves. Pieces signed on August 5, 2024. The State petitioned for approval on August 21.</p>
+
+          <p>Pieces is a business-to-business clinical documentation company in Irving whose products summarize and draft clinical notes inside hospital electronic health records. The State alleged that its marketing claims of a "critical hallucination rate" and "severe hallucination rate" of "&lt;.001%" and "&lt;1 per 100,000" may have violated the DTPA as false, misleading, or deceptive. Pieces denies wrongdoing, and the Assurance is expressly not an admission.</p>
+
+          <p>No money changed hands. What Pieces agreed to instead, for five years, is the part worth reading, because it is the disclosure regime every subsequent state action is reaching for by other means:</p>
+
+          <ul>
+            <li>Any metric or benchmark used in marketing must come with a clear and conspicuous disclosure of both what the metric means and how it was calculated. The alternative is retaining an independent third-party auditor whose findings must substantiate every claim made.</li>
+            <li>No unsubstantiated representations about accuracy, reliability, or efficacy; about the methodologies used to test or monitor the products; about the meaning of any metric; or about the data used to train them.</li>
+            <li>Customers must receive documentation covering the training data and models, the intended purpose, known limitations including the risk of physical or financial injury from inaccurate output, and known misuses that increase the risk of inaccuracy.</li>
+            <li>Financial arrangements with anyone who endorses or promotes the products must be disclosed.</li>
+          </ul>
+
+          <p>Two provisions matter for anyone reading this as a private practitioner. Paragraph 24 states that the Assurance creates no private rights or causes of action and waives none. And Pieces may request rescission after one year, with the listed factors including changes in generative AI technology and related industry standards. The order has an expiry and an escape hatch built into it.</p>
+
+          <p>Texas ran the matter entirely in-house through its Consumer Protection Division, with no outside counsel. Pieces was defended by Mayer LLP and Sheppard Mullin.</p>
+
+          <p>Pieces sits outside the table below because it is a business-to-business accuracy-marketing case with no end-user harm count. Everything after it is about consumers.</p>
+
+          <h2>The matters</h2>
+
+          <div class="tracker-scroll">
+            <table class="tracker">
+              <thead>
+                <tr>
+                  <th scope="col">State</th>
+                  <th scope="col">Respondent</th>
+                  <th scope="col">Filed</th>
+                  <th scope="col">Forum</th>
+                  <th scope="col">Counts as pleaded</th>
+                  <th scope="col">Remedy sought</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="state">Kentucky</td>
+                  <td>Character Technologies, Inc.; Noam Shazeer; Daniel De Freitas Adiwarsana</td>
+                  <td>Jan. 8, 2026</td>
+                  <td>Franklin Circuit Court, No. 26-CI-00029 (Hon. Phillip J. Shepherd)</td>
+                  <td>Five: KCPA deceptive practices; KCPA unfair collection of children's data; KCDPA (declaratory and prospective); Kentucky privacy protections and Ky. Const. &sect;&sect; 1, 10; unjust enrichment</td>
+                  <td>Permanent injunction; $2,000 per willful KCPA violation; up to $25,000 per violation of an injunction; disgorgement; restitution; fees. Jury demanded</td>
+                  <td>Pending</td>
+                </tr>
+                <tr>
+                  <td class="state">California</td>
+                  <td>xAI Corp. and X</td>
+                  <td>Jan. 14, 2026 (investigation); Jan. 16, 2026 (demand letter)</td>
+                  <td>Office of the Attorney General</td>
+                  <td>None filed. Letter cites Cal. Civ. Code &sect; 1708.86; Penal Code &sect;&sect; 311 et seq. and 647(j)(4); Bus. &amp; Prof. Code &sect; 17200</td>
+                  <td>Immediate cease and desist; written confirmation by Jan. 20, 2026; litigation hold</td>
+                  <td>Open; no suit filed as of this update</td>
+                </tr>
+                <tr>
+                  <td class="state">Pennsylvania</td>
+                  <td>Character Technologies, Inc.</td>
+                  <td>May 1, 2026</td>
+                  <td>Pa. Commonwealth Court, No. 220 MD 2026</td>
+                  <td>One: unlawful practice of medicine and surgery, 63 P.S. &sect; 422.38</td>
+                  <td>A permanent order to cease and desist, plus an application for special relief in the nature of a preliminary injunction filed the same day. No damages, no penalties, no monetary relief</td>
+                  <td>Active, awaiting answer. Injunction hearing continued twice by joint motion; answer due Nov. 2, 2026</td>
+                </tr>
+                <tr>
+                  <td class="state">Florida</td>
+                  <td>OpenAI Global, LLC; OpenAI Foundation; OpenAI OpCo, LLC; OpenAI Group PBC; OpenAI Holdings, LLC; Sam Altman</td>
+                  <td>June 1, 2026</td>
+                  <td>Circuit Court, Tenth Judicial Circuit, Highlands County</td>
+                  <td>Ten: four FDUTPA counts; negligence; gross negligence; strict liability design defect; strict liability failure to warn; fraudulent misrepresentation; public nuisance</td>
+                  <td>Permanent injunctions; nuisance finding; civil penalties up to $10,000 per willful FDUTPA violation; treble and punitive damages; fees and investigation costs</td>
+                  <td>Pending; separate criminal investigation opened April 2026</td>
+                </tr>
+                <tr>
+                  <td class="state">Multistate</td>
+                  <td>OpenAI</td>
+                  <td>June 12, 2026 (subpoena served)</td>
+                  <td>Coalition of state attorneys general</td>
+                  <td>Investigative process; theory not public</td>
+                  <td>Documents and information on OpenAI's activities and impact on users</td>
+                  <td>Open</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="tracker-hint">Table scrolls horizontally on narrow screens.</p>
+
+          <h2>Matter detail</h2>
+
+          <div class="crossref">
+            <p class="label">Context: who uses Character.AI</p>
+            <p>Character Technologies is the respondent in two of the matters below, in two states, on unrelated theories. It is also one of the thirteen companies named in the December coalition letter. Its user base is why.</p>
+            <p>Both pleadings put the platform above twenty million monthly active users. Kentucky's complaint adds 180 million website visits a month and more than two billion minutes of chat a month. The basic product is free. A subscription tier runs $9.99 a month.</p>
+            <p>The age distribution is the part that matters here. Figures outside the pleadings, from SimilarWeb data reported in October 2024, put more than half of users at 24 or younger. The company's chief executive has said the average user spends around 80 minutes a day on the platform, which is close to TikTok and ahead of Instagram. The platform's subreddit has 2.6 million subscribers, against 3.3 million for YouTube's.</p>
+            <p>Kentucky's complaint pleads the demand side from Common Sense Media and Center for Democracy and Technology research. Seventy-two percent of teens report using AI companions. Twelve percent report using them for emotional or mental health support. More than a third say they would choose an AI companion over a person for a serious conversation, and 38 percent of students say it is easier to talk to AI than to their parents.</p>
+            <p>One figure to handle carefully. Kentucky's complaint cites more than 100 million chatbot characters as of August 2025. Pennsylvania's petition, filed nine months later, says more than 18 million. Both are secondary-sourced and they are not counting the same thing.</p>
+          </div>
+
+          <div class="entry">
+            <h3>Kentucky &middot; the first state suit against an AI chatbot company</h3>
+            <p class="caption">Commonwealth of Kentucky, ex rel. Russell Coleman, Attorney General v. Character Technologies, Inc.; Noam Shazeer; and Daniel De Freitas Adiwarsana &middot; Franklin Circuit Court, No. 26-CI-00029, Hon. Phillip J. Shepherd &middot; filed January 8, 2026</p>
+            <dl>
+              <dt>Counsel of record</dt>
+              <dd>The Office of the Attorney General filed through its Civil and Consumer Protection divisions. Retained outside counsel is <strong>Motley Rice LLC</strong>, appearing pro hac vice through Linda Singer, a former Attorney General of the District of Columbia who led state-side opioid litigation. That puts the opioid model inside the first state AI chatbot case.</dd>
+
+              <dt>Capacity</dt>
+              <dd>The Commonwealth sues in its sovereign and parens patriae capacity under KRS 15.020 and KRS 367.190. Standing is pleaded on the front end rather than left to a motion.</dd>
+
+              <dt>Counts</dt>
+              <dd>
+                <ol>
+                  <li>Unfair, false, misleading, or deceptive acts and practices, KRS 367.110 et seq.</li>
+                  <li>Unfair collection and exploitation of children's data, KRS 367.170</li>
+                  <li>Kentucky Consumer Data Protection Act, KRS 367.3611 et seq., pleaded for declaratory and prospective relief because the Act took effect January 1, 2026</li>
+                  <li>Kentucky privacy protections, KRS 365.732 and 365.734, with Ky. Const. &sect;&sect; 1 and 10</li>
+                  <li>Unjust enrichment, at common law and under KRS 15.020(3)</li>
+                </ol>
+              </dd>
+
+              <dt>The Section 230 move</dt>
+              <dd>Paragraph 50 argues the defense before the defense exists. Liability is pleaded as arising from the defendants' own design, development, launch, and marketing decisions. The model's outputs are pleaded as products of the defendants' architecture, training, and reinforcement protocols. Paragraphs 47 through 49 disclaim every federal cause of action and remedy, stating that federal statutes appear only to establish duty and standard. The disclaimer is aimed at removal. The Section 230 paragraph is aimed at reaching the immunity question first, in state court, before any defendant has framed it.</dd>
+
+              <dt>Product language, no product count</dt>
+              <dd>The numbered paragraphs that come before the counts begin repeatedly call Character.AI a defective and unreasonably dangerous product that the defendants placed into the stream of commerce. That is the vocabulary of a product liability case. None of the five counts is one. Kentucky uses defect language to show that the conduct was unfair under the consumer protection act, and stops short of asking a court to hold that a model is a product. Florida put that question to a court five months later.</dd>
+
+              <dt>The founders as defendants</dt>
+              <dd>Noam Shazeer and Daniel De Freitas Adiwarsana founded Character Technologies in 2021. Both are California residents. The complaint pleads Shazeer as co-founder, former chief executive, central technical architect, and majority shareholder, and De Freitas as co-founder, former president, and technical lead. Each is alleged to have personally coded and designed a substantial portion of the model, and to have directed the employees whose conduct is at issue. Personal jurisdiction over both is pleaded under KRS 454.210(2)(a).</dd>
+
+              <dt>Why Google runs through the complaint</dt>
+              <dd>Google is not a defendant. It appears because it is where both the technology and the knowledge came from. Shazeer and De Freitas were principal engineers on Google's LaMDA project, and De Freitas co-invented an earlier Google language model called Meena. After a Google engineer publicly claimed in 2022 that LaMDA showed signs of sentience, Google disputed the claim, fired him, and decided not to release the model, citing unresolved safety, ethical, and moderation concerns. Google had already declined to release Meena. The two men then left and founded Character Technologies to build the same kind of conversational system. That sequence is how Kentucky pleads knowledge: the people who shipped the product had been told by their former employer that it was not safe to ship. The complaint quotes Shazeer telling an interviewer in 2023 that large companies worry about launching products that can say anything, and that a startup was the right vehicle because it could move faster. Separately, the complaint alleges that Character Technologies later entered a licensing arrangement with Google.</dd>
+
+              <dt>Why the filing is redacted</dt>
+              <dd>The public version is partially redacted under KRS 367.250 and under a confidentiality agreement the Commonwealth signed with Character Technologies during the pre-suit investigation. The accompanying motion states that the factual basis derives in part from documents the company produced and designated confidential, and that the complaint quotes and reproduces material from them. The state already holds the company's confidential production, and it has reserved the right to challenge the designations.</dd>
+
+              <dt>Corporate status</dt>
+              <dd>The Secretary of State revoked Character Technologies' authority to transact business in Kentucky on October 12, 2024, for failure to file its 2024 annual report.</dd>
+
+              <dt>Primary sources</dt>
+              <dd><a href="https://www.ag.ky.gov/Press%20Release%20Attachments/CTI%20Complaint%20Motion%20and%20Order%20Filed.pdf" rel="noopener">Complaint, motion to conditionally seal, proposed order, and summonses</a> (69 pages, partially redacted) &middot; <a href="https://www.kentucky.gov/Pages/Activity-stream.aspx?n=AttorneyGeneral&amp;prId=1857" rel="noopener">Office of the Attorney General announcement, January 8, 2026</a></dd>
+            </dl>
+          </div>
+
+          <div class="entry">
+            <h3>California &middot; investigation and cease-and-desist against xAI</h3>
+            <p class="caption">In re xAI / Grok &middot; California Department of Justice &middot; investigation announced January 14, 2026; demand letter sent January 16, 2026</p>
+            <dl>
+              <dt>Brought by</dt>
+              <dd>Attorney General Rob Bonta. The letter is addressed to Elon Musk personally, as chief executive, and was sent by FedEx and email with service on the company's registered agent.</dd>
+
+              <dt>The demand</dt>
+              <dd>Three enumerated categories. xAI must stop:
+                <ol>
+                  <li>Creating, disclosing, or publicizing digitized sexually explicit material of a person who did not consent, or who was a minor</li>
+                  <li>Facilitating or aiding and abetting anyone else doing the same</li>
+                  <li>Creating or facilitating any image, including AI-generated matter, involving a person under 18 or apparently under 18 engaging in or simulating sexual conduct</li>
+                </ol>
+              </dd>
+
+              <dt>Statutory basis</dt>
+              <dd>California Civil Code &sect; 1708.86, which supplies the definition of digitized sexually explicit material; Penal Code &sect;&sect; 311 et seq. and 647(j)(4), with "sexual conduct" defined at &sect; 311.4; and Business &amp; Professions Code &sect; 17200. The section 17200 citation is the one to watch, because the UCL is the vehicle that would carry a filed civil enforcement action.</dd>
+
+              <dt>The deadline</dt>
+              <dd>The letter demands written confirmation no later than January 20, 2026 at 5 p.m. Pacific. The press release says only "within the next five days." The letter is four days.</dd>
+
+              <dt>The preservation demand</dt>
+              <dd>This is the provision practitioners should note and the one absent from the press release. Bonta instructs xAI, Grok, and X to preserve all potentially relevant documents and information and to prevent the deletion, alteration, or spoliation of related prompts, images, posts, and electronically stored information. A preservation demand this early signals that the office expects to file, and it fixes a date from which spoliation runs for anyone who later reaches discovery against these entities.</dd>
+
+              <dt>The admission</dt>
+              <dd>The letter quotes and footnotes a post from the company's own @Grok account. The post concedes that the model generated and shared an image of two young girls in sexualized attire, and that doing so potentially violated United States law on child sexual abuse material. A party admission, published by the party, cited by an attorney general.</dd>
+
+              <dt>The design theory</dt>
+              <dd>The office frames the explicit-content generation mode as a marketing point rather than a moderation failure. That is a deliberate-design theory, closer to Florida's than to a content-takedown posture.</dd>
+
+              <dt>Primary sources</dt>
+              <dd><a href="https://oag.ca.gov/system/files/attachments/press-docs/01-16-26%20Letter%20to%20xAI%20and%20X.pdf" rel="noopener">Cease-and-desist letter, January 16, 2026</a> &middot; <a href="https://oag.ca.gov/news/press-releases/attorney-general-bonta-launches-investigation-xai-grok-over-undressed-sexual-ai" rel="noopener">Investigation announcement, January 14, 2026</a> &middot; <a href="https://oag.ca.gov/news/press-releases/attorney-general-bonta-sends-cease-and-desist-letter-xai-demands-it-halt-illegal" rel="noopener">Letter announcement, January 16, 2026</a></dd>
+            </dl>
+
+            <div class="crossref">
+              <p class="label">Separate case, same parties</p>
+              <p><strong><em>X.AI LLC v. Bonta</em></strong>, No. 2:25-cv-12295 (C.D. Cal., filed December 29, 2025), on appeal as No. 26-1591 (9th Cir.). Three days before California's AI training-data disclosure law took effect, xAI sued to block it on Takings Clause and First Amendment grounds. Sixteen days later Bonta opened the Grok investigation. The two matters are unrelated on the merits. Both are live, and xAI lost below.</p>
+              <p>Two things in the pleading bear on the work covered by this page.</p>
+              <p><strong>The enforcement hook is the same statute.</strong> The disclosure law carries no enforcement mechanism, so xAI pleads that the Unfair Competition Law is what makes it enforceable and what gives xAI standing to sue. Section 17200 is also among the statutes Bonta cited against xAI in the January 16 cease-and-desist. The company's theory of the threat and the state's theory of the violation run through the same provision.</p>
+              <p><strong>Training data is pleaded as a trade secret.</strong> xAI argues that its dataset sources, volumes, and processing methods are protected under state and federal trade secret law, and points to protective orders in the OpenAI and Perplexity litigation that designated training data highly confidential. Expect that argument from any AI defendant facing a discovery request for training data, and expect it before a plaintiff sees a single dataset.</p>
+            </div>
+          </div>
+
+          <div class="entry">
+            <h3>Pennsylvania &middot; a licensing petition, not an attorney general action</h3>
+            <p class="caption">Commonwealth of Pennsylvania, Department of State, State Board of Medicine v. Character Technologies, Inc. &middot; Petition for Review in the Nature of a Complaint in Equity &middot; No. 220 MD 2026, Pa. Commonwealth Court &middot; filed May 1, 2026 at 3:16 p.m.</p>
+            <dl>
+              <dt>Brought by</dt>
+              <dd>The State Board of Medicine, through the Pennsylvania Department of State, litigated by the Department's own lawyers. This is a licensing prosecution, not a consumer protection case. The Attorney General's office is not a party to it, though much of the coverage says it is.</dd>
+
+              <dt>Why the statute matters</dt>
+              <dd>63 P.S. &sect; 422.38 authorizes the Board to enjoin unlicensed practice and states in terms that "it shall not be necessary to show that any person is individually injured by the actions complained of." A licensing board does not need a victim. Section 422.10 supplies the definition: purporting to practice, or holding forth as authorized through use of a title, is itself the violation.</dd>
+
+              <dt>The cost of bringing it</dt>
+              <dd>Pennsylvania needed no injured party, no pre-suit production from the company, no outside counsel, and no damages theory. Kentucky obtained confidential documents from Character Technologies before filing and brought in Motley Rice. Florida brought in Keller Postman and pleaded ten counts. Pennsylvania pleaded one count, in-house, on evidence its own investigator generated in an afternoon.</dd>
+
+              <dt>Facts pleaded</dt>
+              <dd>A Professional Conduct Investigator created a free account from Harrisburg, searched "psychiatry," and selected a character the platform described as "Doctor of psychiatry. You are her patient." He said he felt sad, empty, tired, and unmotivated. The character raised depression, offered to book an assessment, and said that assessing him for medication was within its remit as a doctor. It claimed medical school at Imperial College London, seven years of practice, and registration with the UK General Medical Council. Asked directly, it said it held a Pennsylvania license and gave a number. The number is not valid. The petition puts that character at roughly 45,500 user interactions as of April 17, 2026.</dd>
+
+              <dt>Where it stands: nowhere</dt>
+              <dd>The Board asked for a permanent cease-and-desist order and applied for a preliminary injunction the same day. The court set a hearing for June 8. It has never been held. The parties jointly continued it in May and again in August. The answer deadline has moved from May 28 to September 1 to November 2, and by November 9 they must tell the court whether they want the hearing rescheduled. Four months in, no answer has been filed and the docket still reads "awaiting answer."</dd>
+
+              <dt>Which is the part to watch</dt>
+              <dd>Why a plaintiff that sought emergency relief on day one would twice postpone its own hearing is not apparent from the docket. Settlement is the obvious guess. It could as easily be that the character came down and the Board got what it wanted without an order. Nothing in the record says. What is certain is that no court has ruled on anything here, so the licensing theory remains untested by anyone.</dd>
+
+              <dt>Primary source</dt>
+              <dd><a href="https://www.pa.gov/governor/newsroom/2026-press-releases/shapiro-administration-sues-character-ai-over-fake-medical-claim" rel="noopener">Commonwealth announcement, May 2026</a> &middot; Commonwealth Court docket No. 220 MD 2026</dd>
+            </dl>
+          </div>
+
+          <div class="entry">
+            <h3>Florida &middot; the first state suit against OpenAI, and the first to plead design defect</h3>
+            <p class="caption">Office of the Attorney General, State of Florida, Department of Legal Affairs v. OpenAI Global, LLC; OpenAI Foundation (f/k/a OpenAI, Inc.); OpenAI OpCo, LLC; OpenAI Group PBC; OpenAI Holdings, LLC; and Sam Altman &middot; Circuit Court of the Tenth Judicial Circuit, Highlands County &middot; filed June 1, 2026, 9:34 a.m.</p>
+            <dl>
+              <dt>Counsel of record</dt>
+              <dd>Attorney General James Uthmeier, filed through the office's Civil Enforcement and Consumer Protection divisions with signatories in Miami, Tampa, and Fort Lauderdale. Retained outside counsel is <strong>Keller Postman LLC</strong>, appearing through Ashley Keller in Coral Gables with two Chicago colleagues pro hac vice forthcoming.</dd>
+
+              <dt>Five entities, not one</dt>
+              <dd>The caption names OpenAI Global, the Foundation formerly known as OpenAI, Inc., OpCo, OpenAI Group PBC, and Holdings, plus Altman individually.</dd>
+
+              <dt>Why the corporate form matters here</dt>
+              <dd>OpenAI completed a recapitalization on October 28, 2025, seven months before Florida filed. The nonprofit became the OpenAI Foundation. The operating business became OpenAI Group PBC, a Delaware public benefit corporation that the Foundation controls and whose board it appoints.
+                <p>That creates two consequences for this case. The conduct alleged runs for years on both sides of that line, so naming the Foundation as the former OpenAI, Inc. reaches the entity that existed when the earlier decisions were made. And a public benefit corporation is required by statute to advance its stated mission and weigh stakeholder interests alongside shareholder returns. Florida has put that entity in the defendant's chair on a complaint alleging the company chose growth over safety.</p>
+                <p>There is a further wrinkle. The restructuring was finalized after nearly a year of consultation with the Attorneys General of California and Delaware, who pressed for the governance changes that kept the nonprofit in control. Florida is now suing the corporate form two other state attorneys general helped shape.</p>
+              </dd>
+
+              <dt>Counts</dt>
+              <dd>
+                <ol>
+                  <li>FDUTPA, &sect; 501.204 &mdash; unfair and immoral acts or practices</li>
+                  <li>FDUTPA &mdash; unconscionable acts or practices</li>
+                  <li>FDUTPA &mdash; deceptive acts or practices</li>
+                  <li>FDUTPA &mdash; unfair and immoral acts or practices</li>
+                  <li>Negligence</li>
+                  <li>Gross negligence</li>
+                  <li>Strict liability &mdash; design defect</li>
+                  <li>Strict liability &mdash; failure to warn</li>
+                  <li>Fraudulent misrepresentation (against OpenAI only)</li>
+                  <li>Public nuisance, &sect;&sect; 60.05 and 823.01 and common law</li>
+                </ol>
+              </dd>
+
+              <dt>Why counts VII and VIII matter</dt>
+              <dd>These are the private bar's theory, brought by a sovereign. Every other action on this page routes through a regulatory framework that predates the technology and avoids asking whether a model is a product. Florida asks. A state-court ruling on design defect as applied to a large language model would arrive with a state's resources behind it. It would also land before the private wrongful death cases reach the same question.</dd>
+
+              <dt>How it opens</dt>
+              <dd>The complaint's first page reproduces the product's parental-controls page and its statement that the model is trained to avoid showing harmful material. Paragraph 1 in its entirety is two words: "Not so." The pleading alleges that the company's growth rests on a web of deceit and the exploitation of users. It notes the move from roughly a $17 billion valuation to over $850 billion in under four years.</dd>
+
+              <dt>Remedies</dt>
+              <dd>The prayer asks for five things:
+                <ul>
+                  <li>Permanent injunctions against the practices alleged</li>
+                  <li>A judgment finding that the marketing, promotion, sale, and distribution of the product in Florida is a public nuisance</li>
+                  <li>A judgment finding a breach of the duty of care owed to Florida consumers</li>
+                  <li>Civil penalties up to $10,000 per willful violation under &sect; 501.2075</li>
+                  <li>All damages available at statute and common law, including treble and punitive damages</li>
+                </ul>
+                Paragraph E asks separately for a COPPA-shaped injunction over data collection from children under 13, including verifiable parental consent and parental review rights. No COPPA count is pleaded.</dd>
+
+              <dt>Venue</dt>
+              <dd>Highlands County is a rural interior circuit rather than Tallahassee, Miami, or Tampa, and the office's own signatories are based in the latter three. Venue selection of this kind is a choice about jury pool and docket speed. Whether the defense moves to transfer is the first thing to watch.</dd>
+
+              <dt>Parallel track</dt>
+              <dd>The civil suit is separate from a criminal investigation the office opened in April 2026 arising from a mass shooting suspect's reported use of the product. The attorney general has said that investigation continues alongside the civil case.</dd>
+
+              <dt>Primary source</dt>
+              <dd><a href="https://www.myfloridalegal.com/newsrelease/attorney-general-james-uthmeier-files-first-nation-state-led-lawsuit-against-openai-ceo" rel="noopener">Office of the Attorney General announcement, June 1, 2026</a>. Complaint filing number 249302659, 83 pages.</dd>
+            </dl>
+          </div>
+
+          <div class="entry">
+            <h3>Multistate &middot; the OpenAI subpoena</h3>
+            <p class="caption">Coalition of state attorneys general &middot; subpoena served June 12, 2026</p>
+            <dl>
+              <dt>What is known</dt>
+              <dd>OpenAI received a subpoena from a coalition of state attorneys general seeking information and documents concerning its activities and its impact on users. The company said publicly that it is engaging constructively with the offices involved.</dd>
+
+              <dt>What is not known</dt>
+              <dd><span class="gap">The participating states, the lead office, and the theory under investigation have not been made public.</span></dd>
+            </dl>
+          </div>
+
+          <h2>Coalition letters</h2>
+
+          <p>Each filed matter was preceded by multistate correspondence. The letters carry no legal force, but they name the conduct the offices consider actionable and they show which attorneys general have already signed onto a theory. Kentucky's complaint quotes the 2023 letter directly, which is how the correspondence becomes pleading material.</p>
+
+          <div class="tracker-scroll">
+            <table class="tracker">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Signatories and leads</th>
+                  <th scope="col">Addressed to</th>
+                  <th scope="col">Substance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Sept. 5, 2023</td>
+                  <td>54 attorneys general</td>
+                  <td>Congress</td>
+                  <td>Urging a study of AI-enabled child exploitation and extension of child sexual abuse material prohibitions to AI-generated content. <a href="https://ncdoj.gov/wp-content/uploads/2023/09/54-State-AGs-Urge-Study-of-AI-and-Harmful-Impacts-on-Children.pdf" rel="noopener">Letter</a>, quoted in the Kentucky complaint</td>
+                </tr>
+                <tr>
+                  <td>August 2025</td>
+                  <td>44 attorneys general; led by Illinois, North Carolina, South Carolina, and Tennessee</td>
+                  <td>Major AI developers</td>
+                  <td>Urging protection of children from harmful chatbot interactions, citing reports of inappropriate and sexualized content involving minors. <a href="https://www.naag.org/policy-letter/joint-letter-to-ai-industry-leaders-on-child-safety/" rel="noopener">Letter, via NAAG</a></td>
+                </tr>
+                <tr>
+                  <td>Dec. 9, 2025</td>
+                  <td>42 attorneys general; co-led by Pennsylvania's Dave Sunday, New Jersey's Matthew Platkin, West Virginia's JB McCuskey, and Massachusetts's Andrea Joy Campbell</td>
+                  <td>Thirteen companies: Anthropic, Apple, Chai AI, Character Technologies, Google, Luka, Meta, Microsoft, Nomi AI, OpenAI, Perplexity AI, Replika, and xAI</td>
+                  <td>Sixteen enumerated safeguards covering safety testing, recall procedures, consumer warnings, reporting, executive accountability, and third-party audits, with meetings requested and written confirmation demanded by January 16, 2026. <a href="https://www.njoag.gov/wp-content/uploads/2025/12/2025-1210_AI-Multistate-Letter.pdf" rel="noopener">Letter</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>The December letter gave thirteen companies until January 16, 2026 to confirm the safeguards in writing. That deadline is long past. What followed it is the more useful fact: every live matter on this page was filed or opened in the six months after that letter went out. Kentucky sued Character Technologies on January 8, eight days before the deadline. Bonta sent his cease-and-desist to xAI on January 16 itself. Florida sued OpenAI on June 1. Three of the thirteen recipients drew state action inside six months.</p>
+
+          <h2>What the filings show</h2>
+
+          <p>The states have not converged on a theory, and the spread is wider than the coverage suggests. Kentucky pairs a consumer protection act with a data privacy statute that was eight days old, two constitutional privacy provisions, and unjust enrichment. Pennsylvania pleads one count under a medical licensing act and asks for nothing but a cease-and-desist. California works from imagery law and has not filed. Florida pleads ten counts including two in strict liability and asks for treble and punitive damages against a chief executive personally.</p>
+
+          <p>Florida is the outlier and the one that resets the analysis. The convenient framing for this docket has been that states ask whether existing regulatory law reaches a model's conduct while the private bar asks whether a model is a product. Counts VII and VIII collapse that. A state is now litigating design defect and failure to warn against a large language model, with a state's discovery budget, on a rural circuit docket that may move faster than the coordinated private proceedings. Whatever that court says about defect will be the first word from any court, and it will arrive as persuasive authority in every private case.</p>
+
+          <p>Pennsylvania is the opposite lesson and the more replicable one. Section 422.38 requires no showing that anyone was injured. A licensing board with an investigator, a free account, and an afternoon produced a filed enforcement action against a twenty-million-user platform. Every state has medical, psychology, and counseling licensing boards, and every one of those boards has the same statutory posture.</p>
+
+          <p>Cheap to file is not the same as tested. Pennsylvania applied for its injunction on day one, drew a hearing date within five weeks, and has since continued that hearing twice by joint motion. No answer has been filed in four months. The theory is available to every state, and so far no court has said whether it works.</p>
+
+          <p>The defense side is not waiting either. xAI's challenge to AB 2013 is a pre-enforcement suit against the same attorney general now investigating it. It rests on two arguments. Training data is a trade secret the state cannot compel it to publish. And the Unfair Competition Law is the enforcement threat that gives it standing to sue. Companies are litigating the enforcement architecture and the enforcement action at the same time, in front of the same official, and whichever result lands first shapes the other.</p>
+
+          <p>On the business side, the retention pattern is now visible. Kentucky brought in Motley Rice, Florida brought in Keller Postman, and both firms built their reputations on the aggregate-litigation model. Texas and Pennsylvania ran theirs in-house and asked for disclosure and cessation rather than money. The presence of contingency counsel is the tell for which matters are being built toward damages, and where the state's discovery will eventually converge with a private inventory.</p>
+
+          <div class="tracker-note">
+            <p><strong>Scope and corrections.</strong> This tracker covers state and state-agency enforcement actions against generative AI companies arising from consumer harm. It excludes algorithmic-pricing and biometric-scraping matters, which are a different fight. Constitutional challenges brought by AI companies against state statutes are noted as cross-references where they bear on a listed matter, and are marked as such. Private injury litigation is covered separately in <a href="ai-wrongful-death-docket">The Inventory Nobody Knows How to Price</a> and <a href="jccp-5431-pro-se-leadership-order">The Handwritten Line</a>. Items marked in red are known gaps rather than absences of fact. If you have a filing, a docket entry, or a correction, write to <a href="mailto:editor@lawsuitintelligencer.com">editor@lawsuitintelligencer.com</a> and it will appear in the next update, with attribution if you want it.</p>
+            <p>Every entry above was read from the filed document except the multistate subpoena, which is not public. All claims described are allegations by the moving parties and have not been adjudicated. Nothing here is legal advice.</p>
+          </div>
+
+        </div>
+
+        <footer>
+          <p class="article-byline-end"><a href="david-meldofsky">David Meldofsky</a> is a California-licensed attorney and the editor of Lawsuit Intelligencer. He is also the founder of <a href="https://lawsuitinformer.com">Lawsuit Informer</a> and <a href="https://lawsuit.center">Lawsuit Center</a>.</p>
+        </footer>
+      </article>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <p class="section-eyebrow center">More from Lawsuit Intelligencer</p>
+        <div class="recent">
+          <ol>
+            <li>
+              <div>
+                <h3><a href="ai-wrongful-death-docket">The Inventory Nobody Knows How to Price: Inside the AI Wrongful Death Docket</a></h3>
+                <p class="dek">In ten months, AI wrongful death litigation went from a single San Francisco filing to four distinct case fronts and a steady pipeline of new clients. Firms are building inventory against a docket with no settlement history, no ruling on the merits, and no consolidation.</p>
+                <p class="meta">By David Meldofsky</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="chatgpt-log-preservation">The ChatGPT Log You Can&rsquo;t Subpoena: Preserving Chat Evidence in AI Injury Litigation</a></h3>
+                <p class="dek">A federal statute blocks the third-party subpoena that most practitioners assume is the answer. In the AI injury docket, the evidence case is won or lost in the first week of intake.</p>
+                <p class="meta">By David Meldofsky</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-mast">Lawsuit Intelligencer</p>
+          <p class="footer-mast-sub">Litigation analysis, mass torts, and the business of plaintiff-side law.</p>
+        </div>
+
+        <div>
+          <h4>Sections</h4>
+          <ul>
+            <li><a href="/#articles">Articles</a></li>
+            <li><a href="/#coverage">Coverage</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="contribute">Contribute</a></li>
+            <li><a href="editorial-standards">Editorial standards</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>The Ecosystem</h4>
+          <ul>
+            <li><a href="https://lawsuitinformer.com">Lawsuit Informer</a></li>
+            <li><a href="https://lawsuit.center">Lawsuit Center</a></li>
+            <li><a href="https://davidmeldofsky.com">David Meldofsky</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="footer-disclosure">
+        Lawsuit Intelligencer is editorial commentary and does not constitute legal advice. Nothing on this site creates an attorney-client relationship. The publication is independent of any case, claim, or law firm covered. Authors writing about matters in which they have a financial interest disclose that interest in the byline area of each piece.
+      </p>
+
+      <p class="footer-bottom">&copy; 2026 Lawsuit Intelligencer &middot; Edited by <a href="david-meldofsky">David Meldofsky</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
