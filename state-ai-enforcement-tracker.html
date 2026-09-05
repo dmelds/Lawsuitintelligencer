@@ -141,10 +141,37 @@
       margin-top: 6px;
     }
 
-    .entry dd {
-      margin: 3px 0 0;
-      font-size: 1rem;
-      line-height: 1.65;
+    .entry dd,
+    .article-body .entry dd,
+    .article-body .entry dd > p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .entry dd { margin-top: 6px; }
+    .article-body .entry dd > p { margin: 0 0 14px; }
+    .article-body .entry dd > p:last-child { margin-bottom: 0; }
+
+    .article-body .crossref p,
+    .article-body .tracker-note p {
+      font-size: 19px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .article-body .crossref p:last-child,
+    .article-body .tracker-note p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 760px) {
+      .entry dd,
+      .article-body .entry dd,
+      .article-body .entry dd > p,
+      .article-body .crossref p,
+      .article-body .tracker-note p {
+        font-size: 18px;
+      }
     }
 
     .entry dd ol,
@@ -154,9 +181,6 @@
     }
 
     .entry dd li { margin-bottom: 4px; }
-
-    .entry dd > p { margin: 8px 0 0; }
-    .entry dd > p:first-child { margin-top: 0; }
 
     .gap {
       font-family: var(--mono);
@@ -172,9 +196,6 @@
       margin: 22px 0 0;
       font-size: 1rem;
     }
-
-    .crossref p { margin-bottom: 10px; }
-    .crossref p:last-child { margin-bottom: 0; }
 
     .crossref .label {
       font-family: var(--mono);
