@@ -37,6 +37,23 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#001a57">
 
+  <style>
+    .li-dates{list-style:none;margin:28px 0 32px;padding:0;}
+    .li-dates li{display:grid;grid-template-columns:132px 1fr;gap:22px;padding:16px 0;border-top:1px solid var(--rule-soft);}
+    .li-dates li:last-child{border-bottom:1px solid var(--rule-soft);}
+    .li-dates .d{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);padding-top:5px;}
+    .li-dates .t{font-size:17px;line-height:1.55;color:var(--ink-soft);}
+
+    .li-sources{font-size:15px;line-height:1.65;color:var(--ink-muted);border-top:1px solid var(--rule);padding-top:20px;margin-top:44px;}
+    .li-sources strong{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:10px;}
+
+    @media (max-width:600px){
+      .li-dates li{grid-template-columns:1fr;gap:6px;}
+      .li-dates .d{padding-top:0;}
+      .li-dates .t{font-size:16px;}
+    }
+  </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -114,27 +131,13 @@
         </div>
 
         <div class="article-body">
-          <p>On June 15, 2026, Chief Judge Dean Bucci stood before an assembled jury pool in the Paulding County Courthouse and instructed them to investigate nothing and discuss the case with no one. That instruction is among the oldest safeguards in the American trial.</p>
+          <p>On June 15, 2026, Chief Judge Dean Bucci stood before an assembled jury pool in the Paulding County Courthouse and instructed them to investigate nothing and discuss the case with no one. That instruction is among the oldest safeguards in the American trial. The case waiting on that pool was a murder prosecution, six and a half years old and finally reaching a jury.</p>
 
           <p>The next day, Chief Deputy Clerk Lori Jennings informed the court that Juror #18 had violated it. Bucci called him back into the courtroom and questioned him. The State and the defense then moved jointly for a mistrial. Bucci granted it and sent the panel home.</p>
 
           <p>The court's show cause order describes the conduct in neutral terms: performing research on the case and sharing it with other potential jurors. Court TV, which had a camera in Courtroom 1 under a Rule 22 order, reported that the research was a ChatGPT session.</p>
 
           <p>No recording of the exchange exists. Bucci's Rule 22 order, entered six days earlier, forbade the cameras from capturing images of jurors or prospective jurors in any manner, and prohibited audio of their statements or conversations outright. The permitted exceptions ran to two: a foreperson announcing a verdict, and jury questions to the judge. The one proceeding that became national news was the precise thing the order sealed.</p>
-
-          <h2>The recusal</h2>
-
-          <p>Bucci then did something worth pausing on.</p>
-
-          <p>He recused himself from the contempt proceeding while remaining on the criminal case, and directed the clerk to randomly assign another superior court judge to hear it. Juror #18 was ordered to show cause before a different judge, in a different courtroom, on August 11.</p>
-
-          <p>Bucci had witnessed the conduct. Having witnessed it, he would not be the one to weigh it.</p>
-
-          <p>That is the whole principle, performed by a sitting judge at his own expense. Judgment belongs to a decider who has not already been made a participant, and the bench builds procedure to keep that true of itself. A model, asked the same question, produces an answer it has no stake in and no standing to be recused from.</p>
-
-          <p>The referral worked the way referrals are supposed to. Judge T. David Lyles heard the matter. The juror appeared with counsel, admitted the conduct, and offered mitigation. On August 31, Lyles ordered him to pay $4,762.43 into the registry of the court, reimbursing the county for the out-of-pocket costs of the jurors who had been assembled and sent home. He has forty-five days. Nonpayment carries an order of incarceration.</p>
-
-          <p>Somebody in the clerk's office added up the mileage and the per diem of a discharged jury pool and arrived at a figure accurate to the penny. That is what the exercise of judgment looks like when it is working: a specific person, a specific sum, a deadline, and a consequence for missing it.</p>
 
           <h2>The case underneath</h2>
 
@@ -145,6 +148,20 @@
           <p>Six years of that work, and jury selection was the last step. Trial is now specially set for November 9, 2026, with two weeks blocked out.</p>
 
           <p>One procedural note for anyone reaching for the term. The panel had never been sworn, so jeopardy never attached. The word in the order is mistrial, and the consequence here is a calendar entry rather than a constitutional bar.</p>
+
+          <h2>The recusal</h2>
+
+          <p>On the day he granted the mistrial, Bucci did something else worth pausing on.</p>
+
+          <p>He recused himself from the contempt proceeding while remaining on the criminal case, and directed the clerk to randomly assign another superior court judge to hear it. Juror #18 was ordered to show cause before a different judge, in a different courtroom, on August 11.</p>
+
+          <p>Bucci had witnessed the conduct. Having witnessed it, he would not be the one to weigh it.</p>
+
+          <p>That is the whole principle, performed by a sitting judge at his own expense. Judgment belongs to a decider who has not already been made a participant, and the bench builds procedure to keep that true of itself. A model, asked the same question, produces an answer it has no stake in and no standing to be recused from.</p>
+
+          <p>The referral worked the way referrals are supposed to. Judge T. David Lyles heard the matter. The juror appeared with counsel, admitted the conduct, and offered mitigation. On August 31, Lyles ordered him to pay $4,762.43 into the registry of the court, reimbursing the county for the out-of-pocket costs of the jurors who had been assembled and sent home. He has forty-five days. Nonpayment carries an order of incarceration.</p>
+
+          <p>Somebody in the clerk's office added up the mileage and the per diem of a discharged jury pool and arrived at a figure accurate to the penny. That is what the exercise of judgment looks like when it is working: a specific person, a specific sum, a deadline, and a consequence for missing it.</p>
 
           <h2>The rule already covers it</h2>
 
@@ -220,15 +237,24 @@
 
           <p>Three dates now sit in sequence on the Paulding County calendar.</p>
 
-          <p>In mid-October, a former prospective juror's forty-five days run out, and he either pays the county what the wasted pool cost or faces incarceration.</p>
-
-          <p>On November 4 at 5:00 PM, proposed voir dire questions are due to the court in writing. Bucci has decided against using jury questionnaires this time, so whatever counsel want asked, they have to ask themselves.</p>
-
-          <p>On November 9 at 8:30 AM, a new panel files into Courtroom 1.</p>
+          <ul class="li-dates">
+            <li>
+              <span class="d">Mid-October</span>
+              <span class="t">A former prospective juror's forty-five days run out. He either pays the county what the wasted pool cost or faces incarceration.</span>
+            </li>
+            <li>
+              <span class="d">Nov. 4 &middot; 5:00 PM</span>
+              <span class="t">Proposed voir dire questions are due to the court in writing. Bucci has decided against using jury questionnaires this time, so whatever counsel want asked, they have to ask themselves.</span>
+            </li>
+            <li>
+              <span class="d">Nov. 9 &middot; 8:30 AM</span>
+              <span class="t">A new panel files into Courtroom 1.</span>
+            </li>
+          </ul>
 
           <p>Two lawyers in Dallas, Georgia will sit down before that deadline and decide whether to ask a room of strangers what they do with a chatbot. Their answer, in the one case that has already lost a jury to exactly that question, is the whole argument in miniature.</p>
 
-          <p><strong>Sources.</strong> Order on show cause hearing (Lyles, J.), filed August 31, 2026; Show Cause Order, filed June 29, 2026; Order Rescheduling Specially Set Trial, filed June 24, 2026; Second Order on Request to Use a Recording Device Pursuant to Rule 22, filed June 10, 2026; and Order on Motion to Quash, filed August 4, 2026, all in <em>State v. Lacy Jo Lee Boles</em>, No. 20-CR-001378-P2, Superior Court of Paulding County, Georgia. Court TV, &ldquo;Murder trial postponed after juror asks ChatGPT about the case,&rdquo; June 17, 2026. Mike Scarcella, &ldquo;Oklahoma judge used AI in ruling that contained false citations, prosecutor says,&rdquo; Reuters, September 9, 2026; the Hicks letter was first reported by <em>The Oklahoman</em>. Administrative Office of the U.S. Courts, proposed model jury instructions on the use of electronic technology.</p>
+          <p class="li-sources"><strong>Sources</strong>Order on show cause hearing (Lyles, J.), filed August 31, 2026; Show Cause Order, filed June 29, 2026; Order Rescheduling Specially Set Trial, filed June 24, 2026; Second Order on Request to Use a Recording Device Pursuant to Rule 22, filed June 10, 2026; and Order on Motion to Quash, filed August 4, 2026, all in <em>State v. Lacy Jo Lee Boles</em>, No. 20-CR-001378-P2, Superior Court of Paulding County, Georgia. Court TV, &ldquo;Murder trial postponed after juror asks ChatGPT about the case,&rdquo; June 17, 2026. Mike Scarcella, &ldquo;Oklahoma judge used AI in ruling that contained false citations, prosecutor says,&rdquo; Reuters, September 9, 2026; the Hicks letter was first reported by <em>The Oklahoman</em>. Administrative Office of the U.S. Courts, proposed model jury instructions on the use of electronic technology.</p>
         </div>
 
         <footer>
