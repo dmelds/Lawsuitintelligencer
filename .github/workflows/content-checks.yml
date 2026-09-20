@@ -40,16 +40,16 @@ jobs:
 
       - name: Check issue lines (gate)
         if: ${{ github.event_name == 'pull_request' }}
-        run: python3 check_issue_line.py --strict
+        run: python3 scripts/check_issue_line.py --strict
 
       - name: Check date consistency (gate)
         if: ${{ !cancelled() && github.event_name == 'pull_request' }}
-        run: python3 check_date_consistency.py --strict
+        run: python3 scripts/check_date_consistency.py --strict
 
       - name: Check issue lines (report)
         if: ${{ github.event_name != 'pull_request' }}
-        run: python3 check_issue_line.py
+        run: python3 scripts/check_issue_line.py
 
       - name: Check date consistency (report)
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
-        run: python3 check_date_consistency.py
+        run: python3 scripts/check_date_consistency.py
