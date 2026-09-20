@@ -117,7 +117,7 @@
           <p class="article-eyebrow">Analysis &middot; Courts and Artificial Intelligence</p>
           <h1>Courts Are Writing the AI Rules. They Won't Let AI in the Room.</h1>
           <p class="article-dek">A Georgia murder trial lost its jury pool on the second day of selection, and the contempt sanction came to $4,762.43. The record from Paulding County shows a bench drawing a hard line around the one thing it refuses to delegate.</p>
-          <p class="article-meta">By <a href="david-meldofsky">David Meldofsky</a> &middot; September 18, 2026 &middot; 10 min read</p>
+          <p class="article-meta">By <a href="david-meldofsky">David Meldofsky</a> &middot; September 18, 2026 &middot; 14 min read</p>
         </header>
 
         <div class="article-summary">
@@ -126,7 +126,7 @@
             <li>A prospective juror researched a pending murder case and shared what he found. Both sides moved jointly for a mistrial, the judge granted it, and a second judge later assessed $4,762.43 in jury costs against him.</li>
             <li>The existing prohibition on juror research already reaches generative AI. Federal model instructions name seven social platforms by brand and no AI product, which is the gap appellate counsel will work.</li>
             <li>The judge whose instruction was violated, and who questioned the juror about it himself, recused from the contempt proceeding while staying on the criminal case. That reflex is the principle this article is about.</li>
-            <li>The expert seat is the best documented of the three. A misinformation expert's declaration was excluded in its entirety for citing sources a language model invented, and a New York court now requires disclosure of AI use plus a <em>Frye</em> hearing before AI-generated evidence comes in.</li>
+            <li>The expert seat is the best documented of the three, and the Watson Grinding production is the one case where somebody caught it in time: plaintiffs&rsquo; counsel demanded the prompts and got hundreds of pages of ChatGPT logs, one asking the model to show how 3M was zero percent at fault. A misinformation expert's declaration was excluded in its entirety for citing sources a language model invented, and a New York court now requires disclosure of AI use plus a <em>Frye</em> hearing before AI-generated evidence comes in.</li>
             <li>Courts have become the operative AI regulator while barring the technology from their own deliberations. Both halves of that follow from the same premise about what a verdict is.</li>
           </ul>
         </div>
@@ -184,13 +184,41 @@
 
           <p>The apparatus around an expert witness is the most elaborate verification machinery the law has built. An expert is sourced, disclosed, deposed and cross-examined, and as Josh Hyatt of Expert Institute put it in <a href="expert-vetting-josh-hyatt">an interview on this site</a>, the prior transcript sinks more experts than the thin CV does, because every answer he has ever given sits in the record waiting to be used against him. The whole design assumes that what reaches a jury from the witness stand has survived an adversary.</p>
 
-          <p>Three orders from the last two years show that machinery meeting generative AI at the one point where nobody was looking.</p>
+          <p>Four cases from the last two years show that machinery meeting generative AI at the one point where nobody was looking.</p>
 
           <p>In <em>Kohls v. Ellison</em>, Minnesota defended its deepfake statute with a declaration from a Stanford professor who studies misinformation. The declaration cited two academic articles that do not exist and misattributed a third, the product of drafting with a large language model. Judge Laura Provinzino excluded the declaration in its entirety and refused to accept an amended version. Rule 11, she wrote, imposes a &ldquo;personal, nondelegable responsibility&rdquo; to &ldquo;validate the truth and legal reasonableness of the papers filed.&rdquo; The citations to fabricated sources, she added, shatter the expert&rsquo;s credibility with the court.</p>
 
           <p>In <em>Concord Music Group v. Anthropic</em>, a defense expert&rsquo;s declaration cited an article carrying a fabricated title and authors who had never worked together. Counsel acknowledged that Claude had produced the citation while formatting references, and that a human had afterward located the real underlying article. Magistrate Judge Susan van Keulen struck the paragraph. &ldquo;That is a plain and simple AI hallucination.&rdquo;</p>
 
           <p>In <em>Matter of Weber</em>, an expert used Microsoft Copilot to cross-check a damages calculation and could recall neither his prompts nor how the tool reached its outputs. Surrogate Jonathan Schopf rejected the calculation on grounds that had nothing to do with AI, then addressed the tool separately. Counsel carries &ldquo;an affirmative duty to disclose the use of artificial intelligence,&rdquo; he held, and such evidence &ldquo;should properly be subject to a <em>Frye</em> hearing prior to its admission.&rdquo; The court had run the figure through Copilot itself and received three different answers.</p>
+
+          <p>The fourth is the one where somebody went looking.</p>
+
+          <p>The January 2020 explosion at Watson Grinding and Manufacturing in Houston killed three people and damaged roughly two hundred homes. In the litigation that followed, 3M retained Josh Autenrieth of KnightHawk Engineering, an engineer who had never before served as an expert witness, to opine on its standard of care. Plaintiffs' counsel Will Moye noticed a document in the production that he recognized as chatbot output, and demanded the prompts behind it. He received hundreds of pages of ChatGPT logs. One prompt asked the model to show how 3M was zero percent at fault.</p>
+
+          <p>Put to him at trial that eighty-five to ninety percent of the thirty-page report had come from the model, Autenrieth declined to give a number and answered, &ldquo;If you say so.&rdquo; Asked why an impartial witness would instruct a chatbot to demonstrate zero fault, he said the prompts &ldquo;were biased because I had opinions,&rdquo; and that his opinions were &ldquo;already set.&rdquo;</p>
+
+          <p>One detail carries the section. ChatGPT&rsquo;s draft asserted that 3M bore zero percent of the responsibility, and Autenrieth cut that sentence. Striking a line like that is what an expert is supposed to do with a tool&rsquo;s output, until you reach his reason for striking it.</p>
+
+          <p>He had asked the model to argue against his own report, and it came back with two objections. A flat claim of zero percent would be easy for opposing counsel to attack. Apportioning fault between defendants is the jury&rsquo;s job rather than the engineer&rsquo;s, so a percentage had no place in an engineering opinion at all.</p>
+
+          <p>Both objections were sound. Neither was his. The one act of professional judgment visible anywhere in that report was performed by the chatbot, on request.</p>
+
+          <p>3M moved to disqualify its own expert. On August 10, 2026 the jury returned $61,578,273.19 and put thirty percent of the responsibility on 3M.</p>
+
+          <p>There is a further wrinkle in who it worked on. The check Hyatt describes runs on history, and Autenrieth had none. No prior testimony, no transcript to set beside this one, nothing for opposing counsel to pull and compare. The mechanism that catches experts was structurally blind to this one, because it had nothing to read.</p>
+
+          <p>What he did have was a record he created while writing the report. Hundreds of pages of it, produced because somebody asked.</p>
+
+          <p>No new rule produced that result. Opposing counsel read the production, recognized what he was looking at, and asked for the prompts.</p>
+
+          <p>Asking is one thing. In May a federal magistrate held that counsel can compel it.</p>
+
+          <p>In <em>Conservation Law Foundation v. Shell Oil</em>, Magistrate Judge Thomas Farrish ordered production of the generative AI prompts an expert and her research assistant had used in preparing her report. The rationale ran wider than Rule 26(a)(2)(B) and its facts-or-data language. An expert&rsquo;s methodology is fair ground for discovery, the court held, and the process of culling a document production down to a working subset is part of that methodology.</p>
+
+          <p>The work-product objection failed on a detail worth copying into your next stipulation. The parties had a Rule 29 agreement protecting the expert&rsquo;s notes, drafts and communications. The court found it insufficiently clear to reach AI prompts. That order is stayed pending objection to the district judge, so it is not the last word on the question. It is the first one.</p>
+
+          <p>A line is forming around who did the prompting. Prompts an attorney composes have been treated as work product. Prompts an expert composes are being treated as method, which puts them on the discoverable side of the same page.</p>
 
           <p>Set those beside the instruction Bucci gave his jury pool. A juror who consults a chatbot carries the answer into a deliberation no one will ever see. An expert who consults one files it, under oath, through the process built to test the three things a chatbot cannot supply: a source, a method, and a prior record.</p>
 
@@ -206,13 +234,13 @@
 
           <p>Taken together, the complaint describes a judge who handed his legal research to a machine and entered the one deliberation the law seals shut. The first part he admitted. The second remains an allegation.</p>
 
-          <p>Read Wheeler's account against the other two and a shape appears. He wrote the order himself and used the tool only for research. Anthropic's counsel said Claude only formatted a citation to an article that turned out to be real. Ranson said Copilot only checked a figure he had already calculated. Each man kept the judgment and gave away a step he considered clerical, which is the exact division the rule permits, argued by the person who drew the line himself.</p>
-
-          <p>Three courts rejected the division. What they enforced instead is that a signature covers the whole document, including the part the signer decided was too small to check.</p>
-
           <p>The pattern extends well past Oklahoma. Two federal judges have attributed errors in their rulings to AI use in chambers. A Georgia prosecutor's AI use put erroneous citations into a ruling in a murder case.</p>
 
           <p>The principle judges articulate for themselves is stated plainly enough. Tasks requiring discretion, the weighing of evidence, assessments of credibility, and the application of law to fact belong to the judge and stay there. Administrative work may be delegated to a machine. The exercise of judgment may not.</p>
+
+          <p>That line is one each of them drew for himself. Wheeler wrote the order and used the tool only for research. Anthropic&rsquo;s counsel said Claude only formatted a citation to an article that turned out to be real. Ranson said Copilot only checked a figure he had already calculated. Autenrieth said the conclusions rested on twenty years of his own experience. Each man kept the judgment and gave away a step he had decided was clerical, and in each case the man drawing the line was the one it protected.</p>
+
+          <p>Three courts rejected the division outright, and in the fourth matter 3M moved to disqualify the expert who drew it. What they enforced instead is that a signature covers the whole document, including the part the signer decided was too small to check.</p>
 
           <p>Set Wheeler beside Bucci. One judge is alleged to have collapsed the distance between himself and a proceeding he had no business entering. The other, having issued the order and questioned the man accused of defying it, stepped back from a proceeding he had every authority to decide. The same principle produced both the complaint and the recusal.</p>
 
@@ -244,7 +272,7 @@
 
           <h2>For trial counsel</h2>
 
-          <p>Four practical consequences follow.</p>
+          <p>Five practical consequences follow, and the last one runs the other way.</p>
 
           <p><strong>Ask about AI in voir dire.</strong> Prospective jurors who use these tools daily may sincerely believe consulting one differs in kind from research. Ask directly whether they use generative AI, and ask whether they understand that it produces false information with total confidence. Georgia practitioners should note that voir dire scope is bounded by O.C.G.A. &sect; 15-12-133 and Uniform Superior Court Rule 10.1, and that a question about a juror's habits and credulity fits comfortably inside those bounds.</p>
 
@@ -252,7 +280,9 @@
 
           <p><strong>Move quickly on suspected juror misconduct.</strong> Investigation is time sensitive, and juror secrecy rules vary sharply by jurisdiction. Note also that the Paulding court sealed its own record of the exchange as to recording, which leaves the only account of what was said with the court reporter and the participants.</p>
 
-          <p><strong>Examine experts on their own AI use, and ask for the prompts.</strong> <em>Weber</em> supplies the demand: counsel carries an affirmative duty to disclose AI use, and AI-generated evidence belongs in a <em>Frye</em> hearing before it reaches a jury. An expert who cannot produce his prompts or explain how a tool reached its output has handed you the cross-examination. <em>Kohls</em> shows what the record looks like when nobody asks.</p>
+          <p><strong>Examine experts on their own AI use, and ask for the prompts.</strong> <em>Weber</em> supplies the demand: counsel carries an affirmative duty to disclose AI use, and AI-generated evidence belongs in a <em>Frye</em> hearing before it reaches a jury. An expert who cannot produce his prompts or explain how a tool reached its output has handed you the cross-examination. <em>Kohls</em> shows what the record looks like when nobody asks, and the Watson Grinding production shows what turns up when somebody does. <em>Conservation Law Foundation</em> supplies the authority for compelling it, and the warning that goes with it: check that your own protective stipulation names AI prompts, because one drafted to cover notes, drafts and communications did not.</p>
+
+          <p><strong>Then turn the same questions on your own expert.</strong> Everything above works against you with the parties reversed. Your expert&rsquo;s prompts are discoverable on the identical methodology theory, and the stipulation meant to protect them is the one <em>Conservation Law Foundation</em> found wanting. Ask at the engagement stage rather than at the deposition, and ask the expert to state in his own words which conclusions are his. Keep that answer. Where an expert has never testified, it is the only record of his method that exists, and the 3M production is what the other side does with the gap.</p>
 
           <h2>A live test</h2>
 
@@ -275,7 +305,7 @@
 
           <p>Two lawyers in Dallas, Georgia will sit down before that deadline and decide whether to ask a room of strangers what they do with a chatbot. Their answer, in the one case that has already lost a jury to exactly that question, is the whole argument in miniature.</p>
 
-          <p class="li-sources"><strong>Sources</strong>Order on show cause hearing (Lyles, J.), filed August 31, 2026; Show Cause Order, filed June 29, 2026; Order Rescheduling Specially Set Trial, filed June 24, 2026; Second Order on Request to Use a Recording Device Pursuant to Rule 22, filed June 10, 2026; and Order on Motion to Quash, filed August 4, 2026, all in <em>State v. Lacy Jo Lee Boles</em>, No. 20-CR-001378-P2, Superior Court of Paulding County, Georgia. Court TV, &ldquo;Murder trial postponed after juror asks ChatGPT about the case,&rdquo; June 17, 2026. Mike Scarcella, &ldquo;Oklahoma judge used AI in ruling that contained false citations, prosecutor says,&rdquo; Reuters, September 9, 2026; the Hicks letter was first reported by <em>The Oklahoman</em>. <em>Kohls v. Ellison</em>, No. 24-cv-3754 (D. Minn. Jan. 10, 2025); <em>Concord Music Group, Inc. v. Anthropic PBC</em> (N.D. Cal. May 23, 2025); <em>Matter of Weber</em>, 2024 NY Slip Op 24258 (Sur. Ct. Saratoga Cty. Oct. 10, 2024). Administrative Office of the U.S. Courts, proposed model jury instructions on the use of electronic technology.</p>
+          <p class="li-sources"><strong>Sources</strong>Order on show cause hearing (Lyles, J.), filed August 31, 2026; Show Cause Order, filed June 29, 2026; Order Rescheduling Specially Set Trial, filed June 24, 2026; Second Order on Request to Use a Recording Device Pursuant to Rule 22, filed June 10, 2026; and Order on Motion to Quash, filed August 4, 2026, all in <em>State v. Lacy Jo Lee Boles</em>, No. 20-CR-001378-P2, Superior Court of Paulding County, Georgia. Court TV, &ldquo;Murder trial postponed after juror asks ChatGPT about the case,&rdquo; June 17, 2026. Mike Scarcella, &ldquo;Oklahoma judge used AI in ruling that contained false citations, prosecutor says,&rdquo; Reuters, September 9, 2026; the Hicks letter was first reported by <em>The Oklahoman</em>. <em>Kohls v. Ellison</em>, No. 24-cv-3754 (D. Minn. Jan. 10, 2025); <em>Concord Music Group, Inc. v. Anthropic PBC</em> (N.D. Cal. May 23, 2025); <em>Matter of Weber</em>, 2024 NY Slip Op 24258 (Sur. Ct. Saratoga Cty. Oct. 10, 2024). Watson Grinding explosion litigation, Harris County, Texas, verdict of August 10, 2026, as reported by CBS News, 404 Media and Above the Law. <em>Conservation Law Foundation, Inc. v. Shell Oil Co.</em>, No. 3:21-cv-00933 (D. Conn. May 18, 2026) (Farrish, M.J.), order stayed pending objection. Administrative Office of the U.S. Courts, proposed model jury instructions on the use of electronic technology.</p>
         </div>
 
         <footer>
