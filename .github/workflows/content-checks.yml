@@ -1,0 +1,55 @@
+name: Content Checks
+
+# Runs both page-level checkers in one job. They share a trigger set, a cron and
+# a checkout, so splitting them into two workflows bought two runs, two crons and
+# two places to change the checkout pin. Informer keeps one workflow per check
+# because its checks have nothing in common with each other; these two do.
+#
+# check_issue_line.py governs the masthead line. An article's issue is frozen at
+# the month it ran in. An evergreen page's issue advances with the calendar.
+#
+# check_date_consistency.py governs every other date signal. A byline date
+# answers to datePublished and never moves. An "Updated <date>" note answers to
+# dateModified. Month stamps in titles and metadata cannot claim a month the
+# page was never edited in.
+#
+# The PR run is a gate. Both checks report before the job fails, so a branch
+# breaking both shows both in one pass rather than one per push.
+#
+# The monthly run is a review reminder: it reports and exits 0, so a stale month
+# never pressures a title-only bump. To claim a new month, update the page and
+# move dateModified with it. It fires on the 1st, the morning the issue turns.
+
+on:
+  pull_request:
+    branches: [main]
+    paths: ['**.html']
+  schedule:
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  content-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Check issue lines (gate)
+        if: ${{ github.event_name == 'pull_request' }}
+        run: python3 check_issue_line.py --strict
+
+      - name: Check date consistency (gate)
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        run: python3 check_date_consistency.py --strict
+
+      - name: Check issue lines (report)
+        if: ${{ github.event_name != 'pull_request' }}
+        run: python3 check_issue_line.py
+
+      - name: Check date consistency (report)
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+        run: python3 check_date_consistency.py
