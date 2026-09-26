@@ -1,0 +1,10 @@
+# Security headers for every path. Netlify already sends
+# Strict-Transport-Security at the edge, so it is not repeated here.
+# No Content-Security-Policy yet. This site loads no scripts and only one
+# outside resource (Google Fonts), so it is the simplest place to trial a
+# policy later; add it report-only first once a reporting endpoint exists.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
