@@ -1,0 +1,58 @@
+name: Build feed
+
+# Regenerates feed.xml whenever pages change on main, and on demand. The
+# commit it makes is feed-only and tagged [skip ci]; with the paths filter
+# below, the workflow never retriggers itself. Item dates come from each
+# page's JSON-LD, so no git history is needed.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*.html"
+      - "scripts/generate_feed.py"
+      - ".github/workflows/feed.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: feed-${{ github.ref }}
+  # Queue rather than cancel, for the same reason sitemap.yml does.
+  cancel-in-progress: false
+
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Generate feed.xml
+        run: python3 scripts/generate_feed.py
+
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain feed.xml)" ]; then
+            echo "feed.xml already up to date; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add feed.xml
+          git commit -m "chore: regenerate feed.xml [skip ci]"
+          BRANCH="$(git branch --show-current)"
+          # Sitemap, redirects and this workflow all fire on the same push and
+          # all push to main. A single rebase-then-push loses whichever lands
+          # second, so retry with backoff instead of failing the run.
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin "$BRANCH" && git push; then
+              echo "Pushed feed.xml on attempt $attempt"
+              exit 0
+            fi
+            echo "Push attempt $attempt failed; retrying"
+            sleep $(( attempt * 3 + RANDOM % 4 ))
+          done
+          echo "::error::Could not push feed.xml after 5 attempts"
+          exit 1
