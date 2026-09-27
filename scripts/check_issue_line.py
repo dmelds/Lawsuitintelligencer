@@ -67,6 +67,8 @@ EPOCH_YEAR, EPOCH_MONTH = 2026, 5
 # real pages with a first-published date, but neither is an article: the
 # interviews hub re-lists every published interview and the author page is a
 # standing bio. Both advance with the calendar like the rest of this set.
+# mass-tort-wire is the standing page for the wire, which is a tool rather than
+# an article, so it carries no datePublished and tracks the current issue.
 EVERGREEN = {
     "404.html",
     "about.html",
@@ -75,6 +77,7 @@ EVERGREEN = {
     "editorial-standards.html",
     "index.html",
     "interviews.html",
+    "mass-tort-wire.html",
 }
 
 ISSUE = re.compile(
