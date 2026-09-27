@@ -1,8 +1,8 @@
 name: Build feed
 
 # Regenerates feed.xml whenever pages change on main, and on demand. The
-# commit it makes is feed-only and tagged [skip ci]; with the paths filter
-# below, the workflow never retriggers itself. Item dates come from each
+# commit it makes touches only feed.xml, which is outside the paths filter
+# below, so the workflow never retriggers itself. Item dates come from each
 # page's JSON-LD, so no git history is needed.
 
 on:
@@ -41,7 +41,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add feed.xml
-          git commit -m "chore: regenerate feed.xml [skip ci]"
+          # No [skip ci] here: Netlify skips building any commit that carries it, so the tag
+          # would keep the new feed.xml off the live site. No workflow watches feed.xml, so
+          # this commit starts the Netlify deploy and nothing else.
+          git commit -m "chore: regenerate feed.xml"
           BRANCH="$(git branch --show-current)"
           # Sitemap, redirects and this workflow all fire on the same push and
           # all push to main. A single rebase-then-push loses whichever lands
