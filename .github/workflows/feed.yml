@@ -1,9 +1,14 @@
-name: Build feed
+name: Build feed and news sitemap
 
-# Regenerates feed.xml whenever pages change on main, and on demand. The
-# commit it makes touches only feed.xml, which is outside the paths filter
-# below, so the workflow never retriggers itself. Item dates come from each
-# page's JSON-LD, so no git history is needed.
+# Regenerates feed.xml and news-sitemap.xml whenever pages change on main, once a day, and on
+# demand. Both files are written by one job and land in one commit, so a page push produces one
+# extra Netlify deploy rather than two. The commit touches only those two files, which are
+# outside the paths filter below, so the workflow never retriggers itself. Item dates come from
+# each page's JSON-LD, so no git history is needed.
+#
+# The daily run exists for the news sitemap. It lists articles from the last two days, so an
+# article ages out on the calendar with no page push. The run commits, and Netlify deploys,
+# only on a day the file actually changes: the day an article enters and the day it leaves.
 
 on:
   push:
@@ -11,7 +16,10 @@ on:
     paths:
       - "*.html"
       - "scripts/generate_feed.py"
+      - "scripts/generate_news_sitemap.py"
       - ".github/workflows/feed.yml"
+  schedule:
+    - cron: "17 11 * * *"
   workflow_dispatch:
 
 permissions:
@@ -32,30 +40,33 @@ jobs:
       - name: Generate feed.xml
         run: python3 scripts/generate_feed.py
 
+      - name: Generate news-sitemap.xml
+        run: python3 scripts/generate_news_sitemap.py
+
       - name: Commit if changed
         run: |
-          if [ -z "$(git status --porcelain feed.xml)" ]; then
-            echo "feed.xml already up to date; nothing to commit."
+          if [ -z "$(git status --porcelain feed.xml news-sitemap.xml)" ]; then
+            echo "feed.xml and news-sitemap.xml already up to date; nothing to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add feed.xml
+          git add feed.xml news-sitemap.xml
           # No [skip ci] here: Netlify skips building any commit that carries it, so the tag
-          # would keep the new feed.xml off the live site. No workflow watches feed.xml, so
-          # this commit starts the Netlify deploy and nothing else.
-          git commit -m "chore: regenerate feed.xml"
+          # would keep the new files off the live site. No workflow watches these two files,
+          # so this commit starts the Netlify deploy and nothing else.
+          git commit -m "chore: regenerate feed.xml and news-sitemap.xml"
           BRANCH="$(git branch --show-current)"
           # Sitemap, redirects and this workflow all fire on the same push and
           # all push to main. A single rebase-then-push loses whichever lands
           # second, so retry with backoff instead of failing the run.
           for attempt in 1 2 3 4 5; do
             if git pull --rebase origin "$BRANCH" && git push; then
-              echo "Pushed feed.xml on attempt $attempt"
+              echo "Pushed on attempt $attempt"
               exit 0
             fi
             echo "Push attempt $attempt failed; retrying"
             sleep $(( attempt * 3 + RANDOM % 4 ))
           done
-          echo "::error::Could not push feed.xml after 5 attempts"
+          echo "::error::Could not push after 5 attempts"
           exit 1
