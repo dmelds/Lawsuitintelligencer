@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate news-sitemap.xml for Lawsuit Intelligencer: the news sitemap Bing News PubHub reads.
+Generate news-sitemap.xml for Lawsuit Intelligencer, submitted to Bing in Bing Webmaster Tools.
 
 A news sitemap lists only recent articles, each with its publication date and headline. It uses
 the sitemaps.org schema with the news extension, the format both Bing News and Google News read.
@@ -12,9 +12,17 @@ about, contribute, the interviews hub, the author page and the Mass Tort Wire pa
 Which date: datePublished, the date the byline shows. A news sitemap lists publication, so an
 article revised in September after running in May stays out; it is not news again.
 
-The window: articles published in the last WINDOW_DAYS days, counting today. The news sitemap
-format treats two days as current. When nothing qualifies the file is still written, as a valid
-empty urlset, so the URL submitted to Bing never 404s between articles.
+The window: articles published in the last WINDOW_DAYS days, counting today. Google's news
+sitemap spec puts that at two days and says an empty file is harmless. Bing disagrees in its own
+interface: an empty file draws "The feed was empty," and Bing asks the publisher to check the
+sitemap for errors and resubmit. This file is submitted to Bing, so it follows Bing. Fourteen
+days is set against Intelligencer's own publishing record, measured 9/30/26 over the prior 90
+days: the gaps between articles were mostly three to ten days, with one 21-day gap in July.
+Against that record a two-day window lists at least one article on 27 percent of days, seven
+days on 68 percent, and fourteen days on 92 percent. Drugwatch, which Bing News carries, had a
+13-day-old article in its own news sitemap the same day. Revisit the number if the publishing
+rate changes. When nothing qualifies the file is still written, as a valid empty urlset, so the
+URL submitted to Bing never 404s between articles.
 
 Shares its page parsing with generate_feed.py in the same folder, so a change to how titles or
 dates are read applies to both files.
@@ -38,7 +46,7 @@ from generate_feed import (  # noqa: E402
 )
 
 OUT_FILE = "news-sitemap.xml"
-WINDOW_DAYS = 2
+WINDOW_DAYS = 14
 LANGUAGE = "en"
 
 
