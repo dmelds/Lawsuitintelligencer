@@ -6,7 +6,7 @@ name: Build feed and news sitemap
 # outside the paths filter below, so the workflow never retriggers itself. Item dates come from
 # each page's JSON-LD, so no git history is needed.
 #
-# The daily run exists for the news sitemap. It lists articles from the last two days, so an
+# The daily run exists for the news sitemap. It lists articles from the last fourteen days, so an
 # article ages out on the calendar with no page push. The run commits, and Netlify deploys,
 # only on a day the file actually changes: the day an article enters and the day it leaves.
 
