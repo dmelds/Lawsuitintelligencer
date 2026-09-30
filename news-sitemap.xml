@@ -1,4 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <url>
+    <loc>https://lawsuitintelligencer.com/mso-deal-readiness-elliott-portnoy</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Lawsuit Intelligencer</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-09-23</news:publication_date>
+      <news:title>The Preparation Does Much of the Negotiating</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://lawsuitintelligencer.com/ai-chat-logs-deposition</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Lawsuit Intelligencer</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-09-20</news:publication_date>
+      <news:title>Cross-Examined by Your Own Chat Log</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://lawsuitintelligencer.com/expert-vetting-josh-hyatt</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Lawsuit Intelligencer</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-09-18</news:publication_date>
+      <news:title>The Expert Has to Be Right the Same Way, Forty Times</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://lawsuitintelligencer.com/judgment-is-non-delegable</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Lawsuit Intelligencer</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-09-18</news:publication_date>
+      <news:title>Juror AI Misconduct and the Limits of Judicial Delegation</news:title>
+    </news:news>
+  </url>
 </urlset>
