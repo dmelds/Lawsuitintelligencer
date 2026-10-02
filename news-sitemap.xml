@@ -23,26 +23,4 @@
       <news:title>Cross-Examined by Your Own Chat Log</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://lawsuitintelligencer.com/expert-vetting-josh-hyatt</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Lawsuit Intelligencer</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-09-18</news:publication_date>
-      <news:title>The Expert Has to Be Right the Same Way, Forty Times</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://lawsuitintelligencer.com/judgment-is-non-delegable</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Lawsuit Intelligencer</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-09-18</news:publication_date>
-      <news:title>Juror AI Misconduct and the Limits of Judicial Delegation</news:title>
-    </news:news>
-  </url>
 </urlset>
