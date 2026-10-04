@@ -12,15 +12,4 @@
       <news:title>The Preparation Does Much of the Negotiating</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://lawsuitintelligencer.com/ai-chat-logs-deposition</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Lawsuit Intelligencer</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-09-20</news:publication_date>
-      <news:title>Cross-Examined by Your Own Chat Log</news:title>
-    </news:news>
-  </url>
 </urlset>
