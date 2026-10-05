@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Lawsuit Intelligencer</title>
+  <link>https://lawsuitintelligencer.com/</link>
+  <description>Reporting and analysis on mass torts and the plaintiff bar.</description>
+  <language>en-us</language>
+  <lastBuildDate>Mon, 05 Oct 2026 12:00:00 +0000</lastBuildDate>
+  <atom:link href="https://lawsuitintelligencer.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>The 2026 Mass Tort Map</title>
+    <link>https://lawsuitintelligencer.com/mass-tort-map-2026</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/mass-tort-map-2026#2026-10-05</guid>
+    <pubDate>Mon, 05 Oct 2026 12:00:00 +0000</pubDate>
+    <description>A data-driven map of the 2026 federal mass tort docket: extreme concentration, the bellwether turn, and the erosion of Section 230 and bankruptcy.</description>
+  </item>
+  <item>
+    <title>State AI Enforcement Tracker</title>
+    <link>https://lawsuitintelligencer.com/state-ai-enforcement-tracker</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/state-ai-enforcement-tracker#2026-09-30</guid>
+    <pubDate>Wed, 30 Sep 2026 12:00:00 +0000</pubDate>
+    <description>Every state consumer-harm enforcement action against a generative AI company: court, statute, counts, remedy sought, and status. Read from the filings.</description>
+  </item>
+  <item>
+    <title>The Preparation Does Much of the Negotiating</title>
+    <link>https://lawsuitintelligencer.com/mso-deal-readiness-elliott-portnoy</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/mso-deal-readiness-elliott-portnoy#2026-09-23</guid>
+    <pubDate>Wed, 23 Sep 2026 12:00:00 +0000</pubDate>
+    <description>Elliott Portnoy, founding Global CEO of Dentons, on why some plaintiff-side MSO deals close at higher multiples while others stall, and how firms prepare.</description>
+  </item>
+  <item>
+    <title>Cross-Examined by Your Own Chat Log</title>
+    <link>https://lawsuitintelligencer.com/ai-chat-logs-deposition</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/ai-chat-logs-deposition#2026-09-21</guid>
+    <pubDate>Mon, 21 Sep 2026 12:00:00 +0000</pubDate>
+    <description>Three courts have weighed a party’s AI chats, all of them made for the case. The ones a plaintiff made years earlier she hands over like any other document.</description>
+  </item>
+  <item>
+    <title>Juror AI Misconduct and the Limits of Judicial Delegation</title>
+    <link>https://lawsuitintelligencer.com/judgment-is-non-delegable</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/judgment-is-non-delegable#2026-09-19</guid>
+    <pubDate>Sat, 19 Sep 2026 12:00:00 +0000</pubDate>
+    <description>A Georgia jury pool was discharged after a juror researched the case and shared it. What the Boles mistrial shows about where courts draw the line on AI in their own decisions.</description>
+  </item>
+  <item>
+    <title>The Expert Has to Be Right the Same Way, Forty Times</title>
+    <link>https://lawsuitintelligencer.com/expert-vetting-josh-hyatt</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/expert-vetting-josh-hyatt#2026-09-18</guid>
+    <pubDate>Fri, 18 Sep 2026 12:00:00 +0000</pubDate>
+    <description>Josh Hyatt of Expert Institute on why testimony history sinks experts more often than credentials, what a bellwether expert has to survive, and what changes when an appellate court moves the admissibility line mid-litigation.</description>
+  </item>
+  <item>
+    <title>Arizona v. L'Oréal Moves the Hair Relaxer Fight to Disclosure</title>
+    <link>https://lawsuitintelligencer.com/arizona-v-loreal-hair-relaxer</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/arizona-v-loreal-hair-relaxer#2026-09-15</guid>
+    <pubDate>Tue, 15 Sep 2026 12:00:00 +0000</pubDate>
+    <description>Arizona's consumer fraud suit asks what L'Oréal disclosed about relaxer cancer research. What that changes, and what it leaves to MDL 3060.</description>
+  </item>
+  <item>
+    <title>What Plaintiff Firms Get Wrong When They Buy Claimant Acquisition</title>
+    <link>https://lawsuitintelligencer.com/claimant-acquisition-brian-beck</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/claimant-acquisition-brian-beck#2026-09-01</guid>
+    <pubDate>Tue, 01 Sep 2026 12:00:00 +0000</pubDate>
+    <description>Brian Beck of Typhon Interactive on intake economics, what to ask a vendor before signing, and why mass arbitration is a technology problem before it is a media problem.</description>
+  </item>
+  <item>
+    <title>The ChatGPT Log You Can’t Subpoena: Evidence at Intake</title>
+    <link>https://lawsuitintelligencer.com/chatgpt-log-preservation</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/chatgpt-log-preservation#2026-08-28</guid>
+    <pubDate>Fri, 28 Aug 2026 12:00:00 +0000</pubDate>
+    <description>The Stored Communications Act bars civil subpoenas for ChatGPT content, and the order freezing deletion ended in 2025. What that leaves plaintiff counsel.</description>
+  </item>
+  <item>
+    <title>Otter.ai CIPA Ruling: The AI Tort That Skips the Output</title>
+    <link>https://lawsuitintelligencer.com/otter-ai-cipa-ruling</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/otter-ai-cipa-ruling#2026-08-18</guid>
+    <pubDate>Tue, 18 Aug 2026 12:00:00 +0000</pubDate>
+    <description>Judge Lee held Otter.ai is a third-party eavesdropper under CIPA because it trains on what it records. The theory needs no product-or-content holding to work.</description>
+  </item>
+  <item>
+    <title>MDL 3026 Finally Has a Jury in the NEC Docket</title>
+    <link>https://lawsuitintelligencer.com/nec-mdl-first-federal-jury</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/nec-mdl-first-federal-jury#2026-08-17</guid>
+    <pubDate>Mon, 17 Aug 2026 12:00:00 +0000</pubDate>
+    <description>Inman v. Mead Johnson is the first NEC case in MDL 3026 to reach a jury after three bellwethers died at summary judgment. Warning causation is the real test.</description>
+  </item>
+  <item>
+    <title>The Handwritten Line in the ChatGPT Leadership Order</title>
+    <link>https://lawsuitintelligencer.com/jccp-5431-pro-se-leadership-order</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/jccp-5431-pro-se-leadership-order#2026-08-07</guid>
+    <pubDate>Fri, 07 Aug 2026 12:00:00 +0000</pubDate>
+    <description>Judge Schulman interlineated CMO No. 1 in JCCP 5431 by hand to preserve a pro se plaintiff's right to file. Why that line is worth reading closely.</description>
+  </item>
+  <item>
+    <title>The Case You Can’t Serve</title>
+    <link>https://lawsuitintelligencer.com/anti-corruption-bureau-qui-tam</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/anti-corruption-bureau-qui-tam#2026-08-04</guid>
+    <pubDate>Tue, 04 Aug 2026 12:00:00 +0000</pubDate>
+    <description>A Senate bill would create a contingent-fee action against the President, his family, and federal contractors. Then it names an intervenor that does not exist.</description>
+  </item>
+  <item>
+    <title>The Docket the Panel Wouldn't Build</title>
+    <link>https://lawsuitintelligencer.com/video-game-addiction-docket</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/video-game-addiction-docket#2026-07-14</guid>
+    <pubDate>Tue, 14 Jul 2026 12:00:00 +0000</pubDate>
+    <description>Twice denied an MDL, video game addiction litigation re-formed around a California coordination, scattered federal filings, and school district plaintiffs. The structure is now the story.</description>
+  </item>
+  <item>
+    <title>Federal PFAS Rules Contract, States Don't</title>
+    <link>https://lawsuitintelligencer.com/pfas-rules-contracting</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/pfas-rules-contracting#2026-07-11</guid>
+    <pubDate>Sat, 11 Jul 2026 12:00:00 +0000</pubDate>
+    <description>EPA's 2025-2026 PFAS rollback collapsed a key litigation assumption. What changes for plaintiff lawyers when the federal anchor moves and states hold.</description>
+  </item>
+  <item>
+    <title>AI Due-Diligence Queries Are Reading Your Firm</title>
+    <link>https://lawsuitintelligencer.com/ai-due-diligence-queries</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/ai-due-diligence-queries#2026-07-04</guid>
+    <pubDate>Sat, 04 Jul 2026 12:00:00 +0000</pubDate>
+    <description>Machine-constructed search queries are running litigation due diligence on companies and legal brands. What they look like and how to answer them.</description>
+  </item>
+  <item>
+    <title>ByHeart's Five-Month Sprint to MDL 3178</title>
+    <link>https://lawsuitintelligencer.com/byheart-mdl-3178</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/byheart-mdl-3178#2026-07-04</guid>
+    <pubDate>Sat, 04 Jul 2026 12:00:00 +0000</pubDate>
+    <description>How the ByHeart infant formula botulism cases reached MDL 3178 in under five months, and what the hybrid injury-and-class structure means for firms.</description>
+  </item>
+  <item>
+    <title>Hair Relaxer's Daubert Gate and Intake Economics</title>
+    <link>https://lawsuitintelligencer.com/hair-relaxer-daubert-economics</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/hair-relaxer-daubert-economics#2026-07-04</guid>
+    <pubDate>Sat, 04 Jul 2026 12:00:00 +0000</pubDate>
+    <description>MDL 3060's causation ruling will reprice an 11,500-case inventory. The Acetaminophen collapse, the Revlon channel, and what firms should underwrite.</description>
+  </item>
+  <item>
+    <title>Legion's Lawsuit Over the Fable 5 AI Shutdown</title>
+    <link>https://lawsuitintelligencer.com/legion-fable-5-lawsuit</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/legion-fable-5-lawsuit#2026-06-24</guid>
+    <pubDate>Wed, 24 Jun 2026 12:00:00 +0000</pubDate>
+    <description>Legion LegalTech is suing the federal government to undo the export-control order that forced Anthropic to shut off its Fable 5 and Mythos 5 AI models.</description>
+  </item>
+  <item>
+    <title>Fable 5 and the Section 230 Defense for AI Output</title>
+    <link>https://lawsuitintelligencer.com/fable-5-section-230-defense</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/fable-5-section-230-defense#2026-06-16</guid>
+    <pubDate>Tue, 16 Jun 2026 12:00:00 +0000</pubDate>
+    <description>An export-control takedown treated Claude Fable 5 as a dangerous product, not protected speech. What that means for Garcia and the Section 230 defense.</description>
+  </item>
+  <item>
+    <title>Inside the AI Wrongful Death Docket: Pricing the Inventory</title>
+    <link>https://lawsuitintelligencer.com/ai-wrongful-death-docket</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/ai-wrongful-death-docket#2026-06-12</guid>
+    <pubDate>Fri, 12 Jun 2026 12:00:00 +0000</pubDate>
+    <description>Plaintiff firms are signing AI wrongful death cases with no settlement history, no merits ruling, and no consolidation. How the inventory is built.</description>
+  </item>
+  <item>
+    <title>The First AI Infrastructure Class Action Against xAI</title>
+    <link>https://lawsuitintelligencer.com/xai-data-center-class-action</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/xai-data-center-class-action#2026-06-10</guid>
+    <pubDate>Wed, 10 Jun 2026 12:00:00 +0000</pubDate>
+    <description>A nuisance class action filed June 9 opens a second front against xAI's Southaven power plant, already facing a Clean Air Act suit and possible DOJ entry.</description>
+  </item>
+  <item>
+    <title>Law Firm MSOs and the Indirect Fee-Sharing Problem</title>
+    <link>https://lawsuitintelligencer.com/mso-indirect-fee-sharing</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/mso-indirect-fee-sharing#2026-05-29</guid>
+    <pubDate>Fri, 29 May 2026 12:00:00 +0000</pubDate>
+    <description>Private equity's path into personal injury law rests on one undefined word. No court has said where a management fee ends and fee-sharing begins.</description>
+  </item>
+  <item>
+    <title>Using AI in Court Briefs Without Getting Sanctioned</title>
+    <link>https://lawsuitintelligencer.com/ai-in-court-briefs</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/ai-in-court-briefs#2026-05-28</guid>
+    <pubDate>Thu, 28 May 2026 12:00:00 +0000</pubDate>
+    <description>The AI sanctions docket is now its own body of law, and nearly every entry failed at the same step. A working guide to AI in court filings.</description>
+  </item>
+  <item>
+    <title>Mass Tort Intake Is About to Get Reshaped</title>
+    <link>https://lawsuitintelligencer.com/mass-tort-intake-reshaped</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/mass-tort-intake-reshaped#2026-05-07</guid>
+    <pubDate>Thu, 07 May 2026 12:00:00 +0000</pubDate>
+    <description>The Eleventh Circuit's vacatur of the one-to-one consent rule is no all-clear. The pressure has shifted to TCPA class actions and state bar enforcement.</description>
+  </item>
+  <item>
+    <title>Editor's Note: Why Lawsuit Intelligencer Exists</title>
+    <link>https://lawsuitintelligencer.com/welcome</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/welcome#2026-05-07</guid>
+    <pubDate>Thu, 07 May 2026 12:00:00 +0000</pubDate>
+    <description>What Lawsuit Intelligencer is, what it is not, and why it exists: an editorial publication on mass torts and the business of plaintiff-side law.</description>
+  </item>
+</channel>
+</rss>
