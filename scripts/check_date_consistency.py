@@ -81,6 +81,15 @@ TAGS = re.compile(r"<[^>]+>")
 ARTICLE_META = re.compile(r'<p class="article-meta">(.*?)</p>', re.S | re.I)
 UPDATED_CLASS = re.compile(r'<p class="[a-z-]*updated">(.*?)</p>', re.S | re.I)
 
+# The jump-bar label (<span class="li-jump-k">) names the data behind a page's
+# jump links, e.g. "Current data · Oct 1 JPML report". No other rule here reads
+# it, so a label naming a month goes stale silently when the page updates.
+# A label with no month in it, such as the tracker's "Matters", is left alone.
+JUMP_LABEL = re.compile(r'<span class="li-jump-k">(.*?)</span>', re.S | re.I)
+MONTH_WORD = re.compile(
+    r"\b(" + "|".join(list(MONTHS) + [m[:3] for m in MONTHS]) + r")\b\.?",
+    re.I)
+
 # The masthead carries "Month YYYY" on every page. It is check_issue_line.py's
 # business, and it must never be read as a freshness stamp here.
 MASTHEAD = re.compile(
@@ -186,6 +195,37 @@ def visible_dates(html):
     return published, updated, bare
 
 
+def jump_labels(html, dm):
+    """Read the month out of every jump-bar label on the page.
+
+    Returns a list of (ym, raw). A label may give a year ("Oct 1, 2026") or
+    leave it out ("Oct 1 JPML report"). Where the year is missing, pick the
+    year nearest dateModified so a December label read in January lands on the
+    December just past rather than eleven months away. Labels naming no month
+    are skipped, which is what keeps a bar like "Matters" out of this rule.
+    """
+    found = []
+    for raw in (text(b) for b in JUMP_LABEL.findall(html)):
+        for ent, char in (("&middot;", "·"), ("&nbsp;", " "),
+                          ("&amp;", "&")):
+            raw = raw.replace(ent, char)
+        raw = " ".join(raw.split())
+        mw = MONTH_WORD.search(raw)
+        if not mw:
+            continue
+        word = mw.group(1).capitalize()
+        month = MONTHS.get(word) or MONTHS[next(
+            m for m in MONTHS if m.startswith(word[:3]))]
+        yr = re.search(r"\b(20\d{2})\b", raw)
+        if yr:
+            found.append(((int(yr.group(1)), month), raw))
+        elif dm:
+            found.append((min(
+                ((y, month) for y in (dm[0] - 1, dm[0], dm[0] + 1)),
+                key=lambda ym: abs((ym[0] - dm[0]) * 12 + ym[1] - dm[1])), raw))
+    return found
+
+
 def scan(path, now_ym=None):
     html = path.read_text(encoding="utf-8", errors="replace")
     m = TITLE.search(html)
@@ -286,6 +326,24 @@ def scan(path, now_ym=None):
             warnings.append(
                 f"visible stamp \"{raw[:60]}\" gives a month with no day and "
                 f"the page carries no JSON-LD dates — nothing can verify it"
+            )
+
+    # A jump-bar label that names data newer than the page's own edit date is
+    # a claim the page cannot support. A label behind dateModified is only a
+    # question, because a typo fix moves dateModified and leaves the data alone.
+    for ym, raw in jump_labels(html, dm):
+        if not dm:
+            continue
+        if ym > dm:
+            errors.append(
+                f"jump-bar label names {label(ym)} but dateModified is "
+                f"{dm_raw} ({label(dm)}) — the bar points at data from after "
+                f"the last edit"
+            )
+        elif ym < dm:
+            warnings.append(
+                f"jump-bar label still reads \"{raw[:52]}\" while dateModified "
+                f"is {dm_raw} ({label(dm)}) — roll the label if the data moved"
             )
 
     h_stamps = stamps(h1)
