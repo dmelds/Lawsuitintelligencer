@@ -1,20 +1,39 @@
 # BEGIN AUTO-GENERATED HTML REDIRECTS (managed by generate_redirects.py - do not edit)
 /about.html  /about  301!
+/ai-chat-logs-deposition.html  /ai-chat-logs-deposition  301!
 /ai-due-diligence-queries.html  /ai-due-diligence-queries  301!
 /ai-in-court-briefs.html  /ai-in-court-briefs  301!
 /ai-wrongful-death-docket.html  /ai-wrongful-death-docket  301!
+/anti-corruption-bureau-qui-tam.html  /anti-corruption-bureau-qui-tam  301!
+/arizona-v-loreal-hair-relaxer.html  /arizona-v-loreal-hair-relaxer  301!
 /byheart-mdl-3178.html  /byheart-mdl-3178  301!
+/chatgpt-log-preservation.html  /chatgpt-log-preservation  301!
+/claimant-acquisition-brian-beck.html  /claimant-acquisition-brian-beck  301!
 /contribute.html  /contribute  301!
 /david-meldofsky.html  /david-meldofsky  301!
 /editorial-standards.html  /editorial-standards  301!
+/expert-vetting-josh-hyatt.html  /expert-vetting-josh-hyatt  301!
 /fable-5-section-230-defense.html  /fable-5-section-230-defense  301!
 /hair-relaxer-daubert-economics.html  /hair-relaxer-daubert-economics  301!
+/interviews.html  /interviews  301!
+/jccp-5431-pro-se-leadership-order.html  /jccp-5431-pro-se-leadership-order  301!
+/judgment-is-non-delegable.html  /judgment-is-non-delegable  301!
 /legion-fable-5-lawsuit.html  /legion-fable-5-lawsuit  301!
 /mass-tort-intake-reshaped.html  /mass-tort-intake-reshaped  301!
-/mass-tort-map-2026.html  /mass-tort-map-2026  301!
+/mass-tort-map.html  /mass-tort-map  301!
+/mass-tort-wire.html  /mass-tort-wire  301!
+/mso-deal-readiness-elliott-portnoy.html  /mso-deal-readiness-elliott-portnoy  301!
 /mso-indirect-fee-sharing.html  /mso-indirect-fee-sharing  301!
+/nec-mdl-first-federal-jury.html  /nec-mdl-first-federal-jury  301!
+/otter-ai-cipa-ruling.html  /otter-ai-cipa-ruling  301!
 /pfas-rules-contracting.html  /pfas-rules-contracting  301!
+/state-ai-enforcement-tracker.html  /state-ai-enforcement-tracker  301!
 /video-game-addiction-docket.html  /video-game-addiction-docket  301!
 /welcome.html  /welcome  301!
 /xai-data-center-class-action.html  /xai-data-center-class-action  301!
 # END AUTO-GENERATED HTML REDIRECTS
+
+# Custom redirects. The generator preserves everything outside the block above,
+# and only sweeps exact self-pair rules, so these survive a regeneration.
+/mass-tort-map-2026       /mass-tort-map  301!
+/mass-tort-map-2026.html  /mass-tort-map  301!
