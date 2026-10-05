@@ -20,7 +20,7 @@
 /judgment-is-non-delegable.html  /judgment-is-non-delegable  301!
 /legion-fable-5-lawsuit.html  /legion-fable-5-lawsuit  301!
 /mass-tort-intake-reshaped.html  /mass-tort-intake-reshaped  301!
-/mass-tort-map-2026.html  /mass-tort-map-2026  301!
+/mass-tort-map.html  /mass-tort-map  301!
 /mass-tort-wire.html  /mass-tort-wire  301!
 /mso-deal-readiness-elliott-portnoy.html  /mso-deal-readiness-elliott-portnoy  301!
 /mso-indirect-fee-sharing.html  /mso-indirect-fee-sharing  301!
@@ -32,3 +32,8 @@
 /welcome.html  /welcome  301!
 /xai-data-center-class-action.html  /xai-data-center-class-action  301!
 # END AUTO-GENERATED HTML REDIRECTS
+
+# Custom redirects. The generator preserves everything outside the block above,
+# and only sweeps exact self-pair rules, so these survive a regeneration.
+/mass-tort-map-2026       /mass-tort-map  301!
+/mass-tort-map-2026.html  /mass-tort-map  301!
