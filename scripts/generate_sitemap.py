@@ -50,7 +50,7 @@ OVERRIDES = {
     "editorial-standards": ("0.7", "monthly"),
     "contribute": ("0.6", "monthly"),
     "david-meldofsky": ("0.7", "monthly"),
-    "mass-tort-map-2026": ("0.9", "monthly"),
+    "mass-tort-map": ("0.9", "monthly"),
     "mso-indirect-fee-sharing": ("0.9", "monthly"),
     "xai-data-center-class-action": ("0.9", "weekly"),
     "ai-wrongful-death-docket": ("0.9", "weekly"),

@@ -69,7 +69,7 @@ EPOCH_YEAR, EPOCH_MONTH = 2026, 5
 # standing bio. Both advance with the calendar like the rest of this set.
 # mass-tort-wire is the standing page for the wire, which is a tool rather than
 # an article, so it carries no datePublished and tracks the current issue.
-# mass-tort-map-2026 and state-ai-enforcement-tracker are living pages: each
+# mass-tort-map and state-ai-enforcement-tracker are living pages: each
 # carries a datePublished from its first run, but each is rewritten every month
 # with the current JPML report or the current filings, so the masthead states
 # the issue the reader is holding, not the one the page first appeared in. The
@@ -82,7 +82,7 @@ EVERGREEN = {
     "editorial-standards.html",
     "index.html",
     "interviews.html",
-    "mass-tort-map-2026.html",
+    "mass-tort-map.html",
     "mass-tort-wire.html",
     "state-ai-enforcement-tracker.html",
 }
