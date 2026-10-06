@@ -1,9 +1,9 @@
 name: Content Checks
 
-# Runs both page-level checkers in one job. They share a trigger set, a cron and
-# a checkout, so splitting them into two workflows bought two runs, two crons and
-# two places to change the checkout pin. Informer keeps one workflow per check
-# because its checks have nothing in common with each other; these two do.
+# Runs the page-level checkers in one job. They share a trigger set, a cron and
+# a checkout, so splitting them into separate workflows bought extra runs, extra
+# crons and extra places to change the checkout pin. Informer keeps one workflow
+# per check because its checks have nothing in common with each other; these do.
 #
 # check_issue_line.py governs the masthead line. An article's issue is frozen at
 # the month it ran in. An evergreen page's issue advances with the calendar.
@@ -13,8 +13,29 @@ name: Content Checks
 # dateModified. Month stamps in titles and metadata cannot claim a month the
 # page was never edited in.
 #
-# The PR run is a gate. Both checks report before the job fails, so a branch
-# breaking both shows both in one pass rather than one per push.
+# CANNIBALIZATION, added 10/6/26. Informer's check_cannibalization.py compares
+# this site's pages against each other and against Lawsuit Informer and Lawsuit
+# Center on the torts they share: shared body text, status promises, live
+# counts carried on more than one page or site, matching titles and
+# descriptions. Until now that comparison ran only from the Informer repo, on
+# Informer pull requests and a monthly cron, so a page added here was not
+# checked until the next Informer run and the finding never left the log. Now
+# it runs on the pull request that adds the page, before it ships.
+#
+# The script lives in the Informer repo and is run from the Informer checkout,
+# so there is one copy of it. Both other repos are public, so the checkouts
+# need no token. If either is ever made private, add a repo secret with read
+# access and pass it as `token:` on that step. The other-site checkouts come
+# AFTER the issue-line and date checks because those two walk the tree
+# recursively and would otherwise read the other sites' pages as this site's.
+# The cannibalization script reads only the top level of each folder it is
+# given, so the sibling checkouts do not leak into its own-site page set.
+#
+# The PR run is a gate. Every check reports before the job fails, so a branch
+# breaking more than one shows all of them in one pass rather than one per
+# push. The cannibalization gate is strict: a pull request that adds a pair
+# over the error line, here or against another site, fails. Warnings print
+# without failing. Baseline on 10/6/26 was zero errors across all three pairs.
 #
 # The monthly run is a review reminder: it reports and exits 0, so a stale month
 # never pressures a title-only bump. To claim a new month, update the page and
@@ -53,3 +74,27 @@ jobs:
       - name: Check date consistency (report)
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         run: python3 scripts/check_date_consistency.py
+
+      - name: Checkout Lawsuit Informer
+        if: ${{ !cancelled() }}
+        uses: actions/checkout@v7
+        with:
+          repository: dmelds/Lawsuitinformer
+          ref: main
+          path: _informer
+
+      - name: Checkout Lawsuit Center
+        if: ${{ !cancelled() }}
+        uses: actions/checkout@v7
+        with:
+          repository: dmelds/lawsuits-center
+          ref: main
+          path: _center
+
+      - name: Check cannibalization, this site and against Informer and Center (gate)
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        run: python3 _informer/check_cannibalization.py --path . --site intelligencer --with _informer --with _center --strict
+
+      - name: Check cannibalization, this site and against Informer and Center (report)
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+        run: python3 _informer/check_cannibalization.py --path . --site intelligencer --with _informer --with _center
