@@ -205,6 +205,8 @@
 
           <p>FAERS counts reports, and one patient can generate several. Manufacturers forward the reports they receive, the patient's lawyer may file, and the physician may file, each as a separate record. The counts here are deduplicated by openFDA's case identifier, which does not catch every repeat. Reporting is voluntary, so the base rate of injury cannot be computed from it. Age is missing from 22% of the cohort and sex from 26%. A report that names two drugs is counted under both.</p>
 
+          <p>The match also catches reports that name only a generic drug, such as semaglutide, with no brand attached. Some of those patients may have taken compounded semaglutide, which pharmacies mix themselves. Compounded products sit outside the federal cases against Novo Nordisk and Eli Lilly. FAERS does not record which product a generic-only report refers to, so the 5,699 count may include patients the MDL cannot reach.</p>
+
           <p>None of those limits changes the shape of the year curve or the lawyer share, which are the two findings that matter. Both are reproducible from the public API by anyone with a free key.</p>
         </div>
       </article>
