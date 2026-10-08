@@ -1,8 +1,12 @@
 name: Build sitemap
 
 # Regenerates sitemap.xml whenever pages change on main, and on demand.
-# The commit it makes is sitemap-only and tagged [skip ci]; combined with the
-# paths filter below, that prevents the workflow from retriggering itself.
+# The commit it makes touches sitemap.xml only, and the paths filter below does
+# not watch sitemap.xml, so the workflow never retriggers itself.
+# The commit carries NO [skip ci] tag. Netlify skips building any commit that
+# carries it, so a tagged sitemap commit reached main and never deployed until
+# some later commit happened to come along (hit 10/8/26: /archive sat on main
+# and missed the live sitemap). Untagged, this commit starts its own deploy.
 
 on:
   push:
@@ -48,7 +52,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml
-          git commit -m "chore: regenerate sitemap.xml [skip ci]"
+          git commit -m "chore: regenerate sitemap.xml"
           BRANCH="$(git branch --show-current)"
           # This workflow and Generate Redirects both fire on the same push and
           # both push to main. A single rebase-then-push loses whichever lands
