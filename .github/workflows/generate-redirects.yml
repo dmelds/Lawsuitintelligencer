@@ -3,6 +3,9 @@ name: Generate Redirects
 on:
   # Auto: runs when pages change on main. The job only commits _redirects
   # (not an .html file), so it never re-triggers itself.
+  # The commit carries NO [skip ci] tag: Netlify skips building any commit that
+  # carries it, so a tagged _redirects update reached main and stayed off the
+  # live site until some later commit deployed it.
   push:
     branches: [main]
     paths: ['**.html']
@@ -49,7 +52,7 @@ jobs:
             exit 0
           fi
           git add _redirects
-          git commit -m "Auto-regenerate forced .html redirects (_redirects) [skip ci]"
+          git commit -m "Auto-regenerate forced .html redirects (_redirects)"
           BRANCH="$(git branch --show-current)"
           # This workflow and Build sitemap both fire on the same push and both
           # push to main. A single rebase-then-push loses whichever lands
