@@ -14,6 +14,7 @@
 /editorial-standards.html  /editorial-standards  301!
 /expert-vetting-josh-hyatt.html  /expert-vetting-josh-hyatt  301!
 /fable-5-section-230-defense.html  /fable-5-section-230-defense  301!
+/glp-1-faers-reporting-profile.html  /glp-1-faers-reporting-profile  301!
 /hair-relaxer-daubert-economics.html  /hair-relaxer-daubert-economics  301!
 /interviews.html  /interviews  301!
 /jccp-5431-pro-se-leadership-order.html  /jccp-5431-pro-se-leadership-order  301!
@@ -27,6 +28,7 @@
 /nec-mdl-first-federal-jury.html  /nec-mdl-first-federal-jury  301!
 /otter-ai-cipa-ruling.html  /otter-ai-cipa-ruling  301!
 /pfas-rules-contracting.html  /pfas-rules-contracting  301!
+/social-media-insurers-plaintiffs-case.html  /social-media-insurers-plaintiffs-case  301!
 /state-ai-enforcement-tracker.html  /state-ai-enforcement-tracker  301!
 /video-game-addiction-docket.html  /video-game-addiction-docket  301!
 /welcome.html  /welcome  301!
@@ -37,6 +39,8 @@
 # and only sweeps exact self-pair rules, so these survive a regeneration.
 /mass-tort-map-2026       /mass-tort-map  301!
 /mass-tort-map-2026.html  /mass-tort-map  301!
+/social-media-addiction-insurance       /social-media-insurers-plaintiffs-case  301!
+/social-media-addiction-insurance.html  /social-media-insurers-plaintiffs-case  301!
 
 # masstortmap.com -> the map page. Requires both hostnames to be domain aliases
 # on this Netlify site. http and https each need their own rule.
