@@ -67,6 +67,7 @@ EPOCH_YEAR, EPOCH_MONTH = 2026, 5
 # real pages with a first-published date, but neither is an article: the
 # interviews hub re-lists every published interview and the author page is a
 # standing bio. Both advance with the calendar like the rest of this set.
+# archive re-lists every article by month and tracks the current issue.
 # mass-tort-wire is the standing page for the wire, which is a tool rather than
 # an article, so it carries no datePublished and tracks the current issue.
 # mass-tort-map and state-ai-enforcement-tracker are living pages: each
@@ -77,6 +78,7 @@ EPOCH_YEAR, EPOCH_MONTH = 2026, 5
 EVERGREEN = {
     "404.html",
     "about.html",
+    "archive.html",
     "contribute.html",
     "david-meldofsky.html",
     "editorial-standards.html",

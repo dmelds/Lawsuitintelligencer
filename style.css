@@ -348,6 +348,30 @@ select:focus-visible,
   margin-bottom: 12px;
 }
 
+.recent li.lead h3 {
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 14px;
+}
+
+.recent li.lead .dek {
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.recent li.lead {
+  padding-bottom: 40px;
+}
+
+.recent-more {
+  max-width: 920px;
+  margin: 40px auto 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule-soft);
+  text-align: center;
+}
+
 /* === COVERAGE === */
 
 .coverage {
@@ -693,6 +717,14 @@ select:focus-visible,
 
   .recent .dek {
     font-size: 16px;
+  }
+
+  .recent li.lead h3 {
+    font-size: 28px;
+  }
+
+  .recent li.lead .dek {
+    font-size: 17px;
   }
 
   .coverage {
