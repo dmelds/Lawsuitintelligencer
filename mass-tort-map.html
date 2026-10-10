@@ -415,7 +415,7 @@
                 <input type="search" id="li-board-q" placeholder="Search docket, defendant, court or judge" aria-label="Search the docket board">
                 <button type="button" class="li-chip" data-ty="MT" aria-pressed="true">Mass torts</button>
                 <button type="button" class="li-chip" data-ty="PL" aria-pressed="false">Products liability</button>
-                <button type="button" class="li-chip" data-ty="PI" aria-pressed="false">Assault &amp; injury</button>
+                <button type="button" class="li-chip" data-ty="PI" aria-pressed="false">Personal injury</button>
                 <button type="button" class="li-chip" data-ty="NEW" aria-pressed="false">New since June</button>
                 <button type="button" class="li-chip" data-ty="CO" aria-pressed="false">Commercial</button>
                 <button type="button" class="li-chip" data-ty="" aria-pressed="false">All 166</button>
@@ -1023,7 +1023,7 @@
           '<td class="li-spk">' + (r.s ? spark(r.s) : '') + '</td></tr>';
       }).join('');
       var distName = st.dist && D.seats[st.dist] ? D.seats[st.dist].abbr : '';
-      var what = st.ty === 'MT' ? ' mass tort dockets' : st.ty === 'PL' ? ' products liability dockets' : st.ty === 'PI' ? ' assault and injury dockets' : st.ty === 'CO' ? ' commercial dockets' : st.ty === 'NEW' ? ' mass tort dockets created since June' : ' dockets';
+      var what = st.ty === 'MT' ? ' mass tort dockets' : st.ty === 'PL' ? ' products liability dockets' : st.ty === 'PI' ? ' personal injury dockets filed under other headings' : st.ty === 'CO' ? ' commercial dockets' : st.ty === 'NEW' ? ' mass tort dockets created since June' : ' dockets';
       count.textContent = 'Showing ' + show.length + ' of ' + f.length + what + (distName ? ' in ' + distName : '') + ' · ' + fmt(tot) + ' pending actions on the Oct 1 report';
       if (f.length > 25) { more.hidden = false; more.textContent = st.all ? 'Show the top 25' : 'Show all ' + f.length; } else more.hidden = true;
       ths.forEach(function (th) { if (th.dataset.k === st.k) th.setAttribute('aria-sort', st.dir < 0 ? 'descending' : 'ascending'); else th.removeAttribute('aria-sort'); });
