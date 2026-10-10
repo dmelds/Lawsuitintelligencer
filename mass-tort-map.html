@@ -1095,7 +1095,7 @@
         var ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         ln.setAttribute('x1', s.x); ln.setAttribute('y1', s.y); ln.setAttribute('x2', q.x.toFixed(1)); ln.setAttribute('y2', q.y.toFixed(1)); ln.setAttribute('class', 'li-lead'); g.appendChild(ln);
         var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        dot.setAttribute('cx', s.x); dot.setAttribute('cy', s.y); dot.setAttribute('r', 2); dot.setAttribute('class', 'li-seat'); g.appendChild(dot);
+        dot.setAttribute('cx', s.x); dot.setAttribute('cy', s.y); dot.setAttribute('r', 1.6); dot.setAttribute('class', 'li-seat'); g.appendChild(dot);
       });
       list.slice().sort(function (a, b) { return R(b) - R(a); }).forEach(function (o) {
         var s = D.seats[o.code], q = pos[o.code]; if (!s) return;
@@ -1113,19 +1113,26 @@
       var collides = function (c, w, h, boxes) { return boxes.some(function (b) { return c.bx < b.bx + b.w + 4 && c.bx + w + 4 > b.bx && c.by < b.by + b.h + 2 && c.by + h + 2 > b.by; }); };
       list.filter(function (o) { return mob() ? (mode === 'p' ? o.p >= 8000 : o.n >= 9) : (mode === 'p' ? o.p >= 4000 : o.n >= 7); }).sort(function (a, b) { return R(b) - R(a); }).forEach(function (o) {
         var s = D.seats[o.code], q = pos[o.code], r = R(o), txt = s.abbr + ' ' + (mode === 'p' ? fmt(o.p) : o.n), w = txt.length * (mob() ? 15.5 : 8.6), h = mob() ? 28 : 16;
-        var cands = [
-          { x: q.x, y: q.y - r - 6, a: 'middle', bx: q.x - w / 2, by: q.y - r - 6 - h },
-          { x: q.x + r + 6, y: q.y + 5, a: 'start', bx: q.x + r + 6, by: q.y - h / 2 },
-          { x: q.x, y: q.y + r + 17, a: 'middle', bx: q.x - w / 2, by: q.y + r + 4 },
-          { x: q.x - r - 6, y: q.y + 5, a: 'end', bx: q.x - r - 6 - w, by: q.y - h / 2 },
-          { x: q.x + r * 0.75, y: q.y - r * 0.75 - 6, a: 'start', bx: q.x + r * 0.75, by: q.y - r * 0.75 - 6 - h },
-          { x: q.x - r * 0.75, y: q.y + r * 0.75 + 16, a: 'end', bx: q.x - r * 0.75 - w, by: q.y + r * 0.75 + 4 }
-        ].filter(function (c) { return c.bx >= 2 && c.bx + w <= 973 && c.by >= 2 && c.by + h <= 608; });
+        var cands = [];
+        [6, 24].forEach(function (off) {
+          var d = r + off;
+          cands.push({ x: q.x, y: q.y - d, a: 'middle', bx: q.x - w / 2, by: q.y - d - h });
+          cands.push({ x: q.x + d, y: q.y + 5, a: 'start', bx: q.x + d, by: q.y - h / 2 });
+          cands.push({ x: q.x, y: q.y + d + 11, a: 'middle', bx: q.x - w / 2, by: q.y + d - 2 });
+          cands.push({ x: q.x - d, y: q.y + 5, a: 'end', bx: q.x - d - w, by: q.y - h / 2 });
+          var k = d * 0.72;
+          cands.push({ x: q.x + k, y: q.y - k - 4, a: 'start', bx: q.x + k, by: q.y - k - 4 - h });
+          cands.push({ x: q.x - k, y: q.y - k - 4, a: 'end', bx: q.x - k - w, by: q.y - k - 4 - h });
+          cands.push({ x: q.x + k, y: q.y + k + 12, a: 'start', bx: q.x + k, by: q.y + k - 1 });
+          cands.push({ x: q.x - k, y: q.y + k + 12, a: 'end', bx: q.x - k - w, by: q.y + k - 1 });
+        });
+        cands = cands.filter(function (c) { return c.bx >= 2 && c.bx + w <= 973 && c.by >= 2 && c.by + h <= 608; });
         var ok = null;
-        // pass 1: clear of other labels and of every other bubble; pass 2: clear of other labels only
+        // pass 1: clear of other labels and every other bubble; pass 2: clear of labels and of any bubble big enough to carry text
         var others = bubBoxes.filter(function (b, i) { return list[i].code !== o.code; });
+        var bigOthers = bubBoxes.filter(function (b, i) { return list[i].code !== o.code && b.w > 22; });
         for (var ci = 0; ci < cands.length && !ok; ci++) if (!collides(cands[ci], w, h, placed) && !collides(cands[ci], w, h, others)) ok = cands[ci];
-        for (var cj = 0; cj < cands.length && !ok; cj++) if (!collides(cands[cj], w, h, placed)) ok = cands[cj];
+        for (var cj = 0; cj < cands.length && !ok; cj++) if (!collides(cands[cj], w, h, placed) && !collides(cands[cj], w, h, bigOthers)) ok = cands[cj];
         if (!ok) return;
         placed.push({ bx: ok.bx, by: ok.by, w: w, h: h });
         var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
