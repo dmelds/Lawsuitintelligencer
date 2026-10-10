@@ -91,6 +91,87 @@
     .li-stat .li-n .li-accent{color:var(--accent);}
     .li-stat .li-k{font-size:14px;color:var(--ink-soft);line-height:1.4;margin-top:10px;}
 
+
+    /* Interactive layer (map, board, trends, tooltips). Prefixed .li- like the rest. */
+    .li-tool{width:min(960px,calc(100vw - 32px));position:relative;left:50%;transform:translateX(-50%);}
+    .li-tool .li-fig-body{padding:16px 18px 10px;}
+    .li-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px;}
+    .li-ctl input[type=search]{font-family:var(--mono);font-size:12.5px;padding:7px 10px;border:1px solid var(--rule);
+      background:var(--bg);color:var(--ink);min-width:200px;flex:1 1 200px;}
+    .li-chip{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:6px 10px;
+      border:1px solid var(--rule);background:var(--bg);color:var(--ink-soft);cursor:pointer;line-height:1;border-radius:2px;}
+    .li-chip:hover{border-color:var(--ink);color:var(--ink);}
+    .li-chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+    .li-chip.li-chip-x{background:var(--accent);color:var(--bg);border-color:var(--accent);}
+    .li-chip-sw{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:currentColor;}
+    .li-chip[aria-pressed=true] .li-chip-sw{background:var(--bg);}
+    .li-count{font-family:var(--mono);font-size:11.5px;color:var(--ink-muted);margin:0 0 10px;}
+    .li-board th{cursor:pointer;user-select:none;white-space:nowrap;}
+    .li-board th[aria-sort]:after{content:"";display:inline-block;width:0;height:0;margin-left:6px;vertical-align:middle;
+      border-left:4px solid transparent;border-right:4px solid transparent;}
+    .li-board th[aria-sort=descending]:after{border-top:5px solid var(--ink);}
+    .li-board th[aria-sort=ascending]:after{border-bottom:5px solid var(--ink);}
+    table.li-board{min-width:780px;}
+    .li-board td{font-size:14.5px;padding:9px 8px;}
+    .li-board th{padding:9px 8px;}
+    .li-board td.li-t{min-width:190px;}
+    .li-board td.li-num,.li-board th.li-num{text-align:right;font-family:var(--mono);font-size:13px;white-space:nowrap;}
+    .li-board .li-mdl{font-family:var(--mono);font-size:12px;color:var(--ink-muted);white-space:nowrap;}
+    .li-board .li-ty{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;}
+    .li-board .li-court{font-size:13px;color:var(--ink-muted);min-width:150px;}
+    .li-board .li-court b{display:block;font-weight:500;color:var(--ink-soft);}
+    .li-board .li-new{color:var(--accent);font-family:var(--mono);font-size:12px;white-space:nowrap;}
+    .li-board td.li-spk{padding:6px 10px;}
+    .li-spk svg{display:block;width:84px;height:22px;min-width:84px;}
+    .li-spk polyline{fill:none;stroke:var(--ink-soft);stroke-width:1.6;}
+    .li-spk circle{fill:var(--accent);}
+    .li-more{display:block;width:100%;margin:12px 0 4px;padding:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+      text-transform:uppercase;background:var(--bg-alt);border:1px solid var(--rule);color:var(--ink);cursor:pointer;}
+    .li-more:hover{background:var(--rule-soft);}
+    table.li-table th.li-sortable{cursor:pointer;}
+    table.li-table th.li-sortable:hover{color:var(--ink);}
+    table.li-table th[aria-sort=descending]:after{content:" \25BE";}
+    table.li-table th[aria-sort=ascending]:after{content:" \25B4";}
+    .li-tip{position:fixed;z-index:50;pointer-events:none;max-width:280px;background:var(--ink);color:var(--bg);
+      font-family:var(--mono);font-size:12px;line-height:1.5;padding:8px 11px;border-radius:2px;
+      box-shadow:0 4px 14px rgba(0,0,0,.18);opacity:0;transition:opacity .08s;}
+    .li-tip.on{opacity:1;}
+    .li-tip b{color:#fff;font-weight:600;}
+    .li-tip small{color:#cfc5b2;display:block;}
+    .li-hit{cursor:pointer;}
+    .li-hit:hover,.li-hit:focus{opacity:.85;outline:none;}
+    .li-map svg{width:100%;height:auto;display:block;}
+    .li-map .li-nation{fill:var(--bg-alt);stroke:none;}
+    .li-map .li-borders{fill:none;stroke:#fffdf8;stroke-width:1.1;}
+    .li-map .li-outline{fill:none;stroke:var(--rule);stroke-width:1;}
+    .li-map .li-bub{fill:var(--accent);fill-opacity:.42;stroke:var(--accent);stroke-width:1.2;cursor:pointer;transition:fill-opacity .1s;}
+    .li-map .li-bub:hover,.li-map .li-bub:focus{fill-opacity:.75;outline:none;}
+    .li-map .li-bub.sel{fill:var(--ink);stroke:var(--ink);fill-opacity:.8;}
+    .li-map .li-mlbl{fill:var(--ink);font-family:var(--mono);font-size:15px;font-weight:600;pointer-events:none;
+      paint-order:stroke;stroke:#fffdf8;stroke-width:3px;stroke-linejoin:round;}
+    .li-map-legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-muted);margin:6px 0 0;}
+    .li-map-legend svg{width:230px;height:72px;}
+    .li-panel{margin:14px 0 4px;border-top:1px dotted var(--rule);padding-top:12px;}
+    .li-panel h4{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 8px;font-weight:600;}
+    .li-panel ol{margin:0;padding:0 0 0 2em;font-size:15px;color:var(--ink-soft);line-height:1.55;columns:2;column-gap:28px;}
+    .li-panel li{break-inside:avoid;}
+    .li-panel .li-num{font-family:var(--mono);font-size:12.5px;color:var(--ink-muted);}
+    .li-trend svg{width:100%;height:auto;display:block;}
+    .li-trend .li-tl{fill:none;stroke-width:2.2;stroke-linejoin:round;}
+    .li-trend .li-tl.dim{opacity:.25;}
+    .li-trend .li-cur{stroke:var(--ink-muted);stroke-width:1;stroke-dasharray:3 3;}
+    .li-trend .li-tdot{stroke:#fffdf8;stroke-width:1.5;}
+    .li-trend .li-tend{font-family:var(--mono);font-size:12.5px;font-weight:600;}
+    .li-note{font-family:var(--mono);font-size:11.5px;color:var(--ink-muted);line-height:1.55;margin:10px 0 4px;}
+    .li-nojs{font-family:var(--mono);font-size:12px;color:var(--ink-muted);padding:10px 0;}
+    @media (max-width:768px){
+      .li-panel ol{columns:1;}
+      .li-board td{font-size:14px;}
+      .li-map .li-mlbl{font-size:28px;}
+      .li-trend .li-axv{font-size:19px;}
+      .li-trend .li-tl{stroke-width:2.8;}
+      .li-trend .li-tend{font-size:16px;}
+    }
     @media (max-width:768px){
       .li-stats{grid-template-columns:1fr;}
       .li-fig-title{font-size:10.5px;}
@@ -104,7 +185,7 @@
     "headline":"The 2026 Mass Tort Map: Concentration, the Bellwether Turn, and Two Cracking Defenses",
     "description":"A data-driven map of the federal mass tort docket in 2026: extreme concentration in a handful of mega-dockets, the year bellwethers turned into verdicts, and the simultaneous erosion of Section 230 and bankruptcy as structural defenses.",
     "datePublished":"2026-05-30",
-    "dateModified":"2026-10-06",
+    "dateModified":"2026-10-10",
     "author":{
       "@type": "Person",
       "@id": "https://davidmeldofsky.com/#person",
@@ -152,11 +233,14 @@
           <h1>The 2026 Mass Tort Map</h1>
           <p class="article-dek">The federal docket has never been more concentrated, and 2026 is the year the procedural phase finally turned into verdicts. Two of the defense bar's most dependable shields are cracking at the same time: Section&nbsp;230 and bankruptcy.</p>
           <p class="article-meta">By <a href="david-meldofsky">David Meldofsky</a> &middot; May 30, 2026 &middot; 11 min read</p>
-          <p class="article-meta">Updated October 6, 2026, with the Panel&rsquo;s October&nbsp;2 orders from its September&nbsp;24 hearing: four new MDLs, among them separate spinal cord stimulator dockets for Abbott and Nevro and an Apple AirTag stalking docket, plus two refusals. Earlier October updates added the JPML&rsquo;s October&nbsp;1 counts, the fastest-growing and newest-MDL tables, the Ninth Circuit&rsquo;s Section&nbsp;230 ruling, Meta&rsquo;s settlement with 47 states, and the J&amp;J and Pfizer settlement terms.</p>
+          <p class="article-meta">Updated October 10, 2026, with three interactive layers drawn from the JPML&rsquo;s monthly reports. The layers are a district map of every pending MDL, a sortable board of all 162 dockets with month-over-month change, and trend lines for 34 tracked dockets back to February&nbsp;2025. The October&nbsp;6 update added the Panel&rsquo;s October&nbsp;2 orders from its September&nbsp;24 hearing: four new MDLs, among them separate spinal cord stimulator dockets for Abbott and Nevro and an Apple AirTag stalking docket, plus two refusals. Earlier October updates added the JPML&rsquo;s October&nbsp;1 counts, the fastest-growing and newest-MDL tables, the Ninth Circuit&rsquo;s Section&nbsp;230 ruling, Meta&rsquo;s settlement with 47 states, and the J&amp;J and Pfizer settlement terms.</p>
         </header>
 
         <nav class="li-jump" aria-label="Jump to the October data tables">
           <span class="li-jump-k">Current data &middot; Oct&nbsp;1 JPML report</span>
+          <a href="#district-map">District map &rarr;</a>
+          <a href="#docket-board">Docket board &rarr;</a>
+          <a href="#trend-lines">Trend lines &rarr;</a>
           <a href="#fastest-growing">Fastest-growing dockets &rarr;</a>
           <a href="#newest-mdls">Newest MDLs &rarr;</a>
           <a href="#sources-and-method">Sources &amp; method &rarr;</a>
@@ -182,7 +266,7 @@
 
           <p>Dockets carrying 1,000 or more pending actions make up only about an eighth of all active MDLs, yet they hold the overwhelming majority of the cases. The concentration is not a quirk of one big year; it is the structural fact that shapes leadership appointments, settlement leverage, and where the plaintiff bar spends its advertising dollars.</p>
 
-          <div class="li-fig" role="img" aria-label="Concentration bar chart: MDLs with 1,000-plus pending actions are about 13 percent of dockets but about 94.6 percent of all pending actions.">
+          <div class="li-fig" data-fig="1" role="img" aria-label="Concentration bar chart: MDLs with 1,000-plus pending actions are about 13 percent of dockets but about 94.6 percent of all pending actions.">
             <div class="li-fig-head">
               <span class="li-fig-num">Fig. 1</span>
               <span class="li-fig-title">Docket concentration &middot; mega-MDLs (1,000+ cases)</span>
@@ -213,7 +297,7 @@
 
           <p>Within that top tier, one docket dominates everything else. Johnson &amp; Johnson's talc litigation alone accounts for roughly a third of all pending federal MDL actions, more than the next several dockets combined, which is why a single bankruptcy ruling in Texas can move the entire system's case count.</p>
 
-          <div class="li-fig" role="img" aria-label="Horizontal bar chart of the ten largest product-liability MDLs by pending actions as of October 1, 2026. J&J talc leads at 69,340, far ahead of Bard hernia mesh at 23,324 and AFFF at 15,264.">
+          <div class="li-fig" data-fig="2" role="img" aria-label="Horizontal bar chart of the ten largest product-liability MDLs by pending actions as of October 1, 2026. J&J talc leads at 69,340, far ahead of Bard hernia mesh at 23,324 and AFFF at 15,264.">
             <div class="li-fig-head">
               <span class="li-fig-num">Fig. 2</span>
               <span class="li-fig-title">Ten largest product-liability MDLs &middot; pending actions</span>
@@ -269,6 +353,76 @@
             <p class="li-fig-cap">Pending actions, JPML report of October&nbsp;1,&nbsp;2026. Uber passenger assault enters the top ten this month and pushes Paragard, at 4,224, out of it. The dockets drawing the most attention still sit below both: Bard PowerPort at 4,140, GLP-1 at 4,025 and social media at 3,824. Counts are point-in-time and shift monthly; confirm against the current report before citing.</p>
           </div>
 
+                    <p>The same 204,977 actions can be read by courthouse. Fifty districts hold at least one MDL. Four of them hold the mass of the system. New Jersey carries talc and proton-pump inhibitors. Southern Ohio carries Bard hernia mesh, South Carolina carries AFFF, and Northern Illinois carries hair relaxer. The Northern District of California holds the most dockets, nineteen, and its share is built from the platform and rideshare cases that are growing fastest. Hover a district for its totals. Click one to list its dockets and filter the board below to that court.</p>
+
+          <div class="li-fig li-tool li-map" id="district-map">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Interactive &middot; A</span>
+              <span class="li-fig-title">Where the dockets sit &middot; pending MDLs by district, October&nbsp;1, 2026</span>
+            </div>
+            <div class="li-fig-body">
+              <div class="li-ctl" role="group" aria-label="Size bubbles by">
+                <button type="button" class="li-chip" data-mapmode="p" aria-pressed="true">Size by pending actions</button>
+                <button type="button" class="li-chip" data-mapmode="n" aria-pressed="false">Size by number of MDLs</button>
+                <button type="button" class="li-chip li-chip-x" data-mapclear hidden>Clear district &times;</button>
+              </div>
+              <svg viewBox="0 0 975 610" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bubble map of the United States. Each bubble is a federal district holding at least one MDL, sized by pending actions. The largest bubble is the District of New Jersey at 84,916 pending actions across 12 MDLs.">
+                <path class="li-nation" d="M647.9,492.4L647.9,492.4M104.1,551.6L104.1,551.6M99.1,569.8L103.4,565.2L104.6,569.0L99.1,569.8M95.0,582.0L95.0,582.0M93.3,575.4L98.9,570.6L104.5,573.3L95.3,579.5L93.3,575.4M93.1,582.8L93.1,582.8M88.8,587.6L88.8,587.6M71.7,593.6L71.7,593.6M71.0,591.6L71.0,591.6M68.1,593.4L68.1,593.4M65.7,590.1L65.7,590.1M67.5,564.1L67.5,564.1M60.8,591.2L60.8,591.2M58.2,592.3L58.2,592.3M66.1,523.9L66.1,523.9M55.9,595.9L55.9,595.9M44.6,596.9L44.6,596.9M42.6,595.4L42.6,595.4M40.6,595.9L40.6,595.9M44.1,547.4L49.5,546.6L48.3,552.0L44.1,547.4M31.2,600.7L37.9,596.4L36.5,600.8L31.2,600.7M50.7,504.5L65.6,499.7L65.2,503.9L74.2,503.6L73.2,497.5L66.5,495.5L66.2,492.2L59.3,484.4L61.5,480.7L67.1,481.3L75.2,471.3L86.6,468.1L89.3,465.0L95.1,468.7L101.4,468.7L104.4,472.1L108.9,470.7L122.5,473.6L126.0,471.6L132.8,474.4L147.2,547.0L154.5,547.2L163.6,554.7L169.4,545.8L180.7,553.8L192.6,565.1L200.0,566.5L202.9,572.6L201.4,577.9L192.7,573.6L188.2,565.3L183.2,563.4L178.2,556.5L171.3,551.1L172.6,556.5L167.9,559.3L160.0,554.4L150.9,551.2L140.5,549.9L135.3,551.6L125.6,547.4L119.2,547.1L121.0,552.8L113.5,554.3L108.8,560.3L104.8,560.2L106.3,546.2L100.4,556.9L96.1,559.5L99.5,563.5L95.7,569.3L89.8,572.0L76.6,585.8L46.7,594.8L48.5,591.6L56.5,590.1L61.9,585.1L66.4,584.5L80.9,573.4L83.9,563.1L75.7,566.2L71.0,560.6L64.7,564.1L65.8,556.7L63.8,551.0L58.3,553.3L52.6,546.6L51.0,538.2L60.6,525.7L64.3,527.8L73.0,523.1L72.5,513.9L67.6,516.5L55.2,514.1L55.8,508.6L50.7,504.5M24.8,603.0L24.8,603.0M28.4,573.2L28.4,573.2M20.4,602.1L20.4,602.1M26.8,568.3L26.8,568.3M16.0,603.0L16.0,603.0M34.4,517.7L39.4,517.8L44.8,522.4L40.8,524.4L34.4,517.7M7.0,603.0L7.0,603.0M23.4,539.8L23.4,539.8M-0.0,602.2L-0.0,602.2M-6.2,601.1L-6.2,601.1M-10.1,599.3L-10.1,599.3M-10.9,601.2L-10.9,601.2M-15.0,601.4L-15.0,601.4M-18.1,599.6L-18.1,599.6M-20.0,597.4L-20.0,597.4M-30.2,592.5L-30.2,592.5M-35.1,593.3L-35.1,593.3M-40.7,588.5L-40.7,588.5M-55.8,576.5L-55.8,576.5M-57.6,570.8L-57.6,570.8M197.3,577.4L197.3,577.4M196.4,577.0L196.4,577.0M194.6,574.8L194.6,574.8M187.5,570.0L187.5,570.0M187.0,569.1L187.0,569.1M186.2,576.9L186.2,576.9M184.9,573.0L186.7,569.5L194.3,575.8L195.6,580.1L184.9,573.0M182.6,574.2L182.6,574.2M180.3,567.1L185.3,564.2L188.7,566.6L180.3,567.1M174.5,555.9L178.2,556.8L181.3,562.5L179.5,565.8L174.5,555.9M173.8,564.7L177.2,563.4L180.8,572.6L173.8,564.7M173.4,565.8L173.4,565.8M169.1,561.4L171.5,557.7L177.1,562.6L173.8,564.7L169.1,561.4M120.8,555.0L120.8,555.0M120.3,551.4L120.3,551.4M814.5,594.4L814.5,594.4M812.7,595.9L812.7,595.9M807.4,599.0L807.4,599.0M793.7,604.2L800.4,597.6L805.0,600.1L793.7,604.2M789.5,605.4L789.5,605.4M786.4,605.4L786.4,605.4M777.4,558.3L777.4,558.3M770.2,606.1L770.2,606.1M720.4,495.2L720.4,495.2M939.7,114.8L939.7,114.8M937.9,116.1L937.9,116.1M936.3,112.2L936.3,112.2M932.1,116.0L932.1,116.0M933.5,124.7L933.5,124.7M931.3,119.2L931.3,119.2M930.1,116.2L930.1,116.2M927.6,186.7L927.6,186.7M918.3,188.3L921.2,184.4L924.5,186.7L918.3,188.3M864.2,329.1L864.2,329.1M863.3,349.6L863.3,349.6M77.1,374.3L77.1,374.3M74.7,384.2L74.7,384.2M65.1,358.3L65.1,358.3M58.2,374.3L58.2,374.3M56.6,355.0L56.6,355.0M50.2,355.1L50.2,355.1M46.8,353.4L46.8,353.4M305.4,584.4L310.3,577.8L309.7,572.5L322.2,578.2L326.0,584.4L332.0,589.1L328.5,593.2L317.3,598.1L313.7,603.1L309.2,600.4L309.1,593.6L305.4,584.4M291.6,557.9L293.9,555.3L306.4,560.7L305.4,563.9L298.5,565.6L291.6,557.9M291.5,566.6L291.5,566.6M283.8,558.2L283.8,558.2M278.6,553.8L279.6,551.1L291.4,552.5L287.8,555.0L278.6,553.8M258.0,543.0L264.6,540.0L271.3,549.3L261.5,549.2L258.0,543.0M226.0,532.6L230.9,528.2L235.4,528.5L235.7,534.2L229.9,535.7L226.0,532.6M216.3,536.5L216.3,536.5M847.2,281.4L847.2,281.4M677.0,130.8L677.0,130.8M663.4,133.1L663.4,133.1M662.3,138.5L662.3,138.5M660.8,135.5L660.8,135.5M658.7,142.4L658.7,142.4M656.5,149.6L656.5,149.6M655.4,152.7L655.4,152.7M645.5,139.8L645.5,139.8M601.3,92.3L610.0,85.8L610.1,88.6L601.3,92.3M644.4,493.1L644.4,493.1M639.3,492.8L639.3,492.8M635.1,493.8L635.1,493.8M631.7,493.5L631.7,493.5M899.2,195.6L899.2,195.6M896.7,198.0L896.7,198.0M815.5,153.8L815.5,153.8M814.1,153.7L814.1,153.7M720.6,223.0L720.6,223.0M718.6,222.2L718.6,222.2M848.9,285.1L849.8,284.9L848.9,285.1M93.2,50.8L93.2,50.8M98.7,24.5L98.7,24.5M98.8,20.3L98.8,20.3M97.6,23.4L97.6,23.4M95.0,31.0L95.0,31.0M95.5,17.9L95.5,17.9M93.6,19.5L93.6,19.5M95.2,12.9L95.2,12.9M91.0,21.2L98.1,21.7L95.6,26.6L91.0,21.2M91.1,19.0L91.1,19.0M641.9,146.2L641.9,146.2M635.6,150.3L635.6,150.3M584.0,113.2L584.0,113.2M583.2,116.1L583.2,116.1M581.2,115.1L581.2,115.1M579.6,117.2L579.6,117.2M579.7,114.3L579.7,114.3M579.1,113.0L579.1,113.0M579.2,118.4L579.2,118.4M576.0,114.0L576.0,114.0M637.5,497.3L637.5,497.3M628.5,497.9L628.5,497.9M623.7,510.1L623.7,510.1M609.5,520.7L609.5,520.7M605.9,521.2L605.9,521.2M602.1,522.3L602.1,522.3M576.5,511.4L576.5,511.4M908.4,188.4L908.4,188.4M906.7,195.9L906.7,195.9M901.7,193.4L893.4,197.0L884.7,198.3L874.0,208.3L890.9,204.2L894.6,199.5L899.5,201.7L885.7,212.9L871.6,219.2L869.1,216.3L868.9,217.1L866.5,221.4L871.4,222.4L873.1,237.2L865.3,257.1L858.5,254.2L849.3,246.3L849.1,245.8L849.7,244.3L849.3,249.3L854.7,258.0L861.2,262.6L863.7,270.2L862.5,280.4L858.3,288.2L856.5,301.3L852.6,300.6L852.8,292.0L855.4,283.8L851.6,285.2L847.6,275.5L845.5,279.1L841.3,274.1L846.3,271.3L839.0,266.2L841.5,251.7L836.7,254.0L837.9,262.7L836.2,268.7L843.7,284.1L834.6,281.5L829.8,277.6L826.9,280.1L827.0,273.7L824.5,278.6L829.6,278.7L831.8,282.6L838.1,282.8L845.9,287.3L849.1,305.4L846.3,310.4L854.8,308.3L858.8,315.9L855.9,317.4L859.3,322.9L847.3,332.7L855.9,329.5L863.2,329.3L865.6,334.5L859.7,344.3L843.0,343.4L854.2,347.0L850.4,355.8L859.1,353.5L855.6,361.1L851.3,360.8L843.8,364.5L834.4,376.6L833.4,384.0L822.7,386.1L816.3,392.2L813.5,403.5L800.6,418.9L792.1,423.7L792.9,426.8L786.1,434.5L782.5,442.3L781.3,454.4L778.2,460.1L780.1,466.0L787.0,486.2L794.9,499.6L806.0,513.6L806.6,521.8L820.0,544.3L822.8,554.1L823.8,574.5L819.7,586.0L806.9,589.7L800.6,577.8L791.9,575.3L785.4,563.2L777.5,556.8L766.4,542.8L771.1,533.2L764.6,529.8L767.3,534.2L764.7,537.1L761.8,533.4L763.5,517.1L758.8,505.0L755.0,504.8L746.0,498.3L740.3,490.6L732.1,486.7L727.4,487.4L713.6,500.7L707.4,499.8L705.7,493.6L695.8,488.3L680.6,485.8L663.7,490.0L655.9,487.8L653.3,481.7L651.5,490.1L646.4,489.4L636.1,489.7L624.7,495.4L619.2,498.9L623.7,502.2L625.7,497.6L628.2,501.2L627.3,507.1L622.8,507.7L626.2,513.3L632.4,513.8L634.1,521.7L623.8,515.7L619.7,515.3L612.5,521.1L608.1,515.4L600.9,522.7L590.3,517.4L584.2,507.8L578.8,505.8L570.5,513.0L553.5,508.2L540.6,510.3L534.8,511.4L522.4,517.4L523.6,509.1L518.3,510.5L519.9,519.4L523.1,518.8L510.3,529.5L491.9,539.1L480.2,548.3L480.3,546.1L489.2,541.3L484.3,541.9L477.4,546.5L469.3,564.2L467.8,575.8L471.4,591.7L474.4,595.1L466.6,596.5L464.0,593.4L451.7,592.0L440.1,585.0L434.3,583.6L431.4,574.1L427.9,569.9L427.6,559.4L419.8,552.0L418.9,547.9L412.0,540.7L405.1,521.7L390.3,505.7L377.7,504.6L366.4,505.4L361.0,517.2L356.7,521.5L337.1,510.9L329.9,503.6L328.1,491.9L322.9,479.9L315.7,475.3L306.2,462.7L301.6,459.9L296.2,452.0L264.2,448.2L262.9,458.3L246.8,456.2L208.1,450.4L171.7,429.4L142.3,411.7L145.0,407.0L99.4,401.6L97.9,398.1L98.7,387.7L96.5,382.2L86.4,369.8L82.1,369.2L81.6,362.4L76.3,361.7L69.7,356.7L65.0,349.2L48.8,344.2L46.4,340.4L49.7,328.1L45.9,324.5L47.3,321.2L41.5,313.2L34.8,296.1L36.2,288.9L39.6,285.9L31.4,274.2L33.2,260.8L38.4,270.1L35.8,257.2L33.2,259.9L29.3,254.5L27.0,243.0L20.1,228.9L24.0,209.1L18.4,197.1L18.9,193.0L26.6,183.7L31.2,172.8L32.5,159.9L31.0,156.6L33.6,146.4L32.8,139.9L45.3,120.6L57.1,92.4L64.9,70.5L70.9,70.2L65.8,69.1L64.1,65.1L65.9,57.2L70.7,53.9L66.9,51.0L67.5,34.1L66.4,23.4L69.7,20.1L76.9,27.1L90.1,33.0L94.6,32.8L96.5,39.0L92.4,52.3L96.1,51.9L97.9,41.7L101.7,37.5L100.8,27.0L102.3,20.9L100.0,14.3L140.0,25.3L183.5,35.9L198.0,39.0L232.8,46.1L265.4,51.8L302.7,57.4L340.3,62.1L376.8,65.6L404.3,67.7L444.8,69.8L479.4,70.6L510.7,70.7L510.7,62.1L515.6,64.1L520.1,77.3L530.7,78.7L531.5,81.2L540.3,78.2L563.3,87.3L565.8,90.7L576.6,85.7L578.0,88.8L587.6,87.9L596.1,90.7L581.9,97.5L558.9,119.3L560.2,121.1L568.0,119.6L576.1,115.0L580.1,120.4L585.3,123.0L593.8,117.3L600.5,115.7L618.5,100.5L624.3,99.6L615.4,111.7L628.2,114.3L633.0,120.8L643.6,121.3L651.8,115.2L661.9,113.9L669.9,111.0L669.7,117.6L676.4,118.3L683.4,114.8L684.4,121.4L694.0,127.5L681.2,128.7L676.4,126.5L674.2,130.9L671.1,128.2L662.8,127.2L660.9,130.3L652.5,131.2L637.8,139.6L632.4,153.0L629.0,156.5L626.1,165.6L628.0,166.1L635.7,157.0L641.6,147.6L635.4,165.1L635.3,173.6L632.4,180.7L633.3,185.2L630.8,195.3L634.1,205.6L634.1,212.3L633.9,216.7L640.3,229.8L647.2,230.6L651.9,227.5L658.6,215.5L659.9,204.7L658.8,198.0L652.3,184.2L651.8,174.8L655.1,167.9L654.9,159.7L661.1,153.5L663.5,147.8L663.9,155.9L667.7,153.2L667.2,145.5L674.1,141.9L670.4,138.3L675.3,132.7L684.5,135.1L686.6,137.8L696.7,139.9L701.2,146.9L698.7,148.9L702.1,153.9L702.3,162.4L699.1,169.4L695.4,171.4L694.1,177.1L698.9,180.1L704.6,170.6L709.8,167.6L715.2,172.4L721.5,191.1L720.9,199.8L716.2,199.3L715.1,206.5L708.2,221.7L717.6,225.4L719.0,223.5L725.5,227.4L732.9,223.2L737.5,223.2L748.4,213.0L756.1,208.9L767.5,200.2L776.4,192.1L780.3,186.0L774.8,175.9L783.7,171.7L795.7,170.3L799.7,171.9L809.0,169.2L819.3,161.0L814.7,150.3L814.9,146.4L820.4,141.2L828.6,127.9L832.2,124.3L857.5,117.8L886.1,110.5L886.6,105.2L890.8,102.3L894.2,99.2L900.0,86.1L898.1,82.5L899.9,73.8L899.0,67.4L905.9,47.6L912.4,52.2L922.6,45.8L929.7,49.7L938.7,79.8L944.5,79.8L946.1,86.9L951.9,88.0L957.0,94.7L952.7,98.6L950.2,105.5L946.7,104.2L943.8,110.3L938.9,113.6L937.2,109.7L935.7,117.5L931.0,110.0L930.1,122.8L918.0,130.9L912.7,138.3L910.1,150.1L909.4,154.7L914.3,158.4L909.4,165.7L917.0,171.2L921.7,177.7L930.9,176.7L920.0,183.3L917.8,179.3L912.7,186.3L910.5,182.7L909.8,182.1L906.7,181.2L907.6,190.7L901.7,193.4"/>
+                <path class="li-borders" d="M646.4,489.4L642.1,455.0L643.6,386.1L641.6,383.9L689.2,379.6L702.4,427.0L709.5,439.9L705.9,450.0L708.6,457.1L708.2,464.7L710.7,468.7L660.7,473.9L666.2,486.4L663.7,490.0M145.0,407.0L148.8,406.9L150.1,400.8L147.4,400.0L148.0,391.6L152.3,389.0L153.8,380.4L162.7,373.6L159.8,369.6L156.8,356.1L159.9,331.0L166.5,331.4L169.9,334.9L172.6,331.4L176.0,313.3L239.3,324.2L264.6,327.9L246.8,456.2M710.7,468.7L714.2,474.9L765.7,471.4L769.6,475.6L768.7,466.0L780.1,466.0M689.2,379.6L712.7,376.8L734.8,373.6L731.6,381.5L741.0,385.3L748.3,396.1L761.9,405.8L765.6,411.7L771.2,414.4L773.9,422.7L786.1,434.5M651.9,227.5L685.6,223.9L685.8,225.3L692.5,284.2L693.5,291.5L682.5,295.0L683.6,298.2L677.0,305.1L674.1,312.8L668.6,308.8L665.9,314.2L660.7,313.4L655.3,318.6L646.7,315.0L639.3,319.7L637.9,317.4L646.5,298.4L643.4,287.9L645.0,283.6L640.3,229.8M393.8,271.8L422.4,273.4L464.7,274.8L509.9,275.2L516.4,277.6L513.5,285.7L518.5,293.2L522.3,295.2L522.8,343.8L489.0,343.9L432.5,342.7L389.6,340.6M910.1,150.1L904.5,145.1L890.8,102.3M909.8,182.1L905.4,176.0L898.7,178.0L871.1,183.9L870.9,167.6L884.0,164.8L902.9,160.6L909.4,154.7M912.7,186.3L910.5,182.7M560.2,121.1L555.9,122.2L556.4,135.6L551.0,139.0L547.5,147.2L551.2,149.8L549.7,153.6L549.3,165.9L563.9,174.8L564.8,177.8L572.2,182.1L576.3,193.2L549.2,194.4L490.5,195.2L490.7,154.3L484.4,147.3L489.1,139.8L488.6,130.9L485.5,123.3L484.9,102.4L480.5,89.3L481.3,77.7L479.4,70.6M849.7,244.3L850.7,241.4L860.6,230.8L853.7,226.3L849.9,220.7L849.6,213.8L854.9,204.0L870.0,208.9L869.1,216.3M868.9,217.1L866.5,221.4M849.3,246.3L849.1,245.8M712.7,376.8L712.6,371.3L717.2,369.1L721.0,362.5L726.2,361.7L737.7,350.1L740.8,350.5L747.2,345.2L750.7,345.5L755.5,333.9L780.3,331.0L812.0,325.5L858.8,315.9M822.7,386.1L798.1,368.4L777.6,371.4L771.9,364.7L749.4,367.0L734.8,373.6M489.1,139.8L459.8,139.3L412.4,137.2L371.0,134.3L376.8,65.6M522.8,343.8L522.9,355.2L526.7,380.5L526.4,420.7L519.5,418.4L512.4,413.4L499.2,415.2L491.5,419.7L481.1,413.7L476.0,418.5L466.5,412.6L461.6,412.5L453.9,408.5L451.6,410.6L438.3,403.9L429.3,402.6L423.9,398.2L425.7,353.9L371.6,350.7L372.4,339.3M767.5,200.2L768.5,206.3L800.3,200.5L840.8,192.1L847.1,196.5L849.6,202.3L854.9,204.0M850.7,241.4L844.8,244.5L816.4,250.5L782.2,256.8L764.5,259.8L761.1,239.1L756.1,208.9M490.5,195.2L488.2,195.2L490.8,203.8L487.5,211.9L490.6,218.2L476.4,209.5L467.0,209.5L465.7,211.5L456.7,206.1L403.7,203.9L365.2,201.0L369.0,155.7L371.0,134.3M526.4,420.7L534.7,422.5L535.0,434.6L535.4,457.9L539.8,462.9L539.5,466.9L545.4,476.2L545.5,484.4L542.3,490.2L543.0,502.0L538.8,507.4L540.6,510.3M296.2,452.0L295.1,446.9L338.7,451.3L362.8,453.2L366.6,407.5L370.9,350.7L371.6,350.7M365.2,201.0L361.4,246.5M277.0,237.1L333.1,243.9L361.4,246.5L395.3,249.0L393.8,271.8L389.6,340.6L372.4,339.3L348.5,337.5L315.2,334.3L264.6,327.9L268.3,298.9L277.0,237.1L243.5,232.2L247.1,209.5L256.0,153.8L257.8,142.0L298.3,147.9L339.2,152.9L369.0,155.7M898.7,178.0L901.7,193.4M874.0,208.3L874.1,200.9L871.1,183.9M509.9,275.2L502.0,261.8L521.3,262.0L544.8,261.2L570.9,259.5L576.4,264.7L575.5,272.5L578.0,279.5L589.7,289.8L591.3,297.2L600.9,298.4L597.6,313.2L614.0,326.3L613.7,333.4L621.1,339.9L620.1,349.4L616.8,351.3L615.6,351.4L614.6,351.5L611.9,363.1L600.2,363.9L605.1,357.3L603.6,352.2L549.9,354.6L522.9,355.2M782.2,256.8L784.1,268.5L794.3,257.4L800.3,258.2L804.5,253.3L813.9,260.3L812.8,264.9L802.5,259.1L802.8,266.0L796.5,276.6L794.0,275.0L790.3,285.9L783.7,282.8L779.9,297.4L775.9,305.1L776.5,309.2L761.2,318.0L749.9,318.6L747.1,313.2L740.9,311.0L733.7,301.6L733.2,294.7L737.8,293.4L738.5,285.3L741.4,279.5L743.9,282.7L746.3,273.0L753.6,269.4L757.8,263.4L760.9,246.6L761.1,239.1M576.4,264.7L577.4,259.3L581.2,257.7L583.6,247.8L581.5,240.7L593.2,236.0L595.5,223.8L587.0,215.3L634.1,212.3M639.3,319.7L639.0,327.2L632.2,329.8L631.5,337.1L624.3,334.0L621.1,339.9M611.9,363.1L612.6,367.2L604.6,377.6L607.1,383.1L602.8,386.7L598.4,393.0L598.6,400.3L595.3,401.6L593.3,409.4L589.7,410.8L591.7,415.1L587.5,420.3L590.7,429.7L589.3,433.0L535.0,434.6M32.5,159.9L83.6,174.7L100.4,179.1L83.2,245.5L156.8,356.1M863.7,270.2L852.5,272.5L844.8,244.5M576.3,193.2L579.2,198.7L577.4,201.6L579.9,210.5L587.0,215.3M502.0,261.8L496.8,233.9L490.6,218.2M692.5,284.2L698.5,283.2L703.8,289.8L713.8,292.6L720.6,292.4L726.9,287.9L733.2,294.7M747.1,313.2L741.1,320.4L735.1,324.6L728.9,334.2L719.7,338.7L704.2,340.7L672.0,343.1L644.7,346.0L641.4,349.5L616.8,351.3M615.6,351.4L614.6,351.5M849.8,284.9L848.9,285.1M862.5,280.4L855.4,283.8M827.0,273.7L827.9,269.9M825.8,266.9L827.9,269.9L825.8,266.9L813.9,260.3M708.2,221.7L685.8,225.3M632.4,153.0L630.9,147.5L627.3,147.0L628.2,140.2L622.6,135.0L611.9,133.7L606.7,131.3L590.2,127.9L585.3,123.0M602.8,386.7L641.6,383.9M624.7,495.4L617.6,484.9L619.0,477.0L582.5,479.1L584.3,466.9L595.3,448.2L590.9,444.9L591.3,435.6L589.3,433.0M256.0,153.8L252.5,147.5L249.6,151.0L236.6,148.4L234.6,150.9L224.8,149.1L224.0,141.5L219.3,138.5L214.5,118.2L208.0,122.6L205.1,119.7L208.6,113.6L208.1,109.0L213.4,96.2L208.8,95.5L200.8,79.7L195.2,74.2L196.8,68.7L193.2,61.5L198.0,39.0M884.0,164.8L882.2,163.3L880.5,145.7L883.1,132.9L881.8,127.9L887.9,122.0L886.1,110.5M857.5,117.8L862.0,133.9L861.2,139.5L863.6,148.5L867.0,150.2L870.9,167.6M70.9,70.2L76.9,73.7L80.1,79.9L78.9,86.8L86.1,91.4L98.1,90.6L102.8,94.6L112.0,93.8L138.7,94.7L170.5,102.3L175.6,112.3L157.4,136.6L161.6,143.2L157.9,150.4L148.8,190.7L100.4,179.1M719.7,338.7L755.5,333.9M176.0,313.3L197.7,201.0L247.1,209.5M183.5,35.9L170.7,92.4L170.5,102.3M197.7,201.0L148.8,190.7"/>
+                <path class="li-outline" d="M647.9,492.4L647.9,492.4M104.1,551.6L104.1,551.6M99.1,569.8L103.4,565.2L104.6,569.0L99.1,569.8M95.0,582.0L95.0,582.0M93.3,575.4L98.9,570.6L104.5,573.3L95.3,579.5L93.3,575.4M93.1,582.8L93.1,582.8M88.8,587.6L88.8,587.6M71.7,593.6L71.7,593.6M71.0,591.6L71.0,591.6M68.1,593.4L68.1,593.4M65.7,590.1L65.7,590.1M67.5,564.1L67.5,564.1M60.8,591.2L60.8,591.2M58.2,592.3L58.2,592.3M66.1,523.9L66.1,523.9M55.9,595.9L55.9,595.9M44.6,596.9L44.6,596.9M42.6,595.4L42.6,595.4M40.6,595.9L40.6,595.9M44.1,547.4L49.5,546.6L48.3,552.0L44.1,547.4M31.2,600.7L37.9,596.4L36.5,600.8L31.2,600.7M50.7,504.5L65.6,499.7L65.2,503.9L74.2,503.6L73.2,497.5L66.5,495.5L66.2,492.2L59.3,484.4L61.5,480.7L67.1,481.3L75.2,471.3L86.6,468.1L89.3,465.0L95.1,468.7L101.4,468.7L104.4,472.1L108.9,470.7L122.5,473.6L126.0,471.6L132.8,474.4L147.2,547.0L154.5,547.2L163.6,554.7L169.4,545.8L180.7,553.8L192.6,565.1L200.0,566.5L202.9,572.6L201.4,577.9L192.7,573.6L188.2,565.3L183.2,563.4L178.2,556.5L171.3,551.1L172.6,556.5L167.9,559.3L160.0,554.4L150.9,551.2L140.5,549.9L135.3,551.6L125.6,547.4L119.2,547.1L121.0,552.8L113.5,554.3L108.8,560.3L104.8,560.2L106.3,546.2L100.4,556.9L96.1,559.5L99.5,563.5L95.7,569.3L89.8,572.0L76.6,585.8L46.7,594.8L48.5,591.6L56.5,590.1L61.9,585.1L66.4,584.5L80.9,573.4L83.9,563.1L75.7,566.2L71.0,560.6L64.7,564.1L65.8,556.7L63.8,551.0L58.3,553.3L52.6,546.6L51.0,538.2L60.6,525.7L64.3,527.8L73.0,523.1L72.5,513.9L67.6,516.5L55.2,514.1L55.8,508.6L50.7,504.5M24.8,603.0L24.8,603.0M28.4,573.2L28.4,573.2M20.4,602.1L20.4,602.1M26.8,568.3L26.8,568.3M16.0,603.0L16.0,603.0M34.4,517.7L39.4,517.8L44.8,522.4L40.8,524.4L34.4,517.7M7.0,603.0L7.0,603.0M23.4,539.8L23.4,539.8M-0.0,602.2L-0.0,602.2M-6.2,601.1L-6.2,601.1M-10.1,599.3L-10.1,599.3M-10.9,601.2L-10.9,601.2M-15.0,601.4L-15.0,601.4M-18.1,599.6L-18.1,599.6M-20.0,597.4L-20.0,597.4M-30.2,592.5L-30.2,592.5M-35.1,593.3L-35.1,593.3M-40.7,588.5L-40.7,588.5M-55.8,576.5L-55.8,576.5M-57.6,570.8L-57.6,570.8M197.3,577.4L197.3,577.4M196.4,577.0L196.4,577.0M194.6,574.8L194.6,574.8M187.5,570.0L187.5,570.0M187.0,569.1L187.0,569.1M186.2,576.9L186.2,576.9M184.9,573.0L186.7,569.5L194.3,575.8L195.6,580.1L184.9,573.0M182.6,574.2L182.6,574.2M180.3,567.1L185.3,564.2L188.7,566.6L180.3,567.1M174.5,555.9L178.2,556.8L181.3,562.5L179.5,565.8L174.5,555.9M173.8,564.7L177.2,563.4L180.8,572.6L173.8,564.7M173.4,565.8L173.4,565.8M169.1,561.4L171.5,557.7L177.1,562.6L173.8,564.7L169.1,561.4M120.8,555.0L120.8,555.0M120.3,551.4L120.3,551.4M814.5,594.4L814.5,594.4M812.7,595.9L812.7,595.9M807.4,599.0L807.4,599.0M793.7,604.2L800.4,597.6L805.0,600.1L793.7,604.2M789.5,605.4L789.5,605.4M786.4,605.4L786.4,605.4M777.4,558.3L777.4,558.3M770.2,606.1L770.2,606.1M720.4,495.2L720.4,495.2M939.7,114.8L939.7,114.8M937.9,116.1L937.9,116.1M936.3,112.2L936.3,112.2M932.1,116.0L932.1,116.0M933.5,124.7L933.5,124.7M931.3,119.2L931.3,119.2M930.1,116.2L930.1,116.2M927.6,186.7L927.6,186.7M918.3,188.3L921.2,184.4L924.5,186.7L918.3,188.3M864.2,329.1L864.2,329.1M863.3,349.6L863.3,349.6M77.1,374.3L77.1,374.3M74.7,384.2L74.7,384.2M65.1,358.3L65.1,358.3M58.2,374.3L58.2,374.3M56.6,355.0L56.6,355.0M50.2,355.1L50.2,355.1M46.8,353.4L46.8,353.4M305.4,584.4L310.3,577.8L309.7,572.5L322.2,578.2L326.0,584.4L332.0,589.1L328.5,593.2L317.3,598.1L313.7,603.1L309.2,600.4L309.1,593.6L305.4,584.4M291.6,557.9L293.9,555.3L306.4,560.7L305.4,563.9L298.5,565.6L291.6,557.9M291.5,566.6L291.5,566.6M283.8,558.2L283.8,558.2M278.6,553.8L279.6,551.1L291.4,552.5L287.8,555.0L278.6,553.8M258.0,543.0L264.6,540.0L271.3,549.3L261.5,549.2L258.0,543.0M226.0,532.6L230.9,528.2L235.4,528.5L235.7,534.2L229.9,535.7L226.0,532.6M216.3,536.5L216.3,536.5M847.2,281.4L847.2,281.4M677.0,130.8L677.0,130.8M663.4,133.1L663.4,133.1M662.3,138.5L662.3,138.5M660.8,135.5L660.8,135.5M658.7,142.4L658.7,142.4M656.5,149.6L656.5,149.6M655.4,152.7L655.4,152.7M645.5,139.8L645.5,139.8M601.3,92.3L610.0,85.8L610.1,88.6L601.3,92.3M644.4,493.1L644.4,493.1M639.3,492.8L639.3,492.8M635.1,493.8L635.1,493.8M631.7,493.5L631.7,493.5M899.2,195.6L899.2,195.6M896.7,198.0L896.7,198.0M815.5,153.8L815.5,153.8M814.1,153.7L814.1,153.7M720.6,223.0L720.6,223.0M718.6,222.2L718.6,222.2M848.9,285.1L849.8,284.9L848.9,285.1M93.2,50.8L93.2,50.8M98.7,24.5L98.7,24.5M98.8,20.3L98.8,20.3M97.6,23.4L97.6,23.4M95.0,31.0L95.0,31.0M95.5,17.9L95.5,17.9M93.6,19.5L93.6,19.5M95.2,12.9L95.2,12.9M91.0,21.2L98.1,21.7L95.6,26.6L91.0,21.2M91.1,19.0L91.1,19.0M641.9,146.2L641.9,146.2M635.6,150.3L635.6,150.3M584.0,113.2L584.0,113.2M583.2,116.1L583.2,116.1M581.2,115.1L581.2,115.1M579.6,117.2L579.6,117.2M579.7,114.3L579.7,114.3M579.1,113.0L579.1,113.0M579.2,118.4L579.2,118.4M576.0,114.0L576.0,114.0M637.5,497.3L637.5,497.3M628.5,497.9L628.5,497.9M623.7,510.1L623.7,510.1M609.5,520.7L609.5,520.7M605.9,521.2L605.9,521.2M602.1,522.3L602.1,522.3M576.5,511.4L576.5,511.4M908.4,188.4L908.4,188.4M906.7,195.9L906.7,195.9M901.7,193.4L893.4,197.0L884.7,198.3L874.0,208.3L890.9,204.2L894.6,199.5L899.5,201.7L885.7,212.9L871.6,219.2L869.1,216.3L868.9,217.1L866.5,221.4L871.4,222.4L873.1,237.2L865.3,257.1L858.5,254.2L849.3,246.3L849.1,245.8L849.7,244.3L849.3,249.3L854.7,258.0L861.2,262.6L863.7,270.2L862.5,280.4L858.3,288.2L856.5,301.3L852.6,300.6L852.8,292.0L855.4,283.8L851.6,285.2L847.6,275.5L845.5,279.1L841.3,274.1L846.3,271.3L839.0,266.2L841.5,251.7L836.7,254.0L837.9,262.7L836.2,268.7L843.7,284.1L834.6,281.5L829.8,277.6L826.9,280.1L827.0,273.7L824.5,278.6L829.6,278.7L831.8,282.6L838.1,282.8L845.9,287.3L849.1,305.4L846.3,310.4L854.8,308.3L858.8,315.9L855.9,317.4L859.3,322.9L847.3,332.7L855.9,329.5L863.2,329.3L865.6,334.5L859.7,344.3L843.0,343.4L854.2,347.0L850.4,355.8L859.1,353.5L855.6,361.1L851.3,360.8L843.8,364.5L834.4,376.6L833.4,384.0L822.7,386.1L816.3,392.2L813.5,403.5L800.6,418.9L792.1,423.7L792.9,426.8L786.1,434.5L782.5,442.3L781.3,454.4L778.2,460.1L780.1,466.0L787.0,486.2L794.9,499.6L806.0,513.6L806.6,521.8L820.0,544.3L822.8,554.1L823.8,574.5L819.7,586.0L806.9,589.7L800.6,577.8L791.9,575.3L785.4,563.2L777.5,556.8L766.4,542.8L771.1,533.2L764.6,529.8L767.3,534.2L764.7,537.1L761.8,533.4L763.5,517.1L758.8,505.0L755.0,504.8L746.0,498.3L740.3,490.6L732.1,486.7L727.4,487.4L713.6,500.7L707.4,499.8L705.7,493.6L695.8,488.3L680.6,485.8L663.7,490.0L655.9,487.8L653.3,481.7L651.5,490.1L646.4,489.4L636.1,489.7L624.7,495.4L619.2,498.9L623.7,502.2L625.7,497.6L628.2,501.2L627.3,507.1L622.8,507.7L626.2,513.3L632.4,513.8L634.1,521.7L623.8,515.7L619.7,515.3L612.5,521.1L608.1,515.4L600.9,522.7L590.3,517.4L584.2,507.8L578.8,505.8L570.5,513.0L553.5,508.2L540.6,510.3L534.8,511.4L522.4,517.4L523.6,509.1L518.3,510.5L519.9,519.4L523.1,518.8L510.3,529.5L491.9,539.1L480.2,548.3L480.3,546.1L489.2,541.3L484.3,541.9L477.4,546.5L469.3,564.2L467.8,575.8L471.4,591.7L474.4,595.1L466.6,596.5L464.0,593.4L451.7,592.0L440.1,585.0L434.3,583.6L431.4,574.1L427.9,569.9L427.6,559.4L419.8,552.0L418.9,547.9L412.0,540.7L405.1,521.7L390.3,505.7L377.7,504.6L366.4,505.4L361.0,517.2L356.7,521.5L337.1,510.9L329.9,503.6L328.1,491.9L322.9,479.9L315.7,475.3L306.2,462.7L301.6,459.9L296.2,452.0L264.2,448.2L262.9,458.3L246.8,456.2L208.1,450.4L171.7,429.4L142.3,411.7L145.0,407.0L99.4,401.6L97.9,398.1L98.7,387.7L96.5,382.2L86.4,369.8L82.1,369.2L81.6,362.4L76.3,361.7L69.7,356.7L65.0,349.2L48.8,344.2L46.4,340.4L49.7,328.1L45.9,324.5L47.3,321.2L41.5,313.2L34.8,296.1L36.2,288.9L39.6,285.9L31.4,274.2L33.2,260.8L38.4,270.1L35.8,257.2L33.2,259.9L29.3,254.5L27.0,243.0L20.1,228.9L24.0,209.1L18.4,197.1L18.9,193.0L26.6,183.7L31.2,172.8L32.5,159.9L31.0,156.6L33.6,146.4L32.8,139.9L45.3,120.6L57.1,92.4L64.9,70.5L70.9,70.2L65.8,69.1L64.1,65.1L65.9,57.2L70.7,53.9L66.9,51.0L67.5,34.1L66.4,23.4L69.7,20.1L76.9,27.1L90.1,33.0L94.6,32.8L96.5,39.0L92.4,52.3L96.1,51.9L97.9,41.7L101.7,37.5L100.8,27.0L102.3,20.9L100.0,14.3L140.0,25.3L183.5,35.9L198.0,39.0L232.8,46.1L265.4,51.8L302.7,57.4L340.3,62.1L376.8,65.6L404.3,67.7L444.8,69.8L479.4,70.6L510.7,70.7L510.7,62.1L515.6,64.1L520.1,77.3L530.7,78.7L531.5,81.2L540.3,78.2L563.3,87.3L565.8,90.7L576.6,85.7L578.0,88.8L587.6,87.9L596.1,90.7L581.9,97.5L558.9,119.3L560.2,121.1L568.0,119.6L576.1,115.0L580.1,120.4L585.3,123.0L593.8,117.3L600.5,115.7L618.5,100.5L624.3,99.6L615.4,111.7L628.2,114.3L633.0,120.8L643.6,121.3L651.8,115.2L661.9,113.9L669.9,111.0L669.7,117.6L676.4,118.3L683.4,114.8L684.4,121.4L694.0,127.5L681.2,128.7L676.4,126.5L674.2,130.9L671.1,128.2L662.8,127.2L660.9,130.3L652.5,131.2L637.8,139.6L632.4,153.0L629.0,156.5L626.1,165.6L628.0,166.1L635.7,157.0L641.6,147.6L635.4,165.1L635.3,173.6L632.4,180.7L633.3,185.2L630.8,195.3L634.1,205.6L634.1,212.3L633.9,216.7L640.3,229.8L647.2,230.6L651.9,227.5L658.6,215.5L659.9,204.7L658.8,198.0L652.3,184.2L651.8,174.8L655.1,167.9L654.9,159.7L661.1,153.5L663.5,147.8L663.9,155.9L667.7,153.2L667.2,145.5L674.1,141.9L670.4,138.3L675.3,132.7L684.5,135.1L686.6,137.8L696.7,139.9L701.2,146.9L698.7,148.9L702.1,153.9L702.3,162.4L699.1,169.4L695.4,171.4L694.1,177.1L698.9,180.1L704.6,170.6L709.8,167.6L715.2,172.4L721.5,191.1L720.9,199.8L716.2,199.3L715.1,206.5L708.2,221.7L717.6,225.4L719.0,223.5L725.5,227.4L732.9,223.2L737.5,223.2L748.4,213.0L756.1,208.9L767.5,200.2L776.4,192.1L780.3,186.0L774.8,175.9L783.7,171.7L795.7,170.3L799.7,171.9L809.0,169.2L819.3,161.0L814.7,150.3L814.9,146.4L820.4,141.2L828.6,127.9L832.2,124.3L857.5,117.8L886.1,110.5L886.6,105.2L890.8,102.3L894.2,99.2L900.0,86.1L898.1,82.5L899.9,73.8L899.0,67.4L905.9,47.6L912.4,52.2L922.6,45.8L929.7,49.7L938.7,79.8L944.5,79.8L946.1,86.9L951.9,88.0L957.0,94.7L952.7,98.6L950.2,105.5L946.7,104.2L943.8,110.3L938.9,113.6L937.2,109.7L935.7,117.5L931.0,110.0L930.1,122.8L918.0,130.9L912.7,138.3L910.1,150.1L909.4,154.7L914.3,158.4L909.4,165.7L917.0,171.2L921.7,177.7L930.9,176.7L920.0,183.3L917.8,179.3L912.7,186.3L910.5,182.7L909.8,182.1L906.7,181.2L907.6,190.7L901.7,193.4"/>
+                <g id="li-map-bubbles"></g>
+                <g id="li-map-labels"></g>
+              </svg>
+              <div class="li-map-legend" id="li-map-legend"></div>
+              <div class="li-panel" id="li-map-panel" hidden></div>
+              <noscript><p class="li-nojs">The map needs JavaScript. Fig.&nbsp;2 and the tables below carry the same October&nbsp;1 counts.</p></noscript>
+            </div>
+            <p class="li-fig-cap">Each bubble sits on the transferee court&rsquo;s principal seat and is sized by the district&rsquo;s pending actions, or by its count of MDLs when that view is selected. The four MDLs created on October&nbsp;2 appear with the action counts named in their transfer orders. Source: JPML pending-dockets-by-district report, October&nbsp;1,&nbsp;2026; Panel transfer orders of October&nbsp;2,&nbsp;2026.</p>
+          </div>
+
+          <p>Every docket on the Panel&rsquo;s report is on the board below. Sort any column, filter by docket type, or search by product, defendant or judge. The change column compares the October&nbsp;1 and September&nbsp;1 reports. The last column sketches the past twelve months for the 34 dockets this page tracks.</p>
+
+          <div class="li-fig li-tool" id="docket-board">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Interactive &middot; B</span>
+              <span class="li-fig-title">The docket board &middot; all 162 pending MDLs plus the four created October&nbsp;2</span>
+            </div>
+            <div class="li-fig-body">
+              <div class="li-ctl">
+                <input type="search" id="li-board-q" placeholder="Search docket, defendant, court or judge" aria-label="Search the docket board">
+                <button type="button" class="li-chip" data-ty="" aria-pressed="true">All</button>
+                <button type="button" class="li-chip" data-ty="PL" aria-pressed="false">Products liability</button>
+                <button type="button" class="li-chip" data-ty="AT" aria-pressed="false">Antitrust</button>
+                <button type="button" class="li-chip" data-ty="DB" aria-pressed="false">Data breach &amp; privacy</button>
+                <button type="button" class="li-chip" data-ty="SP" aria-pressed="false">Sales practices</button>
+                <button type="button" class="li-chip" data-ty="OT" aria-pressed="false">Other</button>
+                <button type="button" class="li-chip" data-ty="NEW" aria-pressed="false">New since June</button>
+              </div>
+              <p class="li-count" id="li-board-count"></p>
+              <div class="li-table-wrap" style="margin:0">
+                <table class="li-table li-board" id="li-board-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" data-k="n" class="li-num">MDL</th>
+                      <th scope="col" data-k="t">Docket</th>
+                      <th scope="col" data-k="ty">Type</th>
+                      <th scope="col" data-k="d">Court</th>
+                      <th scope="col" data-k="q" class="li-num">Sep&nbsp;1</th>
+                      <th scope="col" data-k="p" class="li-num" aria-sort="descending">Oct&nbsp;1</th>
+                      <th scope="col" data-k="ch" class="li-num">Change</th>
+                      <th scope="col" data-k="pct" class="li-num">%</th>
+                      <th scope="col">12 mo</th>
+                    </tr>
+                  </thead>
+                  <tbody id="li-board-body"></tbody>
+                </table>
+              </div>
+              <button type="button" class="li-more" id="li-board-more" hidden></button>
+              <noscript><p class="li-nojs">The board needs JavaScript. The fastest-growing and newest-MDL tables below carry the October&nbsp;1 figures.</p></noscript>
+            </div>
+            <p class="li-fig-cap">Pending actions from the JPML reports of September&nbsp;1 and October&nbsp;1, 2026. Docket types follow the Panel&rsquo;s own classification. &ldquo;Other&rdquo; gathers intellectual property, securities, disaster, employment and the Panel&rsquo;s miscellaneous category. The miscellaneous category is where the Uber, Lyft and Roblox assault dockets and the opiate MDL sit. A blank Sep&nbsp;1 cell marks a docket created after that report. Four dockets left the report between the two months: MDLs 2358, 2775, 2938 and 3134.</p>
+          </div>
+
           <h2 id="growth-in-mega-dockets" class="li-anchor">2. The growth is inside the mega-dockets</h2>
 
           <p>The long arc for active MDLs is still flat to slightly declining, down from roughly 170 in early 2025 to 159 this spring. The count climbed back to 166 by September and then gave up four dockets in the October report, which is the first month this cycle in which the total pending-action count fell as well. </p>
@@ -277,7 +431,7 @@
 
           <p>J&amp;J proposed a $5.5&nbsp;billion resolution on July&nbsp;27 covering roughly 76,000 ovarian cancer claims across federal and state courts, conditioned on 95% claimant participation, with the first payment capped at $3&nbsp;billion in 2027. A deal that needs 95% of a pool to sign is priced against a pool that kept growing for three reports after it was announced.</p>
 
-          <div class="li-fig" role="img" aria-label="Line chart of J&J talc pending actions from February 2025 to October 2026, rising from about 58,200 to 69,340 after a plateau near 67,600.">
+          <div class="li-fig" data-fig="3" role="img" aria-label="Line chart of J&J talc pending actions from February 2025 to October 2026, rising from about 58,200 to 69,340 after a plateau near 67,600.">
             <div class="li-fig-head">
               <span class="li-fig-num">Fig. 3</span>
               <span class="li-fig-title">J&amp;J Talc (MDL 2738) &middot; pending actions, Feb 2025&ndash;Oct 2026</span>
@@ -323,7 +477,7 @@
 
           <p>That parallel posture is the thing to read. A settlement in principle usually slows the merits track; here the court issued a case management order for ongoing litigation five days after appointing the settlement administrator, and conditional transfer orders are still bringing new cases in. A defense ruling on the September record would leave the deal intact while stripping the value out of every claim sitting outside it, which is precisely the exposure the eligibility window was drawn to contain. The October report, with 9 new cases, suggests the filing bar read that risk the same way.</p>
 
-          <div class="li-fig" role="img" aria-label="Column chart of Depo-Provera pending actions from December 2025 to October 2026, rising from 1,470 to 6,412, with the largest single-report surge marked.">
+          <div class="li-fig" data-fig="4" role="img" aria-label="Column chart of Depo-Provera pending actions from December 2025 to October 2026, rising from 1,470 to 6,412, with the largest single-report surge marked.">
             <div class="li-fig-head">
               <span class="li-fig-num">Fig. 4</span>
               <span class="li-fig-title">Depo-Provera (MDL 3140) &middot; from surge to settlement</span>
@@ -375,6 +529,25 @@
               </svg>
             </div>
             <p class="li-fig-cap">Monthly pending actions, Dec&nbsp;2025&ndash;Oct&nbsp;2026. The spring surge peaked with a gain of roughly 1,700 cases in a single report (marked). Filings continued after the June&nbsp;15 settlement in principle and flattened in October, at 6,412. Only the first, peak and final columns are labeled; the rest run 1,752, 2,098, 3,099, 3,490, 3,769, 5,830, 6,294 and 6,403. Source: JPML monthly statistics.</p>
+          </div>
+
+                    <p>The two charts above follow one docket each. The chart below follows any of the 34 dockets this page tracks, month by month, back to the February&nbsp;2025 report. Pick the dockets to compare. The indexed view sets each docket&rsquo;s first available month to 100 on a log scale. A 4,000-case docket and a 70,000-case docket then share one axis, and a doubling is the same height anywhere on it.</p>
+
+          <div class="li-fig li-tool li-trend" id="trend-lines">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Interactive &middot; C</span>
+              <span class="li-fig-title">Trend lines &middot; pending actions by month, Feb&nbsp;2025&ndash;Oct&nbsp;2026</span>
+            </div>
+            <div class="li-fig-body">
+              <div class="li-ctl" role="group" aria-label="Scale">
+                <button type="button" class="li-chip" data-tmode="c" aria-pressed="true">Count</button>
+                <button type="button" class="li-chip" data-tmode="i" aria-pressed="false">Indexed, first month = 100, log scale</button>
+              </div>
+              <div class="li-ctl" id="li-trend-chips" role="group" aria-label="Dockets to show"></div>
+              <svg id="li-trend-svg" viewBox="0 0 920 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line chart of monthly pending actions for selected MDLs from February 2025 to October 2026."></svg>
+              <noscript><p class="li-nojs">The trend chart needs JavaScript. Figs.&nbsp;3 and 4 above carry the talc and Depo-Provera series.</p></noscript>
+            </div>
+            <p class="li-fig-cap">Monthly pending actions from the JPML&rsquo;s by-actions-pending reports, February&nbsp;2025 through October&nbsp;1, 2026. A line starts in the first report that lists the docket. Up to eight dockets can be shown at once. Hover or tap the chart for the values in a given month.</p>
           </div>
 
           <h3 id="fastest-growing" class="li-anchor">Where the growth actually went this month</h3>
@@ -588,7 +761,7 @@
           <p>The strategic picture for the plaintiff bar is a barbell. At one end sit the proven mega-dockets (talc, AFFF, hair relaxer), with known injury definitions and recognizable defendants. Several of them now turn on an undecided evidentiary motion: the hair relaxer general-causation challenge has been fully briefed before Judge Rowland since June&nbsp;16, expert discovery closes November&nbsp;16, and no bellwether has a trial date. At the other end sit the dockets still growing fastest. Social media, Bard PowerPort and Uber passenger assault together took in 1,350 new actions in the October report, and the law in each is being made in real time. Platform-safety claims are the coherent new category there, and the October&nbsp;2 AirTag order extends it from apps to a consumer device. Depo-Provera has left that end for the settlement window, with 9 new cases in October. The thin middle is the speculative theory the JPML has shown it will refuse to centralize.</p>
 
           <h2 id="sources-and-method" class="li-anchor">Sources &amp; method</h2>
-          <p>Case counts are drawn from the JPML's pending-dockets and monthly statistics reports, anchored to the October&nbsp;1, 2026 report; counts are point-in-time and move monthly. Month-over-month changes compare the October&nbsp;1 and September&nbsp;1, 2026 editions of the pending-dockets-by-actions-pending report. Centralization dates come from the date-transferred column of the pending-dockets-by-MDL-number report of October&nbsp;1, 2026. That column records the date of the Panel's transfer order. The four MDLs created on October&nbsp;2, 2026, and the October&nbsp;2 denials, are taken from the Panel&rsquo;s transfer orders and orders denying transfer for MDLs 2789, 3194, 3195, 3197, 3198 and 3199, published on its Panel Orders page. The same report carries a separate date-filed column, which records when the petition reached the Panel. Verdicts, settlements, and procedural milestones are compiled from court records and litigation reporting by Reuters, Law.com/ALM, NPR, CNBC, and established docket trackers. Settlement terms described as proposed or signed but not finalized are reported as such; confidential terms are not reconstructed here. The GLP-1 orders and hearing dates are taken from the docket in MDL&nbsp;3094, No.&nbsp;2:24-md-03094-KSM (E.D. Pa.). Figures should be re-verified against primary sources before republication. Nothing here is legal advice.</p>
+          <p>Case counts are drawn from the JPML's pending-dockets and monthly statistics reports, anchored to the October&nbsp;1, 2026 report; counts are point-in-time and move monthly. Month-over-month changes compare the October&nbsp;1 and September&nbsp;1, 2026 editions of the pending-dockets-by-actions-pending report. Centralization dates come from the date-transferred column of the pending-dockets-by-MDL-number report of October&nbsp;1, 2026. That column records the date of the Panel's transfer order. The four MDLs created on October&nbsp;2, 2026, and the October&nbsp;2 denials, are taken from the Panel&rsquo;s transfer orders and orders denying transfer for MDLs 2789, 3194, 3195, 3197, 3198 and 3199, published on its Panel Orders page. The same report carries a separate date-filed column, which records when the petition reached the Panel. Verdicts, settlements, and procedural milestones are compiled from court records and litigation reporting by Reuters, Law.com/ALM, NPR, CNBC, and established docket trackers. Settlement terms described as proposed or signed but not finalized are reported as such; confidential terms are not reconstructed here. The GLP-1 orders and hearing dates are taken from the docket in MDL&nbsp;3094, No.&nbsp;2:24-md-03094-KSM (E.D. Pa.). The interactive map, board and trend lines read from a data block embedded in this page. That block is compiled from the by-actions-pending, by-district and by-type editions of the JPML reports from February&nbsp;2025 through October&nbsp;1, 2026, and each layer names its edition in its caption. Figures should be re-verified against primary sources before republication. Nothing here is legal advice.</p>
 
           <p><strong>Citing these figures.</strong> The case counts come from public JPML reports. Use them in a client memo, a pitch deck, a newsletter or a post. Cite Lawsuit Intelligencer with a link to this page, so your reader can check which month the numbers come from. Reproducing a table as it is arranged here, one of the charts, or a passage of the analysis asks for the same credit and link. To run the piece in full, write to <a href="mailto:editor@lawsuitintelligencer.com">editor@lawsuitintelligencer.com</a>.</p>
 
@@ -660,5 +833,345 @@
     </div>
   </footer>
 
+<script type="application/json" id="li-data">{"report":"2026-10-01","prev":"2026-09-01","months":["2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09","2026-10"],"totals":{"actions":[278246,212279,179268,182011,184470,189943,193625,196861,197115,197981,198163,197965,197264,198480,198825,199684,202129,203915,205540,206182,204977],"mdls":[164,164,163,162,162,161,156,159,158,157,157,158,157,160,158,159,159,162,162,166,162]},"types":{"PL":"Products liability","AT":"Antitrust","DB":"Data breach & privacy","SP":"Sales practices","IP":"Intellectual property","SE":"Securities","DI":"Disaster","MI":"Other","EM":"Employment"},"seats":{"NJ":{"abbr":"D.N.J.","city":"Trenton","x":859.7,"y":229.6},"OHS":{"abbr":"S.D. Ohio","city":"Columbus","x":721.4,"y":260.8},"SC":{"abbr":"D.S.C.","city":"Charleston","x":801.3,"y":414.9},"ILN":{"abbr":"N.D. Ill.","city":"Chicago","x":638.2,"y":226.1},"MN":{"abbr":"D. Minn.","city":"Minneapolis","x":541.9,"y":161},"ILS":{"abbr":"S.D. Ill.","city":"East St. Louis","x":600.6,"y":303.6},"INS":{"abbr":"S.D. Ind.","city":"Indianapolis","x":667.8,"y":271.8},"FLN":{"abbr":"N.D. Fla.","city":"Pensacola","x":669.3,"y":486.3},"CAN":{"abbr":"N.D. Cal.","city":"San Francisco","x":34.8,"y":261.4},"GAN":{"abbr":"N.D. Ga.","city":"Atlanta","x":715,"y":405.1},"AZ":{"abbr":"D. Ariz.","city":"Phoenix","x":197.2,"y":399.8},"PAE":{"abbr":"E.D. Pa.","city":"Philadelphia","x":854.2,"y":237.1},"OHN":{"abbr":"N.D. Ohio","city":"Cleveland","x":738.3,"y":222.8},"MA":{"abbr":"D. Mass.","city":"Boston","x":908.7,"y":167.1},"NYE":{"abbr":"E.D.N.Y.","city":"Brooklyn","x":870.9,"y":216.3},"FLS":{"abbr":"S.D. Fla.","city":"Miami","x":822.7,"y":572.5},"PAW":{"abbr":"W.D. Pa.","city":"Pittsburgh","x":770.7,"y":242.2},"CAS":{"abbr":"S.D. Cal.","city":"San Diego","x":99.7,"y":397.5},"NYS":{"abbr":"S.D.N.Y.","city":"Manhattan","x":869.7,"y":215.7},"CAC":{"abbr":"C.D. Cal.","city":"Los Angeles","x":86.8,"y":363.1},"TXN":{"abbr":"N.D. Tex.","city":"Dallas","x":482.9,"y":440.5},"LAE":{"abbr":"E.D. La.","city":"New Orleans","x":614.4,"y":501.3},"TXE":{"abbr":"E.D. Tex.","city":"Tyler","x":511.3,"y":450.3},"DC":{"abbr":"D.D.C.","city":"Washington","x":827.4,"y":267.3},"NH":{"abbr":"D.N.H.","city":"Concord","x":896,"y":150.4},"MT":{"abbr":"D. Mont.","city":"Great Falls","x":263,"y":85.5},"MD":{"abbr":"D. Md.","city":"Baltimore","x":832.9,"y":257.2},"WIE":{"abbr":"E.D. Wis.","city":"Milwaukee","x":631.3,"y":200.1},"KS":{"abbr":"D. Kan.","city":"Wichita","x":474.4,"y":328.1},"MOE":{"abbr":"E.D. Mo.","city":"St. Louis","x":599.8,"y":303.6},"MOW":{"abbr":"W.D. Mo.","city":"Kansas City","x":522.8,"y":295.7},"NM":{"abbr":"D.N.M.","city":"Albuquerque","x":302.4,"y":376.9},"RI":{"abbr":"D.R.I.","city":"Providence","x":906.1,"y":180.4},"ALN":{"abbr":"N.D. Ala.","city":"Birmingham","x":670.4,"y":415.3},"ARE":{"abbr":"E.D. Ark.","city":"Little Rock","x":566.6,"y":394.2},"CO":{"abbr":"D. Colo.","city":"Denver","x":342.8,"y":273.9},"DE":{"abbr":"D. Del.","city":"Wilmington","x":849,"y":243.3},"FLM":{"abbr":"M.D. Fla.","city":"Orlando","x":789,"y":514.6},"MIE":{"abbr":"E.D. Mich.","city":"Detroit","x":713.2,"y":207.2},"NCM":{"abbr":"M.D.N.C.","city":"Winston-Salem","x":782.9,"y":340.9},"NCW":{"abbr":"W.D.N.C.","city":"Charlotte","x":775.3,"y":362.4},"OKN":{"abbr":"N.D. Okla.","city":"Tulsa","x":498.2,"y":363.4},"PAM":{"abbr":"M.D. Pa.","city":"Scranton","x":838.8,"y":206.4},"TNM":{"abbr":"M.D. Tenn.","city":"Nashville","x":665.1,"y":355.1},"TNW":{"abbr":"W.D. Tenn.","city":"Memphis","x":607.4,"y":382.9},"UT":{"abbr":"D. Utah","city":"Salt Lake City","x":228.5,"y":235.3},"VAE":{"abbr":"E.D. Va.","city":"Richmond","x":826.7,"y":299.4},"WAW":{"abbr":"W.D. Wash.","city":"Seattle","x":97.6,"y":46.3},"WIW":{"abbr":"W.D. Wis.","city":"Madison","x":606.7,"y":201.2},"WVN":{"abbr":"N.D.W. Va.","city":"Clarksburg","x":769.1,"y":269.4}},"dockets":[{"n":2738,"t":"J&J talc","ty":"PL","d":"NJ","j":"Michael A. Shipp","p":69340,"q":69250,"s":[58206,58206,58208,58643,59571,63693,66509,66910,67204,67229,67670,67580,67622,67115,67376,67623,68029,68435,68914,69250,69340],"l":"J&J talc"},{"n":2846,"t":"Bard hernia mesh","ty":"PL","d":"OHS","j":"Edmund A. Sargus, Jr.","p":23324,"q":23316,"s":[24102,24083,24080,24078,24074,24050,24029,24026,24004,23932,23818,23749,23728,23695,23693,23703,23573,23382,23321,23316,23324],"l":"Bard hernia mesh"},{"n":2873,"t":"AFFF / PFAS","ty":"PL","d":"SC","j":"Richard M. Gergel","p":15264,"q":15264,"s":[8092,8430,8928,9342,10391,11096,12064,12915,13942,15249,15334,15213,15216,15220,15222,15232,15240,15244,15246,15264,15264],"l":"AFFF"},{"n":3060,"t":"Hair relaxer","ty":"PL","d":"ILN","j":"Mary M. Rowland","p":12381,"q":12129,"s":[9863,9788,9936,10168,10317,10404,10567,10858,10552,10723,10844,10948,11195,11440,11371,11526,11723,11877,11779,12129,12381],"l":"Hair relaxer"},{"n":2789,"t":"Proton-pump inhibitors (No. II)","ty":"PL","d":"NJ","j":"Claire C. Cecchi","p":11404,"q":11404,"s":[11974,11951,11808,11728,11677,11591,11388,11336,11331,11331,11328,11322,11322,11322,11322,11322,11321,11321,11321,11404,11404],"l":"PPI"},{"n":2666,"t":"Bair Hugger","ty":"PL","d":"MN","j":"Joan N. Ericksen","p":8424,"q":8433,"s":[7873,7971,8084,8292,8599,8763,8827,8784,9003,8757,8669,8666,8490,8535,8550,8545,8422,8411,8407,8433,8424],"l":"Bair Hugger"},{"n":3004,"t":"Paraquat","ty":"PL","d":"ILS","j":"Nancy J. Rosenstengel","p":6602,"q":6666,"s":[5838,5859,5911,6036,6159,6354,6311,6362,6445,6433,6470,6476,6489,6509,6542,6580,6651,6665,6665,6666,6602],"l":"Paraquat"},{"n":2570,"t":"Cook IVC filters","ty":"PL","d":"INS","j":"Richard L. Young","p":6470,"q":6501,"s":[7278,7274,7202,6978,6984,6978,6980,6979,6968,6969,6901,6896,6873,6750,6569,6562,6537,6536,6537,6501,6470],"l":"Cook IVC"},{"n":3140,"t":"Depo-Provera","ty":"PL","d":"FLN","j":"M. Casey Rodgers","p":6412,"q":6403,"s":[null,78,130,289,348,435,550,806,1222,1225,1470,1752,2098,3099,3490,3769,5508,5830,6294,6403,6412],"l":"Depo-Provera"},{"n":3084,"t":"Uber passenger sexual assault","ty":"MI","d":"CAN","j":"Charles R. Breyer","p":4916,"q":4588,"s":[1562,1600,1883,2062,2175,2359,2513,2583,2721,2783,2949,3078,3188,3291,3391,3437,3571,3940,4397,4588,4916],"l":"Uber assault"},{"n":2974,"t":"Paragard IUD","ty":"PL","d":"GAN","j":"Leigh Martin May","p":4224,"q":4185,"s":[2937,2965,3036,3252,3330,3474,3529,3569,3595,3658,3749,3800,3867,3926,3982,3984,4071,4111,4156,4185,4224],"l":"Paragard"},{"n":3081,"t":"Bard PowerPort catheter","ty":"PL","d":"AZ","j":"David G. Campbell","p":4140,"q":3734,"s":[1004,1112,1205,1410,1500,1763,1807,1972,1973,2127,2463,2545,2674,2828,3044,3187,3376,3564,3734,3734,4140],"l":"PowerPort"},{"n":3094,"t":"GLP-1 (GI injury)","ty":"PL","d":"PAE","j":"Karen S. Marston","p":4025,"q":4022,"s":[1443,1521,1685,1809,1882,1997,2190,2676,2809,2914,2947,3063,3191,3363,3546,3636,3763,3848,3928,4022,4025],"l":"GLP-1 GI"},{"n":3047,"t":"Social media adolescent addiction","ty":"PL","d":"CAN","j":"Yvonne Gonzalez Rogers","p":3824,"q":3208,"s":[1246,1464,1745,1787,1814,1867,1922,1961,2053,2172,2191,2243,2325,2407,2465,2527,2664,2893,3137,3208,3824],"l":"Social media"},{"n":2804,"t":"National prescription opiates","ty":"MI","d":"OHN","j":"Dan A. Polster","p":2877,"q":2907,"s":[2994,2994,2985,2985,2985,2985,2982,2982,2965,2965,2965,2964,2957,2957,2941,2932,2930,2927,2915,2907,2877],"l":"Opiates"},{"n":3029,"t":"Covidien hernia mesh (No. II)","ty":"PL","d":"MA","j":"Patti B. Saris","p":2479,"q":2453,"s":[1660,1677,1704,1863,1998,2040,2055,2090,2152,2201,2205,2239,2260,2348,2387,2396,2408,2425,2449,2453,2479],"l":"Covidien mesh"},{"n":3092,"t":"Suboxone film","ty":"PL","d":"OHN","j":"J. Philip Calabrese","p":2022,"q":1827,"s":[896,896,896,896,892,890,889,1882,1877,1871,1871,1854,1853,1849,1836,1832,1833,1832,1827,1827,2022],"l":"Suboxone"},{"n":3044,"t":"Exactech orthopedics","ty":"PL","d":"NYE","j":"Nicholas G. Garaufis","p":1838,"q":1838,"s":[1839,1840,1842,1842,1842,1842,1840,1838,1838,1838,1838,1838,1838,1838,1838,1838,1838,1838,1838,1838,1838],"l":"Exactech"},{"n":2875,"t":"Valsartan / losartan / irbesartan","ty":"PL","d":"NJ","j":"Renee M. Bumb","p":1426,"q":1412,"s":[1295,1303,1310,1322,1325,1342,1349,1348,1364,1368,1369,1381,1403,1418,1420,1424,1413,1418,1417,1412,1426],"l":"Valsartan"},{"n":2921,"t":"Allergan Biocell breast implants","ty":"PL","d":"NJ","j":"Brian R. Martinotti","p":1370,"q":1370,"s":[1301,1332,1409,1425,1431,1456,1462,1460,1465,1477,1481,1482,1481,1481,1485,1488,1489,1496,1377,1370,1370],"l":"Allergan Biocell"},{"n":2741,"t":"Roundup","ty":"PL","d":"CAN","j":"Vince Chhabria","p":1104,"q":3925,"s":[4414,4414,4415,4432,4424,4425,4437,4464,4472,4490,4508,4511,3902,3887,3884,3903,3909,3920,3932,3925,1104],"l":"Roundup"},{"n":2924,"t":"Zantac","ty":"PL","d":"FLS","j":"Robin L. Rosenberg","p":847,"q":847,"s":[2427,2427,2427,2427,2427,2427,2427,2427,2233,1812,1812,1030,851,851,847,847,847,847,847,847,847],"l":"Zantac"},{"n":3026,"t":"Preterm infant formula (NEC)","ty":"PL","d":"ILN","j":"Rebecca R. Pallmeyer","p":844,"q":847,"s":[648,663,683,710,740,744,759,760,761,755,774,769,775,779,782,797,798,810,825,847,844],"l":"NEC formula"},{"n":3014,"t":"Philips CPAP","ty":"PL","d":"PAW","j":"Joy Flowers Conti","p":623,"q":624,"s":[825,826,826,828,829,830,832,833,833,785,680,621,618,619,621,622,622,623,624,624,623],"l":"Philips CPAP"},{"n":2243,"t":"Fosamax (No. II)","ty":"PL","d":"NJ","j":"Karen M. Williams","p":559,"q":562},{"n":2492,"t":"NCAA concussion","ty":"MI","d":"ILN","j":"Manish S. Shah","p":549,"q":558},{"n":3080,"t":"Insulin pricing","ty":"SP","d":"NJ","j":"Brian R. Martinotti","p":516,"q":516},{"n":3101,"t":"Baby food heavy metals","ty":"PL","d":"CAN","j":"Jacqueline Scott Corley","p":497,"q":483,"s":[92,101,135,156,167,180,211,210,225,272,385,389,389,389,402,402,450,473,478,483,497],"l":"Baby food"},{"n":3125,"t":"AngioDynamics port catheter","ty":"PL","d":"CAS","j":"Jinsook Ohta","p":439,"q":428,"s":[96,120,141,152,162,180,208,218,248,252,269,295,317,344,357,375,391,401,407,428,439],"l":"AngioDynamics"},{"n":1570,"t":"September 11 terrorist attacks","ty":"DI","d":"NYS","j":"George B. Daniels","p":380,"q":372},{"n":2323,"t":"NFL concussion","ty":"MI","d":"PAE","j":"Joshua D. Wolson","p":329,"q":329},{"n":3079,"t":"Tepezza","ty":"PL","d":"ILN","j":"Thomas M. Durkin","p":279,"q":277},{"n":3163,"t":"GLP-1 NAION vision loss","ty":"PL","d":"PAE","j":"Karen S. Marston","p":247,"q":216,"s":[null,null,null,null,null,null,null,null,null,null,null,29,37,54,73,86,110,146,200,216,247],"l":"GLP-1 NAION"},{"n":2996,"t":"McKinsey opiate consulting","ty":"MI","d":"CAN","j":"Charles R. Breyer","p":234,"q":235},{"n":3083,"t":"MOVEit data breach","ty":"DB","d":"MA","j":"Allison D. Burroughs","p":233,"q":236},{"n":3121,"t":"MultiPlan health insurance","ty":"AT","d":"ILN","j":"Matthew F. Kennelly","p":188,"q":153,"s":[50,48,48,47,46,46,46,49,49,62,64,61,70,72,77,83,110,136,150,153,188],"l":"MultiPlan"},{"n":2973,"t":"Elmiron","ty":"PL","d":"NJ","j":"Brian R. Martinotti","p":186,"q":286},{"n":3166,"t":"Roblox child sexual exploitation","ty":"MI","d":"CAN","j":"Richard Seeborg","p":180,"q":182,"s":[null,null,null,null,null,null,null,null,null,null,null,85,115,132,146,148,162,170,177,182,180],"l":"Roblox"},{"n":3087,"t":"Future Motion (Onewheel)","ty":"PL","d":"CAN","j":"Beth Labson Freeman","p":161,"q":160},{"n":3108,"t":"Change Healthcare data breach","ty":"DB","d":"MN","j":"Donovan W. Frank","p":153,"q":152},{"n":3114,"t":"AT&T data breach","ty":"DB","d":"TXN","j":"Sidney A. Fitzwater","p":140,"q":140},{"n":3023,"t":"Taxotere eye injury","ty":"PL","d":"LAE","j":"Jane Triche Milazzo","p":138,"q":140},{"n":2814,"t":"Ford PowerShift transmission","ty":"PL","d":"CAC","j":"Andre Birotte, Jr.","p":135,"q":135},{"n":3171,"t":"Lyft passenger sexual assault","ty":"MI","d":"CAN","j":"Rita F. Lin","p":134,"q":106,"s":[null,null,null,null,null,null,null,null,null,null,null,null,null,28,35,46,54,56,72,106,134],"l":"Lyft assault"},{"n":2672,"t":"Volkswagen clean diesel","ty":"PL","d":"CAN","j":"Charles R. Breyer","p":129,"q":130},{"n":2197,"t":"DePuy ASR hip implant","ty":"PL","d":"OHN","j":"Jeffrey J. Helmick","p":114,"q":113},{"n":3043,"t":"Acetaminophen ASD/ADHD","ty":"PL","d":"NYS","j":"Denise L. Cote","p":113,"q":58,"s":[15,15,15,2,2,2,0,0,58,58,58,58,58,58,58,58,58,58,58,58,113],"l":"Acetaminophen"},{"n":3176,"t":"Rare Breed Triggers patent","ty":"IP","d":"TXE","j":"Amos L. Mazzant, III","p":109,"q":95},{"n":2656,"t":"Domestic airline antitrust","ty":"AT","d":"DC","j":"Colleen Kollar-Kotelly","p":105,"q":105},{"n":2753,"t":"Atrium C-Qur mesh","ty":"PL","d":"NH","j":"Landya B. McCafferty","p":101,"q":127},{"n":3052,"t":"Kia/Hyundai vehicle theft","ty":"PL","d":"CAC","j":"James V. Selna","p":100,"q":100},{"n":2599,"t":"Takata airbags","ty":"PL","d":"FLS","j":"Federico A. Moreno","p":78,"q":78},{"n":3149,"t":"PowerSchool data breach","ty":"DB","d":"CAS","j":"Anthony J. Battaglia","p":76,"q":79},{"n":3126,"t":"Snowflake data breach","ty":"DB","d":"MT","j":"Brian Morris","p":72,"q":72},{"n":2724,"t":"Generic pharmaceuticals pricing","ty":"AT","d":"PAE","j":"Cynthia M. Rufe","p":70,"q":70},{"n":2879,"t":"Marriott data breach","ty":"DB","d":"MD","j":"John P. Bailey","p":69,"q":73},{"n":1720,"t":"Payment card interchange fees","ty":"AT","d":"NYE","j":"Brian M. Cogan","p":65,"q":66},{"n":3170,"t":"TransUnion data breach","ty":"DB","d":"ILN","j":"Robert W. Gettleman","p":62,"q":63},{"n":3179,"t":"Fire apparatus antitrust","ty":"AT","d":"WIE","j":"William C. Griesbach","p":62,"q":55},{"n":1917,"t":"Cathode ray tube antitrust","ty":"AT","d":"CAN","j":"Jon S. Tigar","p":54,"q":54},{"n":3110,"t":"Granulated sugar antitrust","ty":"AT","d":"MN","j":"Jerry W. Blackwell","p":54,"q":55},{"n":3096,"t":"Perry Johnson transcription breach","ty":"DB","d":"NYE","j":"Rachel P. Kovner","p":53,"q":57},{"n":2998,"t":"Pork antitrust","ty":"AT","d":"MN","j":"John R. Tunheim","p":51,"q":51},{"n":2768,"t":"Stryker LFIT V40 femoral head","ty":"PL","d":"MA","j":"Indira Talwani","p":47,"q":47},{"n":3189,"t":"Norada securities","ty":"SE","d":"CAC","j":"Michelle Williams Court","p":46,"q":46,"c":"2026-08-07"},{"n":3128,"t":"Dividend Solar / Fifth Third lending","ty":"SP","d":"MN","j":"Katherine Marie Menendez","p":46,"q":42},{"n":3155,"t":"Toronto Pearson air crash","ty":"DI","d":"MN","j":"Jerry W. Blackwell","p":42,"q":42},{"n":2904,"t":"AMCA data breach","ty":"DB","d":"NJ","j":"Jamel K. Semper","p":42,"q":42},{"n":3181,"t":"Boston Scientific spinal cord stimulator","ty":"PL","d":"CAC","j":"Josephine L. Staton","p":41,"q":29,"s":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,24,26,29,41],"l":"BSC stimulator","c":"2026-06-05"},{"n":3098,"t":"23andMe data breach","ty":"DB","d":"CAN","j":"Edward M. Chen","p":40,"q":41},{"n":3187,"t":"NPK fertilizer antitrust","ty":"AT","d":"KS","j":"Eric F. Melgren","p":40,"q":37,"c":"2026-06-09"},{"n":3180,"t":"Dupixent","ty":"PL","d":"NJ","j":"Zahid N. Quraishi","p":38,"q":35,"s":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,26,28,35,38],"l":"Dupixent","c":"2026-06-04"},{"n":3076,"t":"FTX collapse","ty":"SE","d":"FLS","j":"K. Michael Moore","p":37,"q":37},{"n":3031,"t":"Cattle and beef antitrust","ty":"AT","d":"MN","j":"John R. Tunheim","p":37,"q":35},{"n":3028,"t":"ONE Apus container ship","ty":"DI","d":"NYS","j":"Paul A. Engelmayer","p":37,"q":59},{"n":3006,"t":"Tasigna","ty":"PL","d":"FLM","j":"Roy B. Dalton, Jr.","p":36,"q":36},{"n":3010,"t":"Google digital advertising antitrust","ty":"AT","d":"NYS","j":"P. Kevin Castel","p":34,"q":32},{"n":2992,"t":"Bank of America unemployment benefits","ty":"MI","d":"CAS","j":"Gonzalo P. Curiel","p":33,"q":33},{"n":3148,"t":"GoodRx / PBM antitrust (No. II)","ty":"AT","d":"RI","j":"Mary S. McElroy","p":32,"q":32},{"n":2918,"t":"Hard disk drive suspension antitrust","ty":"AT","d":"CAN","j":"Maxine M. Chesney","p":30,"q":30},{"n":3113,"t":"Apple smartphone antitrust","ty":"AT","d":"NJ","j":"Julien Xavier Neals","p":29,"q":29},{"n":2905,"t":"ZF-TRW airbag control units","ty":"PL","d":"CAC","j":"John A. Kronstadt","p":28,"q":28},{"n":3185,"t":"Cognizant / TriZetto data breach","ty":"DB","d":"MOE","j":"John Andrew Ross","p":28,"q":28,"c":"2026-06-05"},{"n":2931,"t":"Delta Dental antitrust","ty":"AT","d":"ILN","j":"Sunil R. Harjani","p":27,"q":27},{"n":2542,"t":"Keurig single-serve coffee antitrust","ty":"AT","d":"NYS","j":"Vernon S. Broderick","p":27,"q":25},{"n":3119,"t":"Shale oil antitrust","ty":"AT","d":"NM","j":"Matthew L. Garcia","p":26,"q":26},{"n":2972,"t":"Blackbaud data breach","ty":"DB","d":"SC","j":"Joseph F. Anderson, Jr.","p":26,"q":26},{"n":3051,"t":"ARC airbag inflators","ty":"PL","d":"GAN","j":"Thomas W. Thrash, Jr.","p":24,"q":24},{"n":2865,"t":"Danish tax refund scheme","ty":"MI","d":"NYS","j":"Lewis A. Kaplan","p":24,"q":42},{"n":3160,"t":"Archery products antitrust","ty":"AT","d":"CO","j":"Philip A. Brimmer","p":23,"q":24},{"n":3115,"t":"Vehicle driving data tracking","ty":"DB","d":"GAN","j":"Thomas W. Thrash, Jr.","p":23,"q":21},{"n":2406,"t":"Blue Cross Blue Shield antitrust","ty":"AT","d":"ALN","j":"Anna M. Manasco","p":22,"q":22},{"n":3143,"t":"OpenAI copyright","ty":"IP","d":"NYS","j":"Sidney H. Stein","p":22,"q":19},{"n":3178,"t":"ByHeart infant formula","ty":"PL","d":"NYS","j":"Arun Subramanian","p":22,"q":22},{"n":3172,"t":"Cartiva cartilage implant","ty":"PL","d":"ARE","j":"Kristine G. Baker","p":21,"q":21},{"n":3190,"t":"Valtrus patent","ty":"IP","d":"TXE","j":"James Rodney Gilstrap","p":21,"q":12,"c":"2026-08-07"},{"n":3175,"t":"Shell eggs antitrust","ty":"AT","d":"WIW","j":"James D. Peterson","p":21,"q":21},{"n":3152,"t":"Construction equipment rental antitrust","ty":"AT","d":"ILN","j":"Sara L. Ellis","p":20,"q":22},{"n":2740,"t":"Taxotere hair loss","ty":"PL","d":"LAE","j":"Jane Triche Milazzo","p":20,"q":81},{"n":2460,"t":"Niaspan antitrust","ty":"AT","d":"PAE","j":"Timothy J. Savage","p":20,"q":20},{"n":3073,"t":"T-Mobile 2022 data breach","ty":"DB","d":"MOW","j":"Brian C. Wimes","p":18,"q":18},{"n":2843,"t":"Facebook consumer privacy","ty":"DB","d":"CAN","j":"Vince Chhabria","p":17,"q":33},{"n":2695,"t":"Santa Fe Natural Tobacco marketing","ty":"SP","d":"NM","j":"Robert J. Shelby","p":17,"q":17},{"n":3050,"t":"Chantix (No. II)","ty":"PL","d":"NYS","j":"Katherine Polk Failla","p":17,"q":17},{"n":3097,"t":"Concrete and cement additives antitrust","ty":"AT","d":"NYS","j":"Lewis J. Liman","p":17,"q":17},{"n":3153,"t":"Coinbase data breach","ty":"DB","d":"NYS","j":"Edgardo Ramos","p":17,"q":17},{"n":2311,"t":"Automotive parts antitrust","ty":"AT","d":"MIE","j":"F. Kay Behm","p":16,"q":16},{"n":2981,"t":"Google Play Store antitrust","ty":"AT","d":"CAN","j":"James Donato","p":15,"q":15},{"n":2867,"t":"Local TV advertising antitrust","ty":"AT","d":"ILN","j":"Virginia M. Kendall","p":15,"q":15},{"n":2818,"t":"GM air conditioning","ty":"SP","d":"MIE","j":"Matthew F. Leitman","p":15,"q":15},{"n":3030,"t":"Deere repair services antitrust","ty":"AT","d":"ILN","j":"Iain D. Johnston","p":14,"q":14},{"n":2841,"t":"MONAT hair care","ty":"PL","d":"FLS","j":"Darrin P. Gayles","p":13,"q":13},{"n":3159,"t":"Keffer Development data breach","ty":"DB","d":"MIE","j":"Mark A. Goldsmith","p":13,"q":13},{"n":3144,"t":"TikTok minor privacy","ty":"DB","d":"CAC","j":"George H. Wu","p":12,"q":12},{"n":3001,"t":"Google Play casino-style games","ty":"MI","d":"CAN","j":"Edward J. Davila","p":12,"q":12},{"n":3162,"t":"Class action settlement administration","ty":"AT","d":"DC","j":"John D. Bates","p":12,"q":12},{"n":2700,"t":"Herceptin marketing","ty":"SP","d":"OKN","j":"Gregory K. Frizzell","p":12,"q":12},{"n":2862,"t":"Diisocyanates antitrust","ty":"AT","d":"PAW","j":"W. Scott Hardy","p":12,"q":12},{"n":3040,"t":"Chrysler Pacifica fire recall","ty":"PL","d":"MIE","j":"David M. Lawson","p":11,"q":11},{"n":2913,"t":"Juul Labs","ty":"PL","d":"CAN","j":"William H. Orrick, III","p":10,"q":11},{"n":3193,"t":"Health Gorilla data breach","ty":"DB","d":"FLS","j":"K. Michael Moore","p":10,"q":10,"c":"2026-08-07"},{"n":3191,"t":"Non-AFFF firefighter turnout gear","ty":"SP","d":"MN","j":"Jeffrey M. Bryan","p":10,"q":8,"s":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,8,10],"l":"Turnout gear","c":"2026-08-18"},{"n":3071,"t":"RealPage rental software antitrust (No. II)","ty":"AT","d":"TNM","j":"Waverly D. Crenshaw, Jr.","p":10,"q":13},{"n":3078,"t":"Generac solar power systems","ty":"PL","d":"WIE","j":"Lynn S. Adelman","p":8,"q":8},{"n":3034,"t":"Neo Wireless patent","ty":"IP","d":"MIE","j":"Terrence G. Berg","p":7,"q":7},{"n":3157,"t":"P&G \"Protect, Grow and Restore\"","ty":"SP","d":"OHS","j":"Douglas R. Cole","p":7,"q":7},{"n":3174,"t":"Muan air crash","ty":"DI","d":"WAW","j":"James L. Robart","p":7,"q":7},{"n":2951,"t":"StubHub refunds","ty":"MI","d":"CAN","j":"Haywood S. Gilliam, Jr.","p":6,"q":6},{"n":2441,"t":"Stryker Rejuvenate / ABG II hip","ty":"PL","d":"MN","j":"Donovan W. Frank","p":6,"q":6},{"n":3036,"t":"Gardasil","ty":"PL","d":"NCW","j":"Kenneth D. Bell","p":6,"q":6},{"n":3035,"t":"AME Church retirement fund","ty":"EM","d":"TNW","j":"S. Thomas Anderson","p":6,"q":6},{"n":3167,"t":"Broiler chicken grower antitrust (No. III)","ty":"AT","d":"UT","j":"David B. Barlow","p":6,"q":6},{"n":2151,"t":"Toyota unintended acceleration","ty":"PL","d":"CAC","j":"James V. Selna","p":5,"q":5},{"n":2985,"t":"Apple App Store casino-style games","ty":"MI","d":"CAN","j":"Edward J. Davila","p":5,"q":4},{"n":2670,"t":"Packaged seafood antitrust","ty":"AT","d":"CAS","j":"Dana M. Sabraw","p":5,"q":5},{"n":1916,"t":"Chiquita Brands ATS","ty":"SE","d":"FLS","j":"Roy K. Altman","p":5,"q":5},{"n":3037,"t":"Recalled Abbott infant formula","ty":"PL","d":"ILN","j":"Matthew F. Kennelly","p":5,"q":14},{"n":2984,"t":"Folgers coffee marketing","ty":"SP","d":"MOW","j":"Beth Phillips","p":5,"q":5},{"n":3161,"t":"CCell cannabis vaporizer antitrust","ty":"AT","d":"CAN","j":"Vince Chhabria","p":4,"q":5},{"n":3138,"t":"Denosumab patent","ty":"IP","d":"NJ","j":"Christine P. O'Hearn","p":4,"q":8},{"n":1358,"t":"MTBE","ty":"PL","d":"NYS","j":"Denise L. Cote","p":4,"q":4},{"n":2816,"t":"Sorin 3T heater-cooler (No. II)","ty":"PL","d":"PAM","j":"Karoline Mehalchick","p":4,"q":4},{"n":2099,"t":"Stanford Entities securities","ty":"SE","d":"TXN","j":"David C. Godbey","p":4,"q":7},{"n":2566,"t":"TelexFree securities","ty":"SE","d":"MA","j":"Nathaniel M. Gorton","p":3,"q":3},{"n":2704,"t":"Interest rate swaps antitrust","ty":"AT","d":"NYS","j":"J. Paul Oetken","p":3,"q":3},{"n":3192,"t":"CoStar antitrust","ty":"AT","d":"VAE","j":"David J. Novak","p":3,"q":3,"c":"2026-08-11"},{"n":3103,"t":"Aflibercept patent","ty":"IP","d":"WVN","j":"Thomas S. Kleeh","p":3,"q":3},{"n":2885,"t":"3M Combat Arms earplugs","ty":"PL","d":"FLN","j":"M. Casey Rodgers","p":2,"q":2},{"n":3154,"t":"Respimat antitrust","ty":"AT","d":"MA","j":"Denise J. Casper","p":2,"q":2},{"n":1663,"t":"Insurance brokerage antitrust","ty":"AT","d":"NJ","j":"Claire C. Cecchi","p":2,"q":2},{"n":1871,"t":"Avandia","ty":"PL","d":"PAE","j":"Cynthia M. Rufe","p":2,"q":2},{"n":3074,"t":"BPS Direct / Cabela's wiretapping","ty":"DB","d":"PAE","j":"Mark A. Kearney","p":2,"q":2},{"n":2165,"t":"Endangered Species Act deadlines","ty":"MI","d":"DC","j":"Emmet G. Sullivan","p":1,"q":1},{"n":2930,"t":"Entresto patent","ty":"IP","d":"DE","j":"Richard G. Andrews","p":1,"q":1},{"n":2179,"t":"Deepwater Horizon","ty":"DI","d":"LAE","j":"Carl J. Barbier","p":1,"q":1},{"n":2859,"t":"Zimmer M/L Taper hip","ty":"PL","d":"NYS","j":"Jesse M. Furman","p":1,"q":1},{"n":3111,"t":"Capital One 360 savings interest","ty":"MI","d":"VAE","j":"David J. Novak","p":1,"q":1},{"n":3015,"t":"J&J sunscreen","ty":"PL","d":"FLS","j":"Raag Singhal","p":0,"q":0},{"n":2782,"t":"Ethicon Physiomesh","ty":"PL","d":"GAN","j":"Richard W. Story","p":0,"q":0},{"n":2967,"t":"Clearview AI privacy","ty":"DB","d":"ILN","j":"Sharon Johnson Coleman","p":0,"q":0},{"n":3062,"t":"Crop protection loyalty antitrust","ty":"AT","d":"NCM","j":"Thomas D. Schroeder","p":0,"q":26},{"n":2848,"t":"Zostavax","ty":"PL","d":"PAE","j":"Harvey Bartle, III","p":0,"q":101},{"n":3199,"t":"Apple AirTag stalking","ty":"PL","d":"CAN","j":"Wise","order":17,"c":"2026-10-02"},{"n":3195,"t":"Nevro spinal cord stimulator","ty":"PL","d":"CAN","j":"Gilliam","order":17,"c":"2026-10-02"},{"n":3194,"t":"Abbott spinal cord stimulator","ty":"PL","d":"ILN","j":"Jenkins","order":15,"c":"2026-10-02"},{"n":3197,"t":"Amazon tariff refunds","ty":"SP","d":"WAW","j":"Chun","order":6,"c":"2026-10-02"}]}</script>
+<div class="li-tip" id="li-tip" role="tooltip" aria-hidden="true"></div>
+<script>
+(function () {
+  'use strict';
+  var D = JSON.parse(document.getElementById('li-data').textContent);
+  var fmt = function (n) { return n == null ? '' : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
+  var sign = function (n) { return n > 0 ? '+' + fmt(n) : n < 0 ? '−' + fmt(-n) : '0'; };
+  var pct = function (a, b) { return (b == null || b === 0) ? null : (a - b) / b * 100; };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var MLBL = ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+  var MFULL = D.months.map(function (m) { var p = m.split('-'); return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+p[1] - 1] + ' ' + p[0]; });
+  var OTHER = { IP: 1, SE: 1, DI: 1, MI: 1, EM: 1 };
+  var SHORT = { PL: 'Products', AT: 'Antitrust', DB: 'Data breach', SP: 'Sales', IP: 'IP', SE: 'Securities', DI: 'Disaster', MI: 'Other', EM: 'Employment' };
+  var byN = {}; D.dockets.forEach(function (r) { byN[r.n] = r; });
+  var courtOf = function (r) { var s = D.seats[r.d]; return (s ? s.abbr : r.d) + ' · ' + r.j; };
+
+  /* ---------------- tooltip ---------------- */
+  var tip = document.getElementById('li-tip');
+  var tipOn = false;
+  function showTip(html, x, y) {
+    tip.innerHTML = html; tip.classList.add('on'); tip.setAttribute('aria-hidden', 'false'); tipOn = true; moveTip(x, y);
+  }
+  function moveTip(x, y) {
+    if (!tipOn) return;
+    var w = tip.offsetWidth, h = tip.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
+    var left = x + 14, top = y + 14;
+    if (left + w > vw - 8) left = x - w - 14;
+    if (top + h > vh - 8) top = y - h - 14;
+    if (left < 8) left = 8; if (top < 8) top = 8;
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+  }
+  function hideTip() { tip.classList.remove('on'); tip.setAttribute('aria-hidden', 'true'); tipOn = false; }
+  function bindTip(el, html) {
+    el.classList.add('li-hit'); el.setAttribute('tabindex', '0');
+    el.addEventListener('pointerenter', function (e) { showTip(typeof html === 'function' ? html() : html, e.clientX, e.clientY); });
+    el.addEventListener('pointermove', function (e) { moveTip(e.clientX, e.clientY); });
+    el.addEventListener('pointerleave', hideTip);
+    el.addEventListener('focus', function () { var b = el.getBoundingClientRect(); showTip(typeof html === 'function' ? html() : html, b.left + b.width / 2, b.top); });
+    el.addEventListener('blur', hideTip);
+  }
+  document.addEventListener('scroll', hideTip, { passive: true });
+
+  /* ---------------- Layer 1: tooltips on the static figures ---------------- */
+  (function () {
+    var f1 = document.querySelector('[data-fig="1"] svg'); if (f1) {
+      var r = f1.querySelectorAll('rect');
+      if (r.length >= 4) {
+        bindTip(r[1], '<b>21 of 162 active MDLs</b> carry 1,000 or more pending actions<small>13.0% of dockets</small>');
+        bindTip(r[3], '<b>193,866 of 204,977 pending actions</b> sit in those 21 dockets<small>94.6% of the system</small>');
+      }
+    }
+    var f2 = document.querySelector('[data-fig="2"] svg'); if (f2) {
+      var top = D.dockets.filter(function (r) { return r.p != null; }).sort(function (a, b) { return b.p - a.p; }).slice(0, 10);
+      var bars = f2.querySelectorAll('rect');
+      bars.forEach(function (b, i) {
+        var d = top[i]; if (!d) return;
+        var ch = d.q != null ? d.p - d.q : null;
+        bindTip(b, '<b>' + esc(d.t) + '</b> (MDL ' + d.n + ')<small>' + esc(courtOf(d)) + '</small>' + fmt(d.p) + ' pending, Oct 1' +
+          (ch != null ? '<small>Sep 1: ' + fmt(d.q) + ' · ' + sign(ch) + '</small>' : ''));
+      });
+    }
+    var f3 = document.querySelector('[data-fig="3"] svg'); if (f3) {
+      var pl = f3.querySelector('polyline'); var s = byN[2738].s;
+      if (pl) {
+        var pts = pl.getAttribute('points').trim().split(/\s+/).map(function (p) { return p.split(',').map(Number); });
+        pts.forEach(function (p, i) {
+          var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          c.setAttribute('cx', p[0]); c.setAttribute('cy', p[1]); c.setAttribute('r', 11); c.setAttribute('fill', 'transparent');
+          f3.appendChild(c);
+          var prev = i > 0 ? s[i] - s[i - 1] : null;
+          bindTip(c, '<b>' + fmt(s[i]) + '</b> pending · ' + MFULL[i] + ' report' + (prev != null ? '<small>' + sign(prev) + ' on the prior month</small>' : ''));
+        });
+      }
+    }
+    var f4 = document.querySelector('[data-fig="4"] svg'); if (f4) {
+      var s4 = byN[3140].s.slice(10); var cols = f4.querySelectorAll('rect');
+      cols.forEach(function (b, i) {
+        if (s4[i] == null) return;
+        var prev = i > 0 ? s4[i] - s4[i - 1] : null;
+        bindTip(b, '<b>' + fmt(s4[i]) + '</b> pending · ' + MFULL[10 + i] + ' report' + (prev != null ? '<small>' + sign(prev) + ' on the prior month</small>' : ''));
+      });
+    }
+  })();
+
+  /* ---------------- Layer 1b: sortable static tables ---------------- */
+  (function () {
+    var num = function (t) { t = t.replace(/[,\s]/g, '').replace('−', '-'); var m = t.match(/^[+-]?\d+(\.\d+)?/); return m ? parseFloat(m[0]) : null; };
+    document.querySelectorAll('table.li-table:not(.li-board)').forEach(function (tb) {
+      var ths = tb.querySelectorAll('thead th'); var body = tb.querySelector('tbody'); if (!body) return;
+      ths.forEach(function (th, ci) {
+        th.classList.add('li-sortable'); th.setAttribute('tabindex', '0'); th.title = 'Sort';
+        var go = function () {
+          var dir = th.getAttribute('aria-sort') === 'descending' ? 'ascending' : 'descending';
+          ths.forEach(function (o) { o.removeAttribute('aria-sort'); }); th.setAttribute('aria-sort', dir);
+          var rows = Array.prototype.slice.call(body.querySelectorAll('tr'));
+          rows.sort(function (a, b) {
+            var ta = a.children[ci].textContent, tbt = b.children[ci].textContent, na = num(ta), nb = num(tbt), r;
+            if (na != null && nb != null) r = na - nb; else r = ta.localeCompare(tbt);
+            return dir === 'descending' ? -r : r;
+          });
+          rows.forEach(function (r) { body.appendChild(r); });
+        };
+        th.addEventListener('click', go);
+        th.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+      });
+    });
+  })();
+
+  /* ---------------- Layer 2: the board ---------------- */
+  var board = (function () {
+    var body = document.getElementById('li-board-body'); if (!body) return null;
+    var q = document.getElementById('li-board-q'), count = document.getElementById('li-board-count'), more = document.getElementById('li-board-more');
+    var chips = document.querySelectorAll('#docket-board .li-chip[data-ty]');
+    var ths = document.querySelectorAll('#li-board-table th[data-k]');
+    var st = { ty: '', q: '', dist: null, k: 'p', dir: -1, all: false };
+    var rows = D.dockets.map(function (r) {
+      var o = Object.assign({}, r);
+      o.p = r.p != null ? r.p : r.order; o.isNew = r.p == null;
+      o.ch = (r.q != null && r.p != null) ? r.p - r.q : null;
+      o.pct = (r.q != null && r.p != null) ? pct(r.p, r.q) : null;
+      o.court = courtOf(r); o.tyName = D.types[r.ty] || r.ty;
+      o.hay = (r.n + ' ' + r.t + ' ' + o.court + ' ' + o.tyName).toLowerCase();
+      return o;
+    });
+    function spark(s) {
+      var v = s.slice(-12).filter(function (x) { return x != null; }); if (v.length < 2) return '';
+      var mn = Math.min.apply(null, v), mx = Math.max.apply(null, v), rg = mx - mn || 1;
+      var seg = s.slice(-12), pts = [], last = null;
+      seg.forEach(function (x, i) { if (x == null) return; var px = 3 + i * (78 / 11), py = 19 - (x - mn) / rg * 16; pts.push(px.toFixed(1) + ',' + py.toFixed(1)); last = [px, py]; });
+      return '<svg viewBox="0 0 84 22" aria-hidden="true"><polyline points="' + pts.join(' ') + '"/><circle cx="' + last[0].toFixed(1) + '" cy="' + last[1].toFixed(1) + '" r="2"/></svg>';
+    }
+    function filtered() {
+      return rows.filter(function (r) {
+        if (st.dist && r.d !== st.dist) return false;
+        if (st.ty === 'NEW') { if (!r.c) return false; }
+        else if (st.ty === 'OT') { if (!OTHER[r.ty]) return false; }
+        else if (st.ty && r.ty !== st.ty) return false;
+        if (st.q && r.hay.indexOf(st.q) < 0) return false;
+        return true;
+      }).sort(function (a, b) {
+        var k = st.k, va = a[k], vb = b[k], r;
+        if (va == null && vb == null) r = 0; else if (va == null) r = 1; else if (vb == null) r = -1;
+        else if (typeof va === 'number') r = (va - vb) * st.dir; else r = String(va).localeCompare(String(vb)) * st.dir;
+        return r || (b.p - a.p);
+      });
+    }
+    function render() {
+      var f = filtered(), show = st.all ? f : f.slice(0, 25), tot = 0;
+      f.forEach(function (r) { if (!r.isNew) tot += r.p; });
+      body.innerHTML = show.map(function (r) {
+        var chCls = r.ch > 0 ? 'li-up' : r.ch < 0 ? 'li-down' : '';
+        return '<tr><td class="li-num"><span class="li-mdl">' + r.n + '</span></td>' +
+          '<td class="li-t">' + esc(r.t) + (r.c ? ' <span class="li-new">centralized ' + esc(r.c.replace(/^2026-(\d\d)-(\d\d)$/, function (_, m, d) { return ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+m] + ' ' + (+d); })) + '</span>' : '') + '</td>' +
+          '<td><span class="li-ty" title="' + esc(r.tyName) + '">' + esc(SHORT[r.ty] || r.tyName) + '</span></td>' +
+          '<td class="li-court"><b>' + esc(D.seats[r.d] ? D.seats[r.d].abbr : r.d) + '</b>' + esc(r.j) + '</td>' +
+          '<td class="li-num">' + (r.q != null ? fmt(r.q) : '') + '</td>' +
+          '<td class="li-num">' + (r.isNew ? '<span class="li-new">' + r.p + ' in order</span>' : fmt(r.p)) + '</td>' +
+          '<td class="li-num ' + chCls + '">' + (r.ch != null ? sign(r.ch) : '') + '</td>' +
+          '<td class="li-num ' + chCls + '">' + (r.pct != null ? (r.pct > 0 ? '+' : r.pct < 0 ? '−' : '') + Math.abs(r.pct).toFixed(1) + '%' : '') + '</td>' +
+          '<td class="li-spk">' + (r.s ? spark(r.s) : '') + '</td></tr>';
+      }).join('');
+      var distName = st.dist && D.seats[st.dist] ? D.seats[st.dist].abbr : '';
+      count.textContent = 'Showing ' + show.length + ' of ' + f.length + ' dockets' + (distName ? ' in ' + distName : '') + ' · ' + fmt(tot) + ' pending actions on the Oct 1 report';
+      if (f.length > 25) { more.hidden = false; more.textContent = st.all ? 'Show the top 25' : 'Show all ' + f.length; } else more.hidden = true;
+      ths.forEach(function (th) { if (th.dataset.k === st.k) th.setAttribute('aria-sort', st.dir < 0 ? 'descending' : 'ascending'); else th.removeAttribute('aria-sort'); });
+    }
+    q.addEventListener('input', function () { st.q = q.value.trim().toLowerCase(); render(); });
+    chips.forEach(function (c) { c.addEventListener('click', function () { st.ty = c.dataset.ty; chips.forEach(function (o) { o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); }); render(); }); });
+    ths.forEach(function (th) {
+      th.setAttribute('tabindex', '0');
+      var go = function () { var k = th.dataset.k; if (st.k === k) st.dir = -st.dir; else { st.k = k; st.dir = (k === 't' || k === 'ty' || k === 'd') ? 1 : -1; } render(); };
+      th.addEventListener('click', go); th.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+    more.addEventListener('click', function () { st.all = !st.all; render(); });
+    render();
+    return { setDist: function (d) { st.dist = d; st.all = false; render(); } };
+  })();
+
+  /* ---------------- Layer 3: the map ---------------- */
+  (function () {
+    var g = document.getElementById('li-map-bubbles'); if (!g) return;
+    var gl = document.getElementById('li-map-labels'), panel = document.getElementById('li-map-panel'), legend = document.getElementById('li-map-legend');
+    var clear = document.querySelector('[data-mapclear]'), modes = document.querySelectorAll('[data-mapmode]');
+    var dist = {};
+    D.dockets.forEach(function (r) {
+      var o = dist[r.d] || (dist[r.d] = { code: r.d, n: 0, p: 0, items: [], fresh: 0 });
+      o.items.push(r); if (r.p != null) { o.n++; o.p += r.p; } else o.fresh++;
+    });
+    var list = Object.keys(dist).map(function (k) { return dist[k]; });
+    list.forEach(function (o) { o.items.sort(function (a, b) { return (b.p != null ? b.p : -1) - (a.p != null ? a.p : -1); }); });
+    var mode = 'p', sel = null;
+    var mob = function () { return window.innerWidth <= 768; };
+    var R = function (o) { var v = mode === 'p' ? o.p : o.n; var mx = mode === 'p' ? 84916 : 19; return 3 + 44 * Math.sqrt(v / mx); };
+    var tipFor = function (o) {
+      var s = D.seats[o.code], lead = o.items[0];
+      return '<b>' + esc(s.abbr) + '</b> · ' + esc(s.city) + '<small>' + o.n + (o.n === 1 ? ' MDL' : ' MDLs') + ' · ' + fmt(o.p) + ' pending' + (o.fresh ? ' · ' + o.fresh + ' created Oct 2' : '') + '</small>' +
+        (lead && lead.p != null ? 'Largest: ' + esc(lead.t) + ', ' + fmt(lead.p) : 'Largest: ' + esc(lead.t)) + '<small>Click to list its dockets</small>';
+    };
+    function draw() {
+      g.innerHTML = ''; gl.innerHTML = '';
+      list.slice().sort(function (a, b) { return R(b) - R(a); }).forEach(function (o) {
+        var s = D.seats[o.code]; if (!s) return;
+        var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('cx', s.x); c.setAttribute('cy', s.y); c.setAttribute('r', R(o).toFixed(1)); c.setAttribute('class', 'li-bub' + (sel === o.code ? ' sel' : ''));
+        c.setAttribute('role', 'button'); c.setAttribute('aria-label', s.abbr + ', ' + o.n + ' MDLs, ' + fmt(o.p) + ' pending actions');
+        bindTip(c, function () { return tipFor(o); });
+        var act = function () { select(sel === o.code ? null : o.code); };
+        c.addEventListener('click', act); c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
+        g.appendChild(c);
+      });
+      // labels: greedy placement, largest first, trying above / right / below / left, skipping collisions
+      var placed = [];
+      list.filter(function (o) { return mob() ? (mode === 'p' ? o.p >= 8000 : o.n >= 9) : (mode === 'p' ? o.p >= 4000 : o.n >= 7); }).sort(function (a, b) { return R(b) - R(a); }).forEach(function (o) {
+        var s = D.seats[o.code], r = R(o), txt = s.abbr + ' ' + (mode === 'p' ? fmt(o.p) : o.n), w = txt.length * (mob() ? 15.5 : 8.6), h = mob() ? 28 : 16;
+        var cands = [
+          { x: s.x, y: s.y - r - 6, a: 'middle', bx: s.x - w / 2, by: s.y - r - 6 - h },
+          { x: s.x + r + 6, y: s.y + 5, a: 'start', bx: s.x + r + 6, by: s.y - h / 2 },
+          { x: s.x, y: s.y + r + 17, a: 'middle', bx: s.x - w / 2, by: s.y + r + 4 },
+          { x: s.x - r - 6, y: s.y + 5, a: 'end', bx: s.x - r - 6 - w, by: s.y - h / 2 }
+        ];
+        var ok = null;
+        for (var ci = 0; ci < cands.length && !ok; ci++) {
+          var c = cands[ci]; if (c.bx < 2 || c.bx + w > 973 || c.by < 2 || c.by + h > 608) continue;
+          var hit = placed.some(function (b) { return c.bx < b.bx + b.w + 4 && c.bx + w + 4 > b.bx && c.by < b.by + b.h + 2 && c.by + h + 2 > b.by; });
+          if (!hit) ok = c;
+        }
+        if (!ok) return;
+        placed.push({ bx: ok.bx, by: ok.by, w: w, h: h });
+        var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        t.setAttribute('x', ok.x.toFixed(1)); t.setAttribute('y', ok.y.toFixed(1)); t.setAttribute('text-anchor', ok.a); t.setAttribute('class', 'li-mlbl');
+        t.textContent = txt; gl.appendChild(t);
+      });
+      var L = mode === 'p' ? [[1000, '1,000'], [10000, '10,000'], [84916, '84,916']] : [[1, '1'], [7, '7'], [19, '19']];
+      legend.innerHTML = '<span>Bubble area = ' + (mode === 'p' ? 'pending actions' : 'number of MDLs') + '</span>' +
+        '<svg viewBox="0 0 230 72" aria-hidden="true">' + L.map(function (l, i) { var r = R(mode === 'p' ? { p: l[0] } : { n: l[0] }) * 0.6; var x = 32 + i * 80;
+          return '<circle cx="' + x + '" cy="34" r="' + r.toFixed(1) + '" fill="#8a2419" fill-opacity=".42" stroke="#8a2419"/><text x="' + x + '" y="68" text-anchor="middle" font-size="9" fill="#73675a" font-family="IBM Plex Mono,monospace">' + l[1] + '</text>'; }).join('') + '</svg>' +
+        '<span>Labels mark districts with ' + (mob() ? (mode === 'p' ? '8,000 or more pending actions' : 'nine or more MDLs') : (mode === 'p' ? '4,000 or more pending actions' : 'seven or more MDLs')) + '</span>';
+    }
+    function select(code) {
+      sel = code; draw(); clear.hidden = !code;
+      if (board) board.setDist(code);
+      if (!code) { panel.hidden = true; panel.innerHTML = ''; return; }
+      var o = dist[code], s = D.seats[code];
+      panel.hidden = false;
+      panel.innerHTML = '<h4>' + esc(s.abbr) + ' · ' + esc(s.city) + ' · ' + o.n + (o.n === 1 ? ' MDL' : ' MDLs') + ' · ' + fmt(o.p) + ' pending</h4><ol>' +
+        o.items.map(function (r) { return '<li>' + esc(r.t) + ' <span class="li-num">MDL ' + r.n + ' · ' + esc(r.j) + ' · ' + (r.p != null ? fmt(r.p) : r.order + ' in order') + '</span></li>'; }).join('') + '</ol>';
+    }
+    modes.forEach(function (b) { b.addEventListener('click', function () { mode = b.dataset.mapmode; modes.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); draw(); }); });
+    clear.addEventListener('click', function () { select(null); });
+    var lastMob = mob(); window.addEventListener('resize', function () { if (mob() !== lastMob) { lastMob = mob(); draw(); } });
+    draw();
+  })();
+
+  /* ---------------- Layer 4: trend lines ---------------- */
+  (function () {
+    var svg = document.getElementById('li-trend-svg'); if (!svg) return;
+    var chipsEl = document.getElementById('li-trend-chips'), modes = document.querySelectorAll('[data-tmode]');
+    var PAL = ['#8a2419', '#1a1612', '#2c4a7a', '#4f6b2f', '#b07d1e', '#2f6b6b', '#6b3a6e', '#73675a'];
+    var tracked = D.dockets.filter(function (r) { return r.s; }).sort(function (a, b) { return b.p - a.p; });
+    var on = [3047, 3084, 3081, 3094, 3140, 3092]; var mode = 'c'; var hover = null;
+    var mob = function () { return window.innerWidth <= 768; };
+    var W, H, L, Rm, T, B, LH;
+    function geom() { if (mob()) { W = 600; H = 440; L = 62; Rm = 172; T = 18; B = 50; LH = 21; } else { W = 920; H = 360; L = 64; Rm = 176; T = 18; B = 46; LH = 15; } svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); }
+    var colorOf = {};
+    function series(r) {
+      if (mode === 'c') return r.s;
+      var base = null; return r.s.map(function (v) { if (v == null) return null; if (base == null) base = v || null; return base ? v / base * 100 : null; });
+    }
+    function draw() {
+      geom();
+      colorOf = {}; on.forEach(function (n, i) { colorOf[n] = PAL[i % PAL.length]; });
+      var lines = on.map(function (n) { return { r: byN[n], v: series(byN[n]) }; });
+      var all = []; lines.forEach(function (l) { l.v.forEach(function (x) { if (x != null) all.push(x); }); });
+      var lg = mode === 'i';
+      var mn, mx;
+      if (lg) { var lo = all.length ? Math.min.apply(null, all) : 100, hi = all.length ? Math.max.apply(null, all) : 100; mn = Math.log10(Math.min(lo, 100) / 1.15); mx = Math.log10(Math.max(hi, 100) * 1.15); }
+      else { mn = 0; mx = (all.length ? Math.max.apply(null, all) : 1) * 1.06 || 1; }
+      var span = mx - mn || 1;
+      var X = function (i) { return L + i * (W - L - Rm) / (D.months.length - 1); };
+      var Y = function (v) { var u = lg ? Math.log10(v) : v; return T + (H - T - B) * (1 - (u - mn) / span); };
+      var out = [], ends = [];
+      var tickVals = [];
+      if (lg) { [25, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800].forEach(function (v) { if (Math.log10(v) >= mn && Math.log10(v) <= mx) tickVals.push(v); }); }
+      else { for (var t = 0; t <= 5; t++) tickVals.push(mn + span * t / 5); }
+      tickVals.forEach(function (v) { var y = Y(v);
+        out.push('<line x1="' + L + '" y1="' + y.toFixed(1) + '" x2="' + (W - Rm) + '" y2="' + y.toFixed(1) + '" class="li-grid"/>');
+        out.push('<text x="' + (L - 6) + '" y="' + (y + 5).toFixed(1) + '" class="li-axv" text-anchor="end">' + (mode === 'c' ? (v >= 1000 ? (v / 1000).toFixed(v >= 10000 ? 0 : 1) + 'k' : Math.round(v)) : Math.round(v)) + '</text>'); });
+      var step = mob() ? 4 : 2; D.months.forEach(function (m, i) { if (i % step === 0 || i === D.months.length - 1) out.push('<text x="' + X(i).toFixed(1) + '" y="' + (H - B + 24) + '" class="li-axv" text-anchor="middle">' + MLBL[i] + (i === 0 || i === 12 ? "\u2019" + D.months[i].slice(2, 4) : '') + '</text>'); });
+      lines.forEach(function (l) {
+        var pts = []; l.v.forEach(function (x, i) { if (x != null) pts.push(X(i).toFixed(1) + ',' + Y(x).toFixed(1)); });
+        if (!pts.length) return;
+        var dim = hover != null && hover.n && hover.n !== l.r.n;
+        out.push('<polyline points="' + pts.join(' ') + '" class="li-tl' + (dim ? ' dim' : '') + '" stroke="' + colorOf[l.r.n] + '"/>');
+        var li = l.v.length - 1; while (li >= 0 && l.v[li] == null) li--;
+        out.push('<circle cx="' + X(li).toFixed(1) + '" cy="' + Y(l.v[li]).toFixed(1) + '" r="3.5" fill="' + colorOf[l.r.n] + '" class="li-tdot"/>');
+        ends.push({ y: Y(l.v[li]), n: l.r.n, l: l.r.l || l.r.t, v: l.r.s[li] });
+      });
+      ends.sort(function (a, b) { return a.y - b.y; });
+      for (var ei = 1; ei < ends.length; ei++) if (ends[ei].y - ends[ei - 1].y < LH) ends[ei].y = ends[ei - 1].y + LH;
+      for (var ej = ends.length - 2; ej >= 0; ej--) if (ends[ej + 1].y - ends[ej].y < LH) ends[ej].y = ends[ej + 1].y - LH;
+      ends.forEach(function (e) { var lbl = e.l;
+        out.push('<text x="' + (W - Rm + 8) + '" y="' + (e.y + 4).toFixed(1) + '" class="li-tend" fill="' + colorOf[e.n] + '">' + esc(lbl) + ' ' + fmt(e.v) + '</text>'); });
+      if (hover != null && hover.i != null) {
+        var hi = hover.i; out.push('<line x1="' + X(hi).toFixed(1) + '" y1="' + T + '" x2="' + X(hi).toFixed(1) + '" y2="' + (H - B) + '" class="li-cur"/>');
+        lines.forEach(function (l) { var x = l.v[hi]; if (x == null) return; out.push('<circle cx="' + X(hi).toFixed(1) + '" cy="' + Y(x).toFixed(1) + '" r="4.5" fill="' + colorOf[l.r.n] + '" class="li-tdot"/>'); });
+      }
+      out.push('<rect x="' + L + '" y="' + T + '" width="' + (W - L - Rm) + '" height="' + (H - T - B) + '" fill="transparent" id="li-trend-hit"/>');
+      svg.innerHTML = out.join('');
+      var hit = document.getElementById('li-trend-hit');
+      var at = function (e) { var b = svg.getBoundingClientRect(); var px = (e.clientX - b.left) / b.width * W; var i = Math.round((px - L) / ((W - L - Rm) / (D.months.length - 1))); return Math.max(0, Math.min(D.months.length - 1, i)); };
+      var html = function (i) {
+        var rows = lines.map(function (l) { var x = l.v[i]; if (x == null) return ''; var raw = l.r.s[i];
+          return '<div><span style="color:' + colorOf[l.r.n] + '">●</span> ' + esc(l.r.t) + ': <b>' + fmt(raw) + '</b>' + (mode === 'i' ? ' <small style="display:inline">(' + Math.round(x) + ')</small>' : '') + '</div>'; }).join('');
+        return '<b>' + MFULL[i] + ' report</b>' + rows;
+      };
+      hit.addEventListener('pointermove', function (e) { var i = at(e); if (!hover || hover.i !== i) { hover = { i: i }; draw(); } showTip(html(i), e.clientX, e.clientY); });
+      hit.addEventListener('pointerleave', function () { hover = null; hideTip(); draw(); });
+      svg.setAttribute('aria-label', 'Line chart of monthly pending actions, February 2025 to October 2026, for ' + lines.map(function (l) { return l.r.t; }).join(', ') + '.');
+    }
+    function chips() {
+      chipsEl.innerHTML = tracked.map(function (r) {
+        var o = on.indexOf(r.n) >= 0;
+        return '<button type="button" class="li-chip" data-n="' + r.n + '" aria-pressed="' + o + '"' + (o ? ' style="background:' + colorOf[r.n] + ';border-color:' + colorOf[r.n] + '"' : '') + '>' + esc(r.t) + '</button>';
+      }).join('');
+      chipsEl.querySelectorAll('.li-chip').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var n = +b.dataset.n, i = on.indexOf(n);
+          if (i >= 0) { if (on.length === 1) return; on.splice(i, 1); } else { if (on.length >= 8) { on.shift(); } on.push(n); }
+          draw(); chips();
+        });
+      });
+    }
+    modes.forEach(function (b) { b.addEventListener('click', function () { mode = b.dataset.tmode; modes.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); draw(); }); });
+    var lastMob = mob(); window.addEventListener('resize', function () { if (mob() !== lastMob) { lastMob = mob(); draw(); } });
+    draw(); chips();
+  })();
+})();
+
+</script>
 </body>
 </html>
