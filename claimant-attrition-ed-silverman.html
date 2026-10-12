@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>A Model Will Always Be Wrong</title>
+  <meta name="description" content="Edward Silverman, Analytics Manager at Verus LLC, on the claimant inventory that loses 90 percent of its names before validation, what funders now ask to see, and why a forecast with a range beats a single dollar figure." />
+
+  <link rel="canonical" href="https://lawsuitintelligencer.com/claimant-attrition-ed-silverman" />
+
+  <meta property="og:title" content="A Model Will Always Be Wrong" />
+  <meta property="og:description" content="An interview with Edward Silverman of Verus LLC on claimant attrition, funder diligence, and the limits of predictive analytics in mass tort inventories." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://lawsuitintelligencer.com/claimant-attrition-ed-silverman" />
+  <meta property="og:image" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+  <meta property="og:image:secure_url" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Lawsuit Intelligencer — Mass Torts. Plaintiff-Side Litigation." />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="A Model Will Always Be Wrong" />
+  <meta name="twitter:description" content="An interview with Edward Silverman of Verus LLC on claimant attrition, funder diligence, and the limits of predictive analytics in mass tort inventories." />
+  <meta name="twitter:image" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#001a57">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "A Model Will Always Be Wrong",
+  "description": "Edward Silverman, Analytics Manager at Verus LLC, on the claimant inventory that loses 90 percent of its names before validation, what funders now ask to see, and why a forecast with a range beats a single dollar figure.",
+  "datePublished": "2026-10-15",
+  "dateModified": "2026-10-15",
+  "author": {
+    "@type": "Person",
+    "@id": "https://davidmeldofsky.com/#person",
+    "name": "David Meldofsky",
+    "url": "https://lawsuitintelligencer.com/david-meldofsky",
+    "jobTitle": "California-licensed attorney"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lawsuit Intelligencer",
+    "url": "https://lawsuitintelligencer.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://lawsuitintelligencer.com/claimant-attrition-ed-silverman"
+  }
+}
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="masthead">
+    <div class="container">
+      <div class="masthead-top">
+        <div class="masthead-issue">
+          <a href="/" aria-label="Lawsuit Intelligencer home" class="masthead-mark-link">
+            <img src="/logo.svg" alt="Lawsuit Intelligencer" class="masthead-mark" />
+          </a>
+          <strong>Vol. I &middot; No. 6 &middot; October 2026</strong>
+        </div>
+
+        <nav class="masthead-nav" aria-label="Main navigation">
+          <a href="/#articles">Articles</a>
+          <a href="/#coverage">Coverage</a>
+          <a href="about">About</a>
+          <a href="contribute">Contribute</a>
+        </nav>
+      </div>
+
+      <div class="masthead-title">
+        <p class="masthead-h1"><a href="/">Lawsuit Intelligencer</a></p>
+        <p class="masthead-tagline">Attorney-led analysis of mass torts, product liability, toxic exposure litigation, and the business of plaintiff-side law.</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <article class="article">
+        <header>
+          <p class="article-eyebrow">Interview &middot; The Business of Plaintiff-Side Law</p>
+          <h1>A Model Will Always Be Wrong</h1>
+          <p class="article-dek">Edward Silverman of Verus LLC on the claimant inventory that loses 90 percent of its names before anyone reads a medical record, what funders now ask to see that they did not ask for three years ago, and why a forecast with a range beats a single dollar figure.</p>
+          <p class="article-meta">By <a href="david-meldofsky">David Meldofsky</a> &middot; October 15, 2026 &middot; 6 min read</p>
+        </header>
+
+        <div class="article-body">
+          <p>A plaintiff firm that signs ten thousand claimants in a mass tort does not yet hold ten thousand claims. It holds a dataset. What that dataset is worth depends on how many of the names survive deduplication, validation, and the years between the retainer and the offer. Funders underwrite to the surviving number. Defendants negotiate against it. The firm is often the last party to learn what it is.</p>
+
+          <p>Edward Silverman is Analytics Manager at Verus LLC, a litigation support firm in Princeton, New Jersey, that serves mass tort and class action firms. His work there is forecasting what a claimant inventory will be worth and how many of its claimants will reach compensation. He came to litigation from the life sciences: a doctorate in molecular biology, a postdoctoral fellowship at Caltech, then nine years running analytics at a life sciences technology company.</p>
+
+          <p>I put eight questions to him in writing. His answers place most of the attrition in a mass tort inventory at the front end, before anyone has opened a medical record. A dataset a firm believes holds tens of thousands of claimants can lose 90 percent of them to duplicates and bad information. He also declined to oversell his own category. A model, he says, will always be wrong. A firm is better served by a forecast with a stated range than by a vendor who names a figure.</p>
+
+          <p>His answers run below. The section headings are mine.</p>
+
+          <h2>On where the inventory shrinks</h2>
+
+          <p><strong>Meldofsky: In a large claimant inventory, what share goes unreachable before resolution, and where in the life of a case does that loss concentrate?</strong></p>
+
+          <p><strong>Silverman:</strong> It depends on the nature of the litigation. In a lot of litigation, lead generators are engaged. They cast a very wide net, and often they are not incentivized to be selective. By the time we see the data, a law firm may think it has tens of thousands of claimants. Once we deduplicate and get rid of bad information, that number can get cut by 90 percent or more. What is left is a candidate population of real claims.</p>
+
+          <p>Among those there is further attrition. Good case management can mitigate that somewhat, but people tend to lose interest over time. Then a good chunk of the population often cannot prove injury. The initial stages of validation are where most of the loss concentrates. Another population drops out when they cannot resolve deficiencies on the claim.</p>
+
+          <h2>On the claimant who will go dark</h2>
+
+          <p><strong>Meldofsky: Which early signals actually predict a claimant who later goes dark? I am most interested in the ones firms overlook.</strong></p>
+
+          <p><strong>Silverman:</strong> One is age. Another, even though it is rare, is the claimant who communicates only by phone and does not respond, or who has no email. Those are often the highest risk. If the litigation drags on, people in general lose interest or lose their documentation and go dark. Claimants who do not fill in the necessary information early often can never be tracked down again.</p>
+
+          <h2>On the case management system that is a spreadsheet</h2>
+
+          <p><strong>Meldofsky: Most firms build this reporting in-house out of their case management system. Where does that break down?</strong></p>
+
+          <p><strong>Silverman:</strong> That assumes they have a case management system that is more than a bunch of Excel sheets. Excel can be good, but then there are version control issues. We often see duplicates, a spouse and the original injured party reporting the same claim, and fields that go missing as the sheets evolve. An established system with a standard set of fields helps make the initial data capture robust. We have seen that the more robust the original data capture is, the less follow-up and dropout there will be.</p>
+
+          <h2>On what funders ask for now</h2>
+
+          <p><strong>Meldofsky: Funders underwrite to a set of numbers. Which ones are they demanding in diligence now that they were not asking for three years ago?</strong></p>
+
+          <p><strong>Silverman:</strong> Funders can put tremendous pressure on law firms because they have made a big investment. I think they have become more savvy about getting to the true number of claims likely to be compensable in a portfolio. Three years ago they wanted status reports. They were not asking so much for an assessment of how many claims would be compensable.</p>
+
+          <h2>On attrition that outruns the model</h2>
+
+          <p><strong>Meldofsky: What happens to a firm&rsquo;s economics when actual attrition runs past the rate the funding model assumed?</strong></p>
+
+          <p><strong>Silverman:</strong> To be honest, I do not really know the answer to that. What we can see is firms getting stressed by the frequency of meeting and report requests. Those are things that may have been avoidable with a better initial assessment.</p>
+
+          <h2>On what the data cannot say</h2>
+
+          <p><strong>Meldofsky: Where is predictive analytics oversold right now? Tell me what the data cannot tell a firm.</strong></p>
+
+          <p><strong>Silverman:</strong> The thing that is hard to communicate, since it is the opposite of sales, is that predictive analytics is a best estimate of something. It cannot say with 100 percent certainty that a portfolio will be worth X dollars or that Y claimants will matriculate. A model will always be wrong, and everyone&rsquo;s model will be wrong in different ways.</p>
+
+          <p>One would want to be upfront about the range of uncertainty. A prediction with a range of uncertainty is apt to be better for a firm than someone who puts a distinct dollar value on an output.</p>
+
+          <p>Data also cannot predict exogenous events. A litigation becomes something the public is generally aware of, or a bellwether case behaves in an unexpected way, especially when there are no direct comparisons to draw on.</p>
+
+          <h2>On proving up at the offer</h2>
+
+          <p><strong>Meldofsky: At the point a defendant makes an offer, what separates an inventory that can prove up quickly from one that cannot?</strong></p>
+
+          <p><strong>Silverman:</strong> Three Cs: confidence, consistency, and completeness of the dataset. There cannot be any doubt about the inventory. No duplicates, no missing data, and every claim with its supporting documentation.</p>
+
+          <h2>On which AI uses survive an audit</h2>
+
+          <p><strong>Meldofsky: Firms now run AI tools across their inventories to flag deficiencies, summarize medical records, and message claimants. Which of those uses hold up when a special master or a defendant audits the inventory, and which produce errors the firm ends up answering for?</strong></p>
+
+          <p><strong>Silverman:</strong> Having computer programs or AI run rules to flag deficiencies is usually pretty safe, because if there is a mistake there is a built-in resolution process. Summarization of medical records can get hairy if there is not a human in the loop. AI can be very good at summarizing, but the best practice we have found is to have it summarize and then have a human verify.</p>
+
+          <p>Sometimes there is a hallucination. Sometimes the wrong dates get pulled, and that can cause major issues, especially where a statute of limitations is involved. For any large document summarization, AI is best used as an assistant that makes a human reviewer quicker. It should not replace the reviewer, because mistakes can be very hard to detect until it is too late.</p>
+
+          <p>AI messaging of claimants to notify them of deficiencies is fine so long as the information is pulled correctly. Automated notifications were fairly normalized even before AI. In general, anything that gets entered should have the AI supervised in some way. If there is a mistake, a dedicated defendant will find it.</p>
+
+          <p>Edward Silverman is Analytics Manager at <a href="https://verusllc.com">Verus LLC</a>, a litigation support services firm in Princeton, New Jersey, serving mass tort and class action law firms.</p>
+
+          <p><em>Silverman answered eight questions in writing. His answers appear as written, edited for length and clarity. The attrition figures are his own observations from Verus engagements and have not been independently verified. &mdash;&nbsp;DM</em></p>
+
+          <p><em>Disclosure: The author writes guest analysis for Verus LLC&rsquo;s website under a contributor agreement, and Verus has published two of his articles. The author also holds referral relationships with plaintiff-side firms in mass tort litigation, as described in the <a href="editorial-standards">editorial standards</a>. No litigation is discussed in this interview. No payment was exchanged in either direction.</em></p>
+        </div>
+
+        <footer>
+          <p class="article-byline-end"><a href="david-meldofsky">David Meldofsky</a> is a California-licensed attorney and the editor of Lawsuit Intelligencer. He is also the founder of <a href="https://lawsuitinformer.com">Lawsuit Informer</a> and <a href="https://lawsuit.center">Lawsuit Center</a>.</p>
+        </footer>
+      </article>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <p class="section-eyebrow center">More from Lawsuit Intelligencer</p>
+        <div class="recent">
+          <ol>
+            <li>
+              <div>
+                <h3><a href="mso-deal-readiness-elliott-portnoy">The Preparation Does Much of the Negotiating</a></h3>
+                <p class="dek">Elliott Portnoy now advises private equity sponsors on law firm MSO transactions. He explains why the plaintiff-side deals that close at higher multiples were mostly won a year before the first sponsor meeting.</p>
+                <p class="meta">By David Meldofsky &middot; 5 min read</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="claimant-acquisition-brian-beck">What Plaintiff Firms Get Wrong When They Buy Claimant Acquisition</a></h3>
+                <p class="dek">Brian Beck of Typhon Interactive puts numbers on the difference between a firm that works its leads and one that doesn&rsquo;t, and explains why mass arbitration is a technology problem before it is a media problem.</p>
+                <p class="meta">By David Meldofsky &middot; 7 min read</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="expert-vetting-josh-hyatt">The Expert Has to Be Right the Same Way, Forty Times</a></h3>
+                <p class="dek">Josh Hyatt of Expert Institute on why a prior transcript sinks more experts than a thin CV does, and what a bellwether program demands of a witness that a single case never will.</p>
+                <p class="meta">By David Meldofsky &middot; 6 min read</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-mast">Lawsuit Intelligencer</p>
+          <p class="footer-mast-sub">Litigation analysis, mass torts, and the business of plaintiff-side law.</p>
+        </div>
+
+        <div>
+          <h4>Sections</h4>
+          <ul>
+            <li><a href="/#articles">Articles</a></li>
+            <li><a href="/#coverage">Coverage</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="contribute">Contribute</a></li>
+            <li><a href="editorial-standards">Editorial standards</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>The Ecosystem</h4>
+          <ul>
+            <li><a href="https://lawsuitinformer.com">Lawsuit Informer</a></li>
+            <li><a href="https://lawsuit.center">Lawsuit Center</a></li>
+            <li><a href="https://davidmeldofsky.com">David Meldofsky</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="footer-disclosure">
+        Lawsuit Intelligencer is editorial commentary and does not constitute legal advice. Nothing on this site creates an attorney-client relationship. The publication is independent of any case, claim, or law firm covered. Authors writing about matters in which they have a financial interest disclose that interest at the foot of each piece.
+      </p>
+
+      <p class="footer-bottom">&copy; 2026 Lawsuit Intelligencer &middot; Edited by <a href="david-meldofsky">David Meldofsky</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
