@@ -23,15 +23,4 @@
       <news:title>A Model Will Always Be Wrong</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://lawsuitintelligencer.com/mso-firm-side-frederick-shelton</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Lawsuit Intelligencer</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-10-13</news:publication_date>
-      <news:title>The MSOs Are Hungry Right Now</news:title>
-    </news:news>
-  </url>
 </urlset>
