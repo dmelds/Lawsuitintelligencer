@@ -29,6 +29,58 @@
  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
  <link rel="stylesheet" href="style.css" />
+
+ <style>
+   /* On the wire now: scoped to this page. The strip stays hidden until the desk answers
+      with a list from the last 36 hours, so a reader never sees an empty or stale box. */
+   .wire-now {
+     border-top: 2px solid var(--accent);
+     border-bottom: 1px solid var(--rule);
+     padding: 18px 0 20px;
+     margin: 8px 0 40px;
+   }
+   .wire-now[hidden] { display: none; }
+   .wire-now-label {
+     font-family: var(--mono);
+     font-size: 11px;
+     letter-spacing: 0.12em;
+     text-transform: uppercase;
+     color: var(--accent);
+     margin: 0 0 6px;
+   }
+   .wire-now-note {
+     font-size: 15px;
+     line-height: 1.5;
+     color: var(--ink-muted);
+     margin: 0 0 14px;
+   }
+   .wire-now ol {
+     list-style: none;
+     margin: 0;
+     padding: 0;
+   }
+   .wire-now li {
+     font-size: 17px;
+     line-height: 1.4;
+     padding: 10px 0;
+     border-top: 1px solid var(--rule-soft);
+   }
+   .wire-now li:first-child { border-top: 0; padding-top: 0; }
+   .wire-now li a { color: var(--ink); }
+   .wire-now li a:hover { color: var(--accent); }
+   .wire-now-src {
+     display: block;
+     margin-top: 4px;
+     font-family: var(--mono);
+     font-size: 11px;
+     letter-spacing: 0.06em;
+     text-transform: uppercase;
+     color: var(--ink-muted);
+   }
+   @media (max-width: 768px) {
+     .wire-now li { font-size: 16px; }
+   }
+ </style>
  <link rel="icon" type="image/x-icon" href="/lawsuit-intelligencer-favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/lawsuit-intelligencer-favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/lawsuit-intelligencer-android-chrome-192x192.png">
@@ -114,6 +166,12 @@
          <p>AI has made the news harder to stay ahead of. A ruling posted in the morning is rewritten across dozens of sites by noon and buried by the next day. One story runs under a dozen headlines, and the rulings and settlements that matter get lost among the copies.</p>
 
          <p>I built Mass Tort Wire for my own desk to keep up with that pace. Each time it opens, it gathers the news on the litigations I follow and the firms I watch. It folds the rewrites of a story into one item and sets aside the stories that would waste the morning. Through March 2027 I am setting up free copies for a small number of plaintiff firms, policyholder-side teams, and the companies that serve them.</p>
+
+         <aside class="wire-now" id="wireNow" aria-labelledby="wireNowLabel" hidden>
+           <p class="wire-now-label" id="wireNowLabel">On the wire now</p>
+           <p class="wire-now-note" id="wireNowNote"></p>
+           <ol id="wireNowList"></ol>
+         </aside>
 
          <h2>What it watches</h2>
 
@@ -215,6 +273,62 @@
      <p class="footer-bottom">&copy; 2026 Lawsuit Intelligencer &middot; Edited by <a href="david-meldofsky">David Meldofsky</a></p>
    </div>
  </footer>
+
+
+ <script>
+ // On the wire now. My own desk posts the litigation stories its last scan found in the most
+ // outlets (netlify/functions/trending.mjs on desk.masstortwire.com). This page reads that list
+ // and fills the strip. Any failure, an empty list, or a scan older than 36 hours leaves the
+ // strip hidden. Headlines are set as text, never as HTML.
+ (function () {
+   var box = document.getElementById("wireNow");
+   if (!box || !window.fetch) return;
+   var URL_ = "https://desk.masstortwire.com/.netlify/functions/trending";
+   var MAX_AGE = 36 * 3600000;
+   var ctrl = window.AbortController ? new AbortController() : null;
+   var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 5000);
+   fetch(URL_, { cache: "no-store", credentials: "omit", referrerPolicy: "no-referrer", signal: ctrl ? ctrl.signal : undefined })
+     .then(function (res) { return res.ok ? res.json() : null; })
+     .then(function (data) {
+       clearTimeout(timer);
+       if (!data || !Array.isArray(data.stories) || !data.stories.length) return;
+       var at = Date.parse(data.scannedAt);
+       if (isNaN(at) || Date.now() - at > MAX_AGE) return;
+       var list = document.getElementById("wireNowList");
+       var counted = false;
+       data.stories.slice(0, 6).forEach(function (s) {
+         if (!s || !s.title || !/^https:\/\//i.test(String(s.url || ""))) return;
+         var li = document.createElement("li");
+         var a = document.createElement("a");
+         a.href = s.url;
+         a.textContent = s.title;
+         a.target = "_blank";
+         a.rel = "noopener noreferrer";
+         a.referrerPolicy = "no-referrer";
+         li.appendChild(a);
+         var meta = [];
+         if (s.source) meta.push(String(s.source));
+         if (s.outlets >= 3) { meta.push(s.outlets + " outlets"); counted = true; }
+         if (meta.length) {
+           var src = document.createElement("span");
+           src.className = "wire-now-src";
+           src.textContent = meta.join(" \u00B7 ");
+           li.appendChild(src);
+         }
+         list.appendChild(li);
+       });
+       if (!list.children.length) return;
+       var when = new Date(at).toLocaleString("en-US", {
+         month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short"
+       });
+       var note = "The litigation stories carried by the most outlets in my own wire\u2019s last scan, " + when + ".";
+       if (counted) note += " The count beside a headline is the number of outlets that ran the story.";
+       document.getElementById("wireNowNote").textContent = note;
+       box.hidden = false;
+     })
+     .catch(function () { clearTimeout(timer); });
+ })();
+ </script>
 
 </body>
 </html>

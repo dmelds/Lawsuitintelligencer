@@ -1,8 +1,12 @@
 # Security headers for every path. Netlify already sends
 # Strict-Transport-Security at the edge, so it is not repeated here.
-# No Content-Security-Policy yet. This site loads no scripts and only one
-# outside resource (Google Fonts), so it is the simplest place to trial a
-# policy later; add it report-only first once a reporting endpoint exists.
+# No Content-Security-Policy yet. The site's only script is the inline one on
+# mass-tort-wire.html, which reads one outside address:
+# https://desk.masstortwire.com/.netlify/functions/trending (the "On the wire
+# now" strip). Its other outside resource is Google Fonts. A policy written
+# later needs connect-src for that address and an allowance for the inline
+# script (a hash or a nonce); add it report-only first once a reporting
+# endpoint exists.
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
