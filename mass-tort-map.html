@@ -179,6 +179,24 @@
     .li-trend .li-tdot{stroke:#fffdf8;stroke-width:1.5;}
     .li-trend .li-tend{font-family:var(--mono);font-size:12.5px;font-weight:600;}
     .li-note{font-family:var(--mono);font-size:11.5px;color:var(--ink-muted);line-height:1.55;margin:10px 0 4px;}
+    .li-focus select{font-family:var(--mono);font-size:13px;padding:7px 10px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);
+      flex:1 1 260px;min-width:0;max-width:100%;border-radius:2px;}
+    .li-flab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted);}
+    .li-fstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:2px 0 14px;}
+    .li-fs{border:1px solid var(--rule);background:var(--bg);padding:10px 12px 9px;border-radius:2px;}
+    .li-fs-k{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);line-height:1.35;}
+    .li-fs-v{display:block;font-family:var(--mono);font-size:22px;font-weight:600;color:var(--ink);line-height:1.15;margin-top:6px;}
+    .li-fs-v.li-up{color:#4f6b2f;} .li-fs-v.li-down{color:var(--accent);}
+    .li-fs-s{display:block;font-size:13px;color:var(--ink-soft);line-height:1.35;margin-top:4px;}
+    .li-focus .li-fit{stroke:#2c4a7a;stroke-width:2;stroke-dasharray:6 4;fill:none;}
+    .li-focus .li-fdot{fill:var(--accent);stroke:#fffdf8;stroke-width:1.5;}
+    .li-focus .li-bar-up{fill:#4f6b2f;fill-opacity:.8;}
+    .li-focus .li-bar-dn{fill:var(--accent);fill-opacity:.8;}
+    .li-focus .li-zero{stroke:var(--ink-muted);stroke-width:1;}
+    .li-focus .li-blbl{font-family:var(--mono);font-size:11px;fill:var(--ink-muted);}
+    .li-focus .li-sec{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;fill:var(--ink-muted);}
+    .li-focus svg:focus{outline:2px solid var(--ink);outline-offset:2px;}
+    .li-focus svg:focus:not(:focus-visible){outline:none;}
     .li-nojs{font-family:var(--mono);font-size:12px;color:var(--ink-muted);padding:10px 0;}
     @media (max-width:768px){
       .li-panel ol{columns:1;}
@@ -189,6 +207,10 @@
       .li-trend .li-axv{font-size:19px;}
       .li-trend .li-tl{stroke-width:2.8;}
       .li-trend .li-tend{font-size:16px;}
+      .li-fstats{grid-template-columns:repeat(2,1fr);gap:8px;}
+      .li-fs-v{font-size:19px;}
+      .li-focus .li-blbl{font-size:17px;}
+      .li-focus .li-sec{font-size:16px;}
     }
     @media (max-width:768px){
       .li-stats{grid-template-columns:1fr;}
@@ -203,7 +225,7 @@
     "headline":"The 2026 Mass Tort Map: Concentration, the Bellwether Turn, and Two Cracking Defenses",
     "description":"A data-driven map of the federal mass tort docket in 2026: extreme concentration in a handful of mega-dockets, the year bellwethers turned into verdicts, and the simultaneous erosion of Section 230 and bankruptcy as structural defenses.",
     "datePublished":"2026-05-30",
-    "dateModified":"2026-10-10",
+    "dateModified":"2026-10-29",
     "author":{
       "@type": "Person",
       "@id": "https://davidmeldofsky.com/#person",
@@ -251,7 +273,7 @@
           <h1>The 2026 Mass Tort Map</h1>
           <p class="article-dek">The federal docket has never been more concentrated, and 2026 is the year the procedural phase finally turned into verdicts. Two of the defense bar's most dependable shields are cracking at the same time: Section&nbsp;230 and bankruptcy.</p>
           <p class="article-meta">By <a href="david-meldofsky">David Meldofsky</a> &middot; May 30, 2026 &middot; 11 min read</p>
-          <p class="article-meta">Updated October 10, 2026, with three interactive layers built from the JPML&rsquo;s monthly reports: a district map, a docket board and trend lines. The October&nbsp;6 update added the Panel&rsquo;s October&nbsp;2 orders from its September&nbsp;24 hearing. Those orders created four MDLs, among them separate spinal cord stimulator dockets for Abbott and Nevro and an Apple AirTag stalking docket, and refused two. Earlier October updates added the October&nbsp;1 counts, the Ninth Circuit&rsquo;s Section&nbsp;230 ruling, Meta&rsquo;s 47-state settlement, and the J&amp;J and Pfizer settlement terms.</p>
+          <p class="article-meta">Updated October 29, 2026, with a docket focus view. It follows one MDL across one to twelve monthly reports and fits a trendline to them. The October&nbsp;10 update added three interactive layers built from the JPML&rsquo;s monthly reports: a district map, a docket board and trend lines. The October&nbsp;6 update added the Panel&rsquo;s October&nbsp;2 orders from its September&nbsp;24 hearing. Those orders created four MDLs, among them separate spinal cord stimulator dockets for Abbott and Nevro and an Apple AirTag stalking docket, and refused two. Earlier October updates added the October&nbsp;1 counts, the Ninth Circuit&rsquo;s Section&nbsp;230 ruling, Meta&rsquo;s 47-state settlement, and the J&amp;J and Pfizer settlement terms.</p>
         </header>
 
         <nav class="li-jump" aria-label="Jump to the October data tables">
@@ -259,6 +281,7 @@
           <a href="#district-map">District map &rarr;</a>
           <a href="#docket-board">Docket board &rarr;</a>
           <a href="#trend-lines">Trend lines &rarr;</a>
+          <a href="#docket-focus">Docket focus &rarr;</a>
           <a href="#fastest-growing">Fastest-growing dockets &rarr;</a>
           <a href="#newest-mdls">Newest MDLs &rarr;</a>
           <a href="#sources-and-method">Sources &amp; method &rarr;</a>
@@ -575,6 +598,38 @@
             <p class="li-fig-cap">Monthly pending actions from the JPML&rsquo;s by-actions-pending reports, February&nbsp;2025 through October&nbsp;1, 2026. Each tile runs on its own scale, so compare shapes between tiles and read sizes from the figures. A line starts in the first report that lists the docket. The indexed view sets each docket&rsquo;s first month to 100 on a log scale, so a doubling is the same height anywhere on it.</p>
           </div>
 
+          <p>The docket focus below follows one MDL at a time. Pick a docket and a window of one, three, six or twelve reports. The panel gives the current count, the change over the window and the largest one-month move. It also fits a trendline to the window and sets the docket&rsquo;s change beside the change across all MDLs. It opens on AFFF. Any view can be linked: the address of this page followed by <code>#focus-2873-6</code> opens AFFF over six reports.</p>
+
+          <div class="li-fig li-tool li-trend li-focus" id="docket-focus">
+            <div class="li-fig-head">
+              <span class="li-fig-num">Interactive &middot; D</span>
+              <span class="li-fig-title">Docket focus &middot; one MDL over the window you pick</span>
+            </div>
+            <div class="li-fig-body">
+              <div class="li-ctl">
+                <label class="li-flab" for="li-focus-sel">Docket</label>
+                <select id="li-focus-sel"></select>
+              </div>
+              <div class="li-ctl" role="group" aria-label="Window">
+                <button type="button" class="li-chip" data-fwin="1" aria-pressed="false">1 month</button>
+                <button type="button" class="li-chip" data-fwin="3" aria-pressed="false">3 months</button>
+                <button type="button" class="li-chip" data-fwin="6" aria-pressed="true">6 months</button>
+                <button type="button" class="li-chip" data-fwin="12" aria-pressed="false">12 months</button>
+                <button type="button" class="li-chip" data-fwin="all" aria-pressed="false">Since Feb&nbsp;2025</button>
+              </div>
+              <div class="li-fstats" id="li-focus-stats" aria-live="polite"></div>
+              <div class="li-ctl" role="group" aria-label="Vertical scale">
+                <button type="button" class="li-chip" data-fscale="z" aria-pressed="true">Zoomed to the window</button>
+                <button type="button" class="li-chip" data-fscale="0" aria-pressed="false">From zero</button>
+              </div>
+              <svg id="li-focus-svg" viewBox="0 0 920 380" xmlns="http://www.w3.org/2000/svg" role="img" tabindex="0" aria-label="Line chart of monthly pending actions for one MDL with a fitted trendline."></svg>
+              <p class="li-note" id="li-focus-note"></p>
+              <noscript><p class="li-nojs">The docket focus needs JavaScript. The docket board above lists every docket&rsquo;s October&nbsp;1 and September&nbsp;1 counts.</p></noscript>
+            </div>
+            <p class="li-fig-cap">Monthly pending actions from the JPML&rsquo;s by-actions-pending reports, February&nbsp;2025 through October&nbsp;1, 2026. The dashed line is a least-squares fit to the reports inside the window. Its pace is the fitted change per monthly report. R&sup2; runs from 0 to 1 and shows how closely the reports follow that line.</p>
+            <p class="li-fig-cap">The projection extends the same line one report ahead and assumes the pace holds. The zoomed scale starts near the window&rsquo;s lowest count, which makes small moves look large. From zero shows the docket at true size. Use the arrow keys on the chart to step through the reports.</p>
+          </div>
+
           <h3 id="fastest-growing" class="li-anchor">Where the growth actually went this month</h3>
 
           <p>Depo-Provera held the growth title for most of the cycle. The October report hands it to the social-media docket, which took in 616 new actions in a single month. Bard PowerPort added 406 and Uber passenger assault added 328. Those three dockets account for most of the month's new filings.</p>
@@ -786,7 +841,7 @@
           <p>The strategic picture for the plaintiff bar is a barbell. At one end sit the proven mega-dockets (talc, AFFF, hair relaxer), with known injury definitions and recognizable defendants. Several of them now turn on an undecided evidentiary motion: the hair relaxer general-causation challenge has been fully briefed before Judge Rowland since June&nbsp;16, expert discovery closes November&nbsp;16, and no bellwether has a trial date. At the other end sit the dockets still growing fastest. Social media, Bard PowerPort and Uber passenger assault together took in 1,350 new actions in the October report, and the law in each is being made in real time. Platform-safety claims are the coherent new category there, and the October&nbsp;2 AirTag order extends it from apps to a consumer device. Depo-Provera has left that end for the settlement window, with 9 new cases in October. The thin middle is the speculative theory the JPML has shown it will refuse to centralize.</p>
 
           <h2 id="sources-and-method" class="li-anchor">Sources &amp; method</h2>
-          <p>Case counts are drawn from the JPML's pending-dockets and monthly statistics reports, anchored to the October&nbsp;1, 2026 report; counts are point-in-time and move monthly. Month-over-month changes compare the October&nbsp;1 and September&nbsp;1, 2026 editions of the pending-dockets-by-actions-pending report. Centralization dates come from the date-transferred column of the pending-dockets-by-MDL-number report of October&nbsp;1, 2026. That column records the date of the Panel's transfer order. The four MDLs created on October&nbsp;2, 2026, and the October&nbsp;2 denials, are taken from the Panel&rsquo;s transfer orders and orders denying transfer for MDLs 2789, 3194, 3195, 3197, 3198 and 3199, published on its Panel Orders page. The same report carries a separate date-filed column, which records when the petition reached the Panel. Verdicts, settlements, and procedural milestones are compiled from court records and litigation reporting by Reuters, Law.com/ALM, NPR, CNBC, and established docket trackers. Settlement terms described as proposed or signed but not finalized are reported as such; confidential terms are not reconstructed here. The GLP-1 orders and hearing dates are taken from the docket in MDL&nbsp;3094, No.&nbsp;2:24-md-03094-KSM (E.D. Pa.). The interactive map, board and trend lines read from a data block embedded in this page. That block is compiled from the by-actions-pending, by-district and by-type editions of the JPML reports, February&nbsp;2025 through October&nbsp;1, 2026. Each layer names its edition in its caption. Figures should be re-verified against primary sources before republication. Nothing here is legal advice.</p>
+          <p>Case counts are drawn from the JPML's pending-dockets and monthly statistics reports, anchored to the October&nbsp;1, 2026 report; counts are point-in-time and move monthly. Month-over-month changes compare the October&nbsp;1 and September&nbsp;1, 2026 editions of the pending-dockets-by-actions-pending report. Centralization dates come from the date-transferred column of the pending-dockets-by-MDL-number report of October&nbsp;1, 2026. That column records the date of the Panel's transfer order. The four MDLs created on October&nbsp;2, 2026, and the October&nbsp;2 denials, are taken from the Panel&rsquo;s transfer orders and orders denying transfer for MDLs 2789, 3194, 3195, 3197, 3198 and 3199, published on its Panel Orders page. The same report carries a separate date-filed column, which records when the petition reached the Panel. Verdicts, settlements, and procedural milestones are compiled from court records and litigation reporting by Reuters, Law.com/ALM, NPR, CNBC, and established docket trackers. Settlement terms described as proposed or signed but not finalized are reported as such; confidential terms are not reconstructed here. The GLP-1 orders and hearing dates are taken from the docket in MDL&nbsp;3094, No.&nbsp;2:24-md-03094-KSM (E.D. Pa.). The interactive map, board, trend lines and docket focus read from a data block embedded in this page. That block is compiled from the by-actions-pending, by-district and by-type editions of the JPML reports, February&nbsp;2025 through October&nbsp;1, 2026. Each layer names its edition in its caption. Figures should be re-verified against primary sources before republication. Nothing here is legal advice.</p>
 
           <p><strong>Citing these figures.</strong> The case counts come from public JPML reports. Use them in a client memo, a pitch deck, a newsletter or a post. Cite Lawsuit Intelligencer with a link to this page, so your reader can check which month the numbers come from. Reproducing a table as it is arranged here, one of the charts, or a passage of the analysis asks for the same credit and link. To run the piece in full, write to <a href="mailto:editor@lawsuitintelligencer.com">editor@lawsuitintelligencer.com</a>.</p>
 
@@ -1262,6 +1317,168 @@
     more.addEventListener('click', function () { showAll = !showAll; tiles(); });
     var lastMob = mob(); window.addEventListener('resize', function () { if (mob() !== lastMob) { lastMob = mob(); draw(); } });
     tiles(); draw();
+  })();
+
+  /* ---------------- Layer 5: docket focus ---------------- */
+  (function () {
+    var svg = document.getElementById('li-focus-svg'); if (!svg) return;
+    var fig = document.getElementById('docket-focus');
+    var selEl = document.getElementById('li-focus-sel'), statsEl = document.getElementById('li-focus-stats'), noteEl = document.getElementById('li-focus-note');
+    var wins = document.querySelectorAll('[data-fwin]'), scales = document.querySelectorAll('[data-fscale]');
+    var list = D.dockets.filter(function (r) { return r.s && r.mt; }).sort(function (a, b) { return b.p - a.p; });
+    if (!list.length) return;
+    var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var N = D.months.length, LAST = N - 1;
+    var rep = function (i) { var p = D.months[i].split('-'); return MON[+p[1] - 1] + ' 1, ' + p[0]; };
+    var NEXT = (function () { var p = D.months[LAST].split('-').map(Number), y = p[0], m = p[1] + 1; if (m > 12) { m = 1; y++; } return MON[m - 1] + ' 1, ' + y; })();
+    var WINS = ['1', '3', '6', '12', 'all'];
+    var st = { n: (byN[2873] && byN[2873].s && byN[2873].mt) ? 2873 : list[0].n, w: '6', z: true, hover: null, touched: false };
+    var okN = function (n) { return byN[n] && byN[n].s && byN[n].mt; };
+    function fromHash() {
+      var m = /^#focus-(\d+)(?:-(\d+|all))?$/.exec(location.hash || '');
+      if (!m || !okN(+m[1])) return false;
+      st.n = +m[1]; if (m[2] && WINS.indexOf(m[2]) >= 0) st.w = m[2];
+      return true;
+    }
+    var hashHit = fromHash();
+    selEl.innerHTML = list.map(function (r) { return '<option value="' + r.n + '">' + esc(r.t) + ' · MDL ' + r.n + '</option>'; }).join('');
+    var mob = function () { return window.innerWidth <= 768; };
+    var W, H, L, Rm, T, LB, BT, BB, XL;
+    function geom() {
+      if (mob()) { W = 600; H = 500; L = 70; Rm = 118; T = 20; LB = 300; BT = 344; BB = 440; XL = 482; }
+      else { W = 920; H = 380; L = 64; Rm = 150; T = 20; LB = 238; BT = 270; BB = 344; XL = 368; }
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    }
+    function firstIdx(r) { for (var i = 0; i < r.s.length; i++) if (r.s[i] != null) return i; return -1; }
+    function win(r) { var fi = firstIdx(r); var s = st.w === 'all' ? fi : Math.max(fi, LAST - (+st.w)); return { fi: fi, s: s }; }
+    function fit(r, a) {
+      var xs = [], ys = []; for (var i = a; i <= LAST; i++) if (r.s[i] != null) { xs.push(i); ys.push(r.s[i]); }
+      var n = xs.length, mx = 0, my = 0; xs.forEach(function (x, k) { mx += x; my += ys[k]; }); mx /= n; my /= n;
+      var sxx = 0, sxy = 0, syy = 0; xs.forEach(function (x, k) { sxx += (x - mx) * (x - mx); sxy += (x - mx) * (ys[k] - my); syy += (ys[k] - my) * (ys[k] - my); });
+      var b = sxx ? sxy / sxx : 0, c = my - b * mx, ssr = 0; xs.forEach(function (x, k) { var e = ys[k] - (c + b * x); ssr += e * e; });
+      return { b: b, c: c, n: n, r2: (n >= 3 && syy > 0) ? 1 - ssr / syy : null, at: function (x) { return c + b * x; } };
+    }
+    var pctS = function (v) { if (v == null || !isFinite(v)) return ''; var a = Math.abs(v); return (v > 0 ? '+' : v < 0 ? '−' : '') + (a < 10 ? a.toFixed(1) : a.toFixed(0)) + '%'; };
+    var paceS = function (b) { var a = Math.abs(b); var t = a >= 10 ? fmt(Math.round(a)) : a.toFixed(1).replace(/\.0$/, ''); return (b > 0.05 ? '+' : b < -0.05 ? '−' : '') + t; };
+    var cls = function (v) { return v > 0 ? ' li-up' : v < 0 ? ' li-down' : ''; };
+    function niceTicks(lo, hi) {
+      var span = hi - lo || 1, raw = span / 4, mag = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / mag;
+      var step = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * mag; step = Math.max(step, 1);
+      var out = []; for (var v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(v); return out;
+    }
+    var tickS = function (v) { var a = Math.abs(v); return a >= 10000 ? (v / 1000).toFixed(a % 1000 === 0 ? 0 : 1).replace(/\.0$/, '') + 'k' : fmt(Math.round(v)); };
+    function stats(r, w, f) {
+      var now = r.s[LAST], s0 = r.s[w.s], ch = now - s0, k = LAST - w.s;
+      var big = null; for (var i = w.s + 1; i <= LAST; i++) { if (r.s[i] == null || r.s[i - 1] == null) continue; var d = r.s[i] - r.s[i - 1]; if (!big || Math.abs(d) > Math.abs(big.d)) big = { i: i, d: d }; }
+      var t0 = D.totals.actions[w.s], t1 = D.totals.actions[LAST], tch = t1 - t0;
+      var proj = Math.max(0, Math.round(f.at(LAST + 1)));
+      var share = D.totals.actions[LAST] ? now / D.totals.actions[LAST] * 100 : null;
+      var tile = function (k_, v, s, c) { return '<div class="li-fs"><span class="li-fs-k">' + k_ + '</span><span class="li-fs-v' + (c || '') + '">' + v + '</span><span class="li-fs-s">' + s + '</span></div>'; };
+      statsEl.innerHTML =
+        tile('Pending · ' + rep(LAST), fmt(now), share != null ? (share < 0.1 ? 'under 0.1' : share.toFixed(1)) + '% of all pending MDL actions' : '') +
+        tile('Change since ' + rep(w.s), sign(ch), (pctS(pct(now, s0)) || 'from zero') + ' over ' + k + (k === 1 ? ' month' : ' months'), cls(ch)) +
+        tile('Trendline pace', paceS(f.b) + ' / month', f.r2 != null ? 'fit R² ' + f.r2.toFixed(2) + ' across ' + f.n + ' reports' : (f.n < 3 ? 'two reports, so the line is the one-month change' : 'the count held flat'), cls(Math.abs(f.b) < 0.05 ? 0 : f.b)) +
+        tile('Largest one-month move', big && big.d ? sign(big.d) : '0', big && big.d ? rep(big.i) + ' report' : 'no change in the window', big ? cls(big.d) : '') +
+        tile('All MDLs, same window', sign(tch), pctS(pct(t1, t0)) + ' system-wide, ' + fmt(t1) + ' pending', cls(tch)) +
+        tile('Trendline points to', '~' + fmt(proj), NEXT + ' report, if the pace holds');
+      return { now: now, s0: s0, ch: ch, k: k, big: big, tch: tch, t0: t0, t1: t1 };
+    }
+    function note(r, w, f, x) {
+      var seat = D.seats[r.d], out = [];
+      out.push(esc(r.t) + ' (MDL ' + r.n + ', ' + (seat ? seat.abbr : r.d) + ', Judge ' + esc(r.j) + ') went from ' + fmt(x.s0) + ' on the ' + rep(w.s) + ' report to ' + fmt(x.now) + ' on ' + rep(LAST) + '.');
+      if (x.k >= 2) out.push(Math.abs(f.b) < 0.5 ? 'The trendline across those reports is flat.' : 'The trendline ' + (f.b > 0 ? 'adds' : 'sheds') + ' about ' + paceS(Math.abs(f.b)).replace(/^[+−]/, '') + ' actions a report.');
+      if (f.r2 != null && f.r2 < 0.5 && Math.abs(f.b) >= 0.5) out.push('The reports scatter widely around that line (R² ' + f.r2.toFixed(2) + '), so read the pace loosely.');
+      var dp = pct(x.now, x.s0), sp = pct(x.t1, x.t0);
+      if (dp != null && sp != null && x.k >= 1) out.push('Over the same window the docket changed ' + pctS(dp) + ', against ' + pctS(sp) + ' across all MDLs.');
+      if (w.s === w.fi && st.w !== 'all' && LAST - w.fi < +st.w) out.push('The docket first appears in the ' + rep(w.fi) + ' report, so the window starts there.');
+      if (r.s[LAST] === r.s[LAST - 1]) out.push('The ' + rep(LAST - 1) + ' and ' + rep(LAST) + ' reports carry the same count.');
+      if (x.big && x.big.d < 0 && r.s[x.big.i - 1] && -x.big.d / r.s[x.big.i - 1] >= 0.2) out.push('The ' + rep(x.big.i) + ' report shows a one-month drop of ' + fmt(-x.big.d) + '. The JPML report gives the count without the reason, so check the transferee court’s docket for the cause.');
+      noteEl.innerHTML = out.join(' ');
+    }
+    function draw() {
+      geom();
+      var r = byN[st.n], w = win(r), f = fit(r, w.s), x = stats(r, w, f);
+      note(r, w, f, x);
+      var idx = []; for (var i = w.s; i <= LAST; i++) if (r.s[i] != null) idx.push(i);
+      var vals = idx.map(function (i) { return r.s[i]; }).concat([f.at(w.s), f.at(LAST)]);
+      var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), mn, mx;
+      if (st.z) { var pad = (hi - lo) * 0.14 || Math.max(2, hi * 0.01); mn = Math.max(0, lo - pad); mx = hi + pad; }
+      else { mn = 0; mx = hi * 1.08 || 1; }
+      var ticks = niceTicks(mn, mx); if (!st.z) mn = 0;
+      var span = mx - mn || 1, cnt = Math.max(1, LAST - w.s);
+      var X = function (i) { return L + (i - w.s) / cnt * (W - L - Rm); };
+      var Y = function (v) { return T + (LB - T) * (1 - (v - mn) / span); };
+      var o = [];
+      ticks.forEach(function (v) { if (v < mn - 1e-9 || v > mx + 1e-9) return; var y = Y(v); o.push('<line x1="' + L + '" y1="' + y.toFixed(1) + '" x2="' + (W - Rm) + '" y2="' + y.toFixed(1) + '" class="li-grid"/><text x="' + (L - 6) + '" y="' + (y + 4).toFixed(1) + '" class="li-axv" text-anchor="end">' + tickS(v) + '</text>'); });
+      if (st.hover != null) o.push('<line x1="' + X(st.hover).toFixed(1) + '" y1="' + T + '" x2="' + X(st.hover).toFixed(1) + '" y2="' + BB + '" class="li-cur"/>');
+      o.push('<line x1="' + X(w.s).toFixed(1) + '" y1="' + Y(f.at(w.s)).toFixed(1) + '" x2="' + X(LAST).toFixed(1) + '" y2="' + Y(f.at(LAST)).toFixed(1) + '" class="li-fit"/>');
+      o.push('<polyline points="' + idx.map(function (i) { return X(i).toFixed(1) + ',' + Y(r.s[i]).toFixed(1); }).join(' ') + '" class="li-tl" stroke="#8a2419"/>');
+      var dots = idx.length <= 13;
+      idx.forEach(function (i) { if (dots || i === LAST || i === st.hover) o.push('<circle cx="' + X(i).toFixed(1) + '" cy="' + Y(r.s[i]).toFixed(1) + '" r="' + (i === st.hover ? 5 : 3.5) + '" class="li-fdot"/>'); });
+      var yv = Y(r.s[LAST]), yt = Y(f.at(LAST)), gap = mob() ? 22 : 16;
+      if (Math.abs(yv - yt) < gap) { if (yv <= yt) yt = yv + gap; else yt = yv - gap; }
+      o.push('<text x="' + (W - Rm + 10) + '" y="' + (yv + 4).toFixed(1) + '" class="li-tend" fill="#8a2419">' + fmt(r.s[LAST]) + '</text>');
+      o.push('<text x="' + (W - Rm + 10) + '" y="' + (yt + 4).toFixed(1) + '" class="li-tend" fill="#2c4a7a">Trend ' + paceS(f.b) + '/mo</text>');
+      /* monthly change bars */
+      var ds = []; for (var j = w.s + 1; j <= LAST; j++) if (r.s[j] != null && r.s[j - 1] != null) ds.push({ i: j, d: r.s[j] - r.s[j - 1] });
+      o.push('<text x="' + L + '" y="' + (BT - 10) + '" class="li-sec">Change from the prior report</text>');
+      var pos = 0, neg = 0; ds.forEach(function (e) { if (e.d > pos) pos = e.d; if (-e.d > neg) neg = -e.d; });
+      var tot = pos + neg, y0 = tot ? BT + (BB - BT) * pos / tot : (BT + BB) / 2;
+      var bw = Math.min(mob() ? 44 : 34, (W - L - Rm) / cnt * 0.55);
+      ds.forEach(function (e) {
+        var h = tot ? Math.abs(e.d) / tot * (BB - BT) : 0, bx = X(e.i) - bw / 2;
+        if (e.d !== 0) o.push('<rect x="' + bx.toFixed(1) + '" y="' + (e.d > 0 ? y0 - h : y0).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(1, h).toFixed(1) + '" class="' + (e.d > 0 ? 'li-bar-up' : 'li-bar-dn') + '"/>');
+        if (ds.length <= 12) { var ly = e.d >= 0 ? y0 - h - 4 : y0 + h + (mob() ? 17 : 12); if (e.d >= 0 && ly < BT - 2) ly = BT - 2; o.push('<text x="' + X(e.i).toFixed(1) + '" y="' + ly.toFixed(1) + '" class="li-blbl" text-anchor="middle">' + sign(e.d) + '</text>'); }
+      });
+      o.push('<line x1="' + L + '" y1="' + y0.toFixed(1) + '" x2="' + (W - Rm) + '" y2="' + y0.toFixed(1) + '" class="li-zero"/>');
+      /* month labels */
+      var every = cnt <= (mob() ? 6 : 12) ? 1 : cnt <= 12 ? 2 : (mob() ? 4 : 2);
+      for (var m = w.s; m <= LAST; m++) {
+        if ((LAST - m) % every !== 0) continue;
+        var p = D.months[m].split('-'), yr = (m === w.s || p[1] === '01') ? ' ’' + p[0].slice(2) : '';
+        o.push('<text x="' + X(m).toFixed(1) + '" y="' + XL + '" class="li-axv" text-anchor="middle">' + MON[+p[1] - 1] + yr + '</text>');
+      }
+      o.push('<rect x="' + (L - 10) + '" y="' + T + '" width="' + (W - L - Rm + 20) + '" height="' + (BB - T) + '" fill="transparent" id="li-focus-hit"/>');
+      svg.innerHTML = o.join('');
+      svg.setAttribute('aria-label', 'Line chart of monthly pending actions for ' + r.t + ', MDL ' + r.n + ', from the ' + rep(w.s) + ' report to the ' + rep(LAST) + ' report, with a fitted trendline of ' + paceS(f.b) + ' actions per report and bars showing each monthly change.');
+      var hit = document.getElementById('li-focus-hit');
+      var at = function (e) { var b = svg.getBoundingClientRect(); var px = (e.clientX - b.left) / b.width * W; var i = Math.round((px - L) / ((W - L - Rm) / cnt)) + w.s; return Math.max(w.s, Math.min(LAST, i)); };
+      hit.addEventListener('pointermove', function (e) { var i = at(e); if (st.hover !== i) { st.hover = i; draw(); } showTip(tipHtml(i), e.clientX, e.clientY); });
+      hit.addEventListener('pointerleave', function () { st.hover = null; hideTip(); draw(); });
+    }
+    function tipHtml(i) {
+      var r = byN[st.n], w = win(r), f = fit(r, w.s), v = r.s[i], pv = i > 0 ? r.s[i - 1] : null;
+      return '<b>' + rep(i) + ' report</b><div>Pending: <b>' + fmt(v) + '</b></div>' +
+        (pv != null ? '<div>Change: ' + sign(v - pv) + (pv ? ' · ' + pctS(pct(v, pv)) : '') + '</div>' : '') +
+        '<div>Trendline: ' + fmt(Math.round(f.at(i))) + '</div>';
+    }
+    function sync() {
+      selEl.value = String(st.n);
+      wins.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.fwin === st.w ? 'true' : 'false'); });
+      scales.forEach(function (b) { b.setAttribute('aria-pressed', (b.dataset.fscale === 'z') === st.z ? 'true' : 'false'); });
+    }
+    function setHash() {
+      if (!st.touched || !window.history || !history.replaceState) return;
+      try { history.replaceState(null, '', '#focus-' + st.n + '-' + st.w); } catch (e) { }
+    }
+    function update() { st.hover = null; hideTip(); sync(); draw(); setHash(); }
+    selEl.addEventListener('change', function () { var n = +selEl.value; if (!okN(n)) return; st.n = n; st.touched = true; update(); });
+    wins.forEach(function (b) { b.addEventListener('click', function () { st.w = b.dataset.fwin; st.touched = true; update(); }); });
+    scales.forEach(function (b) { b.addEventListener('click', function () { st.z = b.dataset.fscale === 'z'; update(); }); });
+    svg.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'Home' && e.key !== 'End') return;
+      e.preventDefault();
+      var w = win(byN[st.n]);
+      if (e.key === 'Home') st.hover = w.s; else if (e.key === 'End') st.hover = LAST;
+      else st.hover = st.hover == null ? LAST : Math.max(w.s, Math.min(LAST, st.hover + (e.key === 'ArrowRight' ? 1 : -1)));
+      draw();
+      var b = svg.getBoundingClientRect(); showTip(tipHtml(st.hover), b.left + b.width * (st.hover - w.s) / Math.max(1, LAST - w.s), b.top + 20);
+    });
+    svg.addEventListener('blur', function () { if (st.hover != null) { st.hover = null; hideTip(); draw(); } });
+    window.addEventListener('hashchange', function () { if (fromHash()) { update(); fig.scrollIntoView(); } });
+    var lastMob = mob(); window.addEventListener('resize', function () { if (mob() !== lastMob) { lastMob = mob(); draw(); } });
+    sync(); draw();
+    if (hashHit) setTimeout(function () { fig.scrollIntoView(); }, 0);
   })();
 })();
 
