@@ -10,7 +10,9 @@
 // send runs in network-ops and reads the list through /api/newsletter/export.
 //
 // POST /api/subscribe            signup boxes post here (form or fetch). Fields: email, follow
-//                                (MDL number, repeatable, optional), source, bot-field. Always
+//                                (MDL number, repeatable, optional; the value "mt" follows every
+//                                mass tort on the map, now and as the Panel adds them), source,
+//                                bot-field. Always
 //                                answers "check your email", so the form never tells a stranger
 //                                whether an address is on the list.
 // GET  /email/confirm?t=         page with a Confirm button; POST to the same URL activates.
@@ -167,12 +169,27 @@ function keepClosed(prev, list) {
   const live = new Set(list.map((d) => d.n));
   return (prev || []).filter((n) => !live.has(n));
 }
-function followLabel(follows, list) {
-  if (!follows.length) return "the month's top movers and updates";
+// "Every mass tort" is kept as a flag, never as 74 numbers, so the follow cap never cuts it and
+// an MDL the Panel creates next month is followed without the reader doing anything. Numbers the
+// flag already covers are dropped from the explicit list, which keeps only the other MDLs.
+export const ALL_TORTS = "mt";
+function wantsAllTorts(raw) {
+  return raw.some((v) => String(v || "").trim() === ALL_TORTS);
+}
+function withoutTorts(follows, list) {
+  if (!list) return follows;
+  const torts = new Set(list.filter((d) => d.mt).map((d) => d.n));
+  return follows.filter((n) => !torts.has(n));
+}
+function followLabel(follows, list, allTorts = false) {
+  if (!follows.length && !allTorts) return "the month's top movers and updates";
   const names = new Map((list || []).map((d) => [d.n, d.t]));
   const shown = follows.slice(0, 6).map((n) => (names.has(n) ? `MDL ${n} (${names.get(n)})` : `MDL ${n}`));
   const more = follows.length > 6 ? ` and ${follows.length - 6} more` : "";
-  return `top movers plus ${shown.join(", ")}${more}`;
+  const parts = [];
+  if (allTorts) parts.push("every mass tort on the map");
+  if (shown.length) parts.push(shown.join(", ") + more);
+  return `top movers plus ${parts.join(", plus ")}`;
 }
 
 // ---------------------------------------------------------------- pages
@@ -201,6 +218,8 @@ legend{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:upperca
 label.mdl{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 0;border-bottom:1px solid var(--rule-soft);cursor:pointer}
 label.mdl span{flex:1}
 label.mdl .count{font-size:12px;color:var(--muted);white-space:nowrap}
+label.mdl-all{border-bottom:2px solid var(--rule)}
+input[type=checkbox]:disabled{opacity:.6}
 input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);flex:none}
 input[type=search]{width:100%;font-size:15px;padding:12px;border:1px solid var(--rule);background:#fff;color:var(--ink);margin:0 0 14px}
 details{margin-top:14px}
@@ -242,12 +261,12 @@ function row(d, checked) {
 }
 
 // The filter is progressive: with scripts off every row shows and the form still saves.
-export function followForm(action, follows, list, buttonLabel) {
+export function followForm(action, follows, list, buttonLabel, allTorts = false) {
   const chosen = new Set(follows);
   if (!list) {
     return `<form method="post" action="${action}">
 <div class="panel"><p>The MDL list is not available right now, so your follows cannot be changed this minute. Try again shortly.</p>
-${follows.map((n) => `<input type="hidden" name="follow" value="${n}">`).join("")}</div>
+${follows.map((n) => `<input type="hidden" name="follow" value="${n}">`).join("")}${allTorts ? `<input type="hidden" name="follow" value="${ALL_TORTS}">` : ""}</div>
 </form>`;
   }
   const closed = follows.filter((n) => !list.some((d) => d.n === n));
@@ -259,8 +278,9 @@ ${follows.map((n) => `<input type="hidden" name="follow" value="${n}">`).join(""
 <label for="mdl-filter" class="small">Filter by name or MDL number</label>
 <input type="search" id="mdl-filter" placeholder="e.g. hair relaxer or 3060" autocomplete="off">
 <p class="small none" id="mdl-none" role="status">No pending MDL matches that filter.</p>
-<fieldset>
+<fieldset id="mdl-torts">
 <legend>Mass torts (${torts.length})</legend>
+<label class="mdl mdl-all"><input type="checkbox" name="follow" value="${ALL_TORTS}" id="mdl-all"${allTorts ? " checked" : ""}> <span><strong>Follow every mass tort</strong> <span class="small">including ones the Panel adds later</span></span></label>
 ${torts.map((d) => row(d, chosen.has(d.n))).join("\n")}
 </fieldset>
 <details id="mdl-other"${openOther ? " open" : ""}>
@@ -272,16 +292,29 @@ ${other.map((d) => row(d, chosen.has(d.n))).join("\n")}
 </details>
 ${closed.map((n) => `<input type="hidden" name="closed" value="${n}">`).join("")}
 </div>
-<p class="small">Following none still gets you the monthly letter: the Panel's top movers and the month's updates to the map and trackers.</p>
+<p class="small">Following none still gets you the monthly letter: the Panel's top movers and the month's updates to the map and trackers. Following more than ten MDLs turns your section into one table, with a full entry for each MDL that had a ruling that month.</p>
 <button type="submit">${esc(buttonLabel)}</button>
 </form>
 <script>
 (function(){
   var box=document.getElementById("mdl-filter"),none=document.getElementById("mdl-none"),other=document.getElementById("mdl-other");
   if(!box)return;
-  var rows=[].slice.call(document.querySelectorAll("label.mdl"));
+  var rows=[].slice.call(document.querySelectorAll("label.mdl:not(.mdl-all)"));
+  var all=document.getElementById("mdl-all");
+  var tortBoxes=[].slice.call(document.querySelectorAll('#mdl-torts input[name="follow"]:not(#mdl-all)'));
+  var saved=tortBoxes.map(function(b){return b.checked;});
+  // With "every mass tort" on, the single boxes show checked and are disabled, so the form sends
+  // the flag alone. Turning it off puts back what the reader had before.
+  function syncAll(){
+    tortBoxes.forEach(function(b,i){
+      if(all.checked){ if(!b.disabled) saved[i]=b.checked; b.checked=true; b.disabled=true; }
+      else { b.disabled=false; b.checked=saved[i]; }
+    });
+  }
+  if(all){ syncAll(); all.addEventListener("change",syncAll); }
   box.addEventListener("input",function(){
     var q=box.value.trim().toLowerCase(),shown=0,otherHit=false;
+    if(all) all.closest("label").classList.toggle("none",!!q);
     rows.forEach(function(r){
       var hit=!q||r.getAttribute("data-q").indexOf(q)!==-1;
       r.classList.toggle("none",!hit);
@@ -384,11 +417,11 @@ ${ADDRESS}`;
   return { html, text };
 }
 
-function confirmMail(link, follows, list) {
+function confirmMail(link, follows, list, allTorts = false) {
   const m = mailShell(
     "Confirm the monthly letter",
     [
-      `Someone, hopefully you, asked for Lawsuit Intelligencer's monthly letter at this address, covering ${followLabel(follows, list)}.`,
+      `Someone, hopefully you, asked for Lawsuit Intelligencer's monthly letter at this address, covering ${followLabel(follows, list, allTorts)}.`,
       "Press the button to start it. If you did not ask, ignore this email and nothing will be sent.",
     ],
     link,
@@ -411,7 +444,7 @@ function manageMail(link) {
 async function notify(rec, how, list) {
   const to = (process.env.NOTIFY_TO || "").trim();
   if (!to) return;
-  const what = followLabel(rec.follows || [], list);
+  const what = followLabel(rec.follows || [], list, !!rec.allTorts);
   const from = rec.source ? `${site()}/${rec.source}` : "unknown";
   const when = new Date().toISOString();
   const text = `${rec.email} ${how}.\n\nFollows: ${what}\nSigned up from: ${from}\nTime: ${when}`;
@@ -458,7 +491,8 @@ async function subscribe(req) {
       : page(400, "Check the address", `<h1>That email address did not look right</h1><p>Go back and check it, then try again.</p>`);
   }
   const list = await mdlList();
-  const follows = cleanFollows(f.all("follow"), list);
+  const allTorts = wantsAllTorts(f.all("follow"));
+  const follows = allTorts ? withoutTorts(cleanFollows(f.all("follow"), list), list) : cleanFollows(f.all("follow"), list);
 
   const s = store();
   const id = idFor(email);
@@ -487,13 +521,15 @@ async function subscribe(req) {
   // box on the map never wipes the MDLs picked on /newsletter. Removing picks takes the
   // preferences page, which only the address owner can reach.
   const prev = rec.status === "pending" ? rec.follows || [] : [];
+  rec.allTorts = allTorts || (rec.status === "pending" && !!rec.allTorts);
   rec.email = email;
   rec.follows = [...prev, ...follows.filter((n) => !prev.includes(n))].slice(0, FOLLOW_MAX);
+  if (rec.allTorts) rec.follows = withoutTorts(rec.follows, list);
   rec.status = "pending";
   rec.source = String(f.get("source") || "").replace(/[^a-z0-9-]/gi, "").slice(0, 80);
   rec.updatedAt = iso;
   if (mayResend(rec, now)) {
-    const m = confirmMail(`${site()}/email/confirm?t=${token}`, follows, list);
+    const m = confirmMail(`${site()}/email/confirm?t=${token}`, rec.follows, list, rec.allTorts);
     if (await sendMail(email, m.subject, m.html, m.text)) rec.sends = [...(rec.sends || []), now].slice(-8);
   }
   await s.setJSON(key, rec);
@@ -517,14 +553,14 @@ async function confirm(req, id, token) {
       await s.setJSON(key, rec);
       await notify(rec, "confirmed", list);
     }
-    const pick = (rec.follows || []).length
+    const pick = (rec.follows || []).length || rec.allTorts
       ? `<p><a href="${prefs}">Change the MDLs you follow</a> · <a href="${site()}/">Back to Lawsuit Intelligencer</a></p>`
       : `<p>You are not following any MDL yet. <a href="${prefs}">Pick the MDLs you follow</a> to add a section on each one.</p>`;
     return page(
       200,
       "You are signed up",
       `<h1>You are signed up</h1>
-<p>The letter goes out once a month, after the Panel's report and the map's rewrite. It covers ${esc(followLabel(rec.follows || [], list))}.</p>
+<p>The letter goes out once a month, after the Panel's report and the map's rewrite. It covers ${esc(followLabel(rec.follows || [], list, !!rec.allTorts))}.</p>
 ${pick}`
     );
   }
@@ -539,7 +575,7 @@ ${pick}`
     200,
     "Confirm the letter",
     `<h1>Confirm the monthly letter</h1>
-<p>You asked for ${esc(followLabel(rec.follows || [], list))}.</p>
+<p>You asked for ${esc(followLabel(rec.follows || [], list, !!rec.allTorts))}.</p>
 <form method="post" action="${self}"><button type="submit">Confirm the letter</button></form>`
   );
 }
@@ -556,7 +592,9 @@ async function preferences(req, id, token) {
   if (req.method === "POST") {
     if (!list) return page(503, "Try again shortly", `<h1>Nothing was changed</h1><p>The MDL list is not available this minute, so your follows stay as they were. <a href="${self}">Try again</a>.</p>`);
     const f = await readBody(req);
-    const follows = cleanFollows(f.all("follow"), list);
+    rec.allTorts = wantsAllTorts(f.all("follow"));
+    const picked = cleanFollows(f.all("follow"), list);
+    const follows = rec.allTorts ? withoutTorts(picked, list) : picked;
     const closed = keepClosed(cleanFollows(f.all("closed"), null), list).filter((n) => (rec.follows || []).includes(n));
     rec.follows = [...follows, ...closed].slice(0, FOLLOW_MAX);
     rec.updatedAt = new Date().toISOString();
@@ -571,7 +609,7 @@ async function preferences(req, id, token) {
     return page(
       200,
       "Saved",
-      `<h1>Your MDLs are saved</h1><p>The monthly letter will cover ${esc(followLabel(rec.follows, list))}.</p>
+      `<h1>Your MDLs are saved</h1><p>The monthly letter will cover ${esc(followLabel(rec.follows, list, rec.allTorts))}.</p>
 <p><a href="${self}">Change them again</a> · <a href="${site()}/">Back to Lawsuit Intelligencer</a></p>`
     );
   }
@@ -585,7 +623,7 @@ async function preferences(req, id, token) {
     "Your MDLs",
     `<h1>The MDLs you follow</h1>
 ${state}
-${followForm(self, rec.follows || [], list, "Save my MDLs")}
+${followForm(self, rec.follows || [], list, "Save my MDLs", !!rec.allTorts)}
 <p class="small" style="margin-top:20px"><a href="${unsub}">Unsubscribe from the letter</a></p>`
   );
 }
@@ -644,6 +682,7 @@ async function exportList(req) {
     out.push({
       email: rec.email,
       follows: rec.follows || [],
+      allTorts: !!rec.allTorts,
       confirmedAt: rec.confirmedAt || "",
       preferences: `${site()}/email/preferences?t=${token}`,
       unsubscribe: `${site()}/email/unsubscribe?t=${token}`,
