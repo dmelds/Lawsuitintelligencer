@@ -68,6 +68,8 @@
   .nl-row span.nl-name{flex:1}
   .nl-row .nl-n,.nl-row .nl-p{font-family:var(--mono);font-size:.75rem;color:var(--ink-muted);white-space:nowrap}
   .nl-row input{width:20px;height:20px;accent-color:var(--accent);flex:none}
+  .nl-row input:disabled{opacity:.6}
+  .nl-all{border-bottom:2px solid var(--rule)}
   .nl-hide{display:none}
   .nl-form details{margin-top:12px}
   .nl-form summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-family:var(--mono);font-size:.85rem;color:var(--accent)}
@@ -144,6 +146,7 @@
              <p class="nl-pick-note nl-hide" id="nl-none" role="status">No pending MDL matches that filter.</p>
              <fieldset>
                <legend id="nl-torts-legend">Mass torts</legend>
+               <label class="nl-row nl-all" id="nl-all-row"><input type="checkbox" name="follow" value="mt" id="nl-all"> <span class="nl-name"><strong>Follow every mass tort</strong> <span class="nl-n">including ones the Panel adds later</span></span></label>
                <div class="nl-rows" id="nl-torts"></div>
              </fieldset>
              <details id="nl-other">
@@ -154,6 +157,7 @@
                </fieldset>
              </details>
              <p class="nl-count" id="nl-count" aria-live="polite">0 MDLs picked</p>
+             <p class="nl-pick-note">Following more than ten MDLs turns your section into one table, with a full entry for each MDL that had a ruling that month.</p>
            </div>
            <noscript><p class="nl-pick-note">You can pick the MDLs you follow after you confirm your address.</p></noscript>
 
@@ -243,8 +247,24 @@
 
    function wire() {
      var box = document.getElementById("nl-filter"), none = document.getElementById("nl-none");
-     var other = document.getElementById("nl-other"), count = document.getElementById("nl-count");
-     var rows = [].slice.call(picker.querySelectorAll(".nl-row"));
+     var other = document.getElementById("nl-other"), count_el = document.getElementById("nl-count");
+     var rows = [].slice.call(picker.querySelectorAll(".nl-row:not(.nl-all)"));
+     var all = document.getElementById("nl-all"), allRow = document.getElementById("nl-all-row");
+     var tortBoxes = [].slice.call(document.querySelectorAll('#nl-torts input[name="follow"]'));
+     var saved = tortBoxes.map(function () { return false; });
+     // With "every mass tort" on, the single boxes show checked and are disabled, so the form
+     // sends the flag alone. Turning it off puts back what the reader had picked.
+     function syncAll() {
+       tortBoxes.forEach(function (b, i) {
+         if (all.checked) { if (!b.disabled) saved[i] = b.checked; b.checked = true; b.disabled = true; }
+         else { b.disabled = false; b.checked = saved[i]; }
+       });
+     }
+     function count() {
+       var torts = all.checked ? tortBoxes.length : 0;
+       var n = torts + picker.querySelectorAll('input[name="follow"]:checked:not(#nl-all):not(:disabled)').length;
+       count_el.textContent = n + (n === 1 ? " MDL picked" : " MDLs picked");
+     }
      box.addEventListener("input", function () {
        var q = box.value.trim().toLowerCase(), shown = 0, otherHit = false;
        rows.forEach(function (r) {
@@ -253,14 +273,13 @@
          if (hit) { shown++; if (q && other.contains(r)) otherHit = true; }
        });
        if (q && otherHit) other.open = true;
+       allRow.classList.toggle("nl-hide", !!q);
        none.classList.toggle("nl-hide", shown > 0);
      });
      // Enter in the filter box narrows the list instead of submitting the form.
      box.addEventListener("keydown", function (e) { if (e.key === "Enter") e.preventDefault(); });
-     picker.addEventListener("change", function () {
-       var n = picker.querySelectorAll('input[name="follow"]:checked').length;
-       count.textContent = n + (n === 1 ? " MDL picked" : " MDLs picked");
-     });
+     all.addEventListener("change", syncAll);
+     picker.addEventListener("change", count);
    }
  })();
  </script>
