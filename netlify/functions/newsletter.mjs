@@ -445,7 +445,7 @@ async function notify(rec, how, list) {
   const to = (process.env.NOTIFY_TO || "").trim();
   if (!to) return;
   const what = followLabel(rec.follows || [], list, !!rec.allTorts);
-  const from = rec.source ? `${site()}/${rec.source}` : "unknown";
+  const from = rec.source ? (rec.source === "home" ? "the homepage" : `${site()}/${rec.source}`) : "unknown";
   const when = new Date().toISOString();
   const text = `${rec.email} ${how}.\n\nFollows: ${what}\nSigned up from: ${from}\nTime: ${when}`;
   const html = `<!doctype html><html><body style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#1a1612">

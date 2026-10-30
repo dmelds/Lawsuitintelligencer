@@ -131,6 +131,27 @@
     </div>
   </section>
 
+  <section class="section" id="letter">
+    <div class="container">
+      <p class="section-eyebrow center">The Monthly Letter</p>
+      <div class="featured">
+        <p class="section-eyebrow">Once a month, after the Panel&rsquo;s report</p>
+        <h2><a href="newsletter">The MDL count, by email</a></h2>
+        <p class="dek">Each month the Judicial Panel counts the pending actions in every MDL. The letter lists the dockets that gained and lost the most, adds a section on each MDL you follow, and reports what changed on the map and the tracker.</p>
+        <form class="li-letter-form" style="margin:0 0 20px" method="post" action="/api/subscribe">
+          <label class="li-letter-label" for="home-letter-email">Email address</label>
+          <div class="li-letter-row">
+            <input type="email" id="home-letter-email" name="email" required autocomplete="email" maxlength="254">
+            <button type="submit">Send me the letter</button>
+          </div>
+          <input type="hidden" name="source" value="home">
+          <p class="li-letter-trap" aria-hidden="true"><label>Leave this empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        </form>
+        <a href="newsletter" class="read-link">Pick the MDLs you follow &rarr;</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <p class="section-eyebrow center">Tracker</p>
@@ -299,6 +320,7 @@
           <ul>
             <li><a href="archive">Archive</a></li>
             <li><a href="interviews">Interviews</a></li>
+           <li><a href="newsletter">Monthly letter</a></li>
             <li><a href="#coverage">Coverage</a></li>
             <li><a href="about">About</a></li>
             <li><a href="contribute">Contribute</a></li>
