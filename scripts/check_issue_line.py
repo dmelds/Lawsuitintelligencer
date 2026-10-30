@@ -86,6 +86,7 @@ EVERGREEN = {
     "interviews.html",
     "mass-tort-map.html",
     "mass-tort-wire.html",
+    "newsletter.html",
     "state-ai-enforcement-tracker.html",
 }
 
