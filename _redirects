@@ -1,3 +1,12 @@
+# BEGIN BLOCKED REPO TOOLING (managed by generate_redirects.py - do not edit)
+/generate_redirects.py  /404.html  404!
+/netlify.toml  /404.html  404!
+/package.json  /404.html  404!
+/netlify/*  /404.html  404!
+/.github/*  /404.html  404!
+/scripts/*  /404.html  404!
+# END BLOCKED REPO TOOLING
+
 # BEGIN AUTO-GENERATED HTML REDIRECTS (managed by generate_redirects.py - do not edit)
 /about.html  /about  301!
 /ai-chat-logs-deposition.html  /ai-chat-logs-deposition  301!
