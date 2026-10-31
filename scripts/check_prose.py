@@ -68,6 +68,16 @@ WARN   index.html Recent rows are out of date order.
 WARN   A row's title is neither the article's <h1> nor its opening words.
        Rows shorten long titles on purpose; a title that has moved on
        without its rows is the case this catches.
+ERROR  An article carries an "Updated <Month D, YYYY>" note under its
+       byline and its row (index, archive) does not carry the same date as
+       "Updated <time datetime>", or a row carries an Updated date the page
+       does not. Added October 31, 2026, after the video game docket was
+       brought forward and nothing outside the page said so: the archive
+       row still read July 14.
+ERROR  index.html's "Recently updated" line (div.recent-updated) does not
+       list the RECENT_UPDATED articles with the newest Updated notes,
+       newest first, each with its Updated date. Standing pages count here,
+       since a Mass Tort Map refresh is news to the reader too.
 
 Listing findings are charged to the ARTICLE they concern (plus index.html
 for the structural rules), so a new or edited article gates its own PR even
@@ -118,6 +128,7 @@ READ_TOLERANCE = 1
 INTRO_MIN = 30
 INTRO_MAX_PARAS = 7
 INDEX_ROWS = 10
+RECENT_UPDATED = 3
 
 SKIP = {"404.html"}
 # Pages whose <main> is cards and lists rather than an article. Length rules
@@ -135,6 +146,8 @@ INLINE_RE = re.compile(r"</?(?:a|em|strong|span|cite|abbr|code|i|b|sup|sub|time)
 ROW_RE = re.compile(
     r'<li(?P<attrs>[^>]*)>\s*<div>\s*<h3><a href="(?P<slug>[^"]+)">(?P<title>.*?)</a></h3>\s*'
     r'<p class="dek">(?P<dek>.*?)</p>\s*<p class="meta">(?P<meta>.*?)</p>', re.S)
+UPDATED_NOTE_RE = re.compile(r'<p class="article-meta">\s*Updated ([A-Z][a-z]+) (\d{1,2}), (\d{4})')
+ROW_UPDATED_RE = re.compile(r'Updated\s*<time datetime="(\d{4}-\d{2}-\d{2})"')
 MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
 ABBREV = {"no", "nos", "v", "vs", "mr", "mrs", "ms", "dr", "jr", "sr", "inc", "corp",
@@ -230,8 +243,13 @@ def article_facts(path, page):
     eyebrow = re.search(r'class="article-eyebrow">(.*?)</p>', page, re.S)
     meta = re.search(r'class="article-meta">(.*?)</p>', page, re.S)
     read = re.search(r"(\d+)\s*min read", meta.group(1)) if meta else None
+    upd = UPDATED_NOTE_RE.search(page)
+    updated = ""
+    if upd and upd.group(1) in MONTHS:
+        updated = f"{upd.group(3)}-{MONTHS.index(upd.group(1)) + 1:02d}-{int(upd.group(2)):02d}"
     return {
         "slug": path.stem,
+        "updated": updated,
         "title": plain(h1.group(1)) if h1 else "",
         "eyebrow": strip(eyebrow.group(1)) if eyebrow else "",
         "published": node.get("datePublished", ""),
@@ -360,7 +378,9 @@ def rows_of(page):
         else:
             spelled_iso = None
         read = re.search(r"(\d+)\s*min read", meta)
+        upd = ROW_UPDATED_RE.search(meta)
         out.append({
+            "updated": upd.group(1) if upd else "",
             "slug": m.group("slug"),
             "title": plain(m.group("title")),
             "lead": 'class="lead"' in m.group("attrs"),
@@ -402,6 +422,12 @@ def check_listings(root, articles):
             err(page, f"{listing} row is dated {row['date']}; the page's datePublished is {art['published']}")
         if listing != "interviews.html" and row["read"] and art["read"] and row["read"] != art["read"]:
             err(page, f"{listing} row says {row['read']} min read; the page byline says {art['read']}")
+        if listing != "interviews.html":
+            if art["updated"] and row["updated"] != art["updated"]:
+                have = f"Updated {row['updated']}" if row["updated"] else "no Updated date"
+                err(page, f"{listing} row carries {have}; the page's Updated note says {art['updated']}")
+            elif row["updated"] and not art["updated"]:
+                err(page, f"{listing} row says Updated {row['updated']}; the page carries no Updated note")
         if art["title"] and not title_agrees(row["title"], art["title"]):
             warn(page, f"{listing} row title “{row['title']}” is neither the <h1> nor its opening words: “{art['title']}”")
 
@@ -456,6 +482,26 @@ def check_listings(root, articles):
             art = articles.get(row["slug"])
             if art:
                 row_checks("index.html", row, art)
+
+        # Recently updated: the newest Updated notes, standing pages included
+        text = (root / "index.html").read_text(encoding="utf-8")
+        block = re.search(r'<div class="recent-updated">(.*?)</div>', text, re.S)
+        want = sorted((a for a in articles.values() if a["updated"]),
+                      key=lambda a: a["updated"], reverse=True)[:RECENT_UPDATED]
+        want_pairs = [(a["slug"], a["updated"]) for a in want]
+        if not block:
+            if want_pairs:
+                err("index.html", 'no "Recently updated" line (div.recent-updated) under Recent')
+        else:
+            have_pairs = re.findall(r'<a href="([^"]+)">.*?</a>\s*<time datetime="(\d{4}-\d{2}-\d{2})"', block.group(1), re.S)
+            if have_pairs != want_pairs:
+                err("index.html", "Recently updated line lists "
+                    + (", ".join(f"{s} {d}" for s, d in have_pairs) or "nothing")
+                    + "; the newest Updated notes are "
+                    + ", ".join(f"{s} {d}" for s, d in want_pairs))
+                for slug, d in want_pairs:
+                    if (slug, d) not in have_pairs:
+                        err(f"{slug}.html", f"Updated {d} but missing from index.html's Recently updated line")
 
     return errors, warnings
 
