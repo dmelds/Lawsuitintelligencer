@@ -1,14 +1,27 @@
 name: Generate Redirects
 
 on:
-  # Auto: runs when pages change on main. The job only commits _redirects
-  # (not an .html file), so it never re-triggers itself.
+  # Auto: runs when pages change on main, and when a tooling file is added or
+  # changed so the new file is blocked from the live site in the same deploy.
+  # The job only commits _redirects, which is in neither list, so it never
+  # re-triggers itself.
   # The commit carries NO [skip ci] tag: Netlify skips building any commit that
   # carries it, so a tagged _redirects update reached main and stayed off the
   # live site until some later commit deployed it.
   push:
     branches: [main]
-    paths: ['**.html']
+    paths:
+      - '**.html'
+      - '*.py'
+      - '*.yml'
+      - '*.yaml'
+      - '*.sql'
+      - '*.md'
+      - '*.toml'
+      - '*.sh'
+      - 'package*.json'
+      - 'lastmod-skip-commits.txt'
+      - 'scripts/**'
   # Manual: same dry-run option as the other workflows.
   workflow_dispatch:
     inputs:
