@@ -1,0 +1,82 @@
+name: Masthead Contact Line
+
+# Runs scripts/add_masthead_contact.py: puts the office address and the
+# editor@ address on a second line of the footer-bottom paragraph on every
+# page, and adds a PostalAddress and email to each JSON-LD block that defines
+# https://lawsuitintelligencer.com/#organization.
+#
+# Dispatch only: run it from the Actions tab, read the dry-run summary in the
+# log, then run again with apply = true. It commits straight to the chosen
+# branch rather than opening a pull request, because a PR touching all pages
+# would put every June and July article in front of check_prose.py's
+# --baseline gate.
+#
+# The script is idempotent, so a rerun on a swept tree reports zero pages
+# changed. If the address or email changes, edit the constants at the top of
+# the script and run with apply = true again.
+#
+# The commit carries [skip lastmod] so every sitemap lastmod does not move to
+# one day for a footer change, and [skip actions] so the push does not fan out
+# to the other workflows.
+#
+# It also runs a dry run on the 1st of each month. That run never writes
+# anything; it fails on purpose when a page is missing the line, which is how a
+# page built from a pre-sweep donor gets caught.
+
+on:
+  schedule:
+    - cron: '37 12 1 * *'
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Write changes and commit (leave false for a dry run)'
+        type: boolean
+        default: false
+      branch:
+        description: 'Branch to commit to'
+        type: string
+        default: main
+
+permissions:
+  contents: write
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.branch || 'main' }}
+
+      - name: Dry run
+        run: python3 scripts/add_masthead_contact.py | tee /tmp/contact.log
+
+      - name: Fail the monthly check if a page is out of date
+        if: ${{ github.event_name == 'schedule' }}
+        run: |
+          if grep -q '^  0 pages would change' /tmp/contact.log && grep -q '^  0 pages with problems' /tmp/contact.log; then
+            echo "Every page carries the masthead contact line."
+            exit 0
+          fi
+          echo "::error::Pages are missing the masthead contact line. Run this workflow with apply = true on main."
+          sed -n '1,6p' /tmp/contact.log
+          exit 1
+
+      - name: Apply
+        if: ${{ inputs.apply }}
+        run: python3 scripts/add_masthead_contact.py --apply
+
+      - name: Commit
+        if: ${{ inputs.apply }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git add '*.html'
+          git commit -m "Footer: masthead address and editor email [skip lastmod] [skip actions]"
+          git pull --rebase
+          git push
