@@ -25,6 +25,10 @@
 //                                email's List-Unsubscribe-Post header posts here too (RFC 8058).
 // GET  /api/newsletter/export    X-Export-Key -> every active subscriber with follows and
 //                                personal links. Read only. With EXPORT_KEY unset it refuses all.
+// POST /api/newsletter/remind    X-Export-Key -> re-sends the confirm email once to every reader
+//                                still pending. A reader is reminded at most one time ever
+//                                (remindedAt on the record), and the usual resend limits apply.
+//                                ?dry=1 counts who would get it and sends nothing.
 //
 // Every personal link carries t = <id>.<mac>, the mac being the first 32 hex of an HMAC-SHA256 of
 // the id under NEWSLETTER_SECRET. Nothing about the token is stored; changing the secret voids
@@ -51,6 +55,7 @@ export const config = {
     "/email/preferences",
     "/email/unsubscribe",
     "/api/newsletter/export",
+    "/api/newsletter/remind",
   ],
 };
 
@@ -692,6 +697,40 @@ async function exportList(req) {
   return json(200, { generated: new Date().toISOString(), counts, report: listCache.report || "", subscribers: out });
 }
 
+// One reminder per pending reader, ever. The owner runs this by hand; nothing schedules it.
+async function remindPending(req, url) {
+  if (!sameKey(req.headers.get("x-export-key") || "", process.env.EXPORT_KEY || "")) {
+    return json(401, { error: "unauthorized" });
+  }
+  const dry = url.searchParams.get("dry") === "1";
+  const s = store();
+  const { blobs } = await s.list({ prefix: "sub/" });
+  const list = await mdlList();
+  const now = Date.now();
+  const counts = { pending: 0, sent: 0, already_reminded: 0, resend_limit: 0, failed: 0, would_send: 0 };
+  for (const b of blobs) {
+    const rec = await s.get(b.key, { type: "json" });
+    if (!rec || rec.status !== "pending") continue;
+    counts.pending++;
+    if (rec.remindedAt) { counts.already_reminded++; continue; }
+    if (!mayResend(rec, now)) { counts.resend_limit++; continue; }
+    if (dry) { counts.would_send++; continue; }
+    const token = tokenFor(b.key.slice(4));
+    if (!token) return json(500, { error: "NEWSLETTER_SECRET unset" });
+    const m = confirmMail(`${site()}/email/confirm?t=${token}`, rec.follows || [], list, !!rec.allTorts);
+    if (await sendMail(rec.email, "Reminder: " + m.subject, m.html, m.text)) {
+      rec.sends = [...(rec.sends || []), now].slice(-8);
+      rec.remindedAt = new Date(now).toISOString();
+      rec.updatedAt = rec.remindedAt;
+      await s.setJSON(b.key, rec);
+      counts.sent++;
+    } else {
+      counts.failed++;
+    }
+  }
+  return json(200, { dry, counts });
+}
+
 export default async function handler(req) {
   const url = new URL(req.url);
   const path = url.pathname.replace(/\/$/, "");
@@ -703,6 +742,10 @@ export default async function handler(req) {
   if (path === "/api/newsletter/export") {
     if (req.method !== "GET") return json(405, { error: "method" });
     return exportList(req);
+  }
+  if (path === "/api/newsletter/remind") {
+    if (req.method !== "POST") return json(405, { error: "method" });
+    return remindPending(req, url);
   }
 
   if (req.method !== "GET" && req.method !== "POST") return json(405, { error: "method" });
