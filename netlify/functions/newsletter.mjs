@@ -422,7 +422,7 @@ function confirmMail(link, follows, list, allTorts = false) {
     "Confirm the monthly letter",
     [
       `Someone, hopefully you, asked for Lawsuit Intelligencer's monthly letter at this address, covering ${followLabel(follows, list, allTorts)}.`,
-      "Press the button to start it. If you did not ask, ignore this email and nothing will be sent.",
+      "Press the button to start it. It opens a page on lawsuitintelligencer.com with one more button, and pressing that one finishes your signup. If you did not ask, ignore this email and nothing will be sent.",
     ],
     link,
     "Confirm the letter"
@@ -573,10 +573,11 @@ ${pick}`
   }
   return page(
     200,
-    "Confirm the letter",
-    `<h1>Confirm the monthly letter</h1>
-<p>You asked for ${esc(followLabel(rec.follows || [], list, !!rec.allTorts))}.</p>
-<form method="post" action="${self}"><button type="submit">Confirm the letter</button></form>`
+    "One more step to finish",
+    `<h1>One more step to finish</h1>
+<p>You asked for ${esc(followLabel(rec.follows || [], list, !!rec.allTorts))}. Your signup is not finished yet. Press the button below and the letter starts with the next monthly send.</p>
+<form method="post" action="${self}"><button type="submit">Finish signing up</button></form>
+<p class="small" style="margin-top:22px">Email security filters open every link in a message before you do. This last step comes from you, so a filter can never sign anyone up.</p>`
   );
 }
 
