@@ -528,10 +528,8 @@ def main():
     h = put(h, "issue", f"<strong>{issue_line(report)}</strong>")
     h = put(h, "jump", f'<span class="li-jump-k">Current data &middot; {shortdate(report)} JPML report</span>')
     stamp = moved or a.restamp
-    i, j = region(h, "updated-note")
-    rest = re.sub(r'^<p class="article-meta">Updated [^,]+, \d{4}, with the Panel&rsquo;s [^.]*\.\s*', "", h[i:j])
     if stamp:
-        h = put(h, "updated-note", f'<p class="article-meta">Updated {longdate(today, nb=False)}, with the Panel&rsquo;s {longdate(report)} report. ' + rest.lstrip())
+        h = put(h, "updated-note", f'<p class="article-meta">Updated {longdate(today, nb=False)}, with the Panel&rsquo;s {longdate(report)} report. Earlier updates are in the <a href="#update-log">update log</a>.</p>')
         h, nsub = re.subn(r'"dateModified":\s*"[0-9-]+"', f'"dateModified":"{today}"', h, count=1)
         assert nsub == 1, "no dateModified in the JSON-LD"
 
@@ -555,6 +553,12 @@ def main():
         items = [x for x in re.findall(r"\s*<li>.*?</li>", blk.group(2), re.S) if 'href="mass-tort-map"' not in x]
         items.insert(0, f'\n          <li><a href="mass-tort-map">The 2026 Mass Tort Map</a> <time datetime="{today}">{MON[int(today[5:7])-1]} {int(today[8:])}, {today[:4]}</time></li>')
         ih = ih[:blk.start(2)] + "".join(items[:3]).lstrip("\n") + ih[blk.end(2):]
+        # the Featured card's meta line carries the map's Updated date
+        card = re.search(r'(<h2><a href="mass-tort-map">.*?<p class="meta">)(.*?)(</p>)', ih, re.S)
+        if card:
+            meta = re.sub(r'\s*&middot;\s*Updated <time datetime="[0-9-]+">[^<]*</time>', "", card.group(2))
+            meta += f' &middot; Updated <time datetime="{today}">{MON[int(today[5:7])-1]} {int(today[8:])}, {today[:4]}</time>'
+            ih = ih[:card.start(2)] + meta + ih[card.end(2):]
 
     print(f"report {report} (prev {prev}): {fmt(tot)} actions, {mdls} MDLs; {nmega} mega-dockets {ps:.1f}% / {pa:.1f}%; "
           f"{len(mtl)} mass tort dockets in {len(dist)} districts; {len(gains)} gains + {len(drops)} drops in the table; {nnew} newest rows")
