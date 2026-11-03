@@ -26,6 +26,7 @@ rows.json is {"<report_date>": {"<mdl>": {"p": pending, "h": total_historical,
 newest reports. Also refreshes the "Recently updated" list on index.html.
 """
 import argparse, datetime as dt, json, re, sys
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 MAP, INDEX = "mass-tort-map.html", "index.html"
@@ -391,6 +392,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--bq"); ap.add_argument("--rows"); ap.add_argument("--report")
     ap.add_argument("--path", default="."); ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--restamp", action="store_true", help="move the dates even when the report did not change")
     a = ap.parse_args()
     if not (a.bq or a.rows):
         sys.exit("give --bq PROJECT or --rows FILE")
@@ -407,7 +409,8 @@ def main():
     tot = sum(r["p"] for r in live)
     tot_prev = d["totals"]["actions"][-2]
     mdls, mdls_prev = len(live), d["totals"]["mdls"][-2]
-    today = dt.date.today().isoformat()
+    today = dt.datetime.now(ZoneInfo("America/Los_Angeles")).date().isoformat()
+    moved = old_report != report
 
     # block
     h = h[:m.start(2)] + json.dumps(d, ensure_ascii=False, separators=(",", ":")) + h[m.end(2):]
@@ -478,14 +481,16 @@ def main():
     h = put(h, "sources-block", f"{MONTH[int(fm[5:])-1]}{NBSP}{fm[:4]} through {longdate(report)}. Each layer names its edition in its caption.")
     h = put(h, "issue", f"<strong>{issue_line(report)}</strong>")
     h = put(h, "jump", f'<span class="li-jump-k">Current data &middot; {shortdate(report)} JPML report</span>')
+    stamp = moved or a.restamp
     i, j = region(h, "updated-note")
     rest = re.sub(r'^<p class="article-meta">Updated [^,]+, \d{4}, with the Panel&rsquo;s [^.]*\.\s*', "", h[i:j])
-    h = put(h, "updated-note", f'<p class="article-meta">Updated {longdate(today, nb=False)}, with the Panel&rsquo;s {longdate(report)} report. ' + rest.lstrip())
-    h, nsub = re.subn(r'"dateModified":\s*"[0-9-]+"', f'"dateModified":"{today}"', h, count=1)
-    assert nsub == 1, "no dateModified in the JSON-LD"
+    if stamp:
+        h = put(h, "updated-note", f'<p class="article-meta">Updated {longdate(today, nb=False)}, with the Panel&rsquo;s {longdate(report)} report. ' + rest.lstrip())
+        h, nsub = re.subn(r'"dateModified":\s*"[0-9-]+"', f'"dateModified":"{today}"', h, count=1)
+        assert nsub == 1, "no dateModified in the JSON-LD"
 
     # update log entry (only when the report moved)
-    if f"Panel&rsquo;s {longdate(report)} report" not in h[h.find('<ul class="dev-list"'):]:
+    if stamp and f"Panel&rsquo;s {longdate(report)} report" not in h[h.find('<ul class="dev-list"'):]:
         top_gain = gains[0] if gains else None
         entry = (f'              <li id="dev-{today}-{MONTH[int(report[5:7])-1].lower()}-report" data-kind="count"><time datetime="{today}">{MON[int(today[5:7])-1]}. {int(today[8:])}, {today[:4]}</time> '
                  f'<strong>Moved to the Panel&rsquo;s {longdate(report)} report.</strong> {fmt(tot)} pending actions across {mdls} MDLs, {move} {fmt(abs(da)) + " " if da else ""}from {longdate(prev)}. '
@@ -498,7 +503,7 @@ def main():
 
     # index: Recently updated
     idx = root / INDEX
-    ih = idx.read_text(encoding="utf-8") if idx.exists() else ""
+    ih = idx.read_text(encoding="utf-8") if idx.exists() and stamp else ""
     if ih:
         blk = re.search(r'(<div class="recent-updated">.*?<ul>\n)(.*?)(\s*</ul>)', ih, re.S)
         items = [x for x in re.findall(r"\s*<li>.*?</li>", blk.group(2), re.S) if 'href="mass-tort-map"' not in x]
@@ -513,7 +518,7 @@ def main():
     page.write_text(h, encoding="utf-8")
     if ih:
         idx.write_text(ih, encoding="utf-8")
-    print("wrote", page, "and", idx if ih else "(no index)")
+    print("wrote", page, "and", idx if ih else "(index untouched: dates did not move)")
 
 
 if __name__ == "__main__":
