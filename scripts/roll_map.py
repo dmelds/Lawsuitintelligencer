@@ -556,8 +556,8 @@ def main():
         # the Featured card's meta line carries the map's Updated date
         card = re.search(r'(<h2><a href="mass-tort-map">.*?<p class="meta">)(.*?)(</p>)', ih, re.S)
         if card:
-            meta = re.sub(r'\s*&middot;\s*Updated <time datetime="[0-9-]+">[^<]*</time>', "", card.group(2))
-            meta += f' &middot; Updated <time datetime="{today}">{MON[int(today[5:7])-1]} {int(today[8:])}, {today[:4]}</time>'
+            meta = re.sub(r'\s*&middot;\s*Last updated [A-Z][a-z]+ \d{1,2}, \d{4}', "", card.group(2))
+            meta += f" &middot; Last updated {longdate(today, nb=False)}"
             ih = ih[:card.start(2)] + meta + ih[card.end(2):]
 
     print(f"report {report} (prev {prev}): {fmt(tot)} actions, {mdls} MDLs; {nmega} mega-dockets {ps:.1f}% / {pa:.1f}%; "
