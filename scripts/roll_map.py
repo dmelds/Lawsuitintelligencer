@@ -202,7 +202,7 @@ def fig2(live, report, prev, seats):
     base = y - 58 + 48
     tenth = top[9]
     below = sorted([r for r in live if r["p"] < tenth["p"]], key=lambda r: -r["p"])[:3]
-    tail = ", ".join(f"{html_esc(r['t'])} at {fmt(r['p'])}" for r in below)
+    tail = join_and(f"{html_esc(docket_prose(r))} at {fmt(r['p'])}" for r in below)
     first = ", ".join(f"{html_esc(r['t'])} at {fmt(r['p'])}" for r in top[:3])
     svg = f'''<div class="li-fig" data-fig="2" role="img" aria-label="Horizontal bar chart of the ten largest MDLs by pending actions as of {longdate(report, nb=False)}. {html_esc(top[0]['t'])} leads at {fmt(top[0]['p'])}, far ahead of {html_esc(top[1]['t'])} at {fmt(top[1]['p'])} and {html_esc(top[2]['t'])} at {fmt(top[2]['p'])}.">
             <div class="li-fig-head">
@@ -222,6 +222,42 @@ def fig2(live, report, prev, seats):
           </div>
 '''
     return svg
+
+
+STATE = {"Ala.": "Alabama", "Ariz.": "Arizona", "Ark.": "Arkansas", "Cal.": "California", "Colo.": "Colorado", "Del.": "Delaware",
+         "Fla.": "Florida", "Ga.": "Georgia", "Ill.": "Illinois", "Ind.": "Indiana", "Kan.": "Kansas", "La.": "Louisiana", "Md.": "Maryland",
+         "Mass.": "Massachusetts", "Mich.": "Michigan", "Minn.": "Minnesota", "Mo.": "Missouri", "Mont.": "Montana", "N.C.": "North Carolina",
+         "N.H.": "New Hampshire", "N.J.": "New Jersey", "N.M.": "New Mexico", "N.Y.": "New York", "Ohio": "Ohio", "Okla.": "Oklahoma",
+         "Pa.": "Pennsylvania", "R.I.": "Rhode Island", "S.C.": "South Carolina", "Tenn.": "Tennessee", "Tex.": "Texas", "Utah": "Utah",
+         "Va.": "Virginia", "W. Va.": "West Virginia", "Wash.": "Washington", "Wis.": "Wisconsin", "D.C.": "the District of Columbia"}
+DIV = {"N": "Northern", "S": "Southern", "E": "Eastern", "W": "Western", "C": "Central", "M": "Middle"}
+# how the running text names the big dockets (the block's labels are chart labels)
+PROSE = {2738: "talc", 2789: "proton-pump inhibitors", 2846: "Bard hernia mesh", 2873: "AFFF", 3060: "hair relaxer", 3026: "NEC infant formula",
+         3047: "social media", 3081: "Bard PowerPort", 2974: "Paragard", 3094: "GLP-1", 3163: "GLP-1 NAION", 3084: "Uber passenger assault",
+         3140: "Depo-Provera", 2666: "Bair Hugger", 3004: "paraquat", 2570: "Cook IVC filters", 2741: "Roundup", 3092: "Suboxone",
+         2804: "the opiate MDL", 3166: "Roblox", 3171: "Lyft passenger assault", 3101: "baby food"}
+
+
+def court_prose(abbr):
+    """'N.D. Ill.' -> 'Northern Illinois'; 'D.N.J.' -> 'New Jersey'; 'D.S.C.' -> 'South Carolina'."""
+    a = abbr.strip()
+    m = re.match(r"^([NSEWCM])\.D\.\s*(.+)$", a)
+    if m:
+        st = STATE.get(m.group(2).strip(), m.group(2).strip())
+        return f"{DIV[m.group(1)]} {st}"
+    m = re.match(r"^D\.\s*(.+)$", a)
+    if m:
+        return STATE.get(m.group(1).strip(), m.group(1).strip())
+    return a
+
+
+def docket_prose(r):
+    return PROSE.get(r["n"]) or (r.get("l") or r["t"])
+
+
+def join_and(items):
+    items = list(items)
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
 
 
 def html_esc(s):
@@ -438,25 +474,31 @@ def main():
     by_count = max(dist.items(), key=lambda kv: (len(kv[1]), sum(r["p"] for r in kv[1])))
     def carries(code):
         top2 = sorted(dist[code], key=lambda r: -r["p"])[:2]
-        return " and ".join(html_esc(r.get("l") or r["t"]) for r in top2)
+        return join_and(html_esc(docket_prose(r)) for r in top2)
     cn = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen"]
     h = put(h, "courthouse-a", f"<p>The Panel&rsquo;s {longdate(report)} report can be read by courthouse. The mass tort dockets, {len(mtl)} of the {mdls} on the report, hold {fmt(sum(r['p'] for r in mtl))} of its {fmt(tot)} pending actions and sit in {len(dist)} districts.</p>")
     four = by_actions[:4]
-    h = put(h, "courthouse-b", f"<p>Four courts hold the mass of the system. {seats[four[0][0]]['abbr']} carries {carries(four[0][0])}. {seats[four[1][0]]['abbr']} carries {carries(four[1][0])}, {seats[four[2][0]]['abbr']} carries {carries(four[2][0])}, and {seats[four[3][0]]['abbr']} carries {carries(four[3][0])}. {seats[by_count[0]]['abbr']} holds the most mass tort dockets, {cn[len(by_count[1])] if len(by_count[1]) < len(cn) else len(by_count[1])}.</p>")
+    cp = lambda code: court_prose(seats[code]["abbr"])
+    h = put(h, "courthouse-b", f"<p>Four courts hold the mass of the system. {cp(four[0][0])} carries {carries(four[0][0])}. {cp(four[1][0])} carries {carries(four[1][0])}, {cp(four[2][0])} carries {carries(four[2][0])}, and {cp(four[3][0])} carries {carries(four[3][0])}. The {DIV.get(seats[by_count[0]]['abbr'][0], '')} District of {STATE.get(seats[by_count[0]]['abbr'].split(' ', 1)[-1].strip(), '')} holds the most mass tort dockets, {cn[len(by_count[1])] if len(by_count[1]) < len(cn) else len(by_count[1])}.</p>")
 
     # layer labels
     h = put(h, "map-title", f"pending MDLs by district, {longdate(report)}</span>")
     h = put(h, "map-cap", f"The mass torts view shows the {len(mtl)} mass tort dockets on the report. The All MDLs view shows every docket on it. Source: JPML pending-dockets report, {longdate(report)}.")
     h = put(h, "board-intro", f"The change column compares the {longdate(report)} and {longdate(prev)} reports.")
     h = put(h, "board-title", f"The docket board &middot; {len(mtl)} mass tort MDLs on the {longdate(report)} report</span>")
-    h = put(h, "board-all", f">All {mdls}</button>")
+    h = put(h, "board-all", f"All {mdls}")
     h = put(h, "board-th", f'<th scope="col" data-k="q" class="li-num">{shortdate(prev)}</th>\n                      <th scope="col" data-k="p" class="li-num" aria-sort="descending">{shortdate(report)}</th>')
     pl = sum(1 for r in mtl if r["ty"] == "PL")
     h = put(h, "board-cap", f"Pending actions from the JPML reports of {longdate(prev)} and {longdate(report)}. Mass torts here means the {pl} products liability dockets plus {cn[len(mtl)-pl]}")
     created = sorted([r for r in live if r.get("q") is None], key=lambda r: r["n"])
     gone = sorted(set(rows[prev]) - set(rows[report]))
-    cre = (f"A blank {shortdate(prev)} cell marks a docket created after that report. {'They are' if len(created) != 1 else 'It is'} " + ", ".join(f"{html_esc(r['t'])} (MDL{NBSP}{r['n']})" for r in created) + ". ") if created else f"No docket was created between the two reports. "
-    gon = (f"{cn[len(gone)].capitalize()} docket{'s' if len(gone) != 1 else ''} left the report between the two months: " + ", ".join(f"MDL{NBSP}{n}" for n in gone) + ".") if gone else "No docket left the report between the two months."
+    cre = (f"A blank {shortdate(prev)} cell marks a docket created after that report. " + ("That is " if len(created) == 1 else "Those are ") + join_and(f"{html_esc(r['t'])} (MDL{NBSP}{r['n']})" for r in created) + ". ") if created else "No docket was created between the two reports. "
+    def short_lit(lit):
+        t = re.sub(r"^IN RE:\s*", "", lit).strip()
+        t = re.sub(r"\s+(Products? Liability|Marketing, Sales Practices,? and Products Liability|Customer Data Security Breach|Antitrust|Securities)?\s*Litigation\s*$", "", t)
+        t = re.sub(r",?\s*(Inc|LLC|Corp|Co|Ltd|L\.P)\.?,?", "", t)
+        return html_esc(re.sub(r"\s+", " ", t).strip(" ,"))
+    gon = (f"{cn[len(gone)].capitalize()} docket{'s' if len(gone) != 1 else ''} left the report between the two months: " + join_and(f"{short_lit(rows[prev][n]['lit'])} (MDL{NBSP}{n})" for n in gone) + ".") if gone else "No docket left the report between the two months."
     h = put(h, "board-cap2", f'<p class="li-fig-cap">{cre}{gon}</p>')
     fm = d["months"][0]; lm = d["months"][-1]
     h = put(h, "tiles-intro", f"from the {MONTH[int(fm[5:])-1]}{NBSP}{fm[:4]} report to {MONTH[int(lm[5:])-1]}{NBSP}{lm[:4]}. The figure on each tile is the {shortdate(report)} count;")
@@ -479,6 +521,10 @@ def main():
     h = put(h, "stat-share", f'<div class="li-stat"><div class="li-n"><span class="li-accent">~{pa:.0f}%</span></div><div class="li-k">of pending actions sit in mega-dockets</div></div>')
     h = put(h, "sources-anchor", f"Case counts are drawn from the JPML's pending-dockets and monthly statistics reports, anchored to the {longdate(report)} report; counts are point-in-time and move monthly. Month-over-month changes compare the {longdate(report)} and {longdate(prev)} editions of the pending-dockets-by-actions-pending report. Centralization dates come from the date-transferred column of the pending-dockets-by-MDL-number report of {longdate(report)}.")
     h = put(h, "sources-block", f"{MONTH[int(fm[5:])-1]}{NBSP}{fm[:4]} through {longdate(report)}. Each layer names its edition in its caption.")
+    h, n_alt = re.subn(r'(<meta property="og:image:alt" content="[^"]*?)[\d,]+ pending actions across \d+ MDLs on the JPML report of [A-Z][a-z]+ \d{1,2}, \d{4}',
+                      lambda m: m.group(1) + f"{fmt(tot)} pending actions across {mdls} MDLs on the JPML report of {longdate(report, nb=False)}", h, count=1)
+    if n_alt != 1:
+        print("::warning::og:image:alt did not carry a report sentence to roll")
     h = put(h, "issue", f"<strong>{issue_line(report)}</strong>")
     h = put(h, "jump", f'<span class="li-jump-k">Current data &middot; {shortdate(report)} JPML report</span>')
     stamp = moved or a.restamp
