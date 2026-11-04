@@ -10,6 +10,8 @@ name: Monthly letter trigger
 #
 # Secret: NETWORK_OPS_DISPATCH_TOKEN, a fine-grained token scoped to dmelds/network-ops with
 # Actions read/write (the same scope as the "network-ops dispatch" token on outreach-desk).
+# A token pasted with a line break or spaces is cleaned before use, and anything that is still
+# not a GitHub token fails with its length and shape described, never the token itself.
 # The workflow checks out nothing and writes nothing to this repo.
 
 on:
@@ -32,12 +34,23 @@ jobs:
     steps:
       - name: Start the letter draft in network-ops
         env:
-          GH_TOKEN: ${{ secrets.NETWORK_OPS_DISPATCH_TOKEN }}
+          RAW_TOKEN: ${{ secrets.NETWORK_OPS_DISPATCH_TOKEN }}
         run: |
-          if [ -z "$GH_TOKEN" ]; then
+          if [ -z "$RAW_TOKEN" ]; then
             echo "::error::NETWORK_OPS_DISPATCH_TOKEN is not set, so the letter draft was not started."
             exit 1
           fi
-          gh workflow run intelligencer-monthly.yml -R dmelds/network-ops --ref main \
+          TOKEN="$(printf '%s' "$RAW_TOKEN" | tr -d '[:space:]')"
+          echo "::add-mask::$TOKEN"
+          if [ "$TOKEN" != "$RAW_TOKEN" ]; then
+            echo "::warning::The saved secret carried spaces or line breaks. They were stripped for this run. Re-save the secret to clear this warning."
+          fi
+          if ! printf '%s' "$TOKEN" | LC_ALL=C grep -Eq '^(github_pat_[A-Za-z0-9_]+|gh[pousr]_[A-Za-z0-9]+)$'; then
+            case "$TOKEN" in github_pat_*) START="starts with github_pat_" ;; *) START="does not start with github_pat_" ;; esac
+            BAD="$(printf '%s' "$TOKEN" | LC_ALL=C tr -d 'A-Za-z0-9_' | LC_ALL=C wc -c | tr -d ' ')"
+            echo "::error::NETWORK_OPS_DISPATCH_TOKEN is not a GitHub token. It is ${#TOKEN} characters, ${START}, and holds ${BAD} byte(s) other than letters, digits and underscores. Copy the token again with the copy button and re-save the secret."
+            exit 1
+          fi
+          GH_TOKEN="$TOKEN" gh workflow run intelligencer-monthly.yml -R dmelds/network-ops --ref main \
             -f mode=draft -f source=map-push
           echo "Started the Intelligencer monthly draft in dmelds/network-ops."
