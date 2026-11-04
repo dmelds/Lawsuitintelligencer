@@ -1,0 +1,43 @@
+name: Monthly letter trigger
+
+# Starts the monthly letter's draft in dmelds/network-ops the moment the Mass Tort Map changes on
+# main, so the letter runs only when the map moves instead of on a daily schedule.
+#
+# The draft there decides what to do. A map carrying a JPML report newer than the last letter's
+# opens the approval issue and emails the preview. A push for the same report while that issue
+# is open leaves it alone, so hand edits after a roll do not re-draft. A push after the send
+# finds nothing newer and stops in seconds.
+#
+# Secret: NETWORK_OPS_DISPATCH_TOKEN, a fine-grained token scoped to dmelds/network-ops with
+# Actions read/write (the same scope as the "network-ops dispatch" token on outreach-desk).
+# The workflow checks out nothing and writes nothing to this repo.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mass-tort-map.html"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: letter-trigger
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Start the letter draft in network-ops
+        env:
+          GH_TOKEN: ${{ secrets.NETWORK_OPS_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::NETWORK_OPS_DISPATCH_TOKEN is not set, so the letter draft was not started."
+            exit 1
+          fi
+          gh workflow run intelligencer-monthly.yml -R dmelds/network-ops --ref main \
+            -f mode=draft -f source=map-push
+          echo "Started the Intelligencer monthly draft in dmelds/network-ops."
