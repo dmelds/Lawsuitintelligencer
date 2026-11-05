@@ -75,11 +75,15 @@ EPOCH_YEAR, EPOCH_MONTH = 2026, 5
 # with the current JPML report or the current filings, so the masthead states
 # the issue the reader is holding, not the one the page first appeared in. The
 # byline and JSON-LD datePublished keep the origin.
+# congress-tracker is rebuilt from Hill Wire whenever a bill moves
+# (scripts/generate_congress_board.py), so it states the current issue too. The
+# generator never touches the masthead; roll_issue_line.py rolls it on the 1st.
 EVERGREEN = {
     "404.html",
     "about.html",
     "archive.html",
     "contribute.html",
+    "congress-tracker.html",
     "david-meldofsky.html",
     "editorial-standards.html",
     "index.html",

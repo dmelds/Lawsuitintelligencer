@@ -137,7 +137,7 @@ LISTING = {"index.html", "archive.html", "interviews.html"}
 # Articles that live in the index's Featured and Tracker sections and are
 # updated in place. They are not entries in the dated run, so they are not
 # expected on archive.html or in the index Recent list.
-STANDING = {"mass-tort-map", "state-ai-enforcement-tracker"}
+STANDING = {"mass-tort-map", "state-ai-enforcement-tracker", "congress-tracker"}
 
 BALANCED = ["p", "li", "h2", "h3", "em", "strong", "blockquote", "details"]
 BLOCK_RE = re.compile(r"<(p|li|blockquote|dd)(?:\s[^>]*)?>(.*?)</\1>", re.S)
