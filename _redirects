@@ -1,3 +1,12 @@
+# BEGIN BLOCKED REPO TOOLING (managed by generate_redirects.py - do not edit)
+/generate_redirects.py  /404.html  404!
+/netlify.toml  /404.html  404!
+/package.json  /404.html  404!
+/netlify/*  /404.html  404!
+/.github/*  /404.html  404!
+/scripts/*  /404.html  404!
+# END BLOCKED REPO TOOLING
+
 # BEGIN AUTO-GENERATED HTML REDIRECTS (managed by generate_redirects.py - do not edit)
 /about.html  /about  301!
 /ai-chat-logs-deposition.html  /ai-chat-logs-deposition  301!
@@ -11,6 +20,7 @@
 /chatgpt-log-preservation.html  /chatgpt-log-preservation  301!
 /claimant-acquisition-brian-beck.html  /claimant-acquisition-brian-beck  301!
 /claimant-attrition-ed-silverman.html  /claimant-attrition-ed-silverman  301!
+/congress-tracker.html  /congress-tracker  301!
 /contribute.html  /contribute  301!
 /david-meldofsky.html  /david-meldofsky  301!
 /editorial-standards.html  /editorial-standards  301!

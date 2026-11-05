@@ -5,15 +5,63 @@
   <link>https://lawsuitintelligencer.com/</link>
   <description>Reporting and analysis on mass torts and the plaintiff bar.</description>
   <language>en-us</language>
-  <lastBuildDate>Thu, 29 Oct 2026 12:00:00 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 05 Nov 2026 12:00:00 +0000</lastBuildDate>
   <atom:link href="https://lawsuitintelligencer.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Congress Tracker: Mass Tort and AI Liability Bills</title>
+    <link>https://lawsuitintelligencer.com/congress-tracker</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/congress-tracker#2026-11-05</guid>
+    <pubDate>Thu, 05 Nov 2026 12:00:00 +0000</pubDate>
+    <atom:published>2026-11-05T12:00:00Z</atom:published>
+    <description>38 federal bills on mass torts, AI liability, litigation funding and qui tam: stage, last move and what each would do. Updated November 5, 2026.</description>
+  </item>
+  <item>
+    <title>ByHeart's Five-Month Sprint to MDL 3178</title>
+    <link>https://lawsuitintelligencer.com/byheart-mdl-3178</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/byheart-mdl-3178#2026-11-04</guid>
+    <pubDate>Wed, 04 Nov 2026 12:00:00 +0000</pubDate>
+    <atom:published>2026-07-04T12:00:00Z</atom:published>
+    <description>How the ByHeart infant formula botulism cases reached MDL 3178 in under five months, and what the hybrid injury-and-class structure means for firms.</description>
+  </item>
+  <item>
+    <title>MDL 3026 Finally Has a Jury in the NEC Docket</title>
+    <link>https://lawsuitintelligencer.com/nec-mdl-first-federal-jury</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/nec-mdl-first-federal-jury#2026-11-04</guid>
+    <pubDate>Wed, 04 Nov 2026 12:00:00 +0000</pubDate>
+    <atom:published>2026-08-17T12:00:00Z</atom:published>
+    <description>Inman v. Mead Johnson is the first NEC case in MDL 3026 to reach a jury after three bellwethers died at summary judgment. Warning causation is the real test.</description>
+  </item>
+  <item>
+    <title>Inside the AI Wrongful Death Docket: Pricing the Inventory</title>
+    <link>https://lawsuitintelligencer.com/ai-wrongful-death-docket</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/ai-wrongful-death-docket#2026-11-03</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0000</pubDate>
+    <atom:published>2026-06-12T12:00:00Z</atom:published>
+    <description>Firms are signing AI wrongful death cases with no public settlement values, no merits ruling, and no federal consolidation. How the inventory is built.</description>
+  </item>
   <item>
     <title>The 2026 Mass Tort Map</title>
     <link>https://lawsuitintelligencer.com/mass-tort-map</link>
-    <guid isPermaLink="false">https://lawsuitintelligencer.com/mass-tort-map#2026-10-29</guid>
-    <pubDate>Thu, 29 Oct 2026 12:00:00 +0000</pubDate>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/mass-tort-map#2026-11-03</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0000</pubDate>
     <atom:published>2026-05-30T12:00:00Z</atom:published>
     <description>A data-driven map of the 2026 federal mass tort docket: extreme concentration, the bellwether turn, and the erosion of Section 230 and bankruptcy.</description>
+  </item>
+  <item>
+    <title>State AI Enforcement Tracker</title>
+    <link>https://lawsuitintelligencer.com/state-ai-enforcement-tracker</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/state-ai-enforcement-tracker#2026-11-03</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0000</pubDate>
+    <atom:published>2026-09-05T12:00:00Z</atom:published>
+    <description>Every state consumer-harm enforcement action against a generative AI company: court, statute, counts, remedy sought, and status. Read from the filings.</description>
+  </item>
+  <item>
+    <title>The Docket the Panel Wouldn't Build</title>
+    <link>https://lawsuitintelligencer.com/video-game-addiction-docket</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/video-game-addiction-docket#2026-10-31</guid>
+    <pubDate>Sat, 31 Oct 2026 12:00:00 +0000</pubDate>
+    <atom:published>2026-07-14T12:00:00Z</atom:published>
+    <description>Twice denied an MDL, video game addiction litigation re-formed around a California coordination, federal one-offs, and government plaintiffs.</description>
   </item>
   <item>
     <title>The Bigger Leak Is the Handoff</title>
@@ -22,22 +70,6 @@
     <pubDate>Fri, 23 Oct 2026 12:00:00 +0000</pubDate>
     <atom:published>2026-10-23T12:00:00Z</atom:published>
     <description>Lauren Rothrock of Litify on what a missed intake call costs a plaintiff firm, where the money leaks, and which calls an AI on every line still cannot hear.</description>
-  </item>
-  <item>
-    <title>Inside the AI Wrongful Death Docket: Pricing the Inventory</title>
-    <link>https://lawsuitintelligencer.com/ai-wrongful-death-docket</link>
-    <guid isPermaLink="false">https://lawsuitintelligencer.com/ai-wrongful-death-docket#2026-10-21</guid>
-    <pubDate>Wed, 21 Oct 2026 12:00:00 +0000</pubDate>
-    <atom:published>2026-06-12T12:00:00Z</atom:published>
-    <description>Plaintiff firms are signing AI wrongful death cases with no public settlement values, no merits ruling, and no federal consolidation. How the inventory is built.</description>
-  </item>
-  <item>
-    <title>State AI Enforcement Tracker</title>
-    <link>https://lawsuitintelligencer.com/state-ai-enforcement-tracker</link>
-    <guid isPermaLink="false">https://lawsuitintelligencer.com/state-ai-enforcement-tracker#2026-10-21</guid>
-    <pubDate>Wed, 21 Oct 2026 12:00:00 +0000</pubDate>
-    <atom:published>2026-09-05T12:00:00Z</atom:published>
-    <description>Every state consumer-harm enforcement action against a generative AI company: court, statute, counts, remedy sought, and status. Read from the filings.</description>
   </item>
   <item>
     <title>A Model Will Always Be Wrong</title>
@@ -136,14 +168,6 @@
     <description>Judge Lee held Otter.ai is a third-party eavesdropper under CIPA because it trains on what it records. The theory needs no product-or-content holding to work.</description>
   </item>
   <item>
-    <title>MDL 3026 Finally Has a Jury in the NEC Docket</title>
-    <link>https://lawsuitintelligencer.com/nec-mdl-first-federal-jury</link>
-    <guid isPermaLink="false">https://lawsuitintelligencer.com/nec-mdl-first-federal-jury#2026-08-17</guid>
-    <pubDate>Mon, 17 Aug 2026 12:00:00 +0000</pubDate>
-    <atom:published>2026-08-17T12:00:00Z</atom:published>
-    <description>Inman v. Mead Johnson is the first NEC case in MDL 3026 to reach a jury after three bellwethers died at summary judgment. Warning causation is the real test.</description>
-  </item>
-  <item>
     <title>The Handwritten Line in the ChatGPT Leadership Order</title>
     <link>https://lawsuitintelligencer.com/jccp-5431-pro-se-leadership-order</link>
     <guid isPermaLink="false">https://lawsuitintelligencer.com/jccp-5431-pro-se-leadership-order#2026-08-07</guid>
@@ -160,14 +184,6 @@
     <description>A Senate bill would create a contingent-fee action against the President, his family, and federal contractors. Then it names an intervenor that does not exist.</description>
   </item>
   <item>
-    <title>The Docket the Panel Wouldn't Build</title>
-    <link>https://lawsuitintelligencer.com/video-game-addiction-docket</link>
-    <guid isPermaLink="false">https://lawsuitintelligencer.com/video-game-addiction-docket#2026-07-14</guid>
-    <pubDate>Tue, 14 Jul 2026 12:00:00 +0000</pubDate>
-    <atom:published>2026-07-14T12:00:00Z</atom:published>
-    <description>Twice denied an MDL, video game addiction litigation re-formed around a California coordination, scattered federal filings, and school district plaintiffs. The structure is now the story.</description>
-  </item>
-  <item>
     <title>Federal PFAS Rules Contract, States Don't</title>
     <link>https://lawsuitintelligencer.com/pfas-rules-contracting</link>
     <guid isPermaLink="false">https://lawsuitintelligencer.com/pfas-rules-contracting#2026-07-11</guid>
@@ -182,14 +198,6 @@
     <pubDate>Sat, 04 Jul 2026 12:00:00 +0000</pubDate>
     <atom:published>2026-07-04T12:00:00Z</atom:published>
     <description>Machine-constructed search queries are running litigation due diligence on companies and legal brands. What they look like and how to answer them.</description>
-  </item>
-  <item>
-    <title>ByHeart's Five-Month Sprint to MDL 3178</title>
-    <link>https://lawsuitintelligencer.com/byheart-mdl-3178</link>
-    <guid isPermaLink="false">https://lawsuitintelligencer.com/byheart-mdl-3178#2026-07-04</guid>
-    <pubDate>Sat, 04 Jul 2026 12:00:00 +0000</pubDate>
-    <atom:published>2026-07-04T12:00:00Z</atom:published>
-    <description>How the ByHeart infant formula botulism cases reached MDL 3178 in under five months, and what the hybrid injury-and-class structure means for firms.</description>
   </item>
   <item>
     <title>Hair Relaxer's Daubert Gate and Intake Economics</title>
