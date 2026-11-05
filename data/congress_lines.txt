@@ -36,6 +36,7 @@ hair relaxer lawsuit|Hair relaxer
 ByHeart lawsuit|Infant formula contamination
 Roblox lawsuit|Online games and minors
 state attorney general lawsuit|Federal preemption of state AI law
+asbestos lawsuit|Asbestos
 
 [bills]
 # ---- Roundup and pesticide labeling ----
@@ -83,6 +84,11 @@ state attorney general lawsuit|Federal preemption of state AI law
 # ---- Bankruptcy and the Texas Two-Step ----
 119-s4346|Consumer Protection and Corporate Accountability in Bankruptcy Act (Senate)||Whitehouse, Hawley and Durbin. A Chapter 11 filing that follows a divisional merger, or one filed in bad faith, becomes grounds to dismiss the case. J&J used that route three times on talc claims.
 119-hr8393|Consumer Protection and Corporate Accountability in Bankruptcy Act (House)||Sykes, Gooden and Nadler's House version of S. 4346.
+
+# ---- Asbestos ----
+119-s5235|Alan Reinstein Ban Asbestos Now Act of 2026 (Senate)||Merkley and Curtis, the first Senate Republican cosponsor. It amends TSCA to prohibit the manufacture, processing, use and distribution of all six asbestos fibers, with a time-limited transition for remaining uses.
+119-hr5373|Alan Reinstein Ban Asbestos Now Act of 2025 (House)||Bonamici and Bacon's House version of the ban, filed in September 2025.
+119-hr4247|Asbestos Exposure in Housing Reduction Act of 2025||Torres. HUD and EPA would issue disclosure rules for housing built before 2019. Sellers and lessors would disclose known asbestos hazards, and buyers and tenants would get a 10-day inspection window. A violator would be liable for three times the damages.
 
 # ---- Paraquat ----
 119-hr9357|Paraquat Prevention Act||Luna and Pingree. It would cancel the registration of every use of paraquat, ending its sale in the U.S.
