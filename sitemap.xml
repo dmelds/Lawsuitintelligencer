@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://lawsuitintelligencer.com/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -123,6 +123,13 @@
   <url>
     <loc>https://lawsuitintelligencer.com/claimant-attrition-ed-silverman</loc>
     <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://lawsuitintelligencer.com/congress-tracker</loc>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
