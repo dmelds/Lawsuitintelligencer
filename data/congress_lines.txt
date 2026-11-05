@@ -1,0 +1,119 @@
+# Words for the Congress Tracker (congress-tracker.html).
+# scripts/generate_congress_board.py reads this file. Hill Wire supplies where each bill
+# stands; this file supplies the name, the beat and the one-line read.
+#
+# [cases]   Hill Wire topic | beat name
+#           The topic is spelled as in Hill Wire's bills.txt. Several topics can share
+#           a beat. Topic "-" bills (litigation funding, qui tam) name their beat on
+#           their own [bills] line.
+#
+# [bills]   bill id | name | beat | what the bill would do to the litigation
+#           The bill id is Hill Wire's: congress-typenumber (119-hr7567, 119-samdt6429).
+#           Empty name = Hill Wire's label. Empty beat = the topic's beat above.
+#           Leave out the bill's current stage; the tracker shows that from Congress.gov.
+#           A bill with no line here stays off the tracker, with a warning in the log.
+#
+# [riders]  phrase | why that phrase matters
+#           Phrases come from Hill Wire's [terms] list. A hit in, or a drop from, the
+#           newest text of a must-pass bill is listed with this line.
+#
+# Facts here come from Hill Wire's bills.txt notes, which were checked against
+# Congress.gov and GovInfo on 11/4 and 11/5/26. Keep sentences under 30 words.
+
+[cases]
+Roundup settlement|Roundup and pesticide labeling
+AI chatbot lawsuit|AI chatbot liability
+social media addiction lawsuit|Kids online safety
+PFAS litigation|PFAS and AFFF
+AFFF lawsuit|PFAS and AFFF
+Camp Lejeune lawsuit|Camp Lejeune
+House v. NCAA settlement|College athlete pay
+deepfake lawsuit|Deepfakes and digital replicas
+baby food lawsuit|Baby food heavy metals
+talc lawsuit|Bankruptcy and the Texas Two-Step
+paraquat lawsuit|Paraquat
+hair relaxer lawsuit|Hair relaxer
+ByHeart lawsuit|Infant formula contamination
+Roblox lawsuit|Online games and minors
+state attorney general lawsuit|Federal preemption of state AI law
+
+[bills]
+# ---- Roundup and pesticide labeling ----
+119-hr7567|Farm, Food, and National Security Act of 2026 (farm bill)||Before passage, the House voted 280 to 142 to strip the pesticide labeling uniformity sections, 10205 to 10207. Those sections would have set one national labeling rule. The Senate needs 60 votes, so the question is whether that language returns in Senate text or a conference report.
+119-hr9528|People Over Poison Act||Pingree and Massie filed it four days after Monsanto v. Durnell. It would state that FIFRA does not limit state labeling suits, reopening the failure-to-warn claims the Court closed.
+119-hr7601|No Immunity for Glyphosate Act (House)||Massie, Pingree, Boebert, Mace and Khanna. It bars federal funds for carrying out Executive Order 14387 on glyphosate supply, which critics read as a liability shield for Bayer.
+119-s4425|No Immunity for Glyphosate Act (Senate)||Heinrich, Booker, Markey, Merkley and Welch. It bars funds for Executive Order 14387 and creates a federal claim against glyphosate makers and sellers. It also blocks a Defense Production Act immunity defense, for claims arising before or after enactment.
+
+# ---- AI chatbot liability ----
+119-s3062|GUARD Act (Senate)||Judiciary approved it 22 to 0. Operators would verify ages and bar minors from companion bots. A company whose bot steers a minor toward self-harm or sexual content would face criminal fines.
+119-hr8623|GUARD Act (House)||Moore and Foushee's House companion to S. 3062.
+119-s4407|CHATBOT Act (Senate)||Cruz, Schatz, Curtis and Schiff. Platforms would have to offer family accounts and parental controls for minors. Senate Commerce, which Cruz chairs, voted it out with a substitute.
+119-hr7985|CHATBOT Act (House, professional licensing)||A different bill from S. 4407. Mullin, Matsui, Dingell and four others. AI tools could not offer or advertise professional services, such as therapy, without the license a person would need.
+119-s2937|AI LEAD Act||Durbin, with four cosponsors. It applies product liability to AI systems. The Attorney General, state attorneys general, injured people and classes could sue developers or deployers in federal court. Contract terms limiting that liability would be unenforceable.
+119-hr6489|SAFE BOTs Act||Houchin. The FTC and state attorneys general would enforce its chatbot rules. Its state-law section would bar states from keeping their own laws on the same subject.
+119-hr10719|Protecting Kids from Human-Like Chatbots Act||Whitesides, Kennedy of Utah, Matsui and Miller-Meeks. It limits human-like chatbots offered to minors and gives state attorneys general a damages action. It preserves product liability claims and stronger state laws.
+119-hr9619|People-First Chatbot Act||Foushee and Casar. Chatbot companies would owe users data privacy and security duties, enforced by the FTC and by state attorneys general suing for damages.
+119-s5154|CHAT Act 2.0||Husted and Kim. Tiered, risk-based rules for AI companion chatbots used by minors. The rules bar encouraging self-harm and sexual or romantic exchanges with children.
+
+# ---- Kids online safety ----
+119-hr7757|KIDS Act (House package, includes KOSA)||The House kids online safety package. Its KOSA title drops the duty of care that the Senate version carries.
+119-s1748|Kids Online Safety Act (Senate)||Carries the duty of care that the House package dropped. The two chambers' versions still have to be reconciled before either becomes law.
+
+# ---- PFAS and AFFF ----
+119-hr1267|Water Systems PFAS Liability Protection Act||Gluesenkamp Perez and Maloy. Water and wastewater utilities would be shielded from CERCLA liability as passive receivers of PFAS, which moves cleanup cost back onto manufacturers.
+119-samdt6429|S.Amdt. 6429, passive receiver shield||Filed to put a CERCLA passive receiver shield for PFAS into the NDAA. The number comes from a June 2026 law-firm summary. If the Senate adopts it, the NDAA text will carry "passive receiver" and the riders list will show it.
+119-s4784|National Defense Authorization Act for FY2027 (Senate)||The vehicle for S.Amdt. 6429. The NDAA has to pass or be extended by December 31, 2026, so the lame duck is when the passive receiver shield could move.
+119-s5555|PFAS RAPID Response Act||Peters, Rounds, Slotkin and Gillibrand. The Defense Department would have to start interim PFAS cleanup at certain military installations.
+
+# ---- Camp Lejeune ----
+119-hr4145|Ensuring Justice for Camp Lejeune Victims Act (House)||Murphy. It confirms jury trials, sets a general-causation standard and lets cases be heard outside E.D.N.C. Fees would be capped at 20% for settlements and 25% at trial. Murphy also offered its text as a House floor amendment on June 15, 2026.
+119-s907|Ensuring Justice for Camp Lejeune Victims Act (Senate)||Tillis and Blumenthal's version of the same fixes and fee caps.
+
+# ---- College athlete pay ----
+119-hr4312|SCORE Act||NCAA and conference antitrust protection on pay, eligibility and transfer rules, a bar on athlete employee status, and the House settlement's revenue sharing written into law. House leaders pulled planned floor votes several times in 2026 for lack of votes. As of November 2026, Cruz and Cantwell were drafting a Senate alternative.
+
+# ---- Deepfakes and digital replicas ----
+119-s4591|NO FAKES Act (Senate)||A federal right to block digital replicas of a person's voice and likeness, with platform takedown duties. Cruz objected to a unanimous consent request in October 2026.
+119-hr8915|NO FAKES Act (House)||Salazar, Dean and eight cosponsors. The House companion to S. 4591.
+119-s1837|DEFIANCE Act||Durbin. A federal civil claim for people depicted in sexually explicit deepfakes.
+
+# ---- Baby food heavy metals ----
+119-hr8429|Baby Food Safety Act of 2026||Krishnamoorthi. FDA would set enforceable limits on lead, arsenic, cadmium and mercury in infant and toddler food, with testing and recordkeeping duties on manufacturers.
+
+# ---- Bankruptcy and the Texas Two-Step ----
+119-s4346|Consumer Protection and Corporate Accountability in Bankruptcy Act (Senate)||Whitehouse, Hawley and Durbin. A Chapter 11 filing that follows a divisional merger, or one filed in bad faith, becomes grounds to dismiss the case. J&J used that route three times on talc claims.
+119-hr8393|Consumer Protection and Corporate Accountability in Bankruptcy Act (House)||Sykes, Gooden and Nadler's House version of S. 4346.
+
+# ---- Paraquat ----
+119-hr9357|Paraquat Prevention Act||Luna and Pingree. It would cancel the registration of every use of paraquat, ending its sale in the U.S.
+
+# ---- Hair relaxer ----
+119-hr7685|Healthy Hair Act||Brown, Pressley and Velazquez. Hair straightening and smoothing products containing formaldehyde or formaldehyde-releasing chemicals would be adulterated under federal law.
+
+# ---- Infant formula contamination ----
+119-s272|Protect Infant Formula from Contamination Act||Peters and Hoeven. Infant formula makers would have to test for harmful microorganisms.
+119-hr7867|Infant Formula Safety Modernization Act of 2026||DeLauro. Standard pathogen testing for infant formula products and plants, with required notice of certain positive tests.
+
+# ---- Online games and minors ----
+119-hr6265|Safer GAMING Act||Online video game providers would have to give minors safeguards against harmful contact from other players.
+
+# ---- Federal preemption of state AI law ----
+119-hr5388|American Artificial Intelligence Leadership and Uniformity Act||Baumgartner. A temporary moratorium preempting state laws that restrict AI models and systems in interstate commerce. It would reach the matters on the State AI Enforcement Tracker.
+
+# ---- Topic "-": no Informer page, Intelligencer beats only ----
+119-s3826|Litigation Funding Transparency Act of 2026|Third-party litigation funding|Grassley, Tillis, Kennedy and Cornyn. Parties in class actions, MDLs and coordinated proceedings of 100 or more suits would disclose funders and their agreements. Funders could not steer strategy or settlement.
+119-hr7015|Protecting Third Party Litigation Funding From Abuse Act|Third-party litigation funding|Issa. House leaders pulled it from the floor after about an hour of debate.
+119-hr2675|Protecting Our Courts from Foreign Manipulation Act|Third-party litigation funding|It targets foreign-sourced funding of U.S. suits. House Judiciary marked it up and reported it.
+119-s5183|Anti-Corruption Bureau Creation Act|Qui tam|Schumer, Kim, Merkley and Padilla. Private plaintiffs and state attorneys general could bring qui tam suits over federal corruption, with award bands copied from the False Claims Act. A new Anti-Corruption Bureau would receive the sealed complaints.
+
+[riders]
+pesticide labeling|The phrase the farm bill's stripped uniformity sections used. Its return would reopen the fight over state failure-to-warn claims.
+uniformity in pesticide labeling|The heading of the farm bill sections the House stripped. Its return would reopen the fight over state failure-to-warn claims.
+passive receiver|The CERCLA shield language of S.Amdt. 6429 and H.R. 1267.
+camp lejeune justice act|A reference to the 2022 Act that created the Camp Lejeune claim.
+ai companion|Companion-chatbot language of the kind in the GUARD Act and the CHAT Act.
+section 230 of the communications act|A Section 230 amendment would bear on the platform immunity defenses in the social media MDL.
+artificial intelligence model development|Moratorium language that would preempt state AI laws and reach the matters on the State AI Enforcement Tracker.
+third-party litigation funding|Funder disclosure language of the kind in S. 3826.
+litigation funder|Funder disclosure language of the kind in S. 3826.
+anti-corruption bureau|Language from S. 5183's qui tam bureau.

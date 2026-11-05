@@ -1,0 +1,102 @@
+name: Congress Tracker
+
+# Rebuilds congress-tracker.html from Hill Wire (hill.masstortwire.com). Runs half
+# an hour after each Hill Wire poll (10:47, 16:47 and 22:47 UTC), when the
+# generator or the tracker's words change, and on demand.
+#
+# scripts/generate_congress_board.py --fetch reads Hill Wire's /api/state with the
+# HILL_KEY secret (the same value as Hill Wire's WIRE_KEY, and as the HILL_KEY
+# secrets on network-ops and Lawsuit Informer), saves the parts the tracker reads
+# to data/congress_bills.json, and rewrites the page only when a row changed. A
+# quiet poll commits nothing. Without the secret, or when Hill Wire cannot be
+# reached, the run builds from the saved data and warns; it never fails for that.
+#
+# A bill shows only once data/congress_lines.txt has a line for it. A bill added
+# to Hill Wire's bills.txt with no line here is named as a warning in the run log.
+#
+# The masthead issue line is not this workflow's: the page is in
+# check_issue_line.EVERGREEN and issue-roll.yml rolls it on the 1st.
+#
+# The commit carries no [skip ci], so Netlify builds it. A push made with the
+# workflow's own token starts no other workflow, so the sitemap picks up the new
+# dateModified on the next push of an .html file.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/generate_congress_board.py'
+      - 'data/congress_lines.txt'
+  schedule:
+    - cron: '17 11,17,23 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (print the rows, write nothing)'
+        type: boolean
+        default: false
+      force:
+        description: 'Rewrite the page even if no row changed'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: congress-tracker
+  cancel-in-progress: false
+
+jobs:
+  tracker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Build the tracker
+        env:
+          HILL_KEY: ${{ secrets.HILL_KEY }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python scripts/generate_congress_board.py --fetch --dry-run
+          elif [ "${{ inputs.force }}" = "true" ]; then
+            python scripts/generate_congress_board.py --fetch --force
+          else
+            python scripts/generate_congress_board.py --fetch
+          fi
+
+      # Stdlib checks that fail the run before a page with a bad stamp or broken markup is committed.
+      - name: Check the tracker
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          python scripts/check_date_consistency.py --strict
+          python scripts/check_issue_line.py --strict
+
+      - name: Commit if changed
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/congress_bills.json congress-tracker.html
+          if git diff --cached --quiet; then
+            echo "Tracker and data unchanged."
+            exit 0
+          fi
+          git commit -m "Rebuild the Congress Tracker from Hill Wire"
+          BRANCH="$(git branch --show-current)"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin "$BRANCH" && git push; then
+              echo "Pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "Push attempt $attempt failed; retrying"
+            sleep $(( attempt * 3 + RANDOM % 4 ))
+          done
+          echo "::error::Could not push after 5 attempts"
+          exit 1
