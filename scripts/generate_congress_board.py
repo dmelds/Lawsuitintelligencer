@@ -36,6 +36,17 @@ What a row shows, all from the saved state:
   latest      Congress.gov's latest action of any kind, record cites trimmed
   history     every key move Hill Wire holds for the bill, behind a <details>
 
+Latest moves is the page's Update log, so the monthly letter (network-ops
+scripts/intelligencer_letter.py) reads it the way it reads the map and the other
+living pages: a <ul class="dev-list" data-page="congress-tracker">, one <li> per
+bill per day, id dev-YYYY-MM-DD-<bill id>, data-kind "congress", and a bold lead
+sentence naming who acted, on which bill, and the vote when there is one. The
+text after the lead is the bill's one-line read from congress_lines.txt, which
+the letter prints as the detail. When one bill has several moves on one day,
+the entry carries the furthest one (passage over a failed motion, a committee
+report over calendar placement). Keep the id form stable: the letter tells new
+moves from old ones by id.
+
 Bills from a Congress that has ended show as expired. The 119th ends January 3,
 2027; bills that have not been enacted by then die and return, if at all, with
 new numbers.
@@ -182,6 +193,169 @@ def clean(text: str) -> str:
     t = re.sub(r"\s*Record Vote Number:\s*\d+\.?", "", t)
     t = re.sub(r"\s+", " ", t).strip()
     return t if t.endswith(".") else t + "."
+
+
+# ---------------------------------------------------------------- the Update log (Latest moves)
+
+VOTE = re.compile(r"(\d{1,3})\s*-\s*(\d{1,3})")
+COMMITTEE = re.compile(r"Committee on ((?:the )?[A-Z][A-Za-z,' ]*?[A-Za-z])(?=\.|\s+H\. Rept|$|\s+Original|\s+Reported)")
+
+# The furthest step wins when one bill has several moves on one day.
+MOVE_RANK = [
+    (r"became public law|signed by (the )?president", 10),
+    (r"vetoed", 9),
+    (r"presented to (the )?president", 8),
+    (r"conference report|resolving differences", 7),
+    (r"\bpassed\b|suspend the rules and pass|agreed to", 6),
+    (r"cloture", 5),
+    (r"\breported\b(?! to house)", 4),
+    (r"rules committee resolution", 3),
+    (r"placed on .*calendar", 2),
+]
+
+
+def move_rank(text: str) -> int:
+    low = (text or "").lower()
+    if "motion to recommit" in low:
+        return 1
+    for pat, n in MOVE_RANK:
+        if re.search(pat, low):
+            return n
+    return 0
+
+
+def bare_name(name: str) -> str:
+    """The bill's name for a sentence: the "(House)"/"(Senate)" companion tag dropped, since the
+    number already tells the two apart, and "the" in front unless the name carries its own article."""
+    n = re.sub(r"\s*\((?:House|Senate)\)\s*$", "", name or "").strip()
+    return n if re.match(r"(?i)(the|a|an)\s", n) else "the " + n
+
+
+def tally(text: str) -> str:
+    low = text.lower()
+    v = VOTE.search(text)
+    if v:
+        return f", {v.group(1)} to {v.group(2)}"
+    if "unanimous consent" in low:
+        return " by unanimous consent"
+    if "voice vote" in low:
+        return " by voice vote"
+    return ""
+
+
+def committee_of(text: str, others: list) -> str:
+    """The committee an action names, else the one committee the bill's other moves name."""
+    m = COMMITTEE.search(text or "")
+    if m:
+        return m.group(1)
+    found = {c.group(1) for t in others for c in [COMMITTEE.search(t or "")] if c}
+    return found.pop() if len(found) == 1 else ""
+
+
+def lead_sentence(r: dict, text: str) -> str:
+    """One Congress.gov action as a trade-press lead: who acted, on which bill, the vote."""
+    low = text.lower()
+    bill = f'{r["bill"]}, {bare_name(r["name"])}'
+    house_bill = r["type"].startswith("h")
+    chamber = "House" if house_bill else "Senate"
+    votes = tally(text)
+    if re.search(r"became public law|signed by (the )?president", low):
+        return f"The President signed {bill}, into law."
+    if "vetoed" in low:
+        return f"The President vetoed {bill}."
+    if re.search(r"presented to (the )?president", low):
+        return f"Congress presented {bill}, to the President."
+    if re.search(r"conference report|resolving differences", low):
+        return f"House and Senate negotiators reported a conference version of {bill}."
+    if r["amdt"]:
+        if "not agreed to" in low:
+            return f"The {chamber} rejected {bill}{votes}."
+        if "withdrawn" in low:
+            return f"The sponsor withdrew {bill}."
+        if "agreed to" in low:
+            return f"The {chamber} adopted {bill}{votes}."
+    if "cloture" in low:
+        target = "the motion to proceed to " if "motion to proceed" in low else ""
+        verb = "failed to invoke" if "not invoked" in low else "invoked"
+        return f"The Senate {verb} cloture on {target}{bill}{votes}."
+    if "motion to recommit" in low:
+        verb = "rejected" if "failed" in low else "adopted"
+        return f"The House {verb} a motion to recommit {bill}{votes}."
+    if re.search(r"suspend the rules and pass", low):
+        return f"The House passed {bill}, under suspension of the rules{votes}."
+    amended = ", as amended" if re.search(r"with an amendment|with amendments|as amended", low) else ""
+    if re.search(r"on passage passed|passed (the )?house|passed/agreed to in house", low):
+        return f"The House passed {bill}{amended}{votes}."
+    if re.search(r"passed (the )?senate|passed/agreed to in senate", low):
+        return f"The Senate passed {bill}{amended}{votes}."
+    if "rules committee resolution" in low:
+        rule = re.search(r"H\. ?Res\. ?\d+", text)
+        what = f"{rule.group(0)}, a rule for floor debate on" if rule else "a rule for floor debate on"
+        return f"The House Rules Committee reported {what} {bill}."
+    if re.search(r"placed on senate legislative calendar", low):
+        return f"The Senate placed {bill}, on its legislative calendar."
+    if re.search(r"placed on the (union|house) calendar", low):
+        which = "Union" if "union" in low else "House"
+        return f"The House placed {bill}, on the {which} Calendar."
+    if re.search(r"reported|ordered to be reported", low):
+        # Senate committee actions open "Committee on X."; House ones say "by the Committee on X".
+        c_chamber = "Senate" if re.match(r"committee on|.*reported to senate", low) else chamber
+        name = committee_of(text, [t for _, t in r["moves"]])
+        who = f"The {c_chamber} Committee on {name}" if name else f"A {c_chamber} committee"
+        how = ""
+        if "nature of a substitute" in low:
+            how = ", with a substitute amendment"
+        elif "(amended)" in low or "with an amendment" in low or "with amendments" in low:
+            how = ", with amendments"
+        if "ordered to be reported" in low:
+            return f"{who} voted to report {bill}{how}{votes}."
+        if "original measure" in low:
+            return f"{who} reported {bill}, as an original bill."
+        return f"{who} reported {bill}{how}."
+    if "failed" in low:
+        return f"A {chamber} vote on {bill}, failed{votes}."
+    first = re.split(r"(?<=[a-z])\.\s", text, maxsplit=1)[0].rstrip(".")
+    return f"Congress.gov records a new action on {bill}: {first}."
+
+
+def update_log(rows: list, today: _dt.date) -> list:
+    """[(iso, row, lead)] for Latest moves: one per bill per day, the furthest move that day,
+    newest first, inside MOVES_SINCE and capped at LATEST_MOVES."""
+    floor = today - _dt.timedelta(days=MOVES_SINCE)
+    best = {}
+    for r in rows:
+        for d, t in r["moves"]:
+            dd = to_date(d)
+            if not dd or not (floor <= dd <= today):
+                continue
+            key = (d, r["id"])
+            if key not in best or move_rank(t) > move_rank(best[key][1]):
+                best[key] = (r, t)
+    out = [(d, r, lead_sentence(r, t)) for (d, _), (r, t) in best.items()]
+    out.sort(key=lambda x: (x[0], x[1]["id"]), reverse=True)
+    return out[:LATEST_MOVES]
+
+
+NAME_TOKEN = re.compile(r"(?:with )?(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve) "
+                        r"(?:others|cosponsors)|[A-Z][A-Za-z'-]+(?: [A-Z][A-Za-z'-]+){0,2}(?: of [A-Z][a-z]+)?")
+
+
+def log_detail(line: str) -> str:
+    """The bill's one-line read for Latest moves, without the sponsor list many lines open with
+    ("Cruz, Schatz, Curtis and Schiff."). The letter prints the first sentence after the lead, and a
+    list of names tells a reader nothing about the move. The row below keeps the full line."""
+    m = re.match(r"([^.]*)\.\s+(?=[A-Z])", line or "")
+    if m:
+        parts = [x for x in re.split(r",\s*(?:and\s+)?|\s+and\s+|,?\s+with\s+", m.group(1)) if x]
+        if parts and all(NAME_TOKEN.fullmatch(x.strip()) for x in parts):
+            return line[m.end():]
+    return line
+
+
+def render_log_item(d: str, r: dict, lead: str) -> str:
+    return (f'<li id="dev-{d}-{esc(r["id"])}" data-kind="congress"><time datetime="{d}">{short(d)}</time>'
+            f'<span class="ct-beat-tag">{esc(r["beat"])}</span>'
+            f'<strong><a href="#{esc(r["id"])}">{esc(lead)}</a></strong> {esc(log_detail(r["line"]))}</li>')
 
 
 # ---------------------------------------------------------------- the data file
@@ -425,6 +599,14 @@ CSS = """
     .ct-list dd { font-size: 1rem; line-height: 1.55; padding-left: 14px; }
     .ct-list time { display: block; font-family: var(--mono); font-size: 0.82rem; color: var(--ink-soft); padding-top: 3px; }
     .ct-list .ct-beat-tag { display: block; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin: 2px 0 0; }
+    .article-body .ct-moves { margin: 10px 0 0; }
+    .article-body .ct-moves li { font-size: 1rem; line-height: 1.55; padding: 12px 0; border-bottom: 1px solid var(--rule-soft); }
+    .article-body .ct-moves li:last-child { border-bottom: 1px solid var(--rule-soft); }
+    .ct-moves time { display: inline; margin: 0; font-size: 0.82rem; color: var(--ink-soft); }
+    .ct-moves .ct-beat-tag { display: inline; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin-left: 12px; }
+    .ct-moves .ct-beat-tag::after { content: ""; display: block; margin-bottom: 4px; }
+    .ct-moves strong a { color: var(--ink); text-decoration: none; }
+    .ct-moves strong a:hover { text-decoration: underline; }
     .ct-list blockquote { margin: 8px 0 0; padding: 6px 12px; border-left: 3px solid var(--rule); font-family: var(--mono); font-size: 0.85rem; line-height: 1.55; color: var(--ink-soft); }
     .article-body .ct-note { font-family: var(--mono); font-size: 0.85rem; line-height: 1.6; color: var(--ink-soft); margin: 14px 0 0; }
     @media (max-width: 760px) {
@@ -546,20 +728,12 @@ def render_main(rows: list, riders: list, today: _dt.date, stamp: str) -> str:
          '<a href="https://lawsuitinformer.com/mass-tort-bills-in-congress">Lawsuit Informer&rsquo;s Congress board</a>.</p>',
          f'          <p class="ct-band">{" ".join(band)}</p>']
 
-    moves = []
-    floor = today - _dt.timedelta(days=MOVES_SINCE)
-    for r in rows:
-        for d, t in r["moves"]:
-            dd = to_date(d)
-            if dd and floor <= dd <= today:
-                moves.append((d, r, t))
-    moves.sort(key=lambda x: x[0], reverse=True)
-    if moves:
+    log = update_log(rows, today)
+    if log:
         h.append('          <h2 class="ct-h" id="latest-moves">Latest moves</h2>')
-        h.append('          <dl class="ct-list">' + "".join(
-            f'<dt><time datetime="{d}">{short(d)}</time><span class="ct-beat-tag">{esc(r["beat"])}</span></dt>'
-            f'<dd><a href="#{esc(r["id"])}">{esc(r["bill"])} {esc(r["name"])}</a>. {esc(t)}</dd>'
-            for d, r, t in moves[:LATEST_MOVES]) + "</dl>")
+        h.append(f'          <ul class="dev-list ct-moves" data-page="{SLUG}">\n'
+                 + "\n".join("            " + render_log_item(d, r, lead) for d, r, lead in log)
+                 + "\n          </ul>")
     if riders:
         h.append('          <h2 class="ct-h" id="riders">Riders in must-pass bills</h2>')
         h.append('          <p class="ct-note">Hill Wire reads the newest text of the farm bill, both NDAAs and the Interior-Environment '
@@ -663,7 +837,7 @@ def first_shell(today: _dt.date) -> str:
     s = SHELL_FROM.read_text(encoding="utf-8")
     s = s.replace(f"{SITE}/state-ai-enforcement-tracker\"", f"{SITE}/{SLUG}\"")
     # The tracker's own page styles go; this page brings its own in render.
-    s = re.sub(r"\n  <style>.*?</style>\n", "\n" + CSS, s, count=1, flags=re.S)
+    s = re.sub(r"\n  <style>.*?</style>\n", lambda _: CSS, s, count=1, flags=re.S)
     s = re.sub(r'<script type="application/ld\+json">.*?</script>',
                lambda _: ld_block("", today.isoformat(), today.isoformat()), s, count=1, flags=re.S)
     s = re.sub(r'(<meta property="og:title" content=")[^"]*(")', lambda m: m.group(1) + esc(OG_TITLE) + m.group(2), s, count=1)
@@ -673,7 +847,9 @@ def first_shell(today: _dt.date) -> str:
 
 def set_head(shell: str, stamp: str, desc: str) -> str:
     # The page styles live in the head and change with the generator, so they are rewritten every write.
-    shell = re.sub(r"\n  <style>\s*/\* Congress Tracker, scoped to this page.*?</style>\n", lambda _: "\n" + CSS, shell,
+    # CSS opens with its own newline, so the match's leading newline is not added back (an extra
+    # one here grew a blank line in the head on every write).
+    shell = re.sub(r"\n+  <style>\s*/\* Congress Tracker, scoped to this page.*?</style>\n", lambda _: CSS, shell,
                    count=1, flags=re.S)
     shell = re.sub(r"<title>.*?</title>", f"<title>{esc(TITLE)}</title>", shell, count=1, flags=re.S)
     for pat in (r'(<meta name="description" content=")[^"]*(")',
