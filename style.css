@@ -234,6 +234,15 @@ select:focus-visible,
   margin: 0 auto;
 }
 
+/* Two featured blocks in one section (the homepage Tracker section) get a
+   rule and real space between them, so the second block's eyebrow does not
+   read as a caption under the first block's link. */
+.featured + .featured {
+  margin-top: 72px;
+  padding-top: 64px;
+  border-top: 1px solid var(--rule-soft);
+}
+
 .featured h2 {
   font-family: var(--serif);
   font-weight: 500;
@@ -816,6 +825,11 @@ select:focus-visible,
 
   .featured h2 {
     font-size: 28px;
+  }
+
+  .featured + .featured {
+    margin-top: 48px;
+    padding-top: 44px;
   }
 
   .article-dek {
