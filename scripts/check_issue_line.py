@@ -78,6 +78,7 @@ EPOCH_YEAR, EPOCH_MONTH = 2026, 5
 # congress-tracker is rebuilt from Hill Wire whenever a bill moves
 # (scripts/generate_congress_board.py), so it states the current issue too. The
 # generator never touches the masthead; roll_issue_line.py rolls it on the 1st.
+# state-law-tracker is rebuilt the same way by scripts/generate_state_board.py.
 EVERGREEN = {
     "404.html",
     "about.html",
@@ -92,6 +93,7 @@ EVERGREEN = {
     "mass-tort-wire.html",
     "newsletter.html",
     "state-ai-enforcement-tracker.html",
+    "state-law-tracker.html",
 }
 
 ISSUE = re.compile(
