@@ -1,5 +1,9 @@
 # BEGIN BLOCKED REPO TOOLING (managed by generate_redirects.py - do not edit)
+/add_search_nav.py  /404.html  404!
+/check_issue_line.py  /404.html  404!
 /generate_redirects.py  /404.html  404!
+/generate_search_index.py  /404.html  404!
+/generate_sitemap.py  /404.html  404!
 /netlify.toml  /404.html  404!
 /package.json  /404.html  404!
 /netlify/*  /404.html  404!
@@ -43,6 +47,7 @@
 /newsletter.html  /newsletter  301!
 /otter-ai-cipa-ruling.html  /otter-ai-cipa-ruling  301!
 /pfas-rules-contracting.html  /pfas-rules-contracting  301!
+/search.html  /search  301!
 /social-media-insurers-plaintiffs-case.html  /social-media-insurers-plaintiffs-case  301!
 /state-ai-enforcement-tracker.html  /state-ai-enforcement-tracker  301!
 /state-law-tracker.html  /state-law-tracker  301!
