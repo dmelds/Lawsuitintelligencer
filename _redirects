@@ -1,6 +1,5 @@
 # BEGIN BLOCKED REPO TOOLING (managed by generate_redirects.py - do not edit)
 /generate_redirects.py  /404.html  404!
-/generate_state_board.py  /404.html  404!
 /netlify.toml  /404.html  404!
 /package.json  /404.html  404!
 /netlify/*  /404.html  404!
