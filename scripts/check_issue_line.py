@@ -92,6 +92,7 @@ EVERGREEN = {
     "mass-tort-map.html",
     "mass-tort-wire.html",
     "newsletter.html",
+    "search.html",
     "state-ai-enforcement-tracker.html",
     "state-law-tracker.html",
 }

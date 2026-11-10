@@ -38,7 +38,7 @@ BASE_URL = "https://lawsuitintelligencer.com"
 SKIP_TOKEN = "[skip lastmod]"
 
 # Files that exist on disk but must never appear in the sitemap.
-EXCLUDE = {"404.html"}
+EXCLUDE = {"404.html", "search.html"}
 
 # Per-page priority and change frequency. Anything not listed here uses
 # DEFAULT. index.html is always treated as the homepage.
