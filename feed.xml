@@ -5,8 +5,24 @@
   <link>https://lawsuitintelligencer.com/</link>
   <description>Reporting and analysis on mass torts and the plaintiff bar.</description>
   <language>en-us</language>
-  <lastBuildDate>Thu, 05 Nov 2026 12:00:00 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 10 Nov 2026 12:00:00 +0000</lastBuildDate>
   <atom:link href="https://lawsuitintelligencer.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Inside the AI Wrongful Death Docket: Pricing the Inventory</title>
+    <link>https://lawsuitintelligencer.com/ai-wrongful-death-docket</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/ai-wrongful-death-docket#2026-11-10</guid>
+    <pubDate>Tue, 10 Nov 2026 12:00:00 +0000</pubDate>
+    <atom:published>2026-06-12T12:00:00Z</atom:published>
+    <description>Firms are signing AI wrongful death cases with no public settlement values, no merits ruling, and no federal consolidation. How the inventory is built.</description>
+  </item>
+  <item>
+    <title>State AI Enforcement Tracker</title>
+    <link>https://lawsuitintelligencer.com/state-ai-enforcement-tracker</link>
+    <guid isPermaLink="false">https://lawsuitintelligencer.com/state-ai-enforcement-tracker#2026-11-10</guid>
+    <pubDate>Tue, 10 Nov 2026 12:00:00 +0000</pubDate>
+    <atom:published>2026-09-05T12:00:00Z</atom:published>
+    <description>Every state consumer-harm enforcement action against a generative AI company: court, statute, counts, remedy sought, and status. Read from the filings.</description>
+  </item>
   <item>
     <title>Congress Tracker: Mass Tort and AI Liability Bills</title>
     <link>https://lawsuitintelligencer.com/congress-tracker</link>
@@ -14,14 +30,6 @@
     <pubDate>Thu, 05 Nov 2026 12:00:00 +0000</pubDate>
     <atom:published>2026-11-05T12:00:00Z</atom:published>
     <description>41 federal bills on mass torts, AI liability, litigation funding and qui tam: stage, last move and what each would do. Updated November 5, 2026.</description>
-  </item>
-  <item>
-    <title>State AI Enforcement Tracker</title>
-    <link>https://lawsuitintelligencer.com/state-ai-enforcement-tracker</link>
-    <guid isPermaLink="false">https://lawsuitintelligencer.com/state-ai-enforcement-tracker#2026-11-05</guid>
-    <pubDate>Thu, 05 Nov 2026 12:00:00 +0000</pubDate>
-    <atom:published>2026-09-05T12:00:00Z</atom:published>
-    <description>Every state consumer-harm enforcement action against a generative AI company: court, statute, counts, remedy sought, and status. Read from the filings.</description>
   </item>
   <item>
     <title>ByHeart's Five-Month Sprint to MDL 3178</title>
@@ -38,14 +46,6 @@
     <pubDate>Wed, 04 Nov 2026 12:00:00 +0000</pubDate>
     <atom:published>2026-08-17T12:00:00Z</atom:published>
     <description>Inman v. Mead Johnson is the first NEC case in MDL 3026 to reach a jury after three bellwethers died at summary judgment. Warning causation is the real test.</description>
-  </item>
-  <item>
-    <title>Inside the AI Wrongful Death Docket: Pricing the Inventory</title>
-    <link>https://lawsuitintelligencer.com/ai-wrongful-death-docket</link>
-    <guid isPermaLink="false">https://lawsuitintelligencer.com/ai-wrongful-death-docket#2026-11-03</guid>
-    <pubDate>Tue, 03 Nov 2026 12:00:00 +0000</pubDate>
-    <atom:published>2026-06-12T12:00:00Z</atom:published>
-    <description>Firms are signing AI wrongful death cases with no public settlement values, no merits ruling, and no federal consolidation. How the inventory is built.</description>
   </item>
   <item>
     <title>The 2026 Mass Tort Map</title>
