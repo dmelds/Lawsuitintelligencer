@@ -125,18 +125,47 @@ MOVE_TEXT = re.compile(r"^(re-?reported|reported)\b|\breported (out|favorably|wi
                        r"\bvetoed\b|\bchaptered\b|\bconcurred\b|\benacted\b", re.I)
 PAPER_TEXT = re.compile(r"^(introduced|read (the )?first time|first reading|referred to|re-?referred to|prefiled|"
                         r"pre-filed|filed|bill electronically reproduced)", re.I)
-PAPER_TAGS = {"introduction", "reading-1", "referral-committee", "referral", "filing"}
+KEY_TAGS = {"executive-signature", "executive-veto", "executive-veto-line-item", "became-law", "executive-receipt",
+            "passage", "committee-passage", "committee-passage-favorable", "failure", "committee-failure",
+            "withdrawal", "veto-override-passage"}
+AGREED = re.compile(r"\bconcurr|\bagreed (to )?(house|senate|assembly)\b", re.I)
 VOTE = re.compile(r"(\d{1,3})\s*-\s*(\d{1,3})")
 
 
 def is_move(a: dict) -> bool:
+    """A step that changes where the bill stands: a committee report, a floor vote, agreement
+    between the chambers, delivery to the governor, a signature or a veto. Readings, tabling,
+    amendments and messages between the chambers are left out."""
     t = (a.get("text") or "").strip()
-    tags = a.get("classification") or []
-    if t and MOVE_TEXT.search(t):
-        return True
-    if not t or PAPER_TEXT.search(t):
+    tags = set(a.get("classification") or a.get("tags") or [])
+    if t and PAPER_TEXT.search(t) and not MOVE_TEXT.search(t):
         return False
-    return not (tags and all(x in PAPER_TAGS for x in tags))
+    return bool(tags & KEY_TAGS) or bool(t and (MOVE_TEXT.search(t) or AGREED.search(t)))
+
+
+def move_rank(m: dict) -> int:
+    """Lower is further along. Used to pick one step when a bill has several on one day."""
+    tags = set(m.get("tags") or m.get("classification") or [])
+    low = (m.get("text") or "").lower()
+    for i, (tagset, pat) in enumerate([
+            ({"executive-signature", "executive-veto", "executive-veto-line-item", "became-law"}, r"\bsigned\b|\bvetoed\b|chaptered|enacted"),
+            ({"executive-receipt"}, r"to (the )?governor"),
+            (set(), r"\bconcurr|\bagreed (to )?(house|senate|assembly)\b"),
+            ({"passage"}, r"\bpassed\b"),
+            ({"committee-passage", "committee-passage-favorable"}, r"\breported\b")]):
+        if tags & tagset or re.search(pat, low):
+            return i
+    return 9
+
+
+def day_best(moves: list) -> list:
+    """One move per day, the furthest along, newest day first."""
+    by_day = {}
+    for m in moves:
+        d = m.get("date") or ""
+        if d and (d not in by_day or move_rank(m) < move_rank(by_day[d])):
+            by_day[d] = m
+    return [by_day[d] for d in sorted(by_day, reverse=True)]
 
 
 # ---------------------------------------------------------------- the data file
@@ -284,6 +313,9 @@ def lead_sentence(r: dict, m: dict) -> str:
         return f"{st} enacted {bill}."
     if "executive-receipt" in tags or re.search(r"(delivered|sent|presented|transmitted) to (the )?governor", low):
         return f"{st} lawmakers sent {bill} to the governor."
+    if AGREED.search(low) and "passage" not in tags:
+        who = f"The {st} {chamber}" if chamber else f"{st} lawmakers"
+        return f"{who} agreed to the other chamber's changes to {bill}."
     if "passage" in tags or re.search(r"\bpassed\b", low):
         who = f"The {st} {chamber}" if chamber else f"A {st} chamber"
         return f"{who} passed {bill}" + (f", {vote}." if vote else ".")
@@ -296,19 +328,6 @@ def lead_sentence(r: dict, m: dict) -> str:
     if "withdrawal" in tags:
         return f"The sponsor withdrew {st} {bill}."
     return f"{st} {bill} moved."
-
-
-def move_rank(m: dict) -> int:
-    tags = set(m.get("tags") or [])
-    low = (m.get("text") or "").lower()
-    for i, (tagset, pat) in enumerate([
-            ({"executive-signature", "executive-veto", "became-law"}, r"\bsigned\b|\bvetoed\b|chaptered|enacted"),
-            ({"executive-receipt"}, r"to (the )?governor"),
-            ({"passage"}, r"\bpassed\b"),
-            ({"committee-passage", "committee-passage-favorable"}, r"\breported\b")]):
-        if tags & tagset or re.search(pat, low):
-            return i
-    return 9
 
 
 def read_rows(today: _dt.date) -> list:
@@ -331,8 +350,10 @@ def read_rows(today: _dt.date) -> list:
             label, step, tone = raw, 4, "watch"
         else:
             label, step, tone = STAGES.get(raw, (raw or "Introduced", 1, "quiet"))
-        moves = [m for m in (b.get("moves") or []) if m.get("date") and m["date"] <= today.isoformat()]
-        last = moves[0] if moves else None
+        moves = [m for m in (b.get("moves") or [])
+                 if m.get("date") and m["date"] <= today.isoformat() and is_move(m)]
+        best = day_best(moves)
+        last = best[0] if best else None
         force = ""
         if step == 6 and eff:
             force = ("In force since " if eff <= today.isoformat() else "Takes effect ") + long_(eff)
