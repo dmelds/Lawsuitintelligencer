@@ -725,7 +725,8 @@ def render_main(rows: list, riders: list, today: _dt.date, stamp: str) -> str:
          "          <p>The stage and the last move come from Congress.gov. The last move is the newest action that changes where a bill stands: "
          "a committee report, a floor vote, a cloture vote, presentment or signature. Referrals and floor procedure are left out. "
          "The one-line read on each bill is ours. For the same bills written for injured readers, see "
-         '<a href="https://lawsuitinformer.com/mass-tort-bills-in-congress">Lawsuit Informer&rsquo;s Congress board</a>.</p>',
+         '<a href="https://lawsuitinformer.com/mass-tort-bills-in-congress">Lawsuit Informer&rsquo;s Congress board</a>. '
+         'For state statutes and bills, see the <a href="state-law-tracker">State Law Tracker</a>.</p>',
          f'          <p class="ct-band">{" ".join(band)}</p>']
 
     log = update_log(rows, today)
