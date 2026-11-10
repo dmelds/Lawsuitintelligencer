@@ -5,11 +5,15 @@ The page carries one data block (<script id="li-data">) that the interactive
 layers read, and a set of marked regions, <!-- roll:NAME --> ... <!-- /roll:NAME -->,
 that restate the report in static HTML: the summary count, the section 1 lead
 sentence, Figs. 1-4, the courthouse paragraphs, the board and trend captions,
-the fastest-growing and newest-MDL tables, the stat tiles, the sources
-anchor, the masthead issue line, the dates. This script rebuilds the block
+the fastest-growing and newest-MDL tables, the arithmetic paragraph under
+the moves table, the stat tiles, the sources anchor, the masthead issue line, the dates. This script rebuilds the block
 from jpml.mdl_pending and rewrites every marked region from it. Everything
 outside the markers is the editor's and is never touched, except that one
 Update log entry is inserted at the top of the list.
+
+The notes under the moves table (div.li-notes) are the editor's reporting on
+one report and carry its date in data-notes-report. The script never edits
+them; it warns when they describe an older report than the page now carries.
 
 A new MDL needs a name, a type and a seat before it can be placed. The script
 lists any it cannot place and stops; add the docket to the block by hand (n,
@@ -511,12 +515,32 @@ def main():
     i, j = region(h, "growth-table")
     gt, gains, drops = growth_table(live, report, prev)
     h = put(h, "growth-table", gt)
+    both = [r for r in live if r.get("q") is not None]
+    grew = sum(r["p"] - r["q"] for r in both if r["p"] > r["q"])
+    shrank = sum(r["q"] - r["p"] for r in both if r["p"] < r["q"])
+    born = sum(r["p"] for r in created)
+    left = sum(rows[prev][n]["p"] for n in gone)
+    assert grew - shrank + born - left == da, "moves arithmetic does not close on the change in pending actions"
+    s1 = f"System-wide pending actions {('rose by ' + fmt(da)) if da > 0 else ('fell by ' + fmt(-da)) if da < 0 else 'did not change'} between the two reports."
+    s2 = f" The dockets that grew added {fmt(grew)}." if grew else ""
+    parts = [f"The dockets that shrank gave up {fmt(shrank)}"] if shrank else []
+    if created:
+        parts.append(f"the {cn[len(created)] + ' new MDLs' if len(created) != 1 else 'one new MDL'} brought {fmt(born)}")
+    if gone:
+        parts.append(f"the {cn[len(gone)] if len(gone) != 1 else 'one'} that closed took {fmt(left)} with {'them' if len(gone) != 1 else 'it'}")
+    s3 = parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + ", and " + parts[-1] if parts else ""
+    s3 = (" " + s3[0].upper() + s3[1:] + ".") if s3 else ""
+    h = put(h, "moves-math", f"<p>{s1}{s2}{s3}</p>")
+    nr = re.search(r'data-notes-report="([0-9-]+)"', h)
+    if nr and nr.group(1) != report:
+        print(f"::warning::the notes under the moves table describe the {nr.group(1)} report; rewrite them for {report} or remove the block")
     i, j = region(h, "newest-table")
     nt, nnew = newest_table(d, live, report, h[i:j], seats)
     h = put(h, "newest-table", nt)
 
     # tiles, sources, masthead, dates
     pm = MONTH[int(prev[5:7]) - 1]
+    h = put(h, "stat-actions", f'<div class="li-stat"><div class="li-n">{fmt(tot)}</div><div class="li-k">pending actions, {("up " + fmt(da)) if da > 0 else ("down " + fmt(-da)) if da < 0 else "unchanged"} from {pm}</div></div>')
     h = put(h, "stat-mdls", f'<div class="li-stat"><div class="li-n">{mdls}</div><div class="li-k">active MDLs, {"up" if dm > 0 else "down" if dm < 0 else "unchanged"} from {mdls_prev} in {pm}</div></div>')
     h = put(h, "stat-share", f'<div class="li-stat"><div class="li-n"><span class="li-accent">~{pa:.0f}%</span></div><div class="li-k">of pending actions sit in mega-dockets</div></div>')
     h = put(h, "sources-anchor", f"Case counts are drawn from the JPML's pending-dockets and monthly statistics reports, anchored to the {longdate(report)} report; counts are point-in-time and move monthly. Month-over-month changes compare the {longdate(report)} and {longdate(prev)} editions of the pending-dockets-by-actions-pending report. Centralization dates come from the date-transferred column of the pending-dockets-by-MDL-number report of {longdate(report)}.")
@@ -550,8 +574,12 @@ def main():
     ih = idx.read_text(encoding="utf-8") if idx.exists() and stamp else ""
     if ih:
         blk = re.search(r'(<div class="recent-updated">.*?<ul>\n)(.*?)(\s*</ul>)', ih, re.S)
-        items = [x for x in re.findall(r"\s*<li>.*?</li>", blk.group(2), re.S) if 'href="mass-tort-map"' not in x]
+        items = ["\n          " + x.strip() for x in re.findall(r"\s*<li>.*?</li>", blk.group(2), re.S) if 'href="mass-tort-map"' not in x]
         items.insert(0, f'\n          <li><a href="mass-tort-map">The 2026 Mass Tort Map</a> <time datetime="{today}">{MON[int(today[5:7])-1]} {int(today[8:])}, {today[:4]}</time></li>')
+        # check_prose.py wants newest first, same-day entries in page-name order
+        when = lambda x: re.search(r'datetime="([0-9-]+)"', x).group(1)
+        items.sort(key=lambda x: re.search(r'href="([^"]+)"', x).group(1))
+        items.sort(key=when, reverse=True)
         ih = ih[:blk.start(2)] + "".join(items[:3]).lstrip("\n") + ih[blk.end(2):]
         # the Featured card's meta line carries the map's Updated date
         card = re.search(r'(<h2><a href="mass-tort-map">.*?<p class="meta">)(.*?)(</p>)', ih, re.S)
