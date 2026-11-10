@@ -1,0 +1,53 @@
+# Words for the State Law Tracker (state-law-tracker.html).
+# scripts/generate_state_board.py reads this file. Hill Wire's STATES tab supplies where
+# each bill stands; this file supplies the name, the group and the one-line read.
+#
+# [cases]   Hill Wire topic | beat name
+#           The topic is spelled as in Hill Wire's states.txt.
+#
+# [bills]   state and bill | name | who can sue | effective date | what it does to the litigation
+#           The first part is the two-letter state and the bill number as in states.txt
+#           (ny S 9051, ga SB 540). Empty name = Hill Wire's label.
+#           Who can sue is one of:
+#             private   an injured person can sue under the statute
+#             state     the attorney general or an agency enforces it
+#             shield    the statute narrows or bars a claim
+#             unread    the enforcement section has not been read yet
+#           The effective date is YYYY-MM-DD, or empty when sources disagree or the date
+#           is not confirmed. Leave out the bill's stage; the tracker shows that from the
+#           legislature's record. A bill with no line here stays off the tracker, with a
+#           warning in the log.
+#
+# Facts here come from the notes in Hill Wire's states.txt, checked against state
+# records and news reports on 11/9 and 11/10/26. Keep sentences under 30 words.
+# Ohio SB 488 has no line because its text was unread on 11/10/26.
+
+[cases]
+AI chatbot lawsuit|AI chatbot liability
+baby food lawsuit|Baby food heavy metals
+hair relaxer lawsuit|Hair relaxer
+Roundup settlement|Roundup and pesticide labeling
+social media addiction lawsuit|Kids online safety
+PFAS litigation|PFAS and AFFF
+deepfake lawsuit|Deepfakes
+video game addiction lawsuit|Video game addiction
+paraquat lawsuit|Paraquat
+talc lawsuit|Talc
+asbestos lawsuit|Asbestos
+
+[bills]
+ca SB 1119|California Adam's Law (SB 1119)|private|2027-01-01|Sets child-safety duties for companion chatbot operators, a crisis protocol among them. A child who suffers actual harm from a violation can sue the operator. Most duties start July 1, 2027.
+wa HB 2225|Washington AI companion chatbot law (HB 2225)|private|2027-01-01|Requires disclosure that the chatbot is a machine, safeguards for minors and a self-harm protocol. A violation is an unfair practice under the Consumer Protection Act, which carries a private claim.
+nj A 5607|New Jersey chatbot liability bill (A 5607)|private||Would define a chatbot as a product, make the provider strictly liable for injuries it causes, give injured people a claim and limit use of chat logs. Drawn from the EPIC, CFA and Fairplay model bill.
+ny S 9051|New York AI companion law for minors (S 9051-B)|state|2027-01-01|Bars operators from offering minors an AI companion with any of 12 listed features. The attorney general enforces it at up to $25,000 per violation. The signed text dropped the private right of action in the January draft.
+ga SB 540|Georgia conversational AI safety law (SB 540)|state|2027-07-01|Requires AI disclosure, a block on sexually explicit exchanges and simulated romance with minors, and a self-harm protocol. Enforcement belongs to the attorney general alone.
+id S 1297|Idaho Conversational AI Safety Act (S 1297)|state|2027-07-01|Requires AI disclosure and protections for minors. Published summaries say the attorney general enforces it and the act creates no private right of action.
+ny A 1797|New York hair relaxer warning label law (A 1797)|state||Requires a warning label on any hair relaxer sold in New York that contains a carcinogen or a reproductive toxicant. The attorney general enforces it. The label duty starts 18 months after the November 21, 2025 signing.
+ca SB 236|California C.U.R.L. Act (SB 236)|state||Bars making or selling hair relaxers that contain listed chemicals, formaldehyde among them. The Department of Toxic Substances Control sets test methods, registers makers and enforces the ban.
+ga SB 144|Georgia pesticide failure-to-warn shield (SB 144)|shield||Bars failure-to-warn liability in Georgia for a pesticide whose label carries the warnings EPA requires. Georgia followed North Dakota. The AP reported that it does not reach cases already filed.
+ca SB 867|California AI toy moratorium (SB 867)|unread||Bars making or selling a toy with a built-in companion chatbot in California until January 1, 2031.
+ri HB 7350|Rhode Island AI companion models law (HB 7350)|unread|2027-01-01|Requires AI companion tools to disclose what they are and to keep a protocol for users who talk about suicide or harming others. The Senate twin is S 2195.
+va HB 1844|Virginia Baby Food Protection Act (HB 1844)|unread|2026-01-01|Bars the sale of baby food that exceeds FDA limits for toxic heavy metals. Makers must test each product monthly, post the results and put a scannable code on the label.
+ca AB 56|California social media warning label law (AB 56)|unread|2027-01-01|Requires platforms to show users under 18 a mental health warning at first use each day, again after three hours and every hour after that.
+pa HB 507|Pennsylvania Baby Food Protection Act (HB 507)|unread||Would have the state test each batch of baby food made in Pennsylvania and put results on the label. Caps: arsenic 10 ppb, lead and cadmium 5 ppb, mercury 2 ppb.
+pa HB 2883|Pennsylvania PFAS pesticide ban (HB 2883)|unread||Would bar the sale and use of pesticides that contain PFAS when safer alternatives are available.
