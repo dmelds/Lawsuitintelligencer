@@ -128,6 +128,9 @@ PAPER_TEXT = re.compile(r"^(introduced|read (the )?first time|first reading|refe
 KEY_TAGS = {"executive-signature", "executive-veto", "executive-veto-line-item", "became-law", "executive-receipt",
             "passage", "committee-passage", "committee-passage-favorable", "failure", "committee-failure",
             "withdrawal", "veto-override-passage"}
+# A bill sent back out of a committee unchanged on its way to the floor (Pennsylvania's
+# "Re-reported as committed"). The committee's real vote was the earlier report.
+ROUTINE = re.compile(r"^re-?reported as committed\b", re.I)
 AGREED = re.compile(r"\bconcurr|\bagreed (to )?(house|senate|assembly)\b", re.I)
 VOTE = re.compile(r"(\d{1,3})\s*-\s*(\d{1,3})")
 
@@ -138,6 +141,8 @@ def is_move(a: dict) -> bool:
     amendments and messages between the chambers are left out."""
     t = (a.get("text") or "").strip()
     tags = set(a.get("classification") or a.get("tags") or [])
+    if t and ROUTINE.search(t):
+        return False
     if t and PAPER_TEXT.search(t) and not MOVE_TEXT.search(t):
         return False
     return bool(tags & KEY_TAGS) or bool(t and (MOVE_TEXT.search(t) or AGREED.search(t)))
