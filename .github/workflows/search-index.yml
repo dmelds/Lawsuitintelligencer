@@ -1,0 +1,83 @@
+name: Search index
+
+# Rebuilds search-index.json, the data behind search.html, whenever a page changes.
+#
+# scripts/generate_search_index.py reads every .html page and writes one entry per
+# page, per tracker row (a bill or a statute), per Update log entry and per MDL on
+# the Mass Tort Map. The file is committed only when its contents change.
+#
+# The tracker workflows push with the workflow token, and a push made that way
+# starts no other workflow. The schedule below runs fifteen minutes after them
+# (11:37, 17:37 and 23:37 UTC) so a rebuilt tracker reaches the index the same hour.
+#
+# Run it by hand with "Add the Search link to every masthead" checked to put the
+# Search link in the navigation of every page. That commit is navigation only, so
+# it carries [skip lastmod].
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*.html"
+      - "scripts/generate_search_index.py"
+      - ".github/workflows/search-index.yml"
+  schedule:
+    - cron: "37 11,17,23 * * *"
+  workflow_dispatch:
+    inputs:
+      nav:
+        description: "Add the Search link to every masthead"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: search-index-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Add the Search link to every masthead
+        if: ${{ inputs.nav }}
+        run: python3 scripts/add_search_nav.py --apply
+
+      - name: Generate search-index.json
+        run: python3 scripts/generate_search_index.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          made=0
+          git add -u -- '*.html'
+          if ! git diff --cached --quiet; then
+            git commit -m "Masthead: Search link [skip lastmod] [skip actions]"
+            made=1
+          fi
+          git add search-index.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: regenerate search-index.json"
+            made=1
+          fi
+          if [ "$made" = "0" ]; then
+            echo "search-index.json already up to date; nothing to commit."
+            exit 0
+          fi
+          BRANCH="$(git branch --show-current)"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin "$BRANCH" && git push; then
+              echo "Pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "Push attempt $attempt failed; retrying"
+            sleep $(( attempt * 3 + RANDOM % 4 ))
+          done
+          echo "::error::Could not push after 5 attempts"
+          exit 1
