@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>State Law Tracker: Who Can Sue Under Each New Statute</title>
+  <meta name="description" content="12 state laws and 3 bills on chatbots, baby food, hair relaxers and pesticides, sorted by who can sue. Updated November 10, 2026." />
+
+  <link rel="canonical" href="https://lawsuitintelligencer.com/state-law-tracker" />
+
+  <meta property="og:title" content="State Law Tracker: Chatbot, Product Safety and Liability Statutes, Sorted by Who Can Sue" />
+  <meta property="og:description" content="12 state laws and 3 bills on chatbots, baby food, hair relaxers and pesticides, sorted by who can sue. Updated November 10, 2026." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://lawsuitintelligencer.com/state-law-tracker" />
+  <meta property="og:image" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+  <meta property="og:image:secure_url" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Lawsuit Intelligencer — Mass Torts. Plaintiff-Side Litigation." />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="State Law Tracker: Chatbot, Product Safety and Liability Statutes, Sorted by Who Can Sue" />
+  <meta name="twitter:description" content="12 state laws and 3 bills on chatbots, baby food, hair relaxers and pesticides, sorted by who can sue. Updated November 10, 2026." />
+  <meta name="twitter:image" content="https://lawsuitintelligencer.com/lawsuit-intelligencer-og.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#001a57">
+  <style>
+    /* Congress Tracker, scoped to this page. Rebuilt by scripts/generate_congress_board.py. */
+    .tracker-updated { font-family: var(--mono); font-size: 0.88rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); border-top: 2px solid var(--accent); border-bottom: 1px solid var(--rule); padding: 10px 0; margin: 28px 0 8px; }
+    .article-body p.ct-band { font-family: var(--mono); font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft); margin: 0 0 28px; }
+    .article-body p.ct-band b { color: var(--ink); font-weight: 600; }
+    .article-body h2.ct-h { font-family: var(--mono); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 1px solid var(--rule); padding-bottom: 8px; margin: 48px 0 0; }
+    .article-body h3.ct-beat { font-size: 1.5rem; line-height: 1.25; margin: 44px 0 0; padding-bottom: 8px; border-bottom: 2px solid var(--ink); display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
+    .ct-beat .ct-count { font-family: var(--mono); font-size: 0.8rem; font-weight: 400; letter-spacing: 0.06em; color: var(--ink-soft); margin-left: auto; }
+    .ct-row { padding: 20px 0 18px; border-bottom: 1px solid var(--rule-soft); }
+    .ct-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+    .article-body .ct-name { font-size: 1.2rem; line-height: 1.3; margin: 0; font-weight: 600; }
+    .ct-pill { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 1px 7px; border: 1px solid currentColor; white-space: nowrap; }
+    .ct-live { color: #2f5d3f; }
+    .ct-watch { color: var(--accent); }
+    .ct-quiet { color: var(--ink-muted); }
+    .ct-moved { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; padding: 1px 7px; background: var(--bg-alt); color: var(--ink); }
+    .ct-num { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-soft); margin-left: auto; white-space: nowrap; }
+    .article-body p.ct-official { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-muted); margin: 2px 0 0; }
+    .article-body ol.ct-track { list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3px; margin: 10px 0 0; padding: 0; max-width: 420px; }
+    .article-body .ct-track li { margin: 0; padding: 0; height: 5px; background: var(--rule-soft); }
+    .article-body .ct-track li.on { background: var(--accent); }
+    .article-body .ct-track.law li.on { background: #2f5d3f; }
+    .article-body p.ct-steps { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin: 4px 0 0; }
+    .article-body p.ct-line { margin: 12px 0 0; }
+    .ct-facts { margin: 12px 0 0; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 14px; font-size: 0.98rem; line-height: 1.55; }
+    .ct-facts dt { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding-top: 3px; }
+    .ct-facts dd { margin: 0; color: var(--ink); }
+    .ct-facts dd time { font-family: var(--mono); font-size: 0.9rem; color: var(--ink); }
+    .article-body p.ct-links { margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 4px 18px; font-family: var(--mono); font-size: 0.85rem; }
+    .ct-hist { margin-top: 10px; }
+    .ct-hist > summary { cursor: pointer; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); display: inline-block; border: 1px solid var(--rule); padding: 3px 9px; }
+    .ct-hist > summary:hover { color: var(--ink); border-color: var(--ink-soft); }
+    .ct-hist > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .ct-hist .ct-facts { margin-top: 8px; }
+    .ct-facts dt time { display: block; font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0; text-transform: none; color: var(--ink-soft); margin-top: 2px; }
+    .ct-list { margin: 10px 0 0; display: grid; grid-template-columns: 130px minmax(0, 1fr); }
+    .ct-list dt, .ct-list dd { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--rule-soft); }
+    .ct-list dd { font-size: 1rem; line-height: 1.55; padding-left: 14px; }
+    .ct-list time { display: block; font-family: var(--mono); font-size: 0.82rem; color: var(--ink-soft); padding-top: 3px; }
+    .ct-list .ct-beat-tag { display: block; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin: 2px 0 0; }
+    .article-body .ct-moves { margin: 10px 0 0; }
+    .article-body .ct-moves li { font-size: 1rem; line-height: 1.55; padding: 12px 0; border-bottom: 1px solid var(--rule-soft); }
+    .article-body .ct-moves li:last-child { border-bottom: 1px solid var(--rule-soft); }
+    .ct-moves time { display: inline; margin: 0; font-size: 0.82rem; color: var(--ink-soft); }
+    .ct-moves .ct-beat-tag { display: inline; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin-left: 12px; }
+    .ct-moves .ct-beat-tag::after { content: ""; display: block; margin-bottom: 4px; }
+    .ct-moves strong a { color: var(--ink); text-decoration: none; }
+    .ct-moves strong a:hover { text-decoration: underline; }
+    .ct-list blockquote { margin: 8px 0 0; padding: 6px 12px; border-left: 3px solid var(--rule); font-family: var(--mono); font-size: 0.85rem; line-height: 1.55; color: var(--ink-soft); }
+    .article-body .ct-note { font-family: var(--mono); font-size: 0.85rem; line-height: 1.6; color: var(--ink-soft); margin: 14px 0 0; }
+    @media (max-width: 760px) {
+      .ct-num, .ct-beat .ct-count { margin-left: 0; width: 100%; }
+      .ct-facts { grid-template-columns: 1fr; gap: 2px; }
+      .ct-facts dd { margin-bottom: 8px; }
+      .ct-list { grid-template-columns: 1fr; }
+      .ct-list dt { border-bottom: 0; padding-bottom: 0; }
+      .ct-list dd { padding-left: 0; padding-top: 4px; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "State Law Tracker: Chatbot, Product Safety and Liability Statutes, Sorted by Who Can Sue",
+    "description": "12 state laws and 3 bills on chatbots, baby food, hair relaxers and pesticides, sorted by who can sue. Updated November 10, 2026.",
+    "datePublished": "2026-11-10",
+    "dateModified": "2026-11-10",
+    "author": {
+      "@type": "Person",
+      "@id": "https://davidmeldofsky.com/#person",
+      "name": "David Meldofsky",
+      "url": "https://lawsuitintelligencer.com/david-meldofsky",
+      "jobTitle": "California-licensed attorney"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lawsuit Intelligencer",
+      "url": "https://lawsuitintelligencer.com/"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://lawsuitintelligencer.com/state-law-tracker"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="masthead">
+    <div class="container">
+      <div class="masthead-top">
+        <div class="masthead-issue">
+          <a href="/" aria-label="Lawsuit Intelligencer home" class="masthead-mark-link">
+            <img src="/logo.svg" alt="Lawsuit Intelligencer" class="masthead-mark" />
+          </a>
+          <strong>Vol. I &middot; No. 7 &middot; November 2026</strong>
+        </div>
+
+        <nav class="masthead-nav" aria-label="Main navigation">
+          <a href="archive">Articles</a>
+          <a href="interviews">Interviews</a>
+          <a href="about">About</a>
+          <a href="contribute">Contribute</a>
+        </nav>
+      </div>
+
+      <div class="masthead-title">
+        <p class="masthead-h1"><a href="/">Lawsuit Intelligencer</a></p>
+        <p class="masthead-tagline">Attorney-led analysis of mass torts, product liability, toxic exposure litigation, and the business of plaintiff-side law.</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+<!-- states:rows:a05d86ccf1638924:2026-11-10 -->
+    <div class="container">
+      <article class="article">
+        <header>
+          <p class="article-eyebrow">Tracker &middot; State legislatures</p>
+          <h1>State Law Tracker</h1>
+          <p class="article-dek">Every state law and bill we follow that touches a mass tort or an AI liability fight, sorted by who can sue under it. Each row gives the stage, the effective date, the last move and what the statute does to the litigation, rebuilt from the legislative record three times a day.</p>
+          <p class="article-meta">Compiled by <a href="david-meldofsky">David Meldofsky</a></p>
+        </header>
+        <p class="tracker-updated">Last updated November 10, 2026 &middot; 15 laws and bills &middot; 9 states</p>
+        <p class="li-letter-top"><strong>The monthly letter</strong> carries the month&rsquo;s moves on this tracker, the Panel&rsquo;s biggest docket moves and the MDLs you follow, once a month. <a href="newsletter">Sign up &rarr;</a></p>
+        <div class="article-body">
+          <p>State legislatures moved faster than Congress on chatbots, baby food and hair relaxers in 2025 and 2026. The statutes they passed split on one question that decides their value to a plaintiff: who holds the claim. Washington and California gave it to the injured user. New York and Georgia gave it to the attorney general alone.</p>
+          <p>The split matters in pleading. A statute with a private right of action is a count. A statute the state alone enforces is a standard of care that a negligence count can borrow, where the forum allows negligence per se. A shield statute is an affirmative defense waiting in the answer.</p>
+          <p>The stage and the last move come from each legislature&rsquo;s record through Open States. The read on each statute is ours. For federal bills, see the <a href="congress-tracker">Congress Tracker</a>. For the same statutes written for injured readers, see <a href="https://lawsuitinformer.com/state-laws-on-mass-tort-cases">Lawsuit Informer&rsquo;s state board</a>.</p>
+          <p class="ct-band"><b>12</b> enacted and <b>3</b> pending across <b>9</b> states. <b>3</b> give an injured person a claim. <b>2</b> moved in the last 30 days.</p>
+          <h2 class="ct-h" id="latest-moves">Latest moves</h2>
+          <ul class="dev-list ct-moves" data-page="state-law-tracker">
+            <li id="dev-2026-10-28-ny-s-9051" data-kind="state"><time datetime="2026-10-28">OCT 28, 2026</time><span class="ct-beat-tag">State enforces</span><strong><a href="#ny-s-9051">New York&#x27;s governor signed S 9051.</a></strong> Bars operators from offering minors an AI companion with any of 12 listed features. The attorney general enforces it at up to $25,000 per violation. The signed text dropped the private right of action in the January draft.</li>
+            <li id="dev-2026-10-19-nj-a-5607" data-kind="state"><time datetime="2026-10-19">OCT 19, 2026</time><span class="ct-beat-tag">Private claim</span><strong><a href="#nj-a-5607">A New Jersey Assembly committee reported A 5607.</a></strong> Would define a chatbot as a product, make the provider strictly liable for injuries it causes, give injured people a claim and limit use of chat logs. Drawn from the EPIC, CFA and Fairplay model bill.</li>
+            <li id="dev-2026-10-07-pa-hb-507" data-kind="state"><time datetime="2026-10-07">OCT 7, 2026</time><span class="ct-beat-tag">Enforcement unread</span><strong><a href="#pa-hb-507">The Pennsylvania House passed HB 507, 200-3.</a></strong> Would have the state test each batch of baby food made in Pennsylvania and put results on the label. Caps: arsenic 10 ppb, lead and cadmium 5 ppb, mercury 2 ppb.</li>
+            <li id="dev-2026-09-10-ca-sb-867" data-kind="state"><time datetime="2026-09-10">SEP 10, 2026</time><span class="ct-beat-tag">Enforcement unread</span><strong><a href="#ca-sb-867">California enacted SB 867.</a></strong> Bars making or selling a toy with a built-in companion chatbot in California until January 1, 2031.</li>
+            <li id="dev-2026-09-10-ca-sb-1119" data-kind="state"><time datetime="2026-09-10">SEP 10, 2026</time><span class="ct-beat-tag">Private claim</span><strong><a href="#ca-sb-1119">California enacted SB 1119.</a></strong> Sets child-safety duties for companion chatbot operators, a crisis protocol among them. A child who suffers actual harm from a violation can sue the operator. Most duties start July 1, 2027.</li>
+          </ul>
+          <h2 class="ct-h" id="by-claim">Statutes by who can sue</h2>
+          <h3 class="ct-beat" id="an-injured-person-can-sue">An injured person can sue<span class="ct-count">3 statutes</span></h3>
+          <p class="ct-note">The statute, or the consumer protection act it plugs into, gives an injured person a claim.</p>
+<div class="ct-row" id="ca-sb-1119">
+<div class="ct-head"><h4 class="ct-name">California Adam&#x27;s Law (SB 1119)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">CA SB 1119</span></div>
+<p class="ct-official">California &middot; AI chatbot liability</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Sets child-safety duties for companion chatbot operators, a crisis protocol among them. A child who suffers actual harm from a violation can sue the operator. Most duties start July 1, 2027.</p>
+<dl class="ct-facts"><dt>Takes effect</dt><dd>January 1, 2027</dd><dt>Last move<br><time datetime="2026-09-10">SEP 10, 2026</time></dt><dd>Chaptered by Secretary of State. Chapter 190, Statutes of 2026</dd></dl>
+<p class="ct-links"><a href="ai-wrongful-death-docket">The Inventory Nobody Knows How to Price: Inside the AI Wrongful Death Docket</a></p>
+</div>
+<div class="ct-row" id="wa-hb-2225">
+<div class="ct-head"><h4 class="ct-name">Washington AI companion chatbot law (HB 2225)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">WA HB 2225</span></div>
+<p class="ct-official">Washington &middot; AI chatbot liability</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Requires disclosure that the chatbot is a machine, safeguards for minors and a self-harm protocol. A violation is an unfair practice under the Consumer Protection Act, which carries a private claim.</p>
+<dl class="ct-facts"><dt>Takes effect</dt><dd>January 1, 2027</dd><dt>Last move<br><time datetime="2026-03-24">MAR 24, 2026</time></dt><dd>Governor signed</dd></dl>
+<p class="ct-links"><a href="ai-wrongful-death-docket">The Inventory Nobody Knows How to Price: Inside the AI Wrongful Death Docket</a></p>
+</div>
+<div class="ct-row" id="nj-a-5607">
+<div class="ct-head"><h4 class="ct-name">New Jersey chatbot liability bill (A 5607)</h4><span class="ct-pill ct-watch">Reported</span>
+<span class="ct-moved">MOVED</span>
+<span class="ct-num">NJ A 5607</span></div>
+<p class="ct-official">New Jersey &middot; AI chatbot liability</p>
+<ol class="ct-track" aria-label="Step 3 of 6: Reported"><li class="on"></li><li class="on"></li><li class="on"></li><li></li><li></li><li></li></ol><p class="ct-steps" aria-hidden="true">Step 3 of 6 &middot; Reported</p>
+<p class="ct-line">Would define a chatbot as a product, make the provider strictly liable for injuries it causes, give injured people a claim and limit use of chat logs. Drawn from the EPIC, CFA and Fairplay model bill.</p>
+<dl class="ct-facts"><dt>Last move<br><time datetime="2026-10-19">OCT 19, 2026</time></dt><dd>Reported and Referred to Assembly Appropriations Committee</dd><dt>Introduced</dt><dd><time datetime="2026-10-05">October 5, 2026</time></dd></dl>
+<p class="ct-links"><a href="ai-wrongful-death-docket">The Inventory Nobody Knows How to Price: Inside the AI Wrongful Death Docket</a></p>
+</div>
+          <h3 class="ct-beat" id="the-state-enforces">The state enforces<span class="ct-count">5 statutes</span></h3>
+          <p class="ct-note">The attorney general or an agency enforces these. No private right of action is confirmed in any of them.</p>
+<div class="ct-row" id="ny-s-9051">
+<div class="ct-head"><h4 class="ct-name">New York AI companion law for minors (S 9051-B)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-moved">MOVED</span>
+<span class="ct-num">NY S 9051</span></div>
+<p class="ct-official">New York &middot; AI chatbot liability</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Bars operators from offering minors an AI companion with any of 12 listed features. The attorney general enforces it at up to $25,000 per violation. The signed text dropped the private right of action in the January draft.</p>
+<dl class="ct-facts"><dt>Takes effect</dt><dd>January 1, 2027</dd><dt>Last move<br><time datetime="2026-10-28">OCT 28, 2026</time></dt><dd>Signed Chap.368</dd></dl>
+<p class="ct-links"><a href="state-ai-enforcement-tracker">State AI Enforcement Tracker</a></p>
+</div>
+<div class="ct-row" id="id-s-1297">
+<div class="ct-head"><h4 class="ct-name">Idaho Conversational AI Safety Act (S 1297)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">ID S 1297</span></div>
+<p class="ct-official">Idaho &middot; AI chatbot liability</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Requires AI disclosure and protections for minors. Published summaries say the attorney general enforces it and the act creates no private right of action.</p>
+<dl class="ct-facts"><dt>Takes effect</dt><dd>July 1, 2027</dd><dt>Last move<br><time datetime="2026-03-31">MAR 31, 2026</time></dt><dd>Signed by Governor</dd></dl>
+<p class="ct-links"><a href="state-ai-enforcement-tracker">State AI Enforcement Tracker</a></p>
+</div>
+<div class="ct-row" id="ny-a-1797">
+<div class="ct-head"><h4 class="ct-name">New York hair relaxer warning label law (A 1797)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">NY A 1797</span></div>
+<p class="ct-official">New York &middot; Hair relaxer</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Requires a warning label on any hair relaxer sold in New York that contains a carcinogen or a reproductive toxicant. The attorney general enforces it. The label duty starts 18 months after the November 21, 2025 signing.</p>
+<dl class="ct-facts"><dt>Last move<br><time datetime="2025-11-21">NOV 21, 2025</time></dt><dd>Signed Chap.508</dd></dl>
+</div>
+<div class="ct-row" id="ca-sb-236">
+<div class="ct-head"><h4 class="ct-name">California C.U.R.L. Act (SB 236)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">CA SB 236</span></div>
+<p class="ct-official">California &middot; Hair relaxer</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Bars making or selling hair relaxers that contain listed chemicals, formaldehyde among them. The Department of Toxic Substances Control sets test methods, registers makers and enforces the ban.</p>
+<dl class="ct-facts"><dt>Last move<br><time datetime="2025-10-11">OCT 11, 2025</time></dt><dd>Chaptered by Secretary of State. Chapter 598, Statutes of 2025</dd></dl>
+</div>
+<div class="ct-row" id="ga-sb-540">
+<div class="ct-head"><h4 class="ct-name">Georgia conversational AI safety law (SB 540)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">GA SB 540</span></div>
+<p class="ct-official">Georgia &middot; AI chatbot liability</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Requires AI disclosure, a block on sexually explicit exchanges and simulated romance with minors, and a self-harm protocol. Enforcement belongs to the attorney general alone.</p>
+<dl class="ct-facts"><dt>Takes effect</dt><dd>July 1, 2027</dd></dl>
+<p class="ct-links"><a href="state-ai-enforcement-tracker">State AI Enforcement Tracker</a></p>
+</div>
+          <h3 class="ct-beat" id="liability-shields">Liability shields<span class="ct-count">1 statute</span></h3>
+          <p class="ct-note">These narrow or bar a claim that plaintiffs plead today.</p>
+<div class="ct-row" id="ga-sb-144">
+<div class="ct-head"><h4 class="ct-name">Georgia pesticide failure-to-warn shield (SB 144)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">GA SB 144</span></div>
+<p class="ct-official">Georgia &middot; Roundup and pesticide labeling</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Bars failure-to-warn liability in Georgia for a pesticide whose label carries the warnings EPA requires. Georgia followed North Dakota. The AP reported that it does not reach cases already filed.</p>
+<dl class="ct-facts"><dt>Last move<br><time datetime="2025-05-09">MAY 9, 2025</time></dt><dd>Senate Date Signed by Governor</dd></dl>
+</div>
+          <h3 class="ct-beat" id="enforcement-not-yet-read">Enforcement not yet read<span class="ct-count">6 statutes</span></h3>
+          <p class="ct-note">We have the duties in these and have not read the enforcement section of the enrolled text. Each moves to a group above once we have.</p>
+<div class="ct-row" id="ca-sb-867">
+<div class="ct-head"><h4 class="ct-name">California AI toy moratorium (SB 867)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">CA SB 867</span></div>
+<p class="ct-official">California &middot; AI chatbot liability</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Bars making or selling a toy with a built-in companion chatbot in California until January 1, 2031.</p>
+<dl class="ct-facts"><dt>Last move<br><time datetime="2026-09-10">SEP 10, 2026</time></dt><dd>Chaptered by Secretary of State. Chapter 189, Statutes of 2026</dd></dl>
+<p class="ct-links"><a href="state-ai-enforcement-tracker">State AI Enforcement Tracker</a></p>
+</div>
+<div class="ct-row" id="ca-ab-56">
+<div class="ct-head"><h4 class="ct-name">California social media warning label law (AB 56)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">CA AB 56</span></div>
+<p class="ct-official">California &middot; Kids online safety</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Requires platforms to show users under 18 a mental health warning at first use each day, again after three hours and every hour after that.</p>
+<dl class="ct-facts"><dt>Takes effect</dt><dd>January 1, 2027</dd><dt>Last move<br><time datetime="2025-10-13">OCT 13, 2025</time></dt><dd>Approved by the Governor</dd></dl>
+</div>
+<div class="ct-row" id="va-hb-1844">
+<div class="ct-head"><h4 class="ct-name">Virginia Baby Food Protection Act (HB 1844)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">VA HB 1844</span></div>
+<p class="ct-official">Virginia &middot; Baby food heavy metals</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Bars the sale of baby food that exceeds FDA limits for toxic heavy metals. Makers must test each product monthly, post the results and put a scannable code on the label.</p>
+<dl class="ct-facts"><dt>In force since</dt><dd>January 1, 2026</dd><dt>Last move<br><time datetime="2025-05-02">MAY 2, 2025</time></dt><dd>Approved by Governor</dd></dl>
+</div>
+<div class="ct-row" id="ri-hb-7350">
+<div class="ct-head"><h4 class="ct-name">Rhode Island AI companion models law (HB 7350)</h4><span class="ct-pill ct-live">Enacted</span>
+<span class="ct-num">RI HB 7350</span></div>
+<p class="ct-official">Rhode Island &middot; AI chatbot liability</p>
+<ol class="ct-track law" aria-label="Step 6 of 6: Enacted"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li></ol><p class="ct-steps" aria-hidden="true">Step 6 of 6 &middot; Law</p>
+<p class="ct-line">Requires AI companion tools to disclose what they are and to keep a protocol for users who talk about suicide or harming others. The Senate twin is S 2195.</p>
+<dl class="ct-facts"><dt>Takes effect</dt><dd>January 1, 2027</dd></dl>
+<p class="ct-links"><a href="state-ai-enforcement-tracker">State AI Enforcement Tracker</a></p>
+</div>
+<div class="ct-row" id="pa-hb-507">
+<div class="ct-head"><h4 class="ct-name">Pennsylvania Baby Food Protection Act (HB 507)</h4><span class="ct-pill ct-watch">Passed House</span>
+<span class="ct-num">PA HB 507</span></div>
+<p class="ct-official">Pennsylvania &middot; Baby food heavy metals</p>
+<ol class="ct-track" aria-label="Step 4 of 6: Passed House"><li class="on"></li><li class="on"></li><li class="on"></li><li class="on"></li><li></li><li></li></ol><p class="ct-steps" aria-hidden="true">Step 4 of 6 &middot; One chamber</p>
+<p class="ct-line">Would have the state test each batch of baby food made in Pennsylvania and put results on the label. Caps: arsenic 10 ppb, lead and cadmium 5 ppb, mercury 2 ppb.</p>
+<dl class="ct-facts"><dt>Last move<br><time datetime="2026-10-07">OCT 7, 2026</time></dt><dd>Third consideration and final passage (200-3)</dd></dl>
+</div>
+<div class="ct-row" id="pa-hb-2883">
+<div class="ct-head"><h4 class="ct-name">Pennsylvania PFAS pesticide ban (HB 2883)</h4><span class="ct-pill ct-quiet">In committee</span>
+<span class="ct-num">PA HB 2883</span></div>
+<p class="ct-official">Pennsylvania &middot; PFAS and AFFF</p>
+<ol class="ct-track" aria-label="Step 2 of 6: In committee"><li class="on"></li><li class="on"></li><li></li><li></li><li></li><li></li></ol><p class="ct-steps" aria-hidden="true">Step 2 of 6 &middot; Committee</p>
+<p class="ct-line">Would bar the sale and use of pesticides that contain PFAS when safer alternatives are available.</p>
+<dl class="ct-facts"><dt>Introduced</dt><dd><time datetime="2026-10-28">October 28, 2026</time></dd></dl>
+</div>
+          <p class="ct-note">Method. Hill Wire polls Open States for each bill three times a day. This page is rebuilt from that record and changes only when a stage or a move changes. The tracker lists statutes we have read, so a state missing here may still have one on the subject. Corrections go to <a href="mailto:editor@lawsuitintelligencer.com">editor@lawsuitintelligencer.com</a>.</p>
+
+          <aside class="li-letter" aria-labelledby="li-letter-h">
+            <p class="li-letter-h" id="li-letter-h">The Monthly Letter</p>
+            <p class="li-letter-lead">Once a month: the statutes that moved on this tracker, the Panel&rsquo;s biggest docket moves, and a section on each MDL you follow.</p>
+            <form class="li-letter-form" method="post" action="/api/subscribe">
+              <label class="li-letter-label" for="li-letter-email">Email address</label>
+              <div class="li-letter-row">
+                <input type="email" id="li-letter-email" name="email" required autocomplete="email" maxlength="254">
+                <button type="submit">Send me the letter</button>
+              </div>
+              <input type="hidden" name="source" value="state-law-tracker">
+              <p class="li-letter-trap" aria-hidden="true"><label>Leave this empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            </form>
+            <p class="li-letter-note">You confirm by email before anything is sent. Pick the MDLs you follow on the <a href="newsletter">signup page</a> or from any issue.</p>
+          </aside>
+        </div>
+
+        <footer>
+          <p class="article-byline-end"><a href="david-meldofsky">David Meldofsky</a> is a California-licensed attorney and the editor of Lawsuit Intelligencer. He is also the founder of <a href="https://lawsuitinformer.com">Lawsuit Informer</a> and <a href="https://lawsuit.center">Lawsuit Center</a>.</p>
+        </footer>
+      </article>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <p class="section-eyebrow center">More from Lawsuit Intelligencer</p>
+        <div class="recent">
+          <ol>
+            <li>
+              <div>
+                <h3><a href="congress-tracker">Congress Tracker</a></h3>
+                <p class="dek">Every federal bill we follow that would change a mass tort, an AI liability fight, litigation funding or qui tam practice, with its stage and its last move.</p>
+                <p class="meta">Compiled by David Meldofsky</p>
+              </div>
+            </li>
+            <li>
+              <div>
+                <h3><a href="state-ai-enforcement-tracker">State AI Enforcement Tracker</a></h3>
+                <p class="dek">Every state consumer-harm action against a generative AI company, with the court, the statutory theory, the counts as pleaded, the remedy sought, and where each matter stands.</p>
+                <p class="meta">Compiled by David Meldofsky</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-mast">Lawsuit Intelligencer</p>
+          <p class="footer-mast-sub">Litigation analysis, mass torts, and the business of plaintiff-side law.</p>
+        </div>
+
+        <div>
+          <h4>Sections</h4>
+          <ul>
+            <li><a href="archive">Archive</a></li>
+            <li><a href="interviews">Interviews</a></li>
+           <li><a href="newsletter">Monthly letter</a></li>
+            <li><a href="/#coverage">Coverage</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="contribute">Contribute</a></li>
+            <li><a href="editorial-standards">Editorial standards</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>The Ecosystem</h4>
+          <ul>
+            <li><a href="https://lawsuitinformer.com">Lawsuit Informer</a></li>
+            <li><a href="https://lawsuit.center">Lawsuit Center</a></li>
+            <li><a href="https://davidmeldofsky.com">David Meldofsky</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="footer-disclosure">
+        Lawsuit Intelligencer is editorial commentary and does not constitute legal advice. Nothing on this site creates an attorney-client relationship. The publication is independent of any case, claim, or law firm covered. Authors writing about matters in which they have a financial interest disclose that interest at the foot of each piece.
+      </p>
+
+      <p class="footer-bottom">&copy; 2026 Lawsuit Intelligencer &middot; Edited by <a href="david-meldofsky">David Meldofsky</a><br><span class="footer-contact">6210 Wilshire Blvd. Ste 200, Los Angeles, CA 90048 &middot; <a href="mailto:editor@lawsuitintelligencer.com">editor@lawsuitintelligencer.com</a></span></p>
+    </div>
+  </footer>
+
+</body>
+</html>
