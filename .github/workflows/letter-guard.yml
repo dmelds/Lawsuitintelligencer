@@ -1,0 +1,91 @@
+name: Letter Guard
+
+# Loads the monthly letter's bot check on every page with a signup form.
+#
+# scripts/add_letter_guard.py puts <script src="/letter-guard.js" defer></script> right after
+# each form that posts to /api/subscribe. The Congress and State tracker generators write the
+# same line themselves; this covers the hand-kept pages (homepage, Mass Tort Map, the dockets,
+# the State AI Enforcement Tracker, /newsletter) and any page added later. Why the check exists
+# and how it works is in the header of netlify/functions/newsletter.mjs and letter-guard.js.
+#
+# On a push to main that changes the script, letter-guard.js or the newsletter function, and on
+# demand, it adds the line to any page that lacks it and commits. The line is page furniture, so
+# the commit carries [skip lastmod] (no sitemap lastmod, dateModified or visible stamp moves) and
+# [skip actions] (the push does not fan out to the other workflows). A page that already loads
+# the check is never written, so a run with nothing to add commits nothing.
+#
+# On a pull request that touches a page it only checks: it fails when a page with a signup form
+# does not load the check, which is how a new page built from an older donor gets caught.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/add_letter_guard.py'
+      - 'letter-guard.js'
+      - 'netlify/functions/newsletter.mjs'
+      - '.github/workflows/letter-guard.yml'
+  pull_request:
+    branches: [main]
+    paths: ['**.html']
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (list the pages that would change, write nothing)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: letter-guard
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Check (pull request)
+        if: ${{ github.event_name == 'pull_request' }}
+        run: python3 scripts/add_letter_guard.py --check
+
+      - name: Add the line
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python3 scripts/add_letter_guard.py --dry-run
+          else
+            python3 scripts/add_letter_guard.py
+          fi
+
+      - name: Check dates
+        if: ${{ github.event_name != 'pull_request' && inputs.dry_run != true }}
+        run: python3 scripts/check_date_consistency.py --strict
+
+      - name: Commit if changed
+        if: ${{ github.event_name != 'pull_request' && inputs.dry_run != true }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html'
+          if git diff --cached --quiet; then
+            echo "Every signup page already loads the bot check."
+            exit 0
+          fi
+          git commit -m "Load the letter bot check on signup pages [skip lastmod] [skip actions]"
+          BRANCH="$(git branch --show-current)"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin "$BRANCH" && git push; then
+              echo "Pushed on attempt $attempt"
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push attempt $attempt failed; retrying"
+            sleep $(( attempt * 3 + RANDOM % 4 ))
+          done
+          echo "::error::Could not push after 5 attempts"
+          exit 1
