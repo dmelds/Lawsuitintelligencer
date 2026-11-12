@@ -511,6 +511,7 @@ def render_main(rows: list, today: _dt.date, stamp: str) -> str:
           f'              <input type="hidden" name="source" value="{SLUG}">',
           '              <p class="li-letter-trap" aria-hidden="true"><label>Leave this empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>',
           "            </form>",
+          '            <script src="/letter-guard.js" defer></script>',  # the bot check; see scripts/add_letter_guard.py
           '            <p class="li-letter-note">You confirm by email before anything is sent. Pick the MDLs you follow on the <a href="newsletter">signup page</a> or from any issue.</p>',
           "          </aside>",
           "        </div>",

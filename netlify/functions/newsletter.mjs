@@ -9,12 +9,13 @@
 // sub/<id>, where <id> is the first 32 hex of the SHA-256 of the lowercased address. The monthly
 // send runs in network-ops and reads the list through /api/newsletter/export.
 //
+// GET  /api/subscribe            hands a signup form its bot-check token (see "bot check" below).
 // POST /api/subscribe            signup boxes post here (form or fetch). Fields: email, follow
 //                                (MDL number, repeatable, optional; the value "mt" follows every
 //                                mass tort on the map, now and as the Panel adds them), source,
-//                                bot-field. Always
-//                                answers "check your email", so the form never tells a stranger
-//                                whether an address is on the list.
+//                                bot-field, and the bot check's g, ev and wd. A signup that passes
+//                                the bot check always gets "check your email", so the form never
+//                                tells a stranger whether an address is on the list.
 // GET  /email/confirm?t=         page with a Confirm button; POST to the same URL activates.
 //                                A button rather than a bare link, because mail scanners open
 //                                every GET link in a message.
@@ -26,7 +27,8 @@
 // GET  /api/newsletter/export    X-Export-Key -> every active subscriber with follows and
 //                                personal links. Read only. With EXPORT_KEY unset it refuses all.
 // POST /api/newsletter/remind    X-Export-Key -> re-sends the confirm email once to every reader
-//                                still pending. A reader is reminded at most one time ever
+//                                still pending who signed up through the bot check (?all=1 adds
+//                                the older records). A reader is reminded at most one time ever
 //                                (remindedAt on the record), and the usual resend limits apply.
 //                                ?dry=1 counts who would get it and sends nothing.
 //
@@ -41,9 +43,26 @@
 //   SES_SECRET_ACCESS_KEY
 //   SES_REGION              us-east-2
 //   MAIL_FROM               Lawsuit Intelligencer <editor@lawsuitintelligencer.com>
-//   NOTIFY_TO               optional; gets a short email each time a reader confirms
+//   NOTIFY_TO               optional; gets a short email when a reader signs up (once per address,
+//                           before they confirm), again when they confirm, and when one comes back
+//                           from the preferences page. Unset, the function logs that it was skipped.
 // With SES unset, signups still save as pending and the response is unchanged; the confirm mail
 // does not go, and the function logs why.
+//
+// Bot check (added 11/11/26, the same check Lawsuit Informer's signup boxes got that day after
+// scripted signups filled its list with addresses that never confirm):
+//   - /letter-guard.js, loaded by every signup form, asks GET /api/subscribe for a token the
+//     first time a reader touches the form. The token is a timestamp signed with
+//     NEWSLETTER_SECRET. The form posts it back as g, with ev (a count of real clicks and key
+//     presses) and wd (whether the browser says it is automated). A token counts when it is at
+//     least 2.5 seconds old and at most 2 hours old.
+//   - A form post with no good token, or with ev at 0, gets a page with one button, "Send me the
+//     letter", which carries a fresh token. A person presses it and is signed up; a script that
+//     posts once never gets there. A browser without JavaScript lands on the same page, so no
+//     reader is ever turned away without a way through.
+//   - A browser that reports it is automated gets the usual "check your email" and nothing is kept.
+//   - Every signup the check turns back logs one line (the reason and the page, never the
+//     address), so the function log shows how much is being stopped.
 
 import { getStore } from "@netlify/blobs";
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
@@ -95,6 +114,29 @@ function idFromToken(t) {
 function sameKey(got, want) {
   if (!want || !got || got.length !== want.length) return false;
   return timingSafeEqual(Buffer.from(got), Buffer.from(want));
+}
+
+// ---------------------------------------------------------------- bot check
+
+const GATE_MIN_MS = 2500; //            a signup sooner than this after its token came from a script
+const GATE_MAX_MS = 2 * 3600 * 1000; // and a token older than this has to be asked for again
+
+export function gateToken(now = Date.now()) {
+  const secret = process.env.NEWSLETTER_SECRET || "";
+  if (!secret) return "";
+  const ts = String(now);
+  return `${ts}.${hex(createHmac("sha256", secret).update("gate:" + ts)).slice(0, 32)}`;
+}
+// "ok", or why the token does not count: "none", "bad", "fast" or "old".
+function gateState(g, now) {
+  const m = /^(\d{13})\.([0-9a-f]{32})$/.exec(String(g || ""));
+  if (!m) return g ? "bad" : "none";
+  const want = gateToken(Number(m[1])).split(".")[1] || "";
+  if (!want || !timingSafeEqual(Buffer.from(m[2]), Buffer.from(want))) return "bad";
+  const age = now - Number(m[1]);
+  if (age < GATE_MIN_MS) return "fast";
+  if (age > GATE_MAX_MS) return "old";
+  return "ok";
 }
 
 function cleanEmail(v) {
@@ -445,10 +487,14 @@ function manageMail(link) {
   return { subject: "Your Lawsuit Intelligencer MDLs", ...m };
 }
 
-// The owner's notice when a reader becomes active. Never blocks or fails the reader's request.
-async function notify(rec, how, list) {
+// The owner's notice when a reader signs up or becomes active. Never blocks or fails the reader's
+// request.
+async function notify(rec, how, list, subject) {
   const to = (process.env.NOTIFY_TO || "").trim();
-  if (!to) return;
+  if (!to) {
+    console.log("newsletter: NOTIFY_TO unset, owner notice not sent");
+    return;
+  }
   const what = followLabel(rec.follows || [], list, !!rec.allTorts);
   const from = rec.source ? (rec.source === "home" ? "the homepage" : `${site()}/${rec.source}`) : "unknown";
   const when = new Date().toISOString();
@@ -458,7 +504,7 @@ async function notify(rec, how, list) {
 <p style="margin:0">Follows: ${esc(what)}<br>Signed up from: ${esc(from)}<br>Time: ${esc(when)}</p>
 </body></html>`;
   try {
-    await sendMail(to, `New Intelligencer subscriber: ${rec.email}`, html, text);
+    await sendMail(to, subject || `New Intelligencer subscriber: ${rec.email}`, html, text);
   } catch (e) {
     console.log(`newsletter: notify failed: ${e}`);
   }
@@ -495,21 +541,42 @@ async function subscribe(req) {
       ? json(400, { ok: false, error: "email" })
       : page(400, "Check the address", `<h1>That email address did not look right</h1><p>Go back and check it, then try again.</p>`);
   }
-  const list = await mdlList();
-  const allTorts = wantsAllTorts(f.all("follow"));
-  const follows = allTorts ? withoutTorts(cleanFollows(f.all("follow"), list), list) : cleanFollows(f.all("follow"), list);
-
-  const s = store();
   const id = idFor(email);
-  const key = `sub/${id}`;
-  const now = Date.now();
-  const iso = new Date(now).toISOString();
-  const rec = (await s.get(key, { type: "json" })) || { email, createdAt: iso, status: "new" };
   const token = tokenFor(id);
   if (!token) {
     console.log("newsletter: NEWSLETTER_SECRET unset, signup not saved");
     return done();
   }
+  const now = Date.now();
+  const source = String(f.get("source") || "").replace(/[^a-z0-9-]/gi, "").slice(0, 80);
+  const from = source.slice(0, 60) || "unknown";
+
+  // The bot check (see the header). Nothing is read or saved for a signup it turns back.
+  if (String(f.get("wd")) === "true") {
+    console.log(`newsletter: bot check dropped a signup (automated browser) from ${from}`);
+    return done();
+  }
+  const gate = gateState(f.get("g"), now);
+  const ev = f.get("ev");
+  const noReal = ev !== null && ev !== undefined && !(Number(ev) >= 1);
+  if (gate !== "ok" || noReal) {
+    const why = gate !== "ok" ? `token ${gate}` : "no real click or key";
+    if (asJson) {
+      console.log(`newsletter: bot check turned back a signup (${why}) from ${from}`);
+      return json(400, { ok: false, error: "verify" });
+    }
+    console.log(`newsletter: bot check showed the one-button page (${why}) from ${from}`);
+    return verifyPage(email, f.all("follow"), source, gate === "fast");
+  }
+
+  const list = await mdlList();
+  const allTorts = wantsAllTorts(f.all("follow"));
+  const follows = allTorts ? withoutTorts(cleanFollows(f.all("follow"), list), list) : cleanFollows(f.all("follow"), list);
+
+  const s = store();
+  const key = `sub/${id}`;
+  const iso = new Date(now).toISOString();
+  const rec = (await s.get(key, { type: "json" })) || { email, createdAt: iso, status: "new" };
 
   if (rec.status === "active") {
     // An active address typed again. Follows stay as the owner set them; the owner gets a link
@@ -531,14 +598,43 @@ async function subscribe(req) {
   rec.follows = [...prev, ...follows.filter((n) => !prev.includes(n))].slice(0, FOLLOW_MAX);
   if (rec.allTorts) rec.follows = withoutTorts(rec.follows, list);
   rec.status = "pending";
-  rec.source = String(f.get("source") || "").replace(/[^a-z0-9-]/gi, "").slice(0, 80);
+  rec.source = source;
   rec.updatedAt = iso;
+  rec.checked = true; // came in through the bot check; /api/newsletter/remind only mails these
+  const tell = !rec.signupNoticeAt; // the owner hears about an address once, before it confirms
+  if (tell) rec.signupNoticeAt = iso;
   if (mayResend(rec, now)) {
     const m = confirmMail(`${site()}/email/confirm?t=${token}`, rec.follows, list, rec.allTorts);
     if (await sendMail(email, m.subject, m.html, m.text)) rec.sends = [...(rec.sends || []), now].slice(-8);
   }
   await s.setJSON(key, rec);
+  if (tell) await notify(rec, "signed up and has not confirmed yet", list, `Intelligencer signup, not confirmed yet: ${rec.email}`);
   return done();
+}
+
+// What a form post without a good token gets: the signup again as one button, with a fresh token.
+// A person presses it; a script that posted once is done. The address, the picked MDLs and the
+// page it came from ride in hidden fields.
+function verifyPage(email, follows, source, tooFast) {
+  const picks = [...new Set(follows.map((v) => String(v || "").trim()).filter((v) => /^(mt|\d{1,5})$/.test(v)))].slice(0, FOLLOW_MAX + 1);
+  const hidden = [
+    `<input type="hidden" name="email" value="${esc(email)}">`,
+    `<input type="hidden" name="source" value="${esc(source)}">`,
+    `<input type="hidden" name="g" value="${gateToken()}">`,
+    ...picks.map((v) => `<input type="hidden" name="follow" value="${esc(v)}">`),
+  ].join("\n");
+  return page(
+    200,
+    "One more step",
+    `<h1>One more step</h1>
+<p>Press the button to get the monthly letter at <strong>${esc(email)}</strong>.</p>
+${tooFast ? `<p>That was quick. Press the button once more.</p>\n` : ""}<form method="post" action="${site()}/api/subscribe">
+${hidden}
+<p hidden><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<button type="submit">Send me the letter</button>
+</form>
+<p class="small" style="margin-top:22px">This extra step keeps automated signups off the list. We then email you a link to confirm.</p>`
+  );
 }
 
 async function confirm(req, id, token) {
@@ -698,20 +794,24 @@ async function exportList(req) {
 }
 
 // One reminder per pending reader, ever. The owner runs this by hand; nothing schedules it.
+// Only readers who came in through the bot check are mailed, so a reminder never goes to an
+// address a script typed in before 11/11/26. ?all=1 mails the older ones too.
 async function remindPending(req, url) {
   if (!sameKey(req.headers.get("x-export-key") || "", process.env.EXPORT_KEY || "")) {
     return json(401, { error: "unauthorized" });
   }
   const dry = url.searchParams.get("dry") === "1";
+  const everyone = url.searchParams.get("all") === "1";
   const s = store();
   const { blobs } = await s.list({ prefix: "sub/" });
   const list = await mdlList();
   const now = Date.now();
-  const counts = { pending: 0, sent: 0, already_reminded: 0, resend_limit: 0, failed: 0, would_send: 0 };
+  const counts = { pending: 0, before_bot_check: 0, sent: 0, already_reminded: 0, resend_limit: 0, failed: 0, would_send: 0 };
   for (const b of blobs) {
     const rec = await s.get(b.key, { type: "json" });
     if (!rec || rec.status !== "pending") continue;
     counts.pending++;
+    if (!rec.checked && !everyone) { counts.before_bot_check++; continue; }
     if (rec.remindedAt) { counts.already_reminded++; continue; }
     if (!mayResend(rec, now)) { counts.resend_limit++; continue; }
     if (dry) { counts.would_send++; continue; }
@@ -736,6 +836,7 @@ export default async function handler(req) {
   const path = url.pathname.replace(/\/$/, "");
 
   if (path === "/api/subscribe") {
+    if (req.method === "GET") return json(200, { g: gateToken() });
     if (req.method !== "POST") return json(405, { error: "method" });
     return subscribe(req);
   }
