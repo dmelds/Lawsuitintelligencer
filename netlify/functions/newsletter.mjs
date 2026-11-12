@@ -30,7 +30,10 @@
 //                                still pending who signed up through the bot check (?all=1 adds
 //                                the older records). A reader is reminded at most one time ever
 //                                (remindedAt on the record), and the usual resend limits apply.
+//                                A reader is reminded only once their last confirm mail is at
+//                                least 24 hours old (?min_age_h= changes the wait).
 //                                ?dry=1 counts who would get it and sends nothing.
+//                                network-ops runs it once a day (newsletter-remind.yml).
 //
 // Every personal link carries t = <id>.<mac>, the mac being the first 32 hex of an HMAC-SHA256 of
 // the id under NEWSLETTER_SECRET. Nothing about the token is stored; changing the secret voids
@@ -80,6 +83,7 @@ export const config = {
 
 const RESEND_GAP_MS = 10 * 60 * 1000; // at most one confirm mail per address per 10 minutes
 const RESEND_DAY_MAX = 4; //             and four per rolling day
+const REMIND_MIN_AGE_H = 24; //          a pending reader is reminded no sooner than this
 const FOLLOW_MAX = 60;
 const LIST_TTL_MS = 60 * 60 * 1000; //   the map's MDL list is re-read at most hourly
 const ADDRESS = "Lawsuit Intelligencer · 6210 Wilshire Blvd. Ste 200 · Los Angeles, CA 90048";
@@ -442,14 +446,14 @@ async function sendMail(to, subject, html, text) {
   return true;
 }
 
-function mailShell(heading, paras, link, button) {
+function mailShell(heading, paras, link, button, foot = "") {
   const html = `<!doctype html><html><body style="margin:0;background:#efe8d9;padding:24px 12px;font-family:Georgia,'Times New Roman',serif;color:#1a1612">
 <div style="max-width:560px;margin:0 auto;background:#f7f3eb;border:1px solid #c9bda9">
 <div style="padding:22px 28px;border-bottom:3px double #1a1612;font-size:22px;font-weight:bold">Lawsuit Intelligencer</div>
 <div style="padding:28px">
 <p style="margin:0 0 14px;font-size:22px">${esc(heading)}</p>
 ${paras.map((p) => `<p style="margin:0 0 14px;font-size:16px;line-height:1.6">${esc(p)}</p>`).join("\n")}
-<a href="${link}" style="display:inline-block;margin-top:8px;background:#8a2419;color:#ffffff;text-decoration:none;padding:13px 20px;font-family:Arial,sans-serif;font-size:15px;font-weight:bold">${esc(button)}</a>
+<a href="${link}" style="display:inline-block;margin-top:8px;background:#8a2419;color:#ffffff;text-decoration:none;padding:13px 20px;font-family:Arial,sans-serif;font-size:15px;font-weight:bold">${esc(button)}</a>${foot ? `\n<p style="margin:22px 0 0;font-family:Arial,sans-serif;font-size:13px;line-height:1.6;color:#73675a">${esc(foot)}</p>` : ""}
 </div>
 <div style="padding:18px 28px;border-top:1px solid #c9bda9;font-family:Arial,sans-serif;font-size:12px;line-height:1.6;color:#73675a">${esc(ADDRESS)}</div>
 </div></body></html>`;
@@ -459,22 +463,35 @@ ${paras.join("\n\n")}
 
 ${button}:
 ${link}
-
+${foot ? `\n${foot}\n` : ""}
 ${ADDRESS}`;
   return { html, text };
 }
 
-function confirmMail(link, follows, list, allTorts = false) {
+// The confirm email and its one reminder. Same shape, different opening: the reminder says the
+// signup is still waiting and that no second reminder follows. Both spell out the two steps
+// (the button here, then "Finish signing up" on the page it opens), because readers were
+// stopping after the first.
+function confirmMail(link, follows, list, allTorts = false, reminder = false) {
+  const what = followLabel(follows, list, allTorts);
   const m = mailShell(
-    "Confirm the monthly letter",
+    reminder ? "Your signup is still waiting" : "Confirm your email to start the monthly letter",
     [
-      `Someone, hopefully you, asked for Lawsuit Intelligencer's monthly letter at this address, covering ${followLabel(follows, list, allTorts)}.`,
-      "Press the button to start it. It opens a page on lawsuitintelligencer.com with one more button, and pressing that one finishes your signup. If you did not ask, ignore this email and nothing will be sent.",
+      reminder
+        ? `You signed up for Lawsuit Intelligencer's monthly letter, covering ${what}. The letter starts once you confirm this email address.`
+        : `You asked for Lawsuit Intelligencer's monthly letter, covering ${what}.`,
+      "Two steps finish your signup:",
+      `1. Press "Confirm my email" below.`,
+      `2. On the page that opens, press "Finish signing up".`,
     ],
     link,
-    "Confirm the letter"
+    "Confirm my email",
+    (reminder ? "This is the only reminder we send. " : "") + "If you did not sign up, ignore this email and no letter will be sent."
   );
-  return { subject: "Confirm your Lawsuit Intelligencer letter", ...m };
+  const subject = reminder
+    ? "Reminder: finish signing up for the Lawsuit Intelligencer letter"
+    : "Confirm your email to get the Lawsuit Intelligencer letter";
+  return { subject, ...m };
 }
 
 function manageMail(link) {
@@ -529,8 +546,8 @@ async function subscribe(req) {
           200,
           "Check your email",
           `<h1>Check your email</h1>
-<p>We sent a link to confirm the monthly letter. It starts only after you press the button in that email.</p>
-<p class="small">Nothing there in a few minutes? Check your spam folder.</p>
+<p>We sent a message from Lawsuit Intelligencer to that address. Open it and press the button inside to confirm. The letter starts after you confirm.</p>
+<p class="small">Nothing there in a few minutes? Look in your spam folder.</p>
 <p><a href="${site()}/">Back to Lawsuit Intelligencer</a></p>`
         );
 
@@ -793,7 +810,12 @@ async function exportList(req) {
   return json(200, { generated: new Date().toISOString(), counts, report: listCache.report || "", subscribers: out });
 }
 
-// One reminder per pending reader, ever. The owner runs this by hand; nothing schedules it.
+// One reminder per pending reader, ever. network-ops calls this once a day
+// (.github/workflows/newsletter-remind.yml there); it can also be run by hand.
+// A reader is reminded only when their last confirm mail (or, with none sent, their signup) is at
+// least REMIND_MIN_AGE_H hours old, so nobody is nudged minutes after signing up. ?min_age_h=
+// changes the wait for one call. The answer carries min_age_h, which is how the daily job knows
+// the function it reached applies the wait.
 // Only readers who came in through the bot check are mailed, so a reminder never goes to an
 // address a script typed in before 11/11/26. ?all=1 mails the older ones too.
 async function remindPending(req, url) {
@@ -802,23 +824,28 @@ async function remindPending(req, url) {
   }
   const dry = url.searchParams.get("dry") === "1";
   const everyone = url.searchParams.get("all") === "1";
+  const asked = url.searchParams.get("min_age_h");
+  const hours = asked === null || asked === "" ? NaN : Number(asked);
+  const minAgeH = Number.isFinite(hours) && hours >= 0 ? hours : REMIND_MIN_AGE_H;
   const s = store();
   const { blobs } = await s.list({ prefix: "sub/" });
   const list = await mdlList();
   const now = Date.now();
-  const counts = { pending: 0, before_bot_check: 0, sent: 0, already_reminded: 0, resend_limit: 0, failed: 0, would_send: 0 };
+  const counts = { pending: 0, before_bot_check: 0, sent: 0, already_reminded: 0, too_recent: 0, resend_limit: 0, failed: 0, would_send: 0 };
   for (const b of blobs) {
     const rec = await s.get(b.key, { type: "json" });
     if (!rec || rec.status !== "pending") continue;
     counts.pending++;
     if (!rec.checked && !everyone) { counts.before_bot_check++; continue; }
     if (rec.remindedAt) { counts.already_reminded++; continue; }
+    const last = Math.max(0, ...(rec.sends || []), Date.parse(rec.updatedAt || rec.createdAt || "") || 0);
+    if (now - last < minAgeH * 3600 * 1000) { counts.too_recent++; continue; }
     if (!mayResend(rec, now)) { counts.resend_limit++; continue; }
     if (dry) { counts.would_send++; continue; }
     const token = tokenFor(b.key.slice(4));
     if (!token) return json(500, { error: "NEWSLETTER_SECRET unset" });
-    const m = confirmMail(`${site()}/email/confirm?t=${token}`, rec.follows || [], list, !!rec.allTorts);
-    if (await sendMail(rec.email, "Reminder: " + m.subject, m.html, m.text)) {
+    const m = confirmMail(`${site()}/email/confirm?t=${token}`, rec.follows || [], list, !!rec.allTorts, true);
+    if (await sendMail(rec.email, m.subject, m.html, m.text)) {
       rec.sends = [...(rec.sends || []), now].slice(-8);
       rec.remindedAt = new Date(now).toISOString();
       rec.updatedAt = rec.remindedAt;
@@ -828,7 +855,7 @@ async function remindPending(req, url) {
       counts.failed++;
     }
   }
-  return json(200, { dry, counts });
+  return json(200, { dry, min_age_h: minAgeH, counts });
 }
 
 export default async function handler(req) {
