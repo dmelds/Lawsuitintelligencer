@@ -136,10 +136,20 @@
        return out;
      }
      function reEsc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+     // A term matches at the start of a word, so "CID" finds "CID" and "CIDs" and leaves "pesticide" alone.
+     function edge(t) { return /^[0-9a-z]/i.test(t) ? '\\b' : ''; }
+     var RX = {};
+     function rx(t) { if (!RX[t]) RX[t] = new RegExp(edge(t) + reEsc(t), 'g'); return RX[t]; }
+     function count(text, t) {
+       var re = rx(t), n = 0; re.lastIndex = 0;
+       while (n < 20 && re.exec(text)) n++;
+       return n;
+     }
+     function pos(text, t) { var re = rx(t), m; re.lastIndex = 0; m = re.exec(text); return m ? m.index : -1; }
      function mark(text, ts) {
        var out = esc(text);
        if (!ts.length) return out;
-       var re = new RegExp('(' + ts.map(function (t) { return reEsc(esc(t)); }).sort(function (a, b) { return b.length - a.length; }).join('|') + ')', 'gi');
+       var re = new RegExp('(' + ts.slice().sort(function (a, b) { return b.length - a.length; }).map(function (t) { return edge(t) + reEsc(esc(t)); }).join('|') + ')', 'gi');
        return out.replace(re, '<mark>$1</mark>');
      }
      function date(iso) {
@@ -148,7 +158,11 @@
      }
      function snippet(e, ts) {
        var body = e.x || '', low = norm(body), at = -1;
-       for (var i = 0; i < ts.length; i++) { var j = low.indexOf(ts[i]); if (j >= 0 && (at < 0 || j < at)) at = j; }
+       for (var i = 0; i < ts.length; i++) {
+         var j = pos(low, ts[i]);
+         if (j < 0 && ts[i].length >= 4) j = low.indexOf(ts[i]);
+         if (j >= 0 && (at < 0 || j < at)) at = j;
+       }
        if (at < 0) return '';
        var a = Math.max(0, at - 90), b = Math.min(body.length, at + 170);
        if (a > 0) { var sp = body.indexOf(' ', a); if (sp > 0 && sp < at) a = sp + 1; }
@@ -158,11 +172,20 @@
      function score(e, ts, phrase) {
        var total = 0;
        for (var i = 0; i < ts.length; i++) {
-         var t = ts[i], s = 0;
-         if (e._t.indexOf(t) >= 0) s += 12;
-         if (e._d.indexOf(t) >= 0) s += 5;
-         if (e._h.indexOf(t) >= 0) s += 3;
-         if (e._x.indexOf(t) >= 0) s += 1;
+         var t = ts[i], s = 0, n;
+         if (count(e._t, t)) s += 12;
+         if (count(e._d, t)) s += 5;
+         if (count(e._h, t)) s += 3;
+         n = count(e._x, t);
+         // A page that uses the term twenty times outranks one that mentions it once.
+         if (n) s += 1 + Math.min(n - 1, 4);
+         // Inside a longer word counts for less, and only for a term long enough to mean something there.
+         if (!s && t.length >= 4) {
+           if (e._t.indexOf(t) >= 0) s += 6;
+           else if (e._d.indexOf(t) >= 0) s += 3;
+           else if (e._h.indexOf(t) >= 0) s += 2;
+           else if (e._x.indexOf(t) >= 0) s += 1;
+         }
          if (!s) return 0;
          total += s;
        }
