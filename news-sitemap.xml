@@ -12,15 +12,4 @@
       <news:title>State Law Tracker: Who Can Sue Under Each New Statute</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://lawsuitintelligencer.com/congress-tracker</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Lawsuit Intelligencer</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-05</news:publication_date>
-      <news:title>Congress Tracker: Mass Tort and AI Liability Bills</news:title>
-    </news:news>
-  </url>
 </urlset>
